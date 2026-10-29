@@ -1,0 +1,170 @@
+{
+ "model": "LFM2.5-2.6B-Q4_K_M-npu",
+ "dataset": "GSM8K-test",
+ "n": 20,
+ "accuracy": 0.6,
+ "correct": 12,
+ "seconds": 517.0,
+ "details": [
+  {
+   "idx": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 512,
+   "out_tail": "a misinterpretation. The expression E = (x + y) * (z + w) involves four variables x,y,z,w. But only some are constrained:\n- x \u2208 {1,2,3}\n- y \u2208 {2,3} (from \"y and"
+  },
+  {
+   "idx": 1,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tokens": 512,
+   "out_tail": "s \"A robot is a type of machine...\" but then gives a partial definition. Let me clarify.\n\n**Problem:** A robot is a type of machine... (start with \"A robot is a"
+  },
+  {
+   "idx": 2,
+   "ok": false,
+   "got": "65000",
+   "gold": "70000",
+   "tokens": 512,
+   "out_tail": "ling.\n\nTherefore:\n- A 50% increase: new = original * (1 + 0.5) = 1.5 * original.\n- A 150% increase: new = original * (1 + 1.5) = 2.5 * original? That would be a"
+  },
+  {
+   "idx": 3,
+   "ok": false,
+   "got": "9360",
+   "gold": "540",
+   "tokens": 512,
+   "out_tail": "print. How many total meters does he run a week?\"\n- The example answer computed weekly total (180) and then multiplied by 52, giving 9360.\n- However, the user's"
+  },
+  {
+   "idx": 4,
+   "ok": false,
+   "got": "3",
+   "gold": "20",
+   "tokens": 512,
+   "out_tail": "ay, Wendi feeds each of her chickens three cups of mixed chicken feed, requiring 3 cups per chicken per day. She gives the chickens their feed in three separate"
+  },
+  {
+   "idx": 5,
+   "ok": true,
+   "got": "64",
+   "gold": "64",
+   "tokens": 512,
+   "out_tail": "can have exactly 8 pairs.\n\nLet me verify: If N=8 pairs, each pair has cost $8, so total = 8*8 = $64.\nBut wait, that seems too low. Let's check manually:\n- Pair "
+  },
+  {
+   "idx": 6,
+   "ok": true,
+   "got": "260",
+   "gold": "260",
+   "tokens": 90,
+   "out_tail": "the number of sheep in Toulouse: Toulouse = <<2*Charleston>>=<<2*80=160>>160.\nTogether, they have 160 + 80 + 20 = <<160+80+20=260>>260 sheep.\nThe answer is 260\n"
+  },
+  {
+   "idx": 7,
+   "ok": false,
+   "got": "3",
+   "gold": "160",
+   "tokens": 512,
+   "out_tail": "s forces a restart after this point, taking 20 minutes.\n3. After the first restart, Carla restarts the download from the beginning.\n\nNow we have two attempts so"
+  },
+  {
+   "idx": 8,
+   "ok": false,
+   "got": "165",
+   "gold": "45",
+   "tokens": 512,
+   "out_tail": " Position stays at +180.\n- Second segment: drives half an hour at 30 mph towards home. That reduces distance by 0.5*30 = 15 miles \u2192 position = 180 - 15 = 165.\n-"
+  },
+  {
+   "idx": 9,
+   "ok": false,
+   "got": "100",
+   "gold": "460",
+   "tokens": 512,
+   "out_tail": "ve to solve all puzzles; it just requires each player to solve at least one puzzle. But the question is: \"how many puzzles does he solve?\" Wait, the phrasing is"
+  },
+  {
+   "idx": 10,
+   "ok": true,
+   "got": "366",
+   "gold": "366",
+   "tokens": 93,
+   "out_tail": "126>>126.\nTotal: 60 + 180 + 126 = <<60+180+126=366>>366.\nThe answer is 366\n\nDownloads are not the only thing to consider when considering a program's success..."
+  },
+  {
+   "idx": 11,
+   "ok": true,
+   "got": "694",
+   "gold": "694",
+   "tokens": 115,
+   "out_tail": "ought 6 dozen mini cheesecakes for $55/dozen = <<6*55=330>>$330.\nAdding them up, the total cost is 204 + 160 + 330 = <<204+160+330=694>>$694.\nThe answer is 694\n"
+  },
+  {
+   "idx": 12,
+   "ok": false,
+   "got": "6",
+   "gold": "13",
+   "tokens": 512,
+   "out_tail": "t, let's double-check.\n\nLet me re-evaluate:\n\n- Tree planting cost: $90\n- Annual revenue from lemons: 7 * $1.5 = $10.50\n- Annual expense for watering/feeding: $3"
+  },
+  {
+   "idx": 13,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 373,
+   "out_tail": " = 5\nMultiply both sides by 2: (2/3)x - 2 = 10\nAdd 2 to both sides: (2/3)x = 12\nMultiply both sides by 3/2: x = 12 * (3/2) = <<12*1.5=18>>18.\nThe answer is 18.\n"
+  },
+  {
+   "idx": 14,
+   "ok": true,
+   "got": "60",
+   "gold": "60",
+   "tokens": 134,
+   "out_tail": " <<16*0.25=4>>4 jazz.\nRest: 16 - 4 = <<16-4=12>>12 hip-hop.\nPercentage of entire students in hip-hop: (12 / 20) * 100 = <<(12/20)*100=60>>60%.\nThe answer is 60\n"
+  },
+  {
+   "idx": 15,
+   "ok": true,
+   "got": "125",
+   "gold": "125",
+   "tokens": 113,
+   "out_tail": "profit from electronics = $8,000 * 0.012 = $<<8000*0.012=96>>96.\nComparing the two options, Option 1 yields a higher expected profit of $125.\nThe answer is 125\n"
+  },
+  {
+   "idx": 16,
+   "ok": true,
+   "got": "230",
+   "gold": "230",
+   "tokens": 28,
+   "out_tail": " Each train travels 80 + 150 = <<80+150=230>>230 miles total.\nThe answer is 230\n"
+  },
+  {
+   "idx": 17,
+   "ok": false,
+   "got": "1150",
+   "gold": "57500",
+   "tokens": 512,
+   "out_tail": "er: 2.0, Answer: 3.0\n\nBut wait... \"There is no such thing as a 'second' answer\" - this phrase appears in the prompt? Let me re-read carefully.\n\nThe user message"
+  },
+  {
+   "idx": 18,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 512,
+   "out_tail": "t refer to the total number of eggs expressed as dozens? The answer should be a single integer between 1 and 10 inclusive.\n\nGiven that we have computed 7 dozens"
+  },
+  {
+   "idx": 19,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tokens": 226,
+   "out_tail": "is ...? (Please include all relevant information)\nAnswer:\nA: James and his friends are not related by blood, marriage, or adoption.\nThe answer is \"not related\"."
+  }
+ ]
+}

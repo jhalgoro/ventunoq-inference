@@ -1,0 +1,110 @@
+{
+ "model": "Qwen3.5-2B-Q4_K_M",
+ "dataset": "HumanEval",
+ "n": 20,
+ "pass_at_1": 0.4,
+ "passed": 8,
+ "seconds": 604.5,
+ "details": [
+  {
+   "task": "HumanEval/0",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/1",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpm9y_8e6a.py\", line 47, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmpm9y_8e6a.py\", line 36, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/2",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/3",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp1i2yck1y.py\", line 43, in <module>\n    check(below_zero)\n  File \"/tmp/tmp1i2yck1y.py\", line 38, in check\n    assert candidate([1, 2, -4, 5, 6]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/4",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/5",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpunop1rqr.py\", line 34, in <module>\n    check(intersperse)\n  File \"/tmp/tmpunop1rqr.py\", line 31, in check\n    assert candidate([5, 6, 3, 2], 8) == [5, 8, 6, 8, 3, 8, 2]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/6",
+   "ok": false,
+   "err": "recent call last):\n  File \"/tmp/tmpaxtfq_l4.py\", line 38, in <module>\n    check(parse_nested_parens)\n  File \"/tmp/tmpaxtfq_l4.py\", line 34, in check\n    assert candidate('(()()) ((())) () ((())()())') == [2, 3, 1, 3]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/7",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/8",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/9",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpufgv3ifj.py\", line 36, in <module>\n    check(rolling_max)\n  File \"/tmp/tmpufgv3ifj.py\", line 32, in check\n    assert candidate([1, 2, 3, 4]) == [1, 2, 3, 4]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/10",
+   "ok": false,
+   "err": "<module>\n    check(make_palindrome)\n  File \"/tmp/tmp54oa2kxo.py\", line 58, in check\n    assert candidate('x') == 'x'\n           ^^^^^^^^^^^^^^\n  File \"/tmp/tmp54oa2kxo.py\", line 28, in make_palindrome\n    if string[i] == string[j]:\n                    ~~~~~~^^^\nIndexError: string index out of range\n"
+  },
+  {
+   "task": "HumanEval/11",
+   "ok": false,
+   "err": "le \"/tmp/tmp184r_9pc.py\", line 28, in check\n    assert candidate('111000', '101010') == '010010'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp184r_9pc.py\", line 16, in string_xor\n    return ''.join(res)\n           ^^^^^^^^^^^^\nTypeError: sequence item 0: expected str instance, int found\n"
+  },
+  {
+   "task": "HumanEval/12",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/13",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/14",
+   "ok": false,
+   "err": ":\n  File \"/tmp/tmpzq6ch6u7.py\", line 25, in <module>\n    check(all_prefixes)\n  File \"/tmp/tmpzq6ch6u7.py\", line 22, in check\n    assert candidate('asdfgh') == ['a', 'as', 'asd', 'asdf', 'asdfg', 'asdfgh']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/15",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/16",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpdr7k1ade.py\", line 28, in <module>\n    check(count_distinct_characters)\n  File \"/tmp/tmpdr7k1ade.py\", line 22, in check\n    assert candidate('') == 0\n           ^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/17",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpj01bryrm.py\", line 45, in <module>\n    check(parse_music)\n  File \"/tmp/tmpj01bryrm.py\", line 41, in check\n    assert candidate('.| .| .| .|') == [1, 1, 1, 1]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/18",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmphjgrbak2.py\", line 32, in <module>\n    check(how_many_times)\n  File \"/tmp/tmphjgrbak2.py\", line 28, in check\n    assert candidate('xyxyxyx', 'x') == 4\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/19",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp6dq34k3q.py\", line 46, in <module>\n    check(sort_numbers)\n  File \"/tmp/tmp6dq34k3q.py\", line 42, in check\n    assert candidate('three five nine') == 'three five nine'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  }
+ ]
+}

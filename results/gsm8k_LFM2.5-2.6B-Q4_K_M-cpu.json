@@ -1,0 +1,170 @@
+{
+ "model": "LFM2.5-2.6B-Q4_K_M-cpu",
+ "dataset": "GSM8K-test",
+ "n": 20,
+ "accuracy": 0.55,
+ "correct": 11,
+ "seconds": 4049.1,
+ "details": [
+  {
+   "idx": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 512,
+   "out_tail": "instruction says: \"Please help me solve this problem\" and then gives the problem statement. There's no explicit note that it's inconsistent. However, earlier in"
+  },
+  {
+   "idx": 1,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tokens": 512,
+   "out_tail": "d in 1990, and its use spread rapidly. By 2005, it had been used by 500 people. 2023 brings a problem with no more than 1,000 people using the robot. The answer"
+  },
+  {
+   "idx": 2,
+   "ok": false,
+   "got": "75000",
+   "gold": "70000",
+   "tokens": 101,
+   "out_tail": "ale price by 150%.\nIncreased value = $<<150000*1.5=225000>>225000.\nProfit = Increased value - Total cost = $<<225000-150000=75000>>75,000.\nThe answer is 75,000\n"
+  },
+  {
+   "idx": 3,
+   "ok": false,
+   "got": "9360",
+   "gold": "540",
+   "tokens": 512,
+   "out_tail": "e the response for this specific question only. Your task is to generate a new response for the last question asked, which is \"James decided to (repeated) James"
+  },
+  {
+   "idx": 4,
+   "ok": false,
+   "got": "60",
+   "gold": "20",
+   "tokens": 144,
+   "out_tail": "ep.\nShe needs to give each chicken three cups per day (three meals). So the total feed needed for all chickens is 3 * 20 = <<3*20=60>>60 cups.\nThe answer is 60\n"
+  },
+  {
+   "idx": 5,
+   "ok": false,
+   "got": "1",
+   "gold": "64",
+   "tokens": 512,
+   "out_tail": "nted)\n2. The pattern repeats every two glasses\n\nGiven typical interpretation of such problems, I believe option 1 is correct: only even-numbered glasses get the"
+  },
+  {
+   "idx": 6,
+   "ok": true,
+   "got": "260",
+   "gold": "260",
+   "tokens": 512,
+   "out_tail": "mat as the previous examples: first line with \"A:\", second line with calculation for May, third line with total, fourth line with final answer.\n\nBut wait, there"
+  },
+  {
+   "idx": 7,
+   "ok": false,
+   "got": "20",
+   "gold": "160",
+   "tokens": 512,
+   "out_tail": "ading a 200 GB file. Normally she can download 2 GB/minute, but 40% of the way through the download, Windows forces a restart to install updates, which takes 20"
+  },
+  {
+   "idx": 8,
+   "ok": false,
+   "got": "4",
+   "gold": "45",
+   "tokens": 512,
+   "out_tail": "oser \u2192 165 miles away.\nNext 1.5 hours at 80mph: moves 120 miles closer \u2192 45 miles away from home.\n\nSo he is 45 miles from home at the end of those 4 hours.\n\nThe"
+  },
+  {
+   "idx": 9,
+   "ok": true,
+   "got": "460",
+   "gold": "460",
+   "tokens": 512,
+   "out_tail": " hourly rate. If Eliza worked for 45 hours this week, how much are her earnings for this week?\n\nInterpretation 1: The \"overtime pay\" is a flat amount equal to 1"
+  },
+  {
+   "idx": 10,
+   "ok": false,
+   "got": "72",
+   "gold": "366",
+   "tokens": 313,
+   "out_tail": "er in April and May?\nA: Natalie sold 48/2 = <<48/2=24>>24 clips in May.\nNatalie sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72\n"
+  },
+  {
+   "idx": 11,
+   "ok": true,
+   "got": "694",
+   "gold": "694",
+   "tokens": 147,
+   "out_tail": "st is 204 + 360? Wait, I think there's a mistake. Let me check: 204+160=<<204+160=364>>364. Then adding 330 gives 364+330=<<364+330=694>>694.\nThe answer is 694\n"
+  },
+  {
+   "idx": 12,
+   "ok": false,
+   "got": "24",
+   "gold": "13",
+   "tokens": 512,
+   "out_tail": " calculation. Let me verify again:\n\n- Initial cost: $90.\n- Each year, he spends $3 to water and feed.\n- He gets 7 lemons per year, selling for $1.5 each \u2192 $10.5"
+  },
+  {
+   "idx": 13,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 512,
+   "out_tail": "5\n- James: Answer 624\n\nAnd then Melanie's problem is presented. The solution steps are already written out in the prompt. It seems the user wants me to solve it"
+  },
+  {
+   "idx": 14,
+   "ok": true,
+   "got": "60",
+   "gold": "60",
+   "tokens": 134,
+   "out_tail": " <<16*0.25=4>>4 jazz.\nRest: 16 - 4 = <<16-4=12>>12 hip-hop.\nPercentage of entire students in hip-hop: (12 / 20) * 100 = <<(12/20)*100=60>>60%.\nThe answer is 60\n"
+  },
+  {
+   "idx": 15,
+   "ok": true,
+   "got": "125",
+   "gold": "125",
+   "tokens": 251,
+   "out_tail": ", to maximize profit at the end of this month by making a choice, the merchant should choose the jewelry option and achieve a profit of $125.\nThe answer is 125\n"
+  },
+  {
+   "idx": 16,
+   "ok": true,
+   "got": "230",
+   "gold": "230",
+   "tokens": 28,
+   "out_tail": " Each train travels 80 + 150 = <<80+150=230>>230 miles total.\nThe answer is 230\n"
+  },
+  {
+   "idx": 17,
+   "ok": false,
+   "got": "1150",
+   "gold": "57500",
+   "tokens": 224,
+   "out_tail": "alary is 700 + 2 = <<700+2=702>>$702. Wait, that's not right! I think she should have added the two amounts correctly: $700 + $450 = $1150.\n\nThe answer is 1150\n"
+  },
+  {
+   "idx": 18,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 226,
+   "out_tail": "e total number of eggs is  \n\n\\[\n3 \\times 28 = 84\\text{ eggs}.\n\\]\n\n- One dozen contains 12 eggs, therefore  \n\n\\[\n\\frac{84}{12}=7\\text{ dozens}.\n\\]\n\n**Answer:** 7"
+  },
+  {
+   "idx": 19,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tokens": 512,
+   "out_tail": "e some friends (maybe multiple) who each contribute some number of points.\n- The sum of individual contributions is S = 300.\n- Then there is an additional bonus"
+  }
+ ]
+}

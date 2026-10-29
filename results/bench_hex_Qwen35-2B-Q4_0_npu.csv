@@ -1,0 +1,10 @@
+ggml-hex: Loading driver libcdsprpc.so
+ggml-hex: FASTRPC_GET_DOMAINS query failed (0x6c), using static CDSP domains
+ggml-hex: Hexagon backend (experimental) : allocating new registry : ndev 1
+ggml-hex: Hexagon Arch version v75, DMA64 disabled
+ggml-hex: device 0: HTP0 (phys=0, virt=0, domain=cdsp:3)
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,lazy_mode,embeddings,no_op_offload,no_host,repack,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"707616feb","11754","CPU","Hexagon","HTP","models/Qwen3.5-2B-Q4_0.gguf","qwen35 2B Q4_0","1203911936","1881825088","1024","512","4","0x0f","0","50","f16","f16","100","0","layer","0","0","1","HTP0","0.00","none","auto","auto","0","0","0","1","0","0","512","0","0","2026-10-29T09:52:50Z","593090147","843414","863.276045","1.226613"
+"707616feb","11754","CPU","Hexagon","HTP","models/Qwen3.5-2B-Q4_0.gguf","qwen35 2B Q4_0","1203911936","1881825088","1024","512","4","0x0f","0","50","f16","f16","100","0","layer","0","0","1","HTP0","0.00","none","auto","auto","0","0","0","1","0","0","8192","0","0","2026-10-29T09:52:52Z","10155626656","1945288","806.646446","0.154511"
+"707616feb","11754","CPU","Hexagon","HTP","models/Qwen3.5-2B-Q4_0.gguf","qwen35 2B Q4_0","1203911936","1881825088","1024","512","4","0x0f","0","50","f16","f16","100","0","layer","0","0","1","HTP0","0.00","none","auto","auto","0","0","0","1","0","0","0","32","0","2026-10-29T09:53:22Z","1321391018","2851966","24.216961","0.052268"
+"707616feb","11754","CPU","Hexagon","HTP","models/Qwen3.5-2B-Q4_0.gguf","qwen35 2B Q4_0","1203911936","1881825088","1024","512","4","0x0f","0","50","f16","f16","100","0","layer","0","0","1","HTP0","0.00","none","auto","auto","0","0","0","1","0","0","0","128","0","2026-10-29T09:53:25Z","5270913778","15724801","24.284322","0.072446"

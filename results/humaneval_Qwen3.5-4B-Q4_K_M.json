@@ -1,0 +1,110 @@
+{
+ "model": "Qwen3.5-4B-Q4_K_M",
+ "dataset": "HumanEval",
+ "n": 20,
+ "pass_at_1": 0.85,
+ "passed": 17,
+ "seconds": 1063.0,
+ "details": [
+  {
+   "task": "HumanEval/0",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/1",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmphlog0_ai.py\", line 47, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmphlog0_ai.py\", line 36, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/2",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/3",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/4",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/5",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/6",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/7",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/8",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/9",
+   "ok": false,
+   "err": "vx7v16.py\", line 35, in <module>\n    check(rolling_max)\n  File \"/tmp/tmp6svx7v16.py\", line 30, in check\n    assert candidate([]) == []\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmp6svx7v16.py\", line 11, in rolling_max\n    max_val = numbers[0]\n              ~~~~~~~^^^\nIndexError: list index out of range\n"
+  },
+  {
+   "task": "HumanEval/10",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/11",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/12",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/13",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/14",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/15",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/16",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/17",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/18",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/19",
+   "ok": false,
+   "err": "xsw3.py\", line 49, in <module>\n    check(sort_numbers)\n  File \"/tmp/tmpa_d3xsw3.py\", line 43, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmpa_d3xsw3.py\", line 24, in sort_numbers\n    numbers = input().split()\n              ^^^^^^^\nEOFError: EOF when reading a line\n"
+  }
+ ]
+}

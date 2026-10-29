@@ -1,0 +1,2 @@
+server up: LFM3-1.7B-Q4_K_M
+scripts/eval_suite.sh: line 51: $5: unbound variable

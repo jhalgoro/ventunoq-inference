@@ -1,0 +1,10 @@
+0.02.045.548 I cmn          init: llama threadpool init, n_threads = 8
+0.02.199.154 I 
+0.02.199.285 I system_info: n_threads = 8 (n_threads_batch = 8) / 8 | CPU : NEON = 1 | ARM_FMA = 1 | FP16_VA = 1 | DOTPROD = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.02.199.309 I perplexity: tokenizing the input ..
+0.02.292.946 I perplexity: tokenization took 93.625 ms
+0.02.293.006 I perplexity: calculating perplexity over 33 chunks, n_ctx=2048, batch_size=2048, n_seq=1
+0.31.983.944 I perplexity: 29.69 seconds per pass - ETA 16.32 minutes
+[1]69.2026,[2]39.6172,[3]42.8211,[4]45.2261,[5]45.0082,[6]40.3054,[7]37.1581,[8]38.6023,[9]36.8221,[10]35.1771,[11]34.8691,[12]36.5790,[13]35.8786,[14]34.7237,[15]33.5253,[16]33.3772,[17]33.2329,[18]33.0551,[19]32.2464,[20]31.9486,[21]32.2327,[22]31.6471,[23]31.5058,[24]30.6403,[25]31.4678,[26]31.3240,[27]31.2777,[28]32.1221,[29]32.2487,[30]32.2242,[31]31.7743,[32]31.4972,[33]31.1390,
+16.13.519.528 I Final estimate: PPL = 31.1390 +/- 0.51803
+

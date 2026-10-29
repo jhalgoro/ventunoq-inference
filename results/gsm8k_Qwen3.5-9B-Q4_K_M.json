@@ -1,0 +1,170 @@
+{
+ "model": "Qwen3.5-9B-Q4_K_M",
+ "dataset": "GSM8K-test",
+ "n": 20,
+ "accuracy": 0.85,
+ "correct": 17,
+ "seconds": 2102.4,
+ "details": [
+  {
+   "idx": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 124,
+   "out_tail": "sells the remainder at the farmers' market daily for $2 per fresh duck egg.\nSo she makes 9*2 = <<9*2=18>>$18 every day at the farmers' market.\nThe answer is 18\n"
+  },
+  {
+   "idx": 1,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tokens": 50,
+   "out_tail": " It takes 2/2 = <<2/2=1>>1 bolt of white fiber.\nIt takes a total of 2+1 = <<2+1=3>>3 bolts.\nThe answer is 3\n"
+  },
+  {
+   "idx": 2,
+   "ok": true,
+   "got": "70000",
+   "gold": "70000",
+   "tokens": 164,
+   "out_tail": "ue of the house is 80000 + 120000 = <<80000+120000=200000>>200,000.\nHis profit is 200000 - (80000 + 50000) = <<200000-130000=70000>>70,000.\nThe answer is 70000\n"
+  },
+  {
+   "idx": 3,
+   "ok": true,
+   "got": "540",
+   "gold": "540",
+   "tokens": 60,
+   "out_tail": "\n\nJames runs 3 * 3 = <<3*3=9>>9 sprints every week.\nHe runs 9 * 60 = <<9*60=540>>540 meters in total each week.\nThe answer is 540"
+  },
+  {
+   "idx": 4,
+   "ok": true,
+   "got": "20",
+   "gold": "20",
+   "tokens": 103,
+   "out_tail": "s.\nShe has already given $15 + 25 = 40$ cups in the morning and afternoon.\nTherefore, she needs to give $60 - 40 = 20$ cups for the final meal.\nThe answer is 20"
+  },
+  {
+   "idx": 5,
+   "ok": false,
+   "got": "50",
+   "gold": "64",
+   "tokens": 88,
+   "out_tail": "glass costs $<<5*1=5>>5.\nThe next 15 glasses cost 5 * 0.6 = $<<5*0.6=3>>3 each.\nSo, Kylar needs to pay 5 + 3 * 15 = $<<5+3*15=50>>50 for them.\nThe answer is 50\n"
+  },
+  {
+   "idx": 6,
+   "ok": true,
+   "got": "260",
+   "gold": "260",
+   "tokens": 94,
+   "out_tail": "harleston has 4*20=<<4*20=80>>80 sheep.\nToulouse has 80*2=<<80*2=160>>160 sheep.\nThe total number of sheep is 20+80+160=<<20+80+160=260>>260.\nThe answer is 260\n"
+  },
+  {
+   "idx": 7,
+   "ok": true,
+   "got": "160",
+   "gold": "160",
+   "tokens": 417,
+   "out_tail": "\n2. Update restart: 20 mins.\n3. Restart download from beginning (full 200 GB): $200/2 = 100$ mins.\nTotal time: $40 + 20 + 100 = 160$ minutes.\n\nThe answer is 160"
+  },
+  {
+   "idx": 8,
+   "ok": true,
+   "got": "45",
+   "gold": "45",
+   "tokens": 265,
+   "out_tail": "he has driven a total of 15 + 120 = <<15+120=135>>135 miles in the last 4 hours.\nThe distance from home is 180 - 135 = <<180-135=45>>45 miles.\nThe answer is 45\n"
+  },
+  {
+   "idx": 9,
+   "ok": true,
+   "got": "460",
+   "gold": "460",
+   "tokens": 161,
+   "out_tail": "<10*1.2=12>>12 per hour.\nHer overtime earnings are 12 * 5 = $<<12*5=60>>60.\nHer total earnings for the week are 400 + 60 = $<<400+60=460>>460.\nThe answer is 460"
+  },
+  {
+   "idx": 10,
+   "ok": true,
+   "got": "366",
+   "gold": "366",
+   "tokens": 145,
+   "out_tail": " 0.3) = 180 - 54 = <<180-54=126>>126 downloads.\nThe total number of downloads over the three months is 60 + 180 + 126 = <<60+180+126=366>>366.\nThe answer is 366"
+  },
+  {
+   "idx": 11,
+   "ok": true,
+   "got": "694",
+   "gold": "694",
+   "tokens": 141,
+   "out_tail": ">>160 on mini cupcakes.\nShe spent 6 * 55 = $<<6*55=330>>330 on mini cheesecakes.\nThe total cost is 204 + 160 + 330 = $<<204+160+330=694>>694.\nThe answer is 694\n"
+  },
+  {
+   "idx": 12,
+   "ok": false,
+   "got": "12",
+   "gold": "13",
+   "tokens": 130,
+   "out_tail": "et profit is 10.5 - 3 = $<<10.5-3=7.5>>7.5 per year.\nTo cover the initial planting cost of $90, it will take 90 / 7.5 = <<90/7.5=12>>12 years.\nThe answer is 12\n"
+  },
+  {
+   "idx": 13,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 153,
+   "out_tail": "/2 = x/3 - 1.\nWe know that she has 5 vacuum cleaners left, so we can set up the equation: x/3 - 1 = 5.\nSolving for x, we get x = <<3*6=18>>18.\nThe answer is 18\n"
+  },
+  {
+   "idx": 14,
+   "ok": true,
+   "got": "60",
+   "gold": "60",
+   "tokens": 184,
+   "out_tail": "udents are 16 - 4 = <<16-4=12>>12.\nSo, the percentage of the entire students enrolled in hip-hop dance is 12 / 20 * 100 = <<12/20*100=60>>60%.\nThe answer is 60\n"
+  },
+  {
+   "idx": 15,
+   "ok": true,
+   "got": "125",
+   "gold": "125",
+   "tokens": 424,
+   "out_tail": " final amount earned from the best choice.\nCalculation:\nJewelry gain: 5000 * 0.025 = 125.\nGadgets gain: 8000 * 0.012 = 96.\nMax profit is 125.\n\nThe answer is 125"
+  },
+  {
+   "idx": 16,
+   "ok": true,
+   "got": "230",
+   "gold": "230",
+   "tokens": 39,
+   "out_tail": " Each train traveled 80+150=<<80+150=230>>230 miles.\nThe answer is 230\n"
+  },
+  {
+   "idx": 17,
+   "ok": false,
+   "got": "59800",
+   "gold": "57500",
+   "tokens": 148,
+   "out_tail": " week from coaching.\nSo she earns a total of 700+450=<<700+450=1150>>$1150 per week.\nHer annual salary is 1150*52=<<1150*52=59800>>$59,800.\nThe answer is 59800\n"
+  },
+  {
+   "idx": 18,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 96,
+   "out_tail": "s per week.\nIn 4 weeks, she eats 21 * 4 = <<21*4=84>>84 eggs.\nThere are 12 eggs in a dozen. So, she eats 84 / 12 = <<84/12=7>>7 dozens of eggs.\nThe answer is 7\n"
+  },
+  {
+   "idx": 19,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tokens": 144,
+   "out_tail": "<<12/4=3>>3 hours.\nSo she has 3-1-1=<<3-1-1=1>>1 hour left to cover the remaining distance.\nShe needs to walk at a speed of 6/1=<<6/1=6>>6 mph.\nThe answer is 6\n"
+  }
+ ]
+}

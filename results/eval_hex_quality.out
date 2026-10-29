@@ -1,0 +1,2 @@
+server up: npu (ctx 8192)
+server up: cpu (ctx 8192)

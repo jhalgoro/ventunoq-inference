@@ -1,0 +1,2 @@
+load_backend: loaded RPC backend from /home/arduino/Code/lmf3-ventunoq/llama.cpp/libggml-rpc.so
+load_backend: loaded CPU backend from /home/arduino/Code/lmf3-ventunoq/llama.cpp/libggml-cpu-armv8.2_2.so

@@ -1,0 +1,5 @@
+== KV memory @ 32K ctx ==
+	Maximum resident set size (kbytes): 2607988
+
+== KV memory @ 128K ctx ==
+	Maximum resident set size (kbytes): 3794820

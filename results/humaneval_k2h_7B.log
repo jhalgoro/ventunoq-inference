@@ -1,0 +1,12 @@
+[1/10] HumanEval/0: PASS
+[2/10] HumanEval/1: PASS
+[3/10] HumanEval/2: PASS
+[4/10] HumanEval/3: PASS
+[5/10] HumanEval/4: PASS
+[6/10] HumanEval/5: PASS
+[7/10] HumanEval/6: PASS
+[8/10] HumanEval/7: PASS
+[9/10] HumanEval/8: PASS
+[10/10] HumanEval/9: PASS
+
+HumanEval pass@1: 10/10 -> results/humaneval_K2-Horizon-7B-Q4_K_M.json

@@ -1,0 +1,3 @@
+waiting for k2_4b_done (CPU must be idle for fair numbers)...
+hexagon cycle start 2026-10-29T09:51:07Z
+scripts/test_hexagon.sh: line 34: 196863 Aborted                 timeout 3600 $B -m "$F" --device "$DEV" -ngl 100 $SVC $ARGS -o csv > "results/bench_hex_${TAG}_npu.csv" 2>&1

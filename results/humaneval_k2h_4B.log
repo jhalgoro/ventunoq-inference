@@ -1,0 +1,27 @@
+[1/20] HumanEval/0: PASS
+[2/20] HumanEval/1: FAIL Traceback (most recent call last):
+  File "/tmp/tmp44rj4isi.py", line 49, in <mo
+[3/20] HumanEval/2: PASS
+[4/20] HumanEval/3: PASS
+[5/20] HumanEval/4: PASS
+[6/20] HumanEval/5: PASS
+[7/20] HumanEval/6: PASS
+[8/20] HumanEval/7: PASS
+[9/20] HumanEval/8: PASS
+[10/20] HumanEval/9: PASS
+[11/20] HumanEval/10: FAIL t.py", line 38, in check
+    assert candidate('') == ''
+           ^^^^^^^^^^^^^
+[12/20] HumanEval/11: PASS
+[13/20] HumanEval/12: PASS
+[14/20] HumanEval/13: FAIL timeout
+[15/20] HumanEval/14: PASS
+[16/20] HumanEval/15: PASS
+[17/20] HumanEval/16: PASS
+[18/20] HumanEval/17: FAIL Traceback (most recent call last):
+  File "/tmp/tmpnw705947.py", line 44, in <mo
+[19/20] HumanEval/18: PASS
+[20/20] HumanEval/19: FAIL Traceback (most recent call last):
+  File "/tmp/tmpmn4l7fs1.py", line 30, in <mo
+
+HumanEval pass@1: 15/20 -> results/humaneval_K2-Horizon-4B-Q4_K_M.json

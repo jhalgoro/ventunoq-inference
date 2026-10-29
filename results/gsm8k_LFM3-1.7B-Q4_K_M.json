@@ -1,0 +1,410 @@
+{
+ "model": "LFM3-1.7B-Q4_K_M",
+ "dataset": "GSM8K-test",
+ "n": 50,
+ "accuracy": 0.6,
+ "correct": 30,
+ "seconds": 1375.3,
+ "details": [
+  {
+   "idx": 0,
+   "ok": false,
+   "got": "26",
+   "gold": "18",
+   "tokens": 91,
+   "out_tail": "four muffins for friends, but that doesn't affect egg count. So still 13 eggs.\nShe sells the remainder at $2 per egg: 13 * 2 = $<<13*2=26>>26.\nThe answer is 26\n"
+  },
+  {
+   "idx": 1,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tokens": 49,
+   "out_tail": " The number of white fibers = 2 / 2 = $<<2/2=1>>1.\nTotal bolts = 2 + 1 = <<2+1=3>>3.\nThe answer is 3\n"
+  },
+  {
+   "idx": 2,
+   "ok": false,
+   "got": "75000",
+   "gold": "70000",
+   "tokens": 94,
+   "out_tail": ">>75,000.\nSo total cost to Josh is 80000 + 75000 = $<<80000+75000=155000>>155,000.\nProfit = 155000 - 80000 = $<<155000-80000=75000>>75,000.\nThe answer is 75000\n"
+  },
+  {
+   "idx": 3,
+   "ok": true,
+   "got": "540",
+   "gold": "540",
+   "tokens": 55,
+   "out_tail": " In one week, he runs 3 * 60 = $<<3*60=180>>180 meters.\nSo in a week, he runs 180 * 3 = $<<180*3=540>>540 meters.\nThe answer is 540\n"
+  },
+  {
+   "idx": 4,
+   "ok": true,
+   "got": "20",
+   "gold": "20",
+   "tokens": 101,
+   "out_tail": "Afternoon feed = 25 cups.\nTotal morning + afternoon = 15+25 = $<<15+25=40>>40 cups.\nRemaining for final meal = 60 - 40 = $<<60-40=20>>20 cups.\nThe answer is 20\n"
+  },
+  {
+   "idx": 5,
+   "ok": true,
+   "got": "64",
+   "gold": "64",
+   "tokens": 111,
+   "out_tail": "second 8 glasses, each costs 60% of $5 which is 0.6 * 5 = $<<0.6*5=3>>3.\nSo that's 3*8 = $<<3*8=24>>24.\nTotal cost is 40+24 = $<<40+24=64>>64.\nThe answer is 64\n"
+  },
+  {
+   "idx": 6,
+   "ok": true,
+   "got": "260",
+   "gold": "260",
+   "tokens": 87,
+   "out_tail": " = $<<4*20=80>>80.\nToulouse has twice that: 2 * 80 = $<<2*80=160>>160.\nSeattle has 20.\nTotal together: 160 + 80 + 20 = $<<160+80+20=260>>260.\nThe answer is 260\n"
+  },
+  {
+   "idx": 7,
+   "ok": false,
+   "got": "40",
+   "gold": "160",
+   "tokens": 512,
+   "out_tail": "m beginning at 2 GB/min for (200-2t)/2 minutes.\nSo total time T = t + 20 + (200-2t)/2.\nBut also, the restart happens after 40% of way through. So when does that"
+  },
+  {
+   "idx": 8,
+   "ok": true,
+   "got": "45",
+   "gold": "45",
+   "tokens": 278,
+   "out_tail": "om home, went out 180 miles, then after turning back traveled 135 miles towards home. So distance from original home = 180 - 135 = 45 miles.\nThus answer is 45.\n"
+  },
+  {
+   "idx": 9,
+   "ok": true,
+   "got": "460",
+   "gold": "460",
+   "tokens": 132,
+   "out_tail": "* 1.2 = $<<10*1.2=12>>12 per hour.\nSo for 5 overtime hours, she earns 12 * 5 = $<<12*5=60>>60.\nTotal earnings: 400 + 60 = $<<400+60=460>>460.\nThe answer is 460\n"
+  },
+  {
+   "idx": 10,
+   "ok": true,
+   "got": "366",
+   "gold": "366",
+   "tokens": 87,
+   "out_tail": "<<3*60=180>>180.\nThird month = 180 - (30/100)*180 = 180 - 54 = $<<180-54=126>>126.\nTotal downloads = 60 + 180 + 126 = $<<60+180+126=366>>366.\nThe answer is 366\n"
+  },
+  {
+   "idx": 11,
+   "ok": true,
+   "got": "694",
+   "gold": "694",
+   "tokens": 98,
+   "out_tail": "kes is 2*80 = $<<2*80=160>>160.\nThe cost of mini cheesecakes is 6*55 = $<<6*55=330>>330.\nTotal cost is 204+160+330 = $<<204+160+330=694>>694.\nThe answer is 694\n"
+  },
+  {
+   "idx": 12,
+   "ok": false,
+   "got": "1",
+   "gold": "13",
+   "tokens": 116,
+   "out_tail": "So he needs 10.5 / 87 \u2248 0.12 years, but since it takes whole years, we round up to the next integer: ceil(10.5/87) = <<ceil(10.5/87)=1>>1 year.\nThe answer is 1\n"
+  },
+  {
+   "idx": 13,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tokens": 180,
+   "out_tail": "\nThus total given away: (1/3)x + 2 + (1/3)x - 1 = (2/3)x + 1.\nRemaining: x - [(2/3)x + 1] = (1/3)x - 1 = 5.\nSo (1/3)x = 6 => x = <<6*3=18>>18.\nThe answer is 18\n"
+  },
+  {
+   "idx": 14,
+   "ok": false,
+   "got": "79.8",
+   "gold": "60",
+   "tokens": 115,
+   "out_tail": "5% = 0.8*0.25 = $<<0.8*0.25=0.2>>0.2.\nSo remaining for hip-hop: 80% - 0.2% = 79.8%.\nThus, percentage of entire students in hip-hop is 79.8%.\nThe answer is 79.8\n"
+  },
+  {
+   "idx": 15,
+   "ok": false,
+   "got": "29",
+   "gold": "125",
+   "tokens": 109,
+   "out_tail": "<8000*1.2/100=96>>96.\nTotal profit difference = 125 - 96 = $<<125-96=29>>29.\nThe merchant should choose jewelry to get a higher profit of $29.\nThe answer is 29\n"
+  },
+  {
+   "idx": 16,
+   "ok": true,
+   "got": "230",
+   "gold": "230",
+   "tokens": 27,
+   "out_tail": " Each train travels 80+150 = $<<80+150=230>>230 miles.\nThe answer is 230\n"
+  },
+  {
+   "idx": 17,
+   "ok": false,
+   "got": "1150",
+   "gold": "57500",
+   "tokens": 76,
+   "out_tail": "g: 20 * 35 = $<<20*35=700>>700.\nShe earns from cheerleading: 30 * 15 = $<<30*15=450>>450.\nTotal per year: 700 + 450 = $<<700+450=1150>>1150.\nThe answer is 1150\n"
+  },
+  {
+   "idx": 18,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 89,
+   "out_tail": "days) she eats 3*7 = $<<3*7=21>>21 eggs.\nIn 4 weeks, that's 21*4 = $<<21*4=84>>84 eggs.\nSince a dozen is 12 eggs, 84/12 = $<<84/12=7>>7 dozens.\nThe answer is 7\n"
+  },
+  {
+   "idx": 19,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tokens": 390,
+   "out_tail": "2 = 4*(2+t)\n=> 12 = 8 + 4t\n=> 4t = 4\n=> t = 1 hour.\nThus, she needs to walk remaining distance (6 miles) in 1 hour => speed = 6/1 = 6 mph.\n\nSo answer is 6 mph.\n"
+  },
+  {
+   "idx": 20,
+   "ok": false,
+   "got": "14.6667",
+   "gold": "15",
+   "tokens": 141,
+   "out_tail": ".6667$.\nIn the second case, there are (3/5)*15 = $<<3/5*15=9>>9$ water.\nSo total water is 5.6667+9 = $<<5.6667+9=14.6667>>14.6667 liters.\nThe answer is 14.6667\n"
+  },
+  {
+   "idx": 21,
+   "ok": false,
+   "got": "17",
+   "gold": "14",
+   "tokens": 115,
+   "out_tail": "in 1998 - 23 = <<1998-23=1975>>1975.\nThe difference between 1992 and 1975 is 17 years.\nThus, Raymond's son was born 17 years before Samantha. The answer is 17.\n"
+  },
+  {
+   "idx": 22,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 46,
+   "out_tail": " On Tuesday, he sold 3*1 + 2*2 + 3*0 = $<<3*1+2*2+3*0=7>>7.\nThe answer is 7\n"
+  },
+  {
+   "idx": 23,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 57,
+   "out_tail": " From 1:00 PM to 5:00 PM, the time elapsed is 4 hours.\nSo the candle melts 2 cm/hour * 4 h = $<<2*4=8>>8 centimeters shorter.\nThe answer is 8\n"
+  },
+  {
+   "idx": 24,
+   "ok": true,
+   "got": "26",
+   "gold": "26",
+   "tokens": 76,
+   "out_tail": " The discounted price is 19.5 * (1 - 0.25) = $<<19.5*(1-0.25)=14.625>>14.625.\nSo, Original Price = 19.5 / 0.75 = $<<19.5/0.75=26>>26.\nThe answer is 26\n"
+  },
+  {
+   "idx": 25,
+   "ok": true,
+   "got": "2",
+   "gold": "2",
+   "tokens": 168,
+   "out_tail": " $50, so the remaining amount for pizza boxes is 50 - 33 = $<<50-33=17>>17.\nEach box costs $8.5, so number of boxes: 17 / 8.5 = $<<17/8.5=2>>2.\nThe answer is 2\n"
+  },
+  {
+   "idx": 26,
+   "ok": true,
+   "got": "243",
+   "gold": "243",
+   "tokens": 115,
+   "out_tail": "5 * 3 = $<<22.5*3=67.5>>67.5 for pants.\nHe spent 42 * 3 = $<<42*3=126>>126 for shoes.\nTotal is 49.5 + 67.5 + 126 = $<<49.5+67.5+126=243>>243.\nThe answer is 243\n"
+  },
+  {
+   "idx": 27,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tokens": 104,
+   "out_tail": "\nSo number of cartons needed for 60 servings is 60/15 = $<<60/15=4>>4 cartons.\nCost per carton is $4.00, so total cost is 4*4 = $<<4*4=16>>16.\nThe answer is 16\n"
+  },
+  {
+   "idx": 28,
+   "ok": false,
+   "got": "45",
+   "gold": "25",
+   "tokens": 45,
+   "out_tail": " The distance from the first to the second stop is 20 + (60 - 20 - 15) = $<<20+(60-20-15)=45>>45.\nThe answer is 45\n"
+  },
+  {
+   "idx": 29,
+   "ok": true,
+   "got": "104",
+   "gold": "104",
+   "tokens": 89,
+   "out_tail": "ogether they cost 33 + 66 = $<<33+66=99>>99.\nSince this amount is five dollars less than the boots, the boots cost 99 + 5 = $<<99+5=104>>104.\nThe answer is 104\n"
+  },
+  {
+   "idx": 30,
+   "ok": false,
+   "got": "19",
+   "gold": "109",
+   "tokens": 70,
+   "out_tail": " Allen's current age. Then 7x + 11x = 162 => 18x = 162 => x = 9.\nSo currently Allen is 9 years old. In 10 years he will be 9+10=<<9+10=19>>19.\nThe answer is 19\n"
+  },
+  {
+   "idx": 31,
+   "ok": true,
+   "got": "80",
+   "gold": "80",
+   "tokens": 262,
+   "out_tail": "s 60.\nThird guess: 25% more than the first one: 80 + (0.25*80) = 80 + 20 = 100.\nAverage of 80, 60, and 100: (80+60+100)/3 = $<<(240)/3=80>>80.\nThe answer is 80\n"
+  },
+  {
+   "idx": 32,
+   "ok": true,
+   "got": "35",
+   "gold": "35",
+   "tokens": 52,
+   "out_tail": " He spends 10 * .5 = $<<10*.5=5>>5 hours each day.\nSo in a week, he spends 5*7 = $<<5*7=35>>35 hours.\nThe answer is 35\n"
+  },
+  {
+   "idx": 33,
+   "ok": true,
+   "got": "70",
+   "gold": "70",
+   "tokens": 82,
+   "out_tail": "e S, then gold coins = S + 30.\nTotal coins: S + (S+30) = 110 => 2S + 30 = 110 => 2S = 80 => S = 40.\nSo gold coins = 40 + 30 = $<<40+30=70>>70.\nThe answer is 70\n"
+  },
+  {
+   "idx": 34,
+   "ok": true,
+   "got": "23",
+   "gold": "23",
+   "tokens": 86,
+   "out_tail": "jewels: 40 / 2 = $<<40/2=20>>20.\nAaron has 5 more than that: 20 + 5 = $<<20+5=25>>25.\nSiobhan has 2 fewer than Aaron: 25 - 2 = $<<25-2=23>>23.\nThe answer is 23\n"
+  },
+  {
+   "idx": 35,
+   "ok": false,
+   "got": "10",
+   "gold": "9",
+   "tokens": 88,
+   "out_tail": " 0.25) = $<<4*1+4*0.25=5>>5 in the first half.\nIn the second half, he scored 4 * 1.25 = $<<4*1.25=5>>5 points.\nTotal is 5 + 5 = $<<5+5=10>>10.\nThe answer is 10\n"
+  },
+  {
+   "idx": 36,
+   "ok": true,
+   "got": "75",
+   "gold": "75",
+   "tokens": 113,
+   "out_tail": "5 / 4 = $<<5/4=1.25>>1.25.\nSo each day he spends 2 * 1.25 = $<<2*1.25=2.5>>2.5 on yogurt.\nOver 30 days, he spends 2.5 * 30 = $<<2.5*30=75>>75.\nThe answer is 75\n"
+  },
+  {
+   "idx": 37,
+   "ok": false,
+   "got": "5",
+   "gold": "2",
+   "tokens": 512,
+   "out_tail": " his toys and use the money to buy video games. He has 13 lego sets and he sells them for $15 each. He ends up buying 8 video games for $20 each and has $5 left"
+  },
+  {
+   "idx": 38,
+   "ok": false,
+   "got": "4.44",
+   "gold": "10",
+   "tokens": 148,
+   "out_tail": "so per day he runs 40/3 \u2248 $<<40/3=13.33>>13.33 miles in 3 hours.\nSpeed = distance / time = 13.33 / 3 \u2248 $<<13.33/3=4.44>>4.44 miles per hour.\nThe answer is 4.44\n"
+  },
+  {
+   "idx": 39,
+   "ok": false,
+   "got": "30",
+   "gold": "18",
+   "tokens": 165,
+   "out_tail": "nce running = 12 * 2 = $<<12*2=24>>24 miles.\nDistance walking = 1.5 * 4 = $<<1.5*4=6>>6 miles.\nTotal distance = 24 + 6 = $<<24+6=30>>30 miles.\nThe answer is 30\n"
+  },
+  {
+   "idx": 40,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 63,
+   "out_tail": " Suzy\u2019s iPhone is 1 year old.\nBen\u2019s iPhone is 2 * 1 = $<<2*1=2>>2 years old.\nBrandon\u2019s iPhone is 4 * 2 = $<<4*2=8>>8 years old.\nThe answer is 8\n"
+  },
+  {
+   "idx": 41,
+   "ok": false,
+   "got": "800",
+   "gold": "200",
+   "tokens": 108,
+   "out_tail": "ces is 1200 - 400 = $<<1200-400=800>>800.\nSo Polly could stand up to 800 feet outside the dragon's flames and still hit him with the javelin.\nThe answer is 800\n"
+  },
+  {
+   "idx": 42,
+   "ok": true,
+   "got": "26",
+   "gold": "26",
+   "tokens": 61,
+   "out_tail": "a Jones baked 5 pies * 8 pieces = $<<5*8=40>>40 pieces.\nAfter eating, 14 pieces remained.\nSo, the guests ate 40 - 14 = $<<40-14=26>>26 pieces.\nThe answer is 26\n"
+  },
+  {
+   "idx": 43,
+   "ok": false,
+   "got": "60000",
+   "gold": "48",
+   "tokens": 512,
+   "out_tail": "hen each gram in a serving has 250/60 \u2248 4.1667 cal/g. So indeed consistent.\nThus, to get 200 more calories, he needs 200 / (1250/300) = 200 * 300 / 1250 = 60000"
+  },
+  {
+   "idx": 44,
+   "ok": true,
+   "got": "20",
+   "gold": "20",
+   "tokens": 251,
+   "out_tail": "per pound of beeswax). He has already accounted for that in the $10 per pound cost. So total cost is $20.\nProfit = 40 - 20 = $<<40-20=20>>20.\nThe answer is 20.\n"
+  },
+  {
+   "idx": 45,
+   "ok": false,
+   "got": "44",
+   "gold": "104",
+   "tokens": 132,
+   "out_tail": "three days: 5 + 2 + 4 = $<<5+2+4=11>>11 articles.\nEach article takes 4 hours to write. So total writing time is 11 * 4 = $<<11*4=44>>44 hours.\nThe answer is 44\n"
+  },
+  {
+   "idx": 46,
+   "ok": false,
+   "got": "80",
+   "gold": "163",
+   "tokens": 512,
+   "out_tail": "23? That would be if she didn't place any before store? Let's re-evaluate timeline:\n- Candice has 80 in purse initially.\n- She heads out to job at coffee shop.\n"
+  },
+  {
+   "idx": 47,
+   "ok": false,
+   "got": "60",
+   "gold": "800",
+   "tokens": 512,
+   "out_tail": "ties = 200 / 40 = 5.\n- Red ties quantity = twice the number of blue ties = 2 * 5 = 10.\n- Price per red tie = 1.5 * 40 = $60.\n- Money spent on red ties = 10 * 60"
+  },
+  {
+   "idx": 48,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 63,
+   "out_tail": " First, convert 4 feet to inches: 4 * 12 = $<<4*12=48>>48 inches.\nEach piece is 6 inches long, so number of pieces = 48 / 6 = $<<48/6=8>>8.\nThe answer is 8\n"
+  },
+  {
+   "idx": 49,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tokens": 81,
+   "out_tail": "15 * 8 = $<<15*8=120>>120.\nThe building is 3/4 occupied, so 1 - 3/4 = 1/4 unoccupied.\nThus, unoccupied units = 120 * 1/4 = $<<120*0.25=30>>30.\nThe answer is 30\n"
+  }
+ ]
+}

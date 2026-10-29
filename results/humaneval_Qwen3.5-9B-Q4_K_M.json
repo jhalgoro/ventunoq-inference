@@ -1,0 +1,60 @@
+{
+ "model": "Qwen3.5-9B-Q4_K_M",
+ "dataset": "HumanEval",
+ "n": 10,
+ "pass_at_1": 0.8,
+ "passed": 8,
+ "seconds": 405.9,
+ "details": [
+  {
+   "task": "HumanEval/0",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/1",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp27fb3cdc.py\", line 37, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmp27fb3cdc.py\", line 26, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/2",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/3",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/4",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/5",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/6",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/7",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/8",
+   "ok": false,
+   "err": "module>\n    check(sum_product)\n  File \"/tmp/tmpi51hif52.py\", line 24, in check\n    assert candidate([]) == (0, 1)\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmpi51hif52.py\", line 12, in sum_product\n    return sum(numbers), prod(numbers)\n                         ^^^^\nNameError: name 'prod' is not defined\n"
+  },
+  {
+   "task": "HumanEval/9",
+   "ok": true,
+   "err": ""
+  }
+ ]
+}

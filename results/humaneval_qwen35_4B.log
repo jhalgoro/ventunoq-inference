@@ -1,0 +1,27 @@
+[1/20] HumanEval/0: PASS
+[2/20] HumanEval/1: FAIL Traceback (most recent call last):
+  File "/tmp/tmphlog0_ai.py", line 47, in <mo
+[3/20] HumanEval/2: PASS
+[4/20] HumanEval/3: PASS
+[5/20] HumanEval/4: PASS
+[6/20] HumanEval/5: PASS
+[7/20] HumanEval/6: PASS
+[8/20] HumanEval/7: PASS
+[9/20] HumanEval/8: PASS
+[10/20] HumanEval/9: FAIL vx7v16.py", line 35, in <module>
+    check(rolling_max)
+  File "/tmp/tmp6svx7v16
+[11/20] HumanEval/10: PASS
+[12/20] HumanEval/11: PASS
+[13/20] HumanEval/12: PASS
+[14/20] HumanEval/13: PASS
+[15/20] HumanEval/14: PASS
+[16/20] HumanEval/15: PASS
+[17/20] HumanEval/16: PASS
+[18/20] HumanEval/17: PASS
+[19/20] HumanEval/18: PASS
+[20/20] HumanEval/19: FAIL xsw3.py", line 49, in <module>
+    check(sort_numbers)
+  File "/tmp/tmpa_d3xsw3.
+
+HumanEval pass@1: 17/20 -> results/humaneval_Qwen3.5-4B-Q4_K_M.json

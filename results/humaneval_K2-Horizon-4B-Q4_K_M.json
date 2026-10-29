@@ -1,0 +1,110 @@
+{
+ "model": "K2-Horizon-4B-Q4_K_M",
+ "dataset": "HumanEval",
+ "n": 20,
+ "pass_at_1": 0.75,
+ "passed": 15,
+ "seconds": 2164.0,
+ "details": [
+  {
+   "task": "HumanEval/0",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/1",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmp44rj4isi.py\", line 49, in <module>\n    check(separate_paren_groups)\n  File \"/tmp/tmp44rj4isi.py\", line 38, in check\n    assert candidate('(()()) ((())) () ((())()())') == [\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/2",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/3",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/4",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/5",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/6",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/7",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/8",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/9",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/10",
+   "ok": false,
+   "err": "t.py\", line 38, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^\n  File \"/tmp/tmpfw9jtzot.py\", line 26, in make_palindrome\n    return string + string[:i-1][::-1]\n                            ^\nUnboundLocalError: cannot access local variable 'i' where it is not associated with a value\n"
+  },
+  {
+   "task": "HumanEval/11",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/12",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/13",
+   "ok": false,
+   "err": "timeout"
+  },
+  {
+   "task": "HumanEval/14",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/15",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/16",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/17",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpnw705947.py\", line 44, in <module>\n    check(parse_music)\n  File \"/tmp/tmpnw705947.py\", line 40, in check\n    assert candidate('.| .| .| .|') == [1, 1, 1, 1]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+   "task": "HumanEval/18",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/19",
+   "ok": false,
+   "err": "Traceback (most recent call last):\n  File \"/tmp/tmpmn4l7fs1.py\", line 30, in <module>\n    check(sort_numbers)\n  File \"/tmp/tmpmn4l7fs1.py\", line 25, in check\n    assert candidate('three') == 'three'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  }
+ ]
+}
