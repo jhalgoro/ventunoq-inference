@@ -8,6 +8,23 @@ Spun out of [`../ventunoq-llamacpp`](../ventunoq-llamacpp) Round 2
 ([research/alt-engines.md](../ventunoq-llamacpp/research/alt-engines.md)), where MNN became
 the first engine measured **faster than llama.cpp's CPU** on this board.
 
+## What inspired this repo — the sources, with links
+
+- **The article that started it**: Allen Kuo, *“Edge Inference Engine: One Native API Across
+  CPU, GPU, NPU, and RISC-V”* — <https://allenkuo.medium.com/edge-inference-engine-one-native-api-across-cpu-gpu-npu-and-risc-v-8e4166d1816f>.
+  Its “ten providers” table was the Round-2 candidate screen; **MNN was the only provider
+  that runs LLMs on this board** (the rest died on F1/QNN, F2/Vulkan, missing hardware, or
+  missing model coverage — full screen in parent `research/alt-engines.md` Round 2).
+- **The engine**: alibaba/MNN — <https://github.com/alibaba/MNN> (built on-board via
+  `scripts/build_mnn.sh`; LLM tooling docs under `transformers/llm.md`).
+- **The pre-converted models** that made round one possible without a torch host: HF org
+  **taobao-mnn** — [`Qwen3.5-0.8B-MNN`](https://huggingface.co/taobao-mnn/Qwen3.5-0.8B-MNN) ·
+  [`Qwen3.5-2B-MNN`](https://huggingface.co/taobao-mnn/Qwen3.5-2B-MNN) (int4 + fp16 scales;
+  M2 adds [`Qwen3.5-4B-MNN`](https://huggingface.co/taobao-mnn/Qwen3.5-4B-MNN)).
+- **The F8 landmine it had to dodge**: the mistral.rs SIGILL
+  ([parent F8](../ventunoq-llamacpp/FAILURES.md)) that made a pre-run kernel audit
+  ([research/kernel-audit.md](research/kernel-audit.md)) mandatory before executing anything.
+
 ## Status at a glance
 
 | Track | Status |

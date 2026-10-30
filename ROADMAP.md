@@ -34,7 +34,7 @@ claim is worthless if answers degrade. Measure, same corpora as the parent repo:
 **Success =** a row in BENCHMARKS §4.1 per model; if MNN quality ≤ Q4_0 − noise, the CPU
 recommendation stays llama.cpp regardless of speed.
 
-## M2 — Size range: `taobao-mnn/Qwen3.5-4B-MNN` (+ int8 export)
+## M2 — Size range: [`taobao-mnn/Qwen3.5-4B-MNN`](https://huggingface.co/taobao-mnn/Qwen3.5-4B-MNN) (+ int8 export)
 
 - 4B-MNN (~2.4 GB weights int4) fits RAM comfortably; expect the bandwidth-bound crossover
   to shrink the win toward 0 (trend so far: +30% → +19% decode at 2B).

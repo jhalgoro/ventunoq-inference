@@ -1,8 +1,9 @@
 # MNN kernel audit — why it can't step on F8 (and what would change that)
 
 Date: 2026-10-30, MNN `master` @ clone in `/tmp/opencode/MNN` (406 MB tree, kept until
-cleaned; rebuild: `scripts/build_mnn.sh`). Question: after the mistral.rs release binary
-SIGILLed on `fmlal v0.4s, v2.4h, v3.4h` (parent **F8** — QCS8300 lacks FMLAL/FMLSL *vector*
+cleaned; rebuild: `scripts/build_mnn.sh`; upstream: <https://github.com/alibaba/MNN>).
+Question: after the mistral.rs release binary SIGILLed on `fmlal v0.4s, v2.4h, v3.4h`
+(parent **F8** — QCS8300 lacks FMLAL/FMLSL *vector*
 despite HWCAP `asimdhp`; probe one-liner in the parent F8 entry, exit 132 on both clusters),
 could MNN's ARM82 path execute the same class of instruction?
 
