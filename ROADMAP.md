@@ -12,6 +12,7 @@ value/effort on this board.
 | R4 | NPU > 1.75 GiB | 64-bit CDSP VA window (DMA64) | kernel/vendor | out of our hands |
 | R5 | Statistical confidence | bigger eval N | us, wall-clock | trivial |
 | R6 | Quality/perf beyond Q4 | quant & dtype matrix: Q6_K / Q8_0 / F16 / int8, KV dtype | us, wall-clock | low |
+| R7 | Benchmark depth | longer/harder speed & quality suites, incl. evals on **our own project text** | us, wall-clock | medium |
 
 ---
 
@@ -151,6 +152,56 @@ file we would ever fetch — delete first). Output to `results/bench_dtype_*` + 
 "Q4_K_M for interactive / Q4_0 for prefill" rule, with the Q6_K-on-NPU budget question
 answered either way.
 
+## R7 — Deeper benchmark suites: longer, harder, and on our own corpus
+
+R5 tightens N on the existing evals; R7 adds whole axes we never measured — sustained
+behavior, long-context *quality*, and evals grounded in **this project's own text**
+(the repo corpus is free, versioned, domain-relevant, and already vetted by us).
+
+### Speed axes not yet touched
+
+- **Sustained load / thermals** — this board is passively cooled and every number so far
+  is a short burst mean. Run a 10-min continuous pp+tg loop, log t/s per minute →
+  throttle curve; that curve, not the burst, is what a real deployment gets.
+- **Long-context prefill curves** — pp up to 128K on both engines, reported as
+  TTFT p50/p95 over repeated runs (single-shot means hide the tail).
+- **Concurrency** — `llama-server -np 2/4`: per-client tg and aggregate throughput.
+  `scripts/serve.sh`'s deployment shape was never load-tested.
+- **Agentic replay** — replay real multi-turn tool-call transcripts (this project
+  generated plenty) against `llama-server`, measure per-turn latency and KV growth
+  against the measured ~8.9 KB/token (§2).
+
+### Quality axes not yet touched
+
+- **Full-N suites** — GSM8K full 234 questions, HumanEval full 164, both engines
+  (this absorbs R5).
+- **Harder reasoning/code** — MUSR + BBH-style subsets and MBPP+; pure-stdlib scorers in
+  the `gsm8k_eval.py` style, datasets vendored into `bench/`.
+- **Long-context recall on our corpus (NIAH)** — needle-in-a-haystack at 8K/32K/128K
+  where the haystack is our own `docs/REPORT.md` + `BENCHMARKS.md` + `FAILURES.md`
+  concatenated, needles planted at 0/25/50/75/100% depth. Directly answers "can this
+  board do RAG over exactly the kind of text it produces".
+- **Grounded-QA / hallucination** — questions about our *own numbers* ("what tg128 did
+  K2-Horizon-4B reach?", "which engine hits 679 t/s?"), golden answers generated from
+  `results/*.csv` by script; score = exact number match. Cheap, brutal, and self-referential.
+- **Domain perplexity** — extend beyond `gatsby.txt`: llama.cpp source excerpts and this
+  repo's docs as corpora → fitness for on-board RAG over this domain.
+- **Summarization rubric** — compress `docs/REPORT.md` sections; stdlib scorer checks
+  keyword/number coverage against the originals (no LLM judge — keep it reproducible).
+
+### Method sketch
+
+```bash
+scripts/eval_deep.sh <gguf> <engine>   # chains: sustained → NIAH → grounded-QA → full-N
+# → results/deep_*.{csv,json} + results/deep_done marker
+# budget: ~0.5 day CPU wall-clock for LFM3 + Qwen3.5-4B; NPU variants within the F3 budget
+# no new model downloads — disk policy (delete-after-suite) unaffected
+```
+
+**Success =** a throttle curve, NIAH recall curves per engine, and grounded-QA scores for
+every sub-3B model in the matrix; anything that changes a recommendation gets promoted
+into BENCHMARKS §5 (engine selection guide).
+
 ---
 
 ## "Everything works" definition of done
@@ -165,6 +216,8 @@ answered either way.
 - [ ] **Big models on NPU** — R4: K2-4B `-ngl 100` loads and beats its CPU control.
 - [ ] **Dtype matrix** — R6: Q6_K / Q8_0 / F16 measured on LFM3 (CPU + NPU budget check);
       Q6_K-on-NPU answered; per-workload quant rule updated in BENCHMARKS §5.
+- [ ] **Depth** — R7: throttle curve + NIAH recall curve + grounded-QA score published
+      for at least LFM3-1.7B and Qwen3.5-4B, on both engines where the budget allows.
 
 ## Reproducing this project's environment from scratch
 
