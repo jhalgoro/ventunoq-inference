@@ -234,6 +234,19 @@ vendor/              websockets (vendored — the board has no pip)
 - `npu/NOTES.md` — full QNN forensics (DSP-side `.farf` logs, ioctl probes)
 - `docs/REPORT.md` — the original dated log everything above was distilled from
 
+## Related projects (the ventunoq family)
+
+Two live threads of the engine survey ([research/alt-engines.md](research/alt-engines.md))
+grew into their own evidence bases next door; this repo stays the survey of record and
+owns **F1–F8 / R1–R8** globally:
+
+- [`../ventunoq-mnn`](../ventunoq-mnn) — **MNN** depth program. The one engine measured
+  faster than llama.cpp's CPU here (+9% pp / +30% tg @0.8B); owns F9–F19 / M1–M9.
+- [`../ventunoq-llamacpp-cpu+npu`](../ventunoq-llamacpp-cpu+npu) — **llama.cpp depth**
+  program (this repo's engines pushed further): LFM3-on-NPU rebuild, dtype matrix,
+  sustained/thermal, INA232 energy, `-ngl` boundaries, concurrency. Ports R1/R6/R7/R8 as
+  L1–L4; owns F20+ / L1+. Reuses this repo's vendored binaries via its `scripts/env.sh`.
+
 ## References & Acknowledgements
 
 **The engines and tooling this stands on**
