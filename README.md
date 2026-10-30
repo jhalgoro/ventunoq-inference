@@ -42,7 +42,7 @@ Headline results (details in [BENCHMARKS.md](BENCHMARKS.md)):
 ## Results at a glance
 
 Full matrices, method notes and raw-data pointers: [BENCHMARKS.md](BENCHMARKS.md).
-Charts use Unicode blocks so they render in any terminal or editor.
+Charts are rendered by [`scripts/make_charts.py`](scripts/make_charts.py) (matplotlib).
 
 ### CPU — throughput & quality (llama-bench `-ngl 0`, Q4, this board)
 
@@ -59,51 +59,15 @@ Charts use Unicode blocks so they render in any terminal or editor.
 
 \* reduced sample (GSM8K N=20, HumanEval 10 tasks); others N=50 / 20 tasks.
 
-```
-CPU prefill — pp512 t/s                    (1 block = 2 t/s)
-LFM3-1.7B QAD-Q4_0 │████████████████████████████████████████████ 87.4
-Qwen3.5-2B         │█████████████████████████ 49.1
-LFM3-1.7B Q4_K_M   │████████████████████████ 49.0
-LFM2.5-2.6B        │████████████████ 32.0
-Qwen3.5-4B         │██████████ 19.8
-K2-Horizon-4B      │██████████ 19.8
-Qwen3.5-9B         │██████ 11.6
-K2-Horizon-7B      │██████ 11.2
+![CPU throughput — pp512 / pp8192 / tg128 per model](docs/assets/charts/cpu-throughput.png)
 
-CPU decode — tg128 t/s                   (1 block = 0.5 t/s)
-LFM3-1.7B Q4_K_M   │███████████████████████ 11.7
-LFM3-1.7B QAD-Q4_0 │████████████████████ 10.2
-Qwen3.5-2B         │████████████████ 7.9
-LFM2.5-2.6B        │███████████████ 7.3
-K2-Horizon-4B      │█████████ 4.3
-Qwen3.5-4B         │████████ 4.2
-K2-Horizon-7B      │██████ 3.0
-Qwen3.5-9B         │█████ 2.7
-```
-
-```
-Quality — % (1 block = 2 pts; * = reduced sample)
-                    GSM8K                                        HumanEval
-Qwen3.5-9B   │██████████████████████████████████████████ 85.0* │████████████████████████████████████████ 80.0*
-K2-Horizon-7B│██████████████████████████████████████ 75.0*     │██████████████████████████████████████████████████ 100.0*
-Qwen3.5-4B   │████████████████████████████████████ 72.0        │██████████████████████████████████████████ 85.0
-LFM3-1.7B    │██████████████████████████████ 60.0              │████████████████████████████████ 65.0
-K2-Horizon-4B│██████████████████████████████ 60.0              │██████████████████████████████████████ 75.0
-Qwen3.5-2B   │███████████ 22.0                                 │████████████████████ 40.0
-```
+![Quality — GSM8K vs HumanEval per model](docs/assets/charts/quality.png)
 
 ### NPU — speed-up over the *same binary* pinned to the big cores
 
-```
-                     pp8192                         tg128
-LFM2.5-2.6B    │█████████████████████ 21.1×   │█████      1.35×
-Qwen3.5-2B     │███████████████ 14.9×         │██████     1.51×
-Qwen3.5-0.8B   │██████████████ 13.6×          │█████      1.35×
-Qwen3.5-4B †   │███ ≈3×                       │██████████ ≈2.4×
-K2-Horizon-4B ‡│██ 1.9×                       │█ 0.33×  ← regression, use CPU
+![NPU speed-up vs pinned CPU, and absolute prefill for full offload](docs/assets/charts/npu-speedup.png)
 
-† partial offload `-ngl 24` (fits the ~1.75 GiB DSP budget)   ‡ `-ngl 18` ping-pongs (F4)
-```
+† partial offload `-ngl 24` (fits the ~1.75 GiB DSP budget)   ‡ `-ngl 18` ping-pongs (FAILURES F4)
 
 Decode gains stay small on purpose: every engine shares one 16 GiB LPDDR, so decode is
 bandwidth-bound everywhere ([`research/memory-map.md`](research/memory-map.md)).
@@ -224,6 +188,9 @@ scripts/test_vulkan.sh                                # GPU gate — stays red u
 
 # 5. Check
 ls results/*_done     # suite_done eval_done hex_done hex2_done hexq_done k2_done k2_4b_done
+
+# 6. Optional — re-render the README charts from the same numbers (pip install matplotlib)
+python3 scripts/make_charts.py
 ```
 
 Datasets (`bench/gsm8k/test.jsonl`, `bench/HumanEval.jsonl`) and the eval harnesses are in
@@ -237,7 +204,8 @@ BENCHMARKS.md        everything that works, with numbers + raw-data pointers
 FAILURES.md          every failed pathway: symptom → root cause → evidence → status
 ROADMAP.md           what is needed to make each blocked thing work (per engine)
 docs/REPORT.md       the original chronological field log (2026-10-28/29), kept as-is
-scripts/             working harnesses: bench suites, GSM8K/HumanEval evals, NPU/GPU cycles
+scripts/             working harnesses: bench suites, GSM8K/HumanEval evals, NPU/GPU cycles,
+                     make_charts.py (re-renders the README charts from matplotlib)
 results/             raw CSV/JSON/logs + run markers + DISK_LOG.md audit trail
 npu/                 QNN bring-up log (NOTES.md) + C probes: cumap_probe.c (VA ceiling),
                      mmap_probe.c (fastrpc MMAP works), soc_scan.c, spoof_soc.c
