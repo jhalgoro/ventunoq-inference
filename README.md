@@ -16,6 +16,7 @@ blocked, each with a reproducible root cause, evidence, and a concrete fix path.
 | **NPU** (Hexagon V75 HTP) | Arduino `llamacpp/20261020` runner — upstream **Hexagon backend** over classic fastrpc | ✅ **works** — prefill **9–21×** CPU, decode 1.35–1.5×, quality parity, ≤ ~1.75 GiB NPU-side | [BENCHMARKS §3](BENCHMARKS.md) |
 | **NPU via QNN/QAIRT** | Qualcomm AI Runtime 2.51, HTP skel | ❌ **blocked** — kernel lacks the vendor `smmu_proxy` service (`HAP_mmap2` → `paddr 0x0`) | [FAILURES F1](FAILURES.md) |
 | **GPU** (Adreno 623, Turnip/Mesa 25.2.8, Vulkan 1.3) | llama.cpp v0.8.0 `-DGGML_VULKAN=ON` | ❌ **blocked** — shaders demand `storageBuffer8BitAccess` the device doesn't advertise; driver segfaults instead of erroring | [FAILURES F2](FAILURES.md) |
+| **Alt engines** — MNN · mistral.rs · Strata (+ article sweep) | MNN 3.x ARM82 fp16 (source build); mistral.rs 0.9.5 Candle CPU; Strata | ✅ **MNN beats llama.cpp CPU: +9% pp / +30% tg @0.8B** (no LFM3, no NPU) · ⚠️ mistral.rs: release build SIGILLs ([F8](FAILURES.md)), 0.4–0.9× · ❌ Strata: not testable | [research/alt-engines.md](research/alt-engines.md) |
 
 Headline results (details in [BENCHMARKS.md](BENCHMARKS.md)):
 
@@ -26,6 +27,9 @@ Headline results (details in [BENCHMARKS.md](BENCHMARKS.md)):
   (NPU 60.0% vs CPU 55.0%, N=20 — one question apart).
 - **Decode is bandwidth-bound on every engine** (one shared 16 GiB LPDDR):
   the NPU buys 1.35–1.5× on decode, no more.
+- **llama.cpp is not automatically the fastest engine**: MNN's ARM82 fp16 path beats it on CPU
+  with Qwen3.5 (0.8B: **162.7/41.5** vs 148.7/31.9 t/s; 2B: 75.7/19.2 vs 69.8/16.1) — but LFM3
+  and the NPU still belong to llama.cpp alone ([research/alt-engines.md](research/alt-engines.md)).
 - **One hard NPU limit**: the CDSP maps through a **32-bit IOMMU window measured
   at ~1.75 GiB** (`npu/cumap_probe.c`) — full offload works up to ~2B-class Q4;
   K2-Horizon-4B aborts mid-load.

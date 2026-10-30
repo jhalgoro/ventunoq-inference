@@ -416,3 +416,29 @@ cd70221bebaee0503e0f6717e174250cd7825aa88438b3aabec9ad55731d9bb1  models/Qwen3.5
 ```
 /dev/mmcblk0p71   55G   21G   32G  40% /
 ```
+
+### 2026-10-29 22:1x UTC — DOWNLOAD (alt-engine survey, `/tmp/opencode/mr/`): `Qwen3.5-0.8B-Q4_0.gguf` (507 MB, unsloth, sha matches 13:40 entry), `LFM3-1.7B-Q4_K_M.gguf` (1.10 GB, LiquidAI), `LFM2.5-2.6B-Q4_K_M.gguf` (1.67 GB, LiquidAI)
+```
+444406ddd926550c724ec18d5120a9d40ded44908a063b0e66e9a7e5464c652c  Qwen3.5-0.8B-Q4_0.gguf
+3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4  LFM3-1.7B-Q4_K_M.gguf
+02a8b7e17487d326e46d68ce0ba24211e1b80a14c4cd0597fa73c1cd697f52ed  LFM2.5-2.6B-Q4_K_M.gguf
+```
+
+### 2026-10-29 22:1x UTC — DELETE (alt-engine survey finished, see research/alt-engines.md + FAILURES F8): all three GGUFs above
+```
+/dev/mmcblk0p71   55G   25G   29G  46% /   (before)
+/dev/mmcblk0p71   55G   22G   32G  41% /   (after)
+```
+
+### 2026-10-30 07:1x UTC — DOWNLOAD (MNN cross-check, `/tmp/opencode/`): `Qwen3.5-0.8B-Q4_K_M.gguf` (unsloth, 533 MB), MNN pre-converted weights `taobao-mnn/Qwen3.5-0.8B-MNN` (0.55 GB) + `Qwen3.5-2B-MNN` (1.19 GB); source clone `MNN/` (406 MB, kept — rebuild recipe in research/alt-engines.md)
+```
+bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517  mr/Qwen3.5-0.8B-Q4_K_M.gguf
+4e25ef4cbfb49a33013d17300c2f68cd9c9ce8f2e3f7b947fd2c574ec297ca5e  mnn/Qwen3.5-0.8B-MNN/llm.mnn.weight
+c93f71a2dbecf9328782bd38861656d8faa82e95e7f99607350074768a482054  mnn/Qwen3.5-2B-MNN/llm.mnn.weight
+```
+
+### 2026-10-30 07:2x UTC — DELETE (MNN cross-check finished, numbers recorded in research/alt-engines.md): the GGUF + both MNN model dirs above
+```
+/dev/mmcblk0p71   55G   24G   29G  45% /   (before)
+/dev/mmcblk0p71   55G   22G   32G  41% /   (after)
+```

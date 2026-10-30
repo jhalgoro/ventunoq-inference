@@ -148,3 +148,29 @@ Not a failure so much as a version skew with a clean fix: re-run Arduino's own
   written for the record; this file is the correction.
 - §1's CPU baselines ran un-pinned 8-thread; NPU comparisons (§3) use re-run pinned
   controls on the same binary — never compare across those two regimes.
+
+## F8 — mistral.rs release CPU binary: SIGILL — QCS8300 lacks FMLAL (vector) 📝
+
+**Symptom.** Official `mistralrs-cpu-aarch64-unknown-linux-gnu.tar.gz` (v0.9.5, built
+`-C target-cpu=generic -C target-feature=+dotprod,+fp16,+fhm`) loads Qwen3.5-0.8B-Q4_0 fully
+("Using f16 KV cache on CPU") then dies **before the first token**: `Illegal instruction (core
+dumped)` (exit 132). Reproduced pinned and unpinned; `mistralrs doctor` PASSES it ("Binary
+features match detected hardware" — its own probe reports "extensions: none", so the check is
+vacuous).
+
+**Investigation.** gdb: SIGILL at `mistralrs_core::attention::backends::cpu::single_q::
+compute_group_range::<f16>+724`, faulting instruction **`fmlal v0.4s, v2.4h, v3.4h`**. Minimal
+freestanding `.s` probes (`as -march=armv8.2-a+fp16[fml]`, `taskset` per cluster):
+`fmla v0.4h`, `sdot v0.4s`, `fcvt h0` execute fine on A78C **and** A55; `fmlal v0.4s, v2.4h,
+v3.4h` → SIGILL on **both** clusters.
+
+**Root cause.** `FMLAL`/`FMLSL` (vector, 4H→4S widening) are **optional** in ARMv8.x-FP16 and
+QCS8300 does not implement them — while the kernel still advertises `fphp`/`asimdhp`
+(HWCAP `0x119fff`). A `-C target-feature=+fp16` build legally emits FMLAL anywhere, so **any**
+fp16-targeted aarch64 binary is unsound on this SoC, and HWCAP_ASIMDHP cannot be trusted as an
+FPHV-arithmetic green light here.
+
+**Workaround (both verified).** (a) the second release asset `…-v8_0.tar.gz` (ARMv8.0 baseline,
+NEON-only) runs; (b) the default dotprod build with `MISTRALRS_CPU_KV_F32=1` dodges the f16
+attention kernel. Numbers in [`research/alt-engines.md`](research/alt-engines.md) — and they
+still lose to llama.cpp (0.39–0.92× decode, 0.47–0.54× prefill), so mistral.rs is not adopted.
