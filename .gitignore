@@ -1,0 +1,11 @@
+# source clone + build — rebuild with scripts/build_mnn.sh (recipe also in parent alt-engines.md)
+MNN/
+
+# models are transient by policy (delete-after-suite, results/DISK_LOG.md)
+models/
+*.gguf
+*.mnn.weight
+
+# python
+__pycache__/
+*.pyc

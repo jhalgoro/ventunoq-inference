@@ -1,0 +1,85 @@
+# Benchmarks — MNN on QCS8300 (measured on this board)
+
+Nothing here is quoted from upstream tables; every number has a raw log in `results/` or a
+`scripts/` repro. Provenance from the Round-2 survey runs (pre-repo, logs currently under
+`/tmp/opencode/mnn_bench_*.log` — regenerate with `scripts/bench_mnn.sh`, which writes into
+`results/` from now on).
+
+## Method — how MNN knobs map onto llama.cpp's pinned regime
+
+| MNN | llama.cpp v0.8.0 equivalent | notes |
+|---|---|---|
+| `llm_bench -pg 512,128` | `llama-bench -p 512 -n 128` | identical semantics: prefill 512, then generate 128 reusing the KV cache |
+| `taskset -c 0-3` | `--cpu-mask 0xf --cpu-strict 1` | big cores only (A78C pair @2112/2361.6 MHz) |
+| `-t 4` | `-t 4` | |
+| `-c 2` | — | fp16 compute, printed as precision **Low**; `-c 1` = fp32 (**High**) — see F10 |
+| `-rep 3` | `-r 3` | |
+| model dir `config.json` | `-m file.gguf` | MNN model = dir (`llm.mnn` + `llm.mnn.weight` + tokenizer) |
+
+llama.cpp baselines are the parent repo's: **v0.8.0 b11972** (official Ubuntu-arm64 prebuilt,
+`armv8.2_2` dispatch), raw CSVs in
+[`../ventunoq-llamacpp/results/`](../ventunoq-llamacpp/results/).
+
+## 1. Headline — MNN int4 (fp16) vs llama.cpp, big-core pinned, `-pg 512,128`
+
+| Model | llama.cpp Q4_0 (pp/tg) | llama.cpp Q4_K_M (pp/tg) | **MNN int4 fp16 (pp/tg)** | MNN vs Q4_0 |
+|---|---|---|---|---|
+| Qwen3.5-0.8B | 148.7 / 31.9 | 106.2 / 27.0 | **162.7 ± 0.1 / 41.5 ± 0.1** | +9.4% / **+30%** |
+| Qwen3.5-2B | 69.8 / 16.1 | — | **75.7 ± 0.1 / 19.2 ± 0.0** | +8.4% / **+19%** |
+
+- MNN's int4 weights carry fp16 per-block scales (≈Q4_K-class quality) and compute in ARM82
+  fp16 — the win is kernel + quant format together.
+- Quant-matched comparison matters: llama.cpp's Q4_K_M is *slower* than its own Q4_0 at 0.8B
+  (106 vs 149 pp), so vs the like-for-like quant MNN is ~1.5× at 0.8B.
+- Decode gain shrinks 30%→19% from 0.8B→2B — the bandwidth-bound crossover
+  ([parent research/memory-map.md](../ventunoq-llamacpp/research/memory-map.md)).
+
+## 2. Config sweeps (0.8B unless noted)
+
+| Config | pp512 | tg128 | reading |
+|---|---|---|---|
+| t4 fp16 (`-c 2`) | 162.7 | **41.5** | board default for MNN |
+| t4 fp32 (`-c 1`) | ~154.8 | 25.1 | fp16 is worth **+65% decode** (F10) |
+| t8 fp16 | 170.7 | 31.5 | A55s raise pp but drag tg below t4 |
+| t8 fp32 | 159.2 | 29.1 | |
+| decode wall speed (incl. sampling) | — | 40.9 | `llm_bench` prints it separately |
+
+Memory: peak RSS **930 MB** for the 449 MB model (2.1× model size; vs mistral.rs 4×,
+llama.cpp mmap-based). Measured with `/usr/bin/time -v` on `llm_bench` (text-only model).
+
+## 3. llama.cpp baselines (inherited, for reference)
+
+From [`../ventunoq-llamacpp/BENCHMARKS.md`](../ventunoq-llamacpp/BENCHMARKS.md) §1/§3:
+
+| Model | pinned-CPU pp512 / tg128 | NPU (Hexagon runner) pp512 / tg128 |
+|---|---|---|
+| Qwen3.5-0.8B-Q4_0 | 148.7 / 31.9 | 1366 / 43.0 |
+| Qwen3.5-2B-Q4_0 | 69.8 / 16.1 | 863 / 24.3 |
+| LFM2.5-2.6B-Q4_K_M | 40.1 / 13.1 | 679 / 17.7 |
+| LFM3-1.7B-Q4_K_M | 49.0 / 11.7 | ✗ runner predates lfm3 (parent R1) |
+
+**MNN does not change the NPU picture**: its Hexagon backend is Android+QNN (F13). The
+interesting cross-engine question left is quality — M1 below.
+
+## 4. Planned (fill from ROADMAP items; keep this file numbers-only)
+
+### 4.1 Quality parity (M1) — MNN int4 vs llama.cpp Q4_0 / Q4_K_M
+
+| Model | MNN int4 GSM8K | llama.cpp Q4_0 | llama.cpp Q4_K_M | ppl (gatsby) MNN vs Q4_0 |
+|---|---|---|---|---|
+| Qwen3.5-0.8B | ⏳ | ⏳ (parent harness) | ⏳ | ⏳ |
+| Qwen3.5-2B | ⏳ | 22.0% (N=50, parent) | ⏳ | ⏳ |
+
+### 4.2 Long context (M5) — pp curve + RSS growth per KV token vs llama.cpp's ~8.9 KB/tok
+
+| Model | pp2k | pp8k | pp16k | pp32k | KV RSS growth |
+|---|---|---|---|---|---|
+| Qwen3.5-0.8B | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+
+### 4.3 Sustained + energy (M6) — 10-min loop + INA232 (hwmon2), J/token = W ÷ t/s
+
+| Engine/config | avg W (pp) | avg W (tg) | J/tok pp | J/tok tg | throttle Δ over 10 min |
+|---|---|---|---|---|---|
+| MNN fp16 t4 pinned | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| llama.cpp Q4_0 t4 pinned | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ |
+| llama.cpp NPU (parent repo runs it) | — | — | — | — | — |
