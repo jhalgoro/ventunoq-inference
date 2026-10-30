@@ -49,13 +49,13 @@ NPU-boundary and serving work the survey had no room for.
 |---|---|
 | Inherit pinned-CPU + NPU baselines | ✅ [BENCHMARKS.md](BENCHMARKS.md) §1–2 (raw CSVs stay in the parent) |
 | L1 — LFM3 on NPU (runner rebuild) | 🟡 measured (pp512 1033 t/s) — GSM8K parity open; [ROADMAP](ROADMAP.md) L1 |
-| L2 — dtype matrix (Q6_K/Q8_0/F16/int8, KV dtypes) | 🟡 matrix running |
+| L2 — dtype matrix (Q6_K/Q8_0/F16/int8, KV dtypes) | ✅ BENCHMARKS §3 — NPU prefill quant-independent; Q8_0 fits; KVq4 = F20 |
 | L3 — deep suites (sustained, NIAH, grounded-QA, full-N) | ⏳ L3 |
 | L4 — energy: INA232 W + J/token per engine | ⏳ L4 — probe ready: `scripts/power_probe.py` |
-| L5 — NPU offload boundaries (`-ngl` sweeps, F3/F4 rules) | 🟡 matrix running |
+| L5 — NPU offload boundaries (`-ngl` sweeps, F3/F4 rules) | ✅ BENCHMARKS §4 — one usable depth/model; ≥6B CPU-only |
 | L6 — CPU micro-tuning beyond `-t 4` pinning | ⏳ L6 |
 | L7 — serving & concurrency (`llama-server -np`) | ⏳ L7 |
-| L8 — same-runner CPU controls for every NPU row | 🟡 matrix `*_hex2cpu` stages |
+| L8 — same-runner CPU controls for every NPU row | ✅ every `*_hex2cpu` CSV has strict-1 rows |
 | L9 — MTP spec-decode for Qwen3.5 (`draft-mtp`, new in b11996) | ⏳ L9 |
 
 ## Binary strategy — no duplication
@@ -85,7 +85,7 @@ model set on the runner itself).
 | Qwen3.5-0.8B-Q4_0 | 148.7 / 31.9 | 1366 / 43.0 | 13.6× / 1.35× |
 | Qwen3.5-2B-Q4_0 | 69.8 / 16.1 | 863 / 24.3 | 14.9× / 1.51× |
 | LFM2.5-2.6B-Q4_K_M | 40.1 / 13.1 | 679 / 17.7 | 21.1× / 1.35× |
-| LFM3-1.7B-Q4_K_M | 46.8 / 19.7 *(runner `-ngl 0`)* | 1033 / 25.6 ✅ L1 | 22× / 1.30× |
+| LFM3-1.7B-Q4_K_M | 65.5 / 19.7 *(runner `-ngl 0`, strict)* | 1033 / 25.6 ✅ L1 | 15.8× / 1.30× |
 
 Full inherited tables (threads/pinning, long ctx, partial offload, quality parity):
 [BENCHMARKS.md](BENCHMARKS.md) §1–2.

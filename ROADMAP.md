@@ -11,13 +11,13 @@ plan and success criteria; L5–L7 are new axes the survey had no room for; L8�
 | # | Parent | Question | Effort | Blocks on |
 |---|---|---|---|---|
 | L1 | R1 | Rebuild the hexagon runner so **LFM3 runs on the NPU** | ~~low~~ **done 2026-10-30** | — (was: workflow access; not needed, see L1) |
-| L2 | R6 | dtype matrix: Q6_K / Q8_0 / F16 / KV-dtype — CPU cost + NPU budget | low–med | disk policy |
+| L2 | R6 | dtype matrix: Q6_K / Q8_0 / F16 / KV-dtype — CPU cost + NPU budget | ~~low–med~~ **done 2026-10-30** (§3) | — |
 | L3 | R7 | Deep suites: sustained/thermal, TTFT tails, NIAH, grounded-QA, full-N | medium | — |
 | L4 | R8 | Energy: W and J/token per engine from INA232 (sudo-free) | low | — |
-| L5 | — | NPU offload boundaries: `-ngl` sweeps, F3/F4 rule edges | low | F3 (measurement only) |
+| L5 | — | NPU offload boundaries: `-ngl` sweeps, F3/F4 rule edges | ~~low~~ **done 2026-10-30** (§4) | — (F3 re-derived, measurement only) |
 | L6 | — | CPU micro-tuning beyond `-t 4` pinning | low | — |
 | L7 | — | Serving & concurrency: `llama-server -np 2/4`, both engines | medium | — |
-| L8 | — | **In-arch CPU controls** (same runner, `-ngl 0`, strict pinning) for every NPU row — §1 is out-of-scope context with missing raw CSVs | low | — |
+| L8 | — | **In-arch CPU controls** (same runner, `-ngl 0`, strict pinning) for every NPU row — §1 is out-of-scope context with missing raw CSVs | ~~low~~ **done 2026-10-30** | — |
 | L9 | — | **MTP speculative decode** (`--spec-type draft-mtp`) for Qwen3.5 — merged in b11996 | med | — |
 
 > **Build freshness is a first-class variable here** (2026-10-30 lesson). Arduino ships a
@@ -43,8 +43,10 @@ plan and success criteria; L5–L7 are new axes the survey had no room for; L8�
 
 Everything runs, and the NPU wins prefill by **9–21×** — but decode still lands *at or
 below* the CPU (F4), F3 caps what fits, and the CPU column above is inherited v0.8.0
-context, not this arch. The matrix (`scripts/depth_matrix.sh`) is re-measuring all of it
-on 0.28.0: NPU rows + same-runner `-ngl 0` controls with strict pinning (L8).
+context, not this arch. **Matrix done 2026-10-30** (`scripts/depth_matrix.sh`, 16 stages):
+all of it re-measured on 0.28.0 with same-runner `-ngl 0` strict controls (L8). Restated
+in-arch ratios: prefill **15–18×** (pp8192, full offload), decode **1.30–1.45×**; ≥6B has
+no usable NPU depth (BENCHMARKS §3–§4).
 
 ---
 
@@ -65,12 +67,13 @@ OPBATCH=2048, MBUF 256/256, r=2 (`results/bench_LFM3-17B-Q4KM_npu_ngl100.csv`):
 | | pp512 | pp8192 | tg32 | tg128 |
 |---|---|---|---|---|
 | NPU 0.28.0 | **1033.2 ±0.5** | 905.9 ±0.3 | 25.8 | 25.6 |
-| CPU ctrl 0.28.0 (same runner, `-ngl 0`) | 46.8 | 43.3 | 20.2 | 19.7 |
+| CPU ctrl 0.28.0 (same runner, `-ngl 0`, strict-1) | 65.5 | 54.2 | 19.7 | 19.7 |
 
-**≈22× prefill, 1.30× decode** vs the same-runner control — top of the family band, as
-predicted. Decode 25.6 sits between 0.8B (40.7) and 2.6B (11.5), same ordering as CPU.
-(Inherited §1 lists LFM3 tg128 = 11.7 on the out-of-scope v0.8.0 build — do not ratio
-against it; L8.) Control row is strict-0 pending its strict-1 re-run — numbers move a few %.
+**15.8× pp512 / 16.7× pp8192, 1.30× decode** vs the same-runner control — top of the
+family band, as predicted. Decode 25.6 sits between 0.8B (42.0) and 2.6B (17.8), same
+ordering as CPU. (Inherited §1 lists LFM3 tg128 = 11.7 on the out-of-scope v0.8.0 build —
+do not ratio against it; L8.) The control is the strict-1 re-run: the earlier strict-0 pass
+measured 46.8/43.3, ~30% low — pinning strictness is worth tens of %, exactly L8's point.
 
 **Still open:** quality parity — GSM8K N=20 NPU vs CPU (parent `scripts/gsm8k_eval.py`);
 a wrong-on-NPU model is a bug report, not a result. Acceptance: |Δ| ≤ 1 question, else

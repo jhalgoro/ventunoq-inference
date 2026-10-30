@@ -6,3 +6,77 @@
 13:59:23 npu LFM3-17B-QAD ngl=100 rows=4
 === stage s_lfm3_q4km 2026-10-30T14:07:30Z
 14:07:30 npu LFM3-17B-Q4KM ngl=100 SKIP (have rows)
+14:15:46 hex2cpu LFM3-17B-Q4KM rows=4
+14:15:46 hex2cpu LFM3-17B-Q4KM SKIP (have rows)
+=== stage s_lfm3_qad 2026-10-30T14:15:46Z
+14:15:47 fetch LFM3-17B-QAD already complete
+14:15:48 npu LFM3-17B-QAD ngl=100 SKIP (have rows)
+14:22:32 hex2cpu LFM3-17B-QAD rows=4
+14:22:32 hex2cpu LFM3-17B-QAD SKIP (have rows)
+=== stage s_lfm3_q6k 2026-10-30T14:22:33Z
+14:24:09 npu LFM3-17B-Q6K ngl=100 rows=4
+14:34:37 hex2cpu LFM3-17B-Q6K rows=4
+=== stage s_lfm3_q80 2026-10-30T14:34:38Z
+14:36:45 npu LFM3-17B-Q80 ngl=100 rows=4
+14:44:27 hex2cpu LFM3-17B-Q80 rows=4
+=== stage s_lfm3_f16 2026-10-30T14:44:29Z
+15:04:28 hex2cpu LFM3-17B-F16 rows=4
+=== stage s_lfm3_kv 2026-10-30T15:04:32Z
+15:15:44 hex2cpu LFM3-17B-Q4KM-kvq8 rows=4
+15:28:43 hex2cpu LFM3-17B-Q4KM-kvq4 rows=4
+15:29:31 npu LFM3-17B-Q4KM-kvq8 ngl=100 rows=4
+15:29:36 npu LFM3-17B-Q4KM-kvq4 ngl=100 rows=0
+=== stage s_lfm25 2026-10-30T15:29:37Z
+15:31:42 npu LFM25-26B-Q4KM ngl=100 rows=4
+15:44:45 hex2cpu LFM25-26B-Q4KM rows=4
+15:44:45 hex2cpu LFM25-26B-Q4KM SKIP (have rows)
+=== stage s_q08 2026-10-30T15:44:47Z
+15:45:36 npu Qwen35-08B-Q4KM ngl=100 rows=4
+15:51:02 hex2cpu Qwen35-08B-Q4KM rows=4
+15:51:02 hex2cpu Qwen35-08B-Q4KM SKIP (have rows)
+=== stage s_q2b 2026-10-30T15:51:03Z
+15:52:34 npu Qwen35-2B-Q4KM ngl=100 rows=4
+16:02:12 hex2cpu Qwen35-2B-Q4KM rows=4
+=== stage s_q4b_q4km 2026-10-30T16:02:14Z
+16:28:46 hex2cpu Qwen35-4B-Q4KM rows=4
+16:28:55 npu Qwen35-4B-Q4KM ngl=100 rows=0
+16:29:03 npu Qwen35-4B-Q4KM ngl=36 rows=0
+16:33:00 npu Qwen35-4B-Q4KM ngl=30 rows=4
+16:41:59 npu Qwen35-4B-Q4KM ngl=24 rows=4
+=== stage s_q4b_q40 2026-10-30T16:42:03Z
+17:05:22 hex2cpu Qwen35-4B-Q40 rows=4
+17:21:28 npu Qwen35-4B-Q40 ngl=12 rows=4
+17:34:40 npu Qwen35-4B-Q40 ngl=18 rows=4
+17:34:53 npu Qwen35-4B-Q40 ngl=24 rows=0
+17:38:55 npu Qwen35-4B-Q40 ngl=30 rows=4
+17:39:03 npu Qwen35-4B-Q40 ngl=36 rows=0
+17:39:10 npu Qwen35-4B-Q40 ngl=42 rows=0
+17:39:17 npu Qwen35-4B-Q40 ngl=100 rows=0
+=== stage s_q9b_q4km 2026-10-30T17:39:20Z
+18:24:52 hex2cpu Qwen35-9B-Q4KM rows=4
+18:25:09 npu Qwen35-9B-Q4KM ngl=100 rows=0
+18:25:23 npu Qwen35-9B-Q4KM ngl=32 rows=0
+18:25:47 npu Qwen35-9B-Q4KM ngl=24 rows=0
+18:26:22 npu Qwen35-9B-Q4KM ngl=16 rows=0
+=== stage s_q9b_q40 2026-10-30T18:26:28Z
+18:30:12 npu Qwen35-9B-Q40 ngl=24 rows=0
+18:30:40 npu Qwen35-9B-Q40 ngl=16 rows=0
+19:01:40 npu Qwen35-9B-Q40 ngl=8 rows=4
+=== stage s_k2_4b 2026-10-30T19:01:46Z
+19:39:11 hex2cpu K2H-4B-Q4KM rows=4
+19:39:20 npu K2H-4B-Q4KM ngl=100 rows=0
+19:39:50 npu K2H-4B-Q4KM ngl=30 rows=1
+19:55:19 npu K2H-4B-Q4KM ngl=24 rows=4
+20:17:27 npu K2H-4B-Q4KM ngl=18 rows=4
+=== stage s_k2_4b_q40 2026-10-30T20:17:30Z
+20:19:22 npu K2H-4B-Q40 ngl=100 rows=0
+20:19:34 npu K2H-4B-Q40 ngl=30 rows=0
+20:35:21 npu K2H-4B-Q40 ngl=24 rows=4
+20:56:23 npu K2H-4B-Q40 ngl=18 rows=4
+=== stage s_k2_7b 2026-10-30T20:56:27Z
+21:51:12 hex2cpu K2H-7B-Q4KM rows=4
+21:51:25 npu K2H-7B-Q4KM ngl=100 rows=0
+21:51:37 npu K2H-7B-Q4KM ngl=40 rows=0
+21:51:55 npu K2H-7B-Q4KM ngl=32 rows=0
+21:52:21 npu K2H-7B-Q4KM ngl=24 rows=0
+=== matrix done 2026-10-30T21:52:27Z
