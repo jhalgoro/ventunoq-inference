@@ -16,7 +16,7 @@ blocked, each with a reproducible root cause, evidence, and a concrete fix path.
 | **NPU** (Hexagon V75 HTP) | Arduino `llamacpp/20261020` runner — upstream **Hexagon backend** over classic fastrpc | ✅ **works** — prefill **9–21×** CPU, decode 1.35–1.5×, quality parity, ≤ ~1.75 GiB NPU-side | [BENCHMARKS §3](BENCHMARKS.md) |
 | **NPU via QNN/QAIRT** | Qualcomm AI Runtime 2.51, HTP skel | ❌ **blocked** — kernel lacks the vendor `smmu_proxy` service (`HAP_mmap2` → `paddr 0x0`) | [FAILURES F1](FAILURES.md) |
 | **GPU** (Adreno 623, Turnip/Mesa 25.2.8, Vulkan 1.3) | llama.cpp v0.8.0 `-DGGML_VULKAN=ON` | ❌ **blocked** — shaders demand `storageBuffer8BitAccess` the device doesn't advertise; driver segfaults instead of erroring | [FAILURES F2](FAILURES.md) |
-| **Alt engines** — MNN · mistral.rs · Strata (+ article sweep) | MNN 3.x ARM82 fp16 (source build); mistral.rs 0.9.5 Candle CPU; Strata | ✅ **MNN beats llama.cpp CPU: +9% pp / +30% tg @0.8B** (no LFM3, no NPU) · ⚠️ mistral.rs: release build SIGILLs ([F8](FAILURES.md)), 0.4–0.9× · ❌ Strata: not testable | [research/alt-engines.md](research/alt-engines.md) |
+| **Alt engines** — MNN · mistral.rs · Strata (+ 2 article sweeps) | MNN 3.x ARM82 fp16 (source build); mistral.rs 0.9.5 Candle CPU; Strata | ✅ **MNN beats llama.cpp CPU: +9% pp / +30% tg @0.8B** (no LFM3, no NPU) · ⚠️ mistral.rs: release build SIGILLs ([F8](FAILURES.md)), 0.4–0.9× · ❌ Strata: not testable · ❌ NPU-article engines (llm.npu/MLLM, hailo-ollama, OpenVINO…): all QNN → F1, nothing runnable | [research/alt-engines.md](research/alt-engines.md) |
 
 Headline results (details in [BENCHMARKS.md](BENCHMARKS.md)):
 

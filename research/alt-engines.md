@@ -1,4 +1,4 @@
-# Alternative inference engines — Strata, mistral.rs, and the "ten providers" set (2026-10-29/30)
+# Alternative inference engines — Strata, mistral.rs, MNN, and the article sweeps (2026-10-29/30)
 
 Round 1 (2026-10-29): are [`niko1221/Strata`](https://github.com/niko1221/Strata) and
 [`EricLBuehler/mistral.rs`](https://github.com/EricLBuehler/mistral.rs) worth testing on this
@@ -12,6 +12,13 @@ DirectML, Vulkan(-Video). **One of them beats llama.cpp on this board's CPU — 
 +30% decode** (see §Round 2 below). That changes the project's "which engine" answer for
 Qwen-class CPU inference, though not for LFM3 or the NPU.
 
+Round 3 (2026-10-30): five NPU-inference articles (localaimaster's 2026 NPU comparison, two
+arXiv hardware/benchmark studies, USC's edge-platform benchmark, and llm.npu @ ASPLOS '25),
+asked specifically whether any of them names an **NPU engine worth exploring** here. Answer:
+no — every Qualcomm-NPU route in them is QNN/SNPE, which this kernel blocks (F1). llm.npu is
+still the most useful read of the set, as a design blueprint for the Hexagon path we already
+run (§Round 3 below).
+
 ## Verdict
 
 | Engine | Verdict | Why |
@@ -20,6 +27,7 @@ Qwen-class CPU inference, though not for LFM3 or the NPU.
 | **mistral.rs** | ⚠️ **works, not competitive** | CPU-only path (no NPU/GPU), default release binary **SIGILLs on QCS8300** (F8), 2–2.6× slower than llama.cpp on prefill, LFM3 not in any release |
 | **MNN** | ✅ **the one engine worth adopting for CPU** | ARM82 fp16 kernels: **+9% prefill / +30% decode vs llama.cpp Q4_0 at 0.8B**, +8%/+19% at 2B; F8-safe by construction; no LFM3/LFM2, no NPU here (QNN=Android, F1) |
 | ONNX Runtime / TensorRT / DirectML / LiteRT / bare QNN / ncnn / IREE | ❌ see §Round 2 matrix | Blocked by F1 (all QNN paths), F2 (Vulkan), no hardware (CUDA/NVIDIA/Windows), or no LLM/arch coverage (ncnn, ORT) |
+| Round 3 (NPU articles): llm.npu/MLLM, hailo-ollama, MLC-LLM, OpenVINO, MLX, SNPE | ❌ **nothing to test** — see §Round 3 | Every Qualcomm-NPU path in them is QNN/SNPE → **F1**; the rest is non-Qualcomm hardware or GPU/CPU routes already covered |
 
 ## Board constraints this survey keeps hitting (recap)
 
@@ -184,11 +192,72 @@ Reading:
   `is_visual` exports also need `visual.mnn` for `llm_demo` (text-only: patch `is_visual:false`,
   or just use `llm_bench`, which skips it).
 
+## Round 3 — NPU-path articles (2026-10-30)
+
+Five "NPU inference" articles asked about specifically for **NPU engines worth exploring** on
+this board: [localaimaster's 2026 NPU comparison](https://localaimaster.com/blog/npu-comparison-2026),
+[NPU Hardware Evaluation v1.0](https://arxiv.org/html/2609.13166) (Covision Lab),
+[LLM Inference at the Edge under sustained load](https://arxiv.org/html/2603.23640v1),
+[Benchmarking Edge AI Platforms](https://arxiv.org/html/2409.14803v1) (USC), and
+[llm.npu (ASPLOS '25)](https://arxiv.org/html/2407.05858v2). Verdict: **none names an engine
+runnable here** — but llm.npu is the best design document available for improving the NPU path
+we already have.
+
+| Article | Engines named | On QCS8300? |
+|---|---|---|
+| localaimaster NPU comparison 2026 | OpenVINO · ORT-QNN EP · AI Engine Direct · LiteRT ("in progress") · Core ML/MLX | ✘ laptop parts (Panther Lake / X2-on-Windows / Ryzen AI / Apple); every Qualcomm cell is QNN → F1 |
+| NPU Hardware Evaluation v1.0 | Hailo-8/10H · Axelera · EdgeCortix · SiMa · QCS6490/8550/IQ-9075 via **AI Engine Direct + SNPE/QNN** · TensorRT | ✘ vision-only suite (12 CV models, no LLM); Qualcomm stack → F1; ASIC chips = foreign hardware |
+| Edge LLM under sustained load | **hailo-ollama**+HailoRT (RPi5+Hailo-10H) · MLC-LLM/TVM OpenCL (S24 **GPU**) · MLX Swift (iPhone, "Neural Engine not utilised") · vLLM | ✘ Hailo-10H is a separate PCIe M.2 module with a vendor kernel driver (no-sudo ✘); the S24 (Snapdragon 8 Gen 3!) is benchmarked on the **GPU** — no NPU stack is used anywhere in the paper |
+| USC edge-platform benchmark | OpenVINO + Intel NPU library (LLaMA on Core Ultra) | ✘ Intel-only; no Qualcomm content |
+| **llm.npu (ASPLOS '25)** | **MLLM + QNN**, Android (Xiaomi 14 / Redmi K60 Pro); baselines llama.cpp · TFLite · MNN · MLC-LLM · PowerInfer-v2 | ✘ as an engine (QNN → F1, Android-only); ✅ as a **design reference** — below |
+
+### llm.npu — not testable, but the blueprint for our Hexagon path
+
+The only LLM-on-Qualcomm-NPU system among the five: >1,000 t/s prefill on 1B-class models,
+22.4× prefill / 30.7× energy savings on average vs llama.cpp/MNN/TFLite baselines (SD 8 Gen 3,
+W8A8). Its three techniques map directly onto levers for our llama.cpp Hexagon runner
+(679 t/s pp512, §3 BENCHMARKS):
+
+1. **Chunk-sharing graphs** — QNN graph build+optimize costs seconds (360 ms + 11.5 s for
+   Gemma-2B), so per-prompt graph prep kills NPU prefill; llm.npu pre-builds fixed-length
+   chunk subgraphs and shares the static (Linear/LayerNorm) ones across chunks. Our
+   ggml-Hexagon path pays no per-prompt graph-prep (which is why it can show a 21× prefill
+   win at all), but the chunking logic is the model for handling variable prompts on any
+   future NPU graph API here.
+2. **Shadow outlier execution** — per-tensor W8A8 on NPU + the 0.1–0.3% outlier channels
+   computed in float on CPU in parallel. This is the accuracy-recovery trick for NPU-friendly
+   quants; relevant if a W8A8 NPU quant path is ever pursued here (mobile NPUs have no
+   group-quantized MatMul — their Table 1 — same reason our NPU path needs the q4_K→NPU
+   repack, PR #28994).
+3. **Out-of-order CPU/NPU subgraph scheduling** — attention/LayerNorm stay on CPU, linears on
+   NPU; naive overlap leaves 37% bubbles, so subgraphs are reordered to keep the NPU (the
+   critical path) fed. Directly relevant to our F4 finding (partial offload regresses decode
+   to 7.9 t/s via ping-pong — offload fully or keep ≥⅔ of layers on the NPU).
+
+Code: <https://github.com/UbiquitousLearning/mllm> (MLLM; QNN backend is Android-only).
+
+### Corroborations picked up along the way
+
+- 2609: Hexagon DSP platforms "execute one inference job at a time" — consistent with our
+  F4/full-offload rule; and the IQ-9075's CPU is Kryo Gen 6 (A78C @ 2.1–2.36 GHz), i.e. the
+  same cluster as this board's.
+- 2603: sustained-load failure modes on phones (iPhone loses ~½ throughput in 2 iterations;
+  S24 hits an OS-enforced GPU frequency floor) — the right methodology for ROADMAP R7
+  (sustained/thermal suites; our own thermal behaviour is unmeasured); their Hailo-10H number
+  (6.9 t/s decode at <2 W, bandwidth-bound on-module DDR) is another data point for our
+  "decode is bandwidth-bound on every engine" rule.
+- 2603 explicitly: MLX does not use Apple's Neural Engine — the "NPU" in most consumer NPU
+  marketing rarely runs LLMs; consistent with Round 2's finding that the article's QNN wins
+  were Android-with-root, not reachable from this Linux kernel.
+
 ## Revisit when…
 
 - …MNN adds LFM2/LFM3 to `llmexport`/`model_mapper` — that would move LFM3 CPU inference to a
   ~30% faster engine; and
 - …mistral.rs v0.9.6+ ships LFM3 (expect the ~2× Candle deficit anyway); and
 - …anyone ships a QNN path that doesn't need `smmu_proxy` (kernel work, F1) — until then every
-  NPU claim in the article's QNN/LiteRT/MNN-Hexagon providers is unreachable on this board.
+  NPU claim in the article's QNN/LiteRT/MNN-Hexagon providers, and llm.npu/MLLM, is unreachable
+  on this board; and
+- …llm.npu's chunk-graph / shadow-outlier ideas become implementable on the ggml Hexagon
+  backend (W8A8 NPU quant + outlier shadow ops) — that's the upgrade path the paper sketches.
 
