@@ -13,7 +13,7 @@ this repo starts at **F20**. Legend (parent convention): 🔒 blocked outside ou
 | F2 🔒🛠️ | Turnip Vulkan lacks `StorageBuffer8BitAccess`; quantized/tiled matmuls fault | GPU out of scope here (it's neither CPU nor NPU) |
 | F3 🔒 | 32-bit CDSP VA window ⇒ ~1.75 GiB NPU-side budget | L5 sweeps map the boundary; raising it is R4/vendor work |
 | F4 📝 | Partial offload ping-pong: K2-4B `-ngl 18` = 2.6 t/s vs CPU 7.9 | L5 re-tests the rule's edges (quant dependence, per-layer split) |
-| F5 🛠️ | Runner `llamacpp/20261020` (ggml 0.27.0) predates the `lfm3` arch | **L1 is exactly this fix** — rebuild via Arduino's GitHub workflow |
+| F5 ✅ | Runner `llamacpp/20261020` (ggml 0.27.0) predates the `lfm3` arch | **Resolved 2026-10-30**: the public `llamacpp/20261029` asset (ggml 0.28.0) runs lfm3 on HTP0 — LFM3-1.7B pp512 **1033 t/s** (`results/bench_LFM3-17B-Q4KM_npu_ngl100.csv`) |
 | F6 📝 | Env gotchas (unversioned `libcdsprpc.so` symlink, HF stalls, …) | `scripts/env.sh` encodes the fixes; HF pull recipe = `curl -L -C - --retry 3 --speed-limit 200000 --speed-time 30` |
 | F7 📝 | Harness/data artifacts (reduced-N cells, prompt-echo rambles) | inherited CSVs in BENCHMARKS §1–2 carry the same caveats |
 | F8 📝 | QCS8300 lacks FMLAL/FMLSL **vector** despite HWCAP `asimdhp` | build any llama.cpp variant with default `-march` only; never assume `asimdhp` ⇒ FMLAL |

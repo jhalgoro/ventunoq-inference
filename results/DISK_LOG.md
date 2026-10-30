@@ -8,3 +8,11 @@ Baseline at repo creation (2026-10-30):
 ```
 /dev/mmcblk0p71   55G   22G   32G  41% /
 ```
+
+### 2026-10-30 13:58 UTC — DOWNLOAD (LFM3-17B-QAD): `/tmp/opencode/dl/LFM3-1.7B-QAD-Q4_0.gguf`
+```
+43a7d09a0e9cba91b63eb7052488b9564569bddfd65754d2e426465e572a7452  /tmp/opencode/dl/LFM3-1.7B-QAD-Q4_0.gguf
+```
+```
+/dev/mmcblk0p71   55G   24G   29G  45% /
+```

@@ -1,0 +1,8 @@
+=== stage s_lfm3_q4km 2026-10-30T13:42:42Z
+13:43:27 npu LFM3-17B-Q4KM ngl=100 rows=4
+13:57:59 hex2cpu LFM3-17B-Q4KM rows=4
+13:57:59 cpu LFM3-17B-Q4KM rows=0
+=== stage s_lfm3_qad 2026-10-30T13:57:59Z
+13:59:23 npu LFM3-17B-QAD ngl=100 rows=4
+=== stage s_lfm3_q4km 2026-10-30T14:07:30Z
+14:07:30 npu LFM3-17B-Q4KM ngl=100 SKIP (have rows)

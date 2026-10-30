@@ -1,5 +1,8 @@
 # Benchmarks — llama.cpp CPU + NPU depth (measured on this board)
 
+**Scope:** only the **llama.cpp CPU+NPU hexagon runner** is evaluated here. CPU rows are
+that runner's own `-ngl 0` path (same binary as NPU rows); the v0.8.0 CPU-only build and
+MNN are out of scope — §1 below is inherited context, kept for history, never extended.
 §1–2 are **inherited baselines** — the regimes every new measurement in this repo must
 compare against. Raw CSVs live in
 [`../ventunoq-llamacpp/results/`](../ventunoq-llamacpp/results/) (not duplicated here);
@@ -7,7 +10,7 @@ method notes: parent [BENCHMARKS.md](../ventunoq-llamacpp/BENCHMARKS.md) header.
 Everything from §3 on is this repo's own output — fill from the
 [ROADMAP](ROADMAP.md) items, keep this file numbers-only.
 
-## 1. CPU baselines (v0.8.0 b11972, `-ngl 0`, pinned big cores)
+## 1. Inherited CPU-only baselines (v0.8.0 b11972 — out of scope, context only)
 
 | Model (Q4_K_M unless noted) | pp512 | pp8192 | tg128 |
 |---|---|---|---|
@@ -28,6 +31,9 @@ KV ≈ 8.9 KB/token (tri-hybrid), Qwen-class 2.6–3.8× that.
 
 ## 2. NPU baselines (hexagon runner `llamacpp/20261020`, `-ngl 100`)
 
+Rows 1–5 are inherited; their `pinned-CPU control` column is v0.8.0-era context — L8 is
+replacing it with same-runner `-ngl 0` controls for every row.
+
 | Model (Q4) | NPU pp512 | NPU pp8192 | NPU tg128 | pinned-CPU control | speed-up (pp8192 / tg128) |
 |---|---|---|---|---|---|
 | Qwen3.5-0.8B-Q4_0 | **1366** | 1233 | **43.0** | 148.7 / 31.9 | **13.6× / 1.35×** |
@@ -35,11 +41,19 @@ KV ≈ 8.9 KB/token (tri-hybrid), Qwen-class 2.6–3.8× that.
 | LFM2.5-2.6B-Q4_K_M | **679** | 572 | **17.7** | 40.1 / 13.1 | **21.1× / 1.35×** |
 | Qwen3.5-4B-Q4_0 partial (`-ngl 24`) | 70.8 | 53.7 | 10.3 | *(unpinned: 19.8/4.2)* | ~3× / ~2.4× |
 | K2-Horizon-4B-Q4_K_M full | ✗ F3 VA ceiling | — | — | — | — |
+| **LFM3-1.7B-Q4_K_M** ² | **1033.2 ±0.5** | 905.9 | 25.6 | 46.8 / 19.7 ² | **20.9× / 1.30×** |
+
+² LFM3 row only: runner `llamacpp/20261029` (ggml 0.28.0, b11996-7df8b876b) — 20261020
+can't load `lfm3` (F5). Control = same runner, `-ngl 0`, t4 mask 0x0f (strict-0 pass;
+strict-1 re-run in progress, L8).
+`results/bench_LFM3-17B-Q4KM_{npu_ngl100,hex2cpu}.csv`. Regime `-p 512,8192 -n 32,128
+-r 2 -b 1024 -ub 512 -fa on`, OPBATCH=2048, MBUF 256/256.
 
 Rules already banked (parent §3): prefill 9–21× on HTP, decode only 1.35–1.5×
 (bandwidth-bound); **offload fully or ≥⅔ layers** (F4 ping-pong); DSP-side budget
 ~1.75 GiB (F3); quality parity NPU↔CPU confirmed (GSM8K 60 vs 55% @N=20 — one band).
-LFM3 itself: ✗ F5 → **L1**.
+LFM3: F5 **resolved 2026-10-30** via the public 20261029 asset → L1 ✅ measured,
+21× prefill confirms the prediction; GSM8K parity check still open.
 
 ## 3. Dtype & quant matrix (L2) — LFM3-1.7B reference, CPU pinned + NPU-budget check
 
@@ -83,9 +97,8 @@ not a ceiling). The ~15 W hunch stays open until the NPU rows exist.
 
 | Engine/config | avg W (pp) | avg W (tg) | J/tok pp | J/tok tg |
 |---|---|---|---|---|
-| CPU pinned t4 | ⏳ | ⏳ | ⏳ | ⏳ |
+| CPU ctrl (`-ngl 0`, same runner) | ⏳ | ⏳ | ⏳ | ⏳ |
 | NPU `-ngl 100` | ⏳ | ⏳ | ⏳ ⏳ ← hypothesis: tiny | ⏳ ⏳ ← hypothesis: ≪ CPU |
-| MNN fp16 t4 (sibling repo runs it) | — | — | — | — |
 
 ## 7. Serving & concurrency (L7) — `llama-server -np 2/4`
 

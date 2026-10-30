@@ -1,0 +1,5 @@
+LLAMA=/home/arduino/Code/ventunoq-llamacpp/llama.cpp  HEX=/tmp/opencode/pkg-snapdragon  HEX2=/tmp/opencode/pkg-snapdragon-20261029  (llama-bench: ok, runner: ok, runner2/lfm3: ok)
+=== stage s_lfm3_q4km 2026-10-30T13:42:42Z
+=== stage s_lfm3_qad 2026-10-30T13:57:59Z
+HEX2=/tmp/opencode/pkg-snapdragon-20261029  HEX=/tmp/opencode/pkg-snapdragon  (runner2/lfm3: ok, runner1: ok)
+=== stage s_lfm3_q4km 2026-10-30T14:07:30Z

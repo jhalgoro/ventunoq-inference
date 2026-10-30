@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
 # 10-min sustained pp+tg loop (L3) — the passive-cooling throttle curve.
-# Usage: scripts/sustained.sh <gguf> <cpu|npu> <tag> [minutes]
-#   cpu → v0.8.0 prebuilt, board-pinned;  npu → hexagon runner + service tuning.
+# Usage: scripts/sustained.sh <gguf> <cpu|npu|npu2> <tag> [minutes]
+#   cpu → $HEX2 runner at -ngl 0 (same binary as NPU — scope: CPU+NPU arch only);
+#   npu → old runner;  npu2 → 20261029 runner (lfm3).
 # Pair with: scripts/power_probe.py <tag> 5   (start the probe FIRST, stop both together)
 # Emits results/sustained_<tag>.csv — one row per minute with the window's tg t/s.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 source scripts/env.sh
 
-GGUF=${1:?usage: sustained.sh <gguf> <cpu|npu> <tag> [minutes]}
-ENGINE=${2:?cpu|npu}; TAG=${3:?tag}; MIN=${4:-10}
+GGUF=${1:?usage: sustained.sh <gguf> <cpu|npu|npu2> <tag> [minutes]}
+ENGINE=${2:?cpu|npu|npu2}; TAG=${3:?tag}; MIN=${4:-10}
 OUT=results/sustained_$TAG.csv
 
-if [ "$ENGINE" = cpu ]; then
-  BIN="$LLAMA/llama-cli"; NGL=0; EXTRA="$CPU_PIN"
-else
-  BIN="$HEX/bin/llama-cli"; NGL=100; EXTRA="-t 4 --cpu-mask 0x0f -b 1024 -ub 512 -fa on"
-fi
+case "$ENGINE" in
+  cpu)  BIN="$HEX2/bin/llama-cli";  NGL=0;   EXTRA="$CPU_PIN"
+        export LD_LIBRARY_PATH=/tmp/opencode/libfix:$HEX2/lib ;;
+  npu)  BIN="$HEX/bin/llama-cli";  NGL=100; EXTRA="-t 4 --cpu-mask 0x0f -b 1024 -ub 512 -fa on"
+        export LD_LIBRARY_PATH=/tmp/opencode/libfix:$HEX/lib ADSP_LIBRARY_PATH=$HEX/lib ;;
+  npu2) BIN="$HEX2/bin/llama-cli"; NGL=100; EXTRA="-t 4 --cpu-mask 0x0f -b 1024 -ub 512 -fa on"
+        export LD_LIBRARY_PATH=/tmp/opencode/libfix:$HEX2/lib ADSP_LIBRARY_PATH=$HEX2/lib ;;
+esac
 PROMPT=$(python3 -c "print('The quick brown fox jumps over the lazy dog. '*64)")
 
 echo "minute,ts,tg_tps" > "$OUT"
