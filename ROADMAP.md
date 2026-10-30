@@ -11,6 +11,7 @@ value/effort on this board.
 | R3 | QNN path | vendor `smmu_proxy` kernel service | Arduino/Qualcomm | out of our hands |
 | R4 | NPU > 1.75 GiB | 64-bit CDSP VA window (DMA64) | kernel/vendor | out of our hands |
 | R5 | Statistical confidence | bigger eval N | us, wall-clock | trivial |
+| R6 | Quality/perf beyond Q4 | quant & dtype matrix: Q6_K / Q8_0 / F16 / int8, KV dtype | us, wall-clock | low |
 
 ---
 
@@ -98,6 +99,58 @@ N=20 GSM8K parity (§3.1) has ±1–2 question noise; N=50+ NPU runs and full Hu
 (164 tasks) would tighten the quality claims. Pure wall-clock: ~1 h/model on the NPU.
 `scripts/gsm8k_eval.py <port> <N> <tag>` — nothing blocking.
 
+## R6 — Quantization & dtype sweep: Q6/Q8 up, F16/int8 down
+
+Everything measured so far is Q4 (K_M/Q_0/QAD). The board's two hard constraints —
+**decode is bandwidth-bound** and the **~1.75 GiB NPU budget (F3)** — make weight dtype
+the biggest untested lever on both quality and speed. Predictions below are bandwidth
+scaling (decode ∝ 1/weight-bytes) plus the measured QAD lesson (prefill is *dequant-cost*
+bound, dtype-dependent: Q4_0 was ×1.8 vs Q4_K_M); they must be measured, not assumed.
+
+### What to run (LFM3-1.7B as the reference model, CPU pinned `-t 4 --cpu-mask 0xf --cpu-strict 1`)
+
+| Config | Weight size | Predicted tg128 | Predicted pp512 | Quality vs Q4_K_M (ppl 29.5) | NPU ≤1.75 GiB? |
+|---|---|---|---|---|---|
+| Q4_K_M (baseline, measured) | 1.14 GB | **11.7** | 49.0 | — | ✅ fits |
+| **Q6_K** | ~1.5 GB | ~8.6 (×0.74) | ≈45–49 | ≈ F16 (Δ ppl ~−0.1…0.2) | ✅ fits, barely |
+| **Q8_0** ("int8") | ~2.0 GB | ~6.7 (×0.57) | ≈45–50 | effectively lossless | ❌ over F3 budget |
+| **F16** (`--type f16`) | ~3.4 GB | ~3.5 (×0.30) | ≈40–49 | reference point | ❌ way over |
+
+- **Q6_K** is the interesting one: buys near-F16 quality and *still* fits the DSP window
+  — the only upgrade path that keeps the 9–21× NPU prefill. Verify with a
+  `test_hexagon.sh`-style `-ngl 100` run; if it aborts mid-load, F3 bit again.
+- **F16 on this CPU is all cost, no compute win**: ggml dequantizes to f32 and computes
+  in f32 regardless of storage dtype, so the A78's FEAT_FP16 arithmetic never gets used —
+  you pay 3× decode for ~zero quality gain over Q6_K. bf16 is worse: the core lacks
+  FEAT_BF16, so it adds a costlier dequant on top. **Verdict to verify: skip both.**
+- **"int8" in llama.cpp means `q8_0`** (int8 weights + per-block f32 scales, dotprod
+  `vec_dot` path): half the bytes of F16 at ~lossless quality — the honest sweet spot
+  when quality > speed. True **W8A8 int8 compute does not exist** in llama.cpp (activations
+  are always f32), and the Hexagon backend's HMX kernels consume repacked q4_0/q4_K/q8_0
+  *weights* only — so no engine here can exploit int8 activations.
+- **KV-cache dtype** (independent of weights): `-fa on -ctk q8_0 -ctv q8_0` should halve
+  the measured 1.14 GB @128K KV to ~0.6 GB — big for long-context NPU runs where the
+  arena competes with weights (R4 relief we *can* do from userspace). Measure the quality
+  drift at N=50.
+
+### Method
+
+```bash
+# one model, four dtypes — quantize locally from the safetensors/GGUF we already vet:
+llama-quantize LFM3-1.7B-Q4_K_M.gguf lfm3-q6_k.gguf  Q6_K
+llama-quantize LFM3-1.7B-Q4_K_M.gguf lfm3-q8_0.gguf  Q8_0
+llama-bench    -m lfm3-q6_k.gguf -ngl 0 -t 4 --cpu-mask 0xf --cpu-strict 1 -pg 512,8192 -n 128
+./llama-perplexity -m lfm3-q6_k.gguf -f bench/gatsby.txt -c 2048     # vs baseline 29.54
+scripts/gsm8k_eval.py <port> 50 q6k                                  # quality sanity
+# NPU: Q6_K -ngl 100 (fits?) and Q8_0 of the 0.8B (budget test); KV: rerun 32K ctx with -ctk/-ctv q8_0
+```
+
+Disk policy unchanged: each variant exists only during its own suite (F16 is the largest
+file we would ever fetch — delete first). Output to `results/bench_dtype_*` + `DISK_LOG.md`.
+**Success =** a per-workload dtype recommendation in BENCHMARKS §5 replacing the current
+"Q4_K_M for interactive / Q4_0 for prefill" rule, with the Q6_K-on-NPU budget question
+answered either way.
+
 ---
 
 ## "Everything works" definition of done
@@ -110,6 +163,8 @@ N=20 GSM8K parity (§3.1) has ±1–2 question noise; N=50+ NPU runs and full Hu
 - [ ] **QNN** — R3: `qairt-net-run` executes one HTP graph end-to-end (then reassess
       whether it beats the Hexagon backend at all).
 - [ ] **Big models on NPU** — R4: K2-4B `-ngl 100` loads and beats its CPU control.
+- [ ] **Dtype matrix** — R6: Q6_K / Q8_0 / F16 measured on LFM3 (CPU + NPU budget check);
+      Q6_K-on-NPU answered; per-workload quant rule updated in BENCHMARKS §5.
 
 ## Reproducing this project's environment from scratch
 
