@@ -61,7 +61,9 @@ Charts are rendered by [`scripts/make_charts.py`](scripts/make_charts.py) (matpl
 
 ![CPU throughput — pp512 / pp8192 / tg128 per model](docs/assets/charts/cpu-throughput.png)
 
-![Quality — GSM8K vs HumanEval per model](docs/assets/charts/quality.png)
+![GSM8K — math word problems](docs/assets/charts/quality-gsm8k.png)
+
+![HumanEval — code generation](docs/assets/charts/quality-humaneval.png)
 
 ### NPU — speed-up over the *same binary* pinned to the big cores
 

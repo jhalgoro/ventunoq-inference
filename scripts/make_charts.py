@@ -18,9 +18,6 @@ plt.rcParams.update({
     "figure.facecolor": "white",
 })
 
-# company accent colors (used on tick labels + legend)
-CO = {"Liquid AI": "#6C3FC5", "Qwen": "#E16120", "K2 Lab": "#0E8A7B"}
-
 # ---------------------------------------------------------------- 1. CPU throughput
 # model, pp512, pp8192, tg128, company
 cpu = [
@@ -44,18 +41,13 @@ for yy, v in zip(y + h, pp512): ax.text(v + 1, yy, f"{v:.1f}", va="center", font
 for yy, v in zip(y, pp8192):    ax.text(v + 1, yy, f"{v:.1f}", va="center", fontsize=9)
 for yy, v in zip(y - h, tg128): ax.text(v + 1, yy, f"{v:.1f}", va="center", fontsize=9)
 ax.set_yticks(y, names)
-comp = {r[0]: r[4] for r in cpu}
-for t in ax.get_yticklabels():
-    t.set_color(CO[comp[t.get_text()]]); t.set_fontweight("bold")
 ax.set_xlim(0, 100)
 ax.set_xlabel("tokens / second  (llama-bench, -ngl 0, Q4, llama.cpp v0.8.0)")
 ax.set_title("CPU throughput — Arduino Ventuno Q (QCS8300), 4×A78 pinned where relevant", pad=12)
-hnd, _ = ax.get_legend_handles_labels()
-hnd += [Patch(facecolor=c, label=n) for n, c in CO.items()]
-ax.legend(handles=hnd, loc="lower right", frameon=False, fontsize=9)
+ax.legend(loc="lower right", frameon=False, fontsize=9)
 fig.tight_layout(); fig.savefig(f"{OUT}/cpu-throughput.png", dpi=150); plt.close(fig)
 
-# ---------------------------------------------------------------- 2. quality
+# ---------------------------------------------------------------- 2. quality — one chart per test
 q = [  # model, gsm8k, humaneval, reduced?, company
     ("Qwen3.5-9B",    85.0,  80.0, True,  "Qwen"),
     ("K2-Horizon-7B", 75.0, 100.0, True,  "K2 Lab"),
@@ -64,25 +56,22 @@ q = [  # model, gsm8k, humaneval, reduced?, company
     ("K2-Horizon-4B", 60.0,  75.0, False, "K2 Lab"),
     ("Qwen3.5-2B",    22.0,  40.0, False, "Qwen"),
 ]
-names = [r[0] for r in q][::-1]
-gsm = [r[1] for r in q][::-1]; hum = [r[2] for r in q][::-1]
-y = np.arange(len(names)); h = 0.34
-fig, ax = plt.subplots(figsize=(10, 4.6))
-ax.barh(y + h/2, gsm, height=h, color="#0f766e", label="GSM8K (math, strict last-number)")
-ax.barh(y - h/2, hum, height=h, color="#b91c1c", label="HumanEval (code, sandboxed exec)")
-red = {r[0]: r[3] for r in q}
-for yy, v, n in zip(y + h/2, gsm, names): ax.text(v + 1, yy, f"{v:.0f}%" + ("*" if red[n] else ""), va="center", fontsize=9)
-for yy, v, n in zip(y - h/2, hum, names): ax.text(v + 1, yy, f"{v:.0f}%" + ("*" if red[n] else ""), va="center", fontsize=9)
-ax.set_yticks(y, names)
-comp = {r[0]: r[4] for r in q}
-for t in ax.get_yticklabels():
-    t.set_color(CO[comp[t.get_text()]]); t.set_fontweight("bold")
-ax.set_xlim(0, 112); ax.set_xlabel("% correct   (* = reduced sample: GSM8K N=20, HumanEval 10 tasks; others N=50 / 20)")
-ax.set_title("Quality on-device — CPU, Q4_K_M (unsloth quants for Qwen)", pad=12)
-hnd, _ = ax.get_legend_handles_labels()
-hnd += [Patch(facecolor=c, label=n) for n, c in CO.items()]
-ax.legend(handles=hnd, loc="center left", bbox_to_anchor=(1.01, 0.5), frameon=False, fontsize=9)
-fig.tight_layout(); fig.savefig(f"{OUT}/quality.png", dpi=150); plt.close(fig)
+for idx, title, col in [(1, "GSM8K — math word problems (strict last-number match)", "#0f766e"),
+                        (2, "HumanEval — code generation (sandboxed execution)", "#b91c1c")]:
+    rows = sorted(q, key=lambda r: r[idx])          # ascending → best on top of barh
+    names = [r[0] for r in rows]; vals = [r[idx] for r in rows]; red = [r[3] for r in rows]
+    fig, ax = plt.subplots(figsize=(9, 4.0))
+    y = np.arange(len(names))
+    ax.barh(y, vals, height=0.6, color=col)
+    for yy, v, s in zip(y, vals, red):
+        ax.text(v + 1.5, yy, f"{v:.0f}%" + ("*" if s else ""), va="center", fontsize=10, fontweight="bold")
+    ax.set_yticks(y, names)
+    ax.set_xlim(0, 112)
+    ax.set_xlabel("% correct   (* = reduced sample: N=20 GSM8K / 10 tasks HumanEval; others N=50 / 20)")
+    ax.set_title(title + " — Ventuno Q, CPU, Q4_K_M", pad=10)
+    fig.tight_layout()
+    fig.savefig(f"{OUT}/quality-{'gsm8k' if idx == 1 else 'humaneval'}.png", dpi=150)
+    plt.close(fig)
 
 # ---------------------------------------------------------------- 3. NPU
 # model, npu_pp512, cpu_pp512(pinned same binary), pp8192 speedup, tg128 speedup
