@@ -13,6 +13,7 @@ value/effort on this board.
 | R5 | Statistical confidence | bigger eval N | us, wall-clock | trivial |
 | R6 | Quality/perf beyond Q4 | quant & dtype matrix: Q6_K / Q8_0 / F16 / int8, KV dtype | us, wall-clock | low |
 | R7 | Benchmark depth | longer/harder speed & quality suites, incl. evals on **our own project text** | us, wall-clock | medium |
+| R8 | Energy profile | INA232 power sampling (sudo-free) → J/token per engine, then reduce | us | low |
 
 ---
 
@@ -202,6 +203,57 @@ scripts/eval_deep.sh <gguf> <engine>   # chains: sustained → NIAH → grounded
 every sub-3B model in the matrix; anything that changes a recommendation gets promoted
 into BENCHMARKS §5 (engine selection guide).
 
+## R8 — Energy: measure watts and J/token, then reduce them
+
+**Status:** zero power telemetry went into any measurement so far — every number in this
+project is a *speed* number. The working assumption "we never draw more than ~15 W" is
+untested. Good news found on 2026-10-29: **the board already ships a power meter we can
+read without sudo.**
+
+### Telemetry that exists on this board (verified)
+
+| Source | What it gives |
+|---|---|
+| `/sys/class/hwmon/hwmon2` = **ina232** | `power1_input` (µW), `in1_input` (mV), `curr1_input` (mA) on the 20 V input rail — whole-board draw incl. PMIC losses; `update_interval` configurable |
+| 46 hwmon thermal zones | per-block temps incl. **`nsp_0_*` (the Hexagon NSP!)**, `cpuss_*`, `ddrss_*`, `gpuss_*` — throttle correlation without guessing |
+| `emc2305` (hwmon0) | fan controller; `fan*_fault` set → **passively cooled**, confirms the R7 thermal concern |
+| `ucsi-source-psy-*` (USB-C PD) | `voltage_now`/`current_now` read 0 — dead end; use the INA232 |
+
+**Spot check (2026-10-29):** idle ≈ 8.5–9.5 W; 8× `yes` CPU stress → avg 11.0 W,
+**max 11.8 W**. Consistent with the ≤15 W hunch — but `yes` is memory-light, DDR is
+under-tested, and **NPU and GPU load were never measured at all**. Treat 15 W as an
+open question until an all-engines stress says otherwise.
+
+### R8a — measure
+
+- `scripts/power_probe.py`: sample `power1_input` + the `nsp/cpuss/ddrss` zones at 2–10 Hz
+  alongside any existing suite → `results/power_<tag>.csv` (same marker style as the suites).
+- Conditions per engine (CPU-pinned / NPU / GPU-when-R2-lands): idle → loaded-idle →
+  pp burst → tg burst → 10-min sustained (reuse the R7 loop).
+- Headline metric: **J/token = W ÷ t/s** for prefill and decode, per engine. Hypothesis to
+  test: the NPU's decode win looks small in wall-clock (1.35–1.5×) but should look *big*
+  in J/token — HTP MACs plus a shorter high-power window beat NEON dequant+dot.
+- Caveat: the INA232 reads the input rail (the right number for deployment); supply-side
+  losses upstream of the USB-C input stay invisible.
+
+### R8b — reduce (only after R8a has a baseline)
+
+- **Already banked:** big-core pinning is an energy win too (race-to-idle — the work
+  finishes sooner); expect it to show up in J/token.
+- **Quant/dtype × energy:** rerun the probe across the R6 matrix — Q4_0/QAD do less
+  dequant work per token; `-ctk/-ctv q8_0` halves KV → less DDR energy in the
+  bandwidth-bound decode regime.
+- **Engine choice as an energy knob:** if NPU prefill is 21× faster at similar watts,
+  it is ~21× cheaper per prompt token — the single biggest energy lever here; verify.
+- **Governor/cpufreq tuning** needs root → flag for the board owner, not part of this
+  project's sudo-free scope.
+- **If throttling shows** (rising `nsp_*`/`cpuss_*` + falling t/s): revisit `-t 4`,
+  `-ngl` splits, and `GGML_HEXAGON_OPBATCH` as *thermal* knobs.
+
+**Success =** a W and J/token table per engine (LFM3 + Qwen-4B minimum) published as a new
+BENCHMARKS §6, and the 15 W ceiling either confirmed under all-engines sustained load or
+corrected with the real peak.
+
 ---
 
 ## "Everything works" definition of done
@@ -218,6 +270,8 @@ into BENCHMARKS §5 (engine selection guide).
       Q6_K-on-NPU answered; per-workload quant rule updated in BENCHMARKS §5.
 - [ ] **Depth** — R7: throttle curve + NIAH recall curve + grounded-QA score published
       for at least LFM3-1.7B and Qwen3.5-4B, on both engines where the budget allows.
+- [ ] **Energy** — R8: J/token table per engine in BENCHMARKS §6; the ~15 W ceiling
+      confirmed or corrected under sustained all-engines load.
 
 ## Reproducing this project's environment from scratch
 
