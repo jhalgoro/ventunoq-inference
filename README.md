@@ -7,16 +7,47 @@ llama.cpp **CPU** (v0.8.0 b11972, pinned big cores) and llama.cpp **Hexagon NPU*
 goes*: dtype matrix, long context, sustained/thermal behaviour, energy (W, J/token),
 NPU offload boundaries, and CPU micro-tuning.
 
-Spun out of the parent's ROADMAP: **L1–L7 here ≙ R1, R6, R7, R8 there** plus the
-NPU-boundary and serving work the survey had no room for.
+## What inspired this repo — the sources, with links
+
+- **The NPU path itself**: Arduino **“Bricks”** —
+  <https://docs.arduino.cc/software/app-lab/bricks/about-bricks> — whose `arduino:llm` brick
+  ships the `llamacpp-npu-runner` image for *this exact board* (ventunoq), i.e. the
+  `llamacpp/20261020` Hexagon runner everything in §2 measures. Parent research doc:
+  [`../ventunoq-llamacpp/research/bricks-faster-inference.md`](../ventunoq-llamacpp/research/bricks-faster-inference.md).
+  The same repo's `build-llamacpp.yml` workflow is what **L1** pulls.
+- **The five Round-3 NPU articles** (surveyed in parent
+  [research/alt-engines.md](../ventunoq-llamacpp/research/alt-engines.md) Round 3 — none
+  names an engine runnable here, three shape this repo's method):
+  - **llm.npu (ASPLOS ’25)** — <https://arxiv.org/html/2407.05858v2> (code:
+    <https://github.com/UbiquitousLearning/mllm>) — the only LLM-on-Qualcomm-NPU system
+    published; its out-of-order CPU/NPU subgraph scheduling is the design reference for
+    **L5** (F4 ping-pong), its shadow-outlier W8A8 the accuracy-recovery note for any future
+    NPU quant path.
+  - *LLM Inference at the Edge under sustained load* — <https://arxiv.org/html/2603.23640v1>
+    — the sustained-load/thermal methodology **L3** adopts (their phones throttle hard; this
+    board is passively cooled).
+  - *NPU Hardware Evaluation v1.0* — <https://arxiv.org/html/2609.13166> — corroborates
+    “one DSP job at a time” (the F4 rule) and shows the IQ-9075 running the same Kryo/A78C
+    cluster as this board.
+  - *localaimaster 2026 NPU comparison* — <https://localaimaster.com/blog/npu-comparison-2026>
+    and *Benchmarking Edge AI Platforms (USC)* — <https://arxiv.org/html/2409.14803v1> — the
+    negative screen: every Qualcomm cell is QNN → parent F1; the Intel/Apple parts are
+    foreign hardware. Kept as evidence that **no external engine beats the llama.cpp path here**.
+- **The CPU baseline**: llama.cpp — <https://github.com/ggml-org/llama.cpp> (v0.8.0 b11972
+  prebuilt) + llama-bench — <https://github.com/ggml-org/llama.cpp/tree/master/tools/llama-bench>;
+  the `-t 4 --cpu-mask 0xf --cpu-strict 1` rule this repo inherits was measured in the
+  parent’s thread/pinning study (`../ventunoq-llamacpp/results/bench_q4km_{threads,pinbig}.csv`).
 
 ## Status at a glance
+
+Spun out of the parent's ROADMAP: **L1–L7 here ≙ R1, R6, R7, R8 there** plus the
+NPU-boundary and serving work the survey had no room for.
 
 | Track | Status |
 |---|---|
 | Inherit pinned-CPU + NPU baselines | ✅ [BENCHMARKS.md](BENCHMARKS.md) §1–2 (raw CSVs stay in the parent) |
 | L1 — LFM3 on NPU (runner rebuild) | ⏳ [ROADMAP](ROADMAP.md) L1 — highest value, fully ours |
-| L2 — dtype/dtype matrix (Q6_K/Q8_0/F16/int8, KV dtypes) | ⏳ L2 |
+| L2 — dtype matrix (Q6_K/Q8_0/F16/int8, KV dtypes) | ⏳ L2 |
 | L3 — deep suites (sustained, NIAH, grounded-QA, full-N) | ⏳ L3 |
 | L4 — energy: INA232 W + J/token per engine | ⏳ L4 — probe ready: `scripts/power_probe.py` |
 | L5 — NPU offload boundaries (`-ngl` sweeps, F3/F4 rules) | ⏳ L5 |

@@ -25,7 +25,10 @@ arch. LFM3 (the board's best sub-3B model, 60% GSM8K / 65% HumanEval) is the *on
 interesting model that misses the 9–21× NPU prefill.
 
 **Fix** — rebuild Arduino's own artifact against a newer ref (full recipe: parent
-`research/bricks-faster-inference.md`):
+`research/bricks-faster-inference.md`; workflow lives in
+[arduino/app-bricks-py](https://github.com/arduino/app-bricks-py), whose
+[Bricks docs](https://docs.arduino.cc/software/app-lab/bricks/about-bricks) are what put
+this runner on the board in the first place):
 
 ```bash
 gh workflow run build-llamacpp.yml -R <your-fork>/app-bricks-py \
@@ -49,6 +52,10 @@ scaling + the QAD dequant-cost lesson — all five must be measured, not assumed
 Disk: Q8_0/F16 are ~2–3.4 GB each → one at a time, delete-after-row, DISK_LOG.
 
 ## L3 — Deep suites (R7 port; BENCHMARKS §5)
+
+Method model: *LLM Inference at the Edge under sustained load*
+([arXiv 2603.23640](https://arxiv.org/html/2603.23640v1)) — their phones lose ~½ throughput
+under sustained load; we measure whether passive cooling does the same to us.
 
 - **Sustained/thermal** — `scripts/sustained.sh` (10-min pp+tg loop, per-minute t/s +
   temps) for CPU-pinned and NPU. Passive cooling ⇒ the curve is the deployment number.
@@ -74,6 +81,13 @@ the ~15 W ceiling under sustained NPU+CPU+DDR load. (Sibling repo's M6 runs the 
 probe against MNN — coordinate tags, don't duplicate rows.)
 
 ## L5 — NPU offload boundaries (BENCHMARKS §4)
+
+Design reference: **llm.npu (ASPLOS ’25)** ([arXiv 2407.05858](https://arxiv.org/html/2407.05858v2),
+[code](https://github.com/UbiquitousLearning/mllm)) — its out-of-order CPU/NPU subgraph
+scheduling exists precisely because naive CPU/NPU overlap leaves 37% bubbles: the same
+failure we measured as F4. Also corroborating: *NPU Hardware Evaluation v1.0*
+([arXiv 2609.13166](https://arxiv.org/html/2609.13166)) — Hexagon platforms "execute one
+inference job at a time".
 
 F3 (~1.75 GiB DSP VA) and F4 (ping-pong: offload fully or ≥⅔ layers) are two measured
 points with a whole design space between them. Sweep `-ngl {12,18,24,30,36}` on
