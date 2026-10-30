@@ -1,0 +1,10 @@
+# models are transient by policy (delete-after-suite, results/DISK_LOG.md)
+models/
+*.gguf
+
+# llama.cpp stacks are NOT vendored here — scripts/env.sh points at the parent's copies
+llama.cpp/
+
+# python
+__pycache__/
+*.pyc
