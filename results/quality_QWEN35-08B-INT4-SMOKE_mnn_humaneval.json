@@ -1,0 +1,28 @@
+{
+ "tag": "QWEN35-08B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 3,
+ "score": 0.0,
+ "seconds": 16.0,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "s)\n  File \"/tmp/opencode/sandbox/he_0.py\", line 32, in check\n    assert candidate([1.0, 2.0, 5.9, 4.0, 5.0], 0.95) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": " 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    return any(abs(a - b) < threshold for a, b in zip(numbers, numbers[1:]))"
+  },
+  {
+   "id": "HumanEval/82",
+   "ok": false,
+   "err": ".py\", line 51, in <module>\n    check(prime_length)\n  File \"/tmp/opencode/sandbox/he_1.py\", line 31, in check\n    assert candidate('Hello') == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "return True\n    for i in range(2, length):\n        if string[i] == string[i-1]:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "k(generate_integers)\n  File \"/tmp/opencode/sandbox/he_2.py\", line 33, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "lt = set()\n    for i in range(a, b + 1):\n        if i % 2 == 0:\n            result.add(i)\n    \n    return sorted(result)"
+  }
+ ]
+}

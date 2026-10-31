@@ -1,0 +1,4 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-08B-INT4-SMOKE_chat
+[ppl] gatsby perplexity = 36.395954
+
+ppl QWEN35-08B-INT4-SMOKE/mnn: 1/1 = 100.0% -> results/quality_QWEN35-08B-INT4-SMOKE_mnn_ppl.json
