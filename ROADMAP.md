@@ -166,7 +166,9 @@ hash in the row, produced by the runner binary.
 (symbols in libllama.so) — the Qwen3.5 MTP head is merged upstream. Decode is the NPU's
 weak axis (F4: tg128 ≈ CPU); if the MTP draft accepts at ~2+, decode could be the *next*
 9–21× story, on both engines. Unsloth ships matching files: `unsloth/Qwen3.5-{0.8B,2B,
-4B,9B}-MTP-GGUF` (full quant set, single-file).
+4B,9B}-MTP-GGUF` (full quant set, single-file). **Second family (2026-10-31):** gemma4 —
+`libllama.so` carries a `gemma4-assistant` graph and unsloth ships separate draft heads
+`unsloth/gemma-4-{E2B,E4B}-it-GGUF/MTP/mtp-gemma-4-*-it-Q8_0.gguf` (0.10 GB).
 
 **Do:** Qwen3.5-2B-MTP Q4_K_M, CPU and NPU, `--spec-type draft-mtp` vs none, `-p 512
 -n 128`; record tg t/s, accept rate, draft tokens; then repeat at `-np 1` server. Check
