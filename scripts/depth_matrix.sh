@@ -179,8 +179,22 @@ s_k2_7b() {
   for N in 100 40 32 24; do bench_npu "$TAG" $N || true; done
   delmodel "$F"
 }
+s_gemma_e2b() { # gemma4 additions 2026-10-30 — b11996 enumerates the gemma4 arch
+  TAG=Gemma4-E2B-Q4KM; F=$DL/gemma-4-E2B-it-Q4_K_M.gguf
+  fetch "$UNS/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf" || return
+  npu_ctrl "$TAG"
+  bench_npu "$TAG" 100 || { for N in 30 24 18; do bench_npu "$TAG" $N || true; done; }
+  delmodel "$F"
+}
+s_gemma_e4b() { # 4.98 GB Q4_K_M ⇒ F3 sweep expected; unsloth also ships MTP heads (L9)
+  TAG=Gemma4-E4B-Q4KM; F=$DL/gemma-4-E4B-it-Q4_K_M.gguf
+  fetch "$UNS/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q4_K_M.gguf" || return
+  npu_ctrl "$TAG"
+  for N in 100 40 30 24 18; do bench_npu "$TAG" $N || true; done
+  delmodel "$F"
+}
 
-STAGES="s_lfm3_q4km s_lfm3_qad s_lfm3_q6k s_lfm3_q80 s_lfm3_f16 s_lfm3_kv s_lfm25 s_q08 s_q2b s_q4b_q4km s_q4b_q40 s_q9b_q4km s_q9b_q40 s_k2_4b s_k2_4b_q40 s_k2_7b"
+STAGES="s_lfm3_q4km s_lfm3_qad s_lfm3_q6k s_lfm3_q80 s_lfm3_f16 s_lfm3_kv s_lfm25 s_q08 s_q2b s_q4b_q4km s_q4b_q40 s_q9b_q4km s_q9b_q40 s_k2_4b s_k2_4b_q40 s_k2_7b s_gemma_e2b s_gemma_e4b"
 for S in ${@:-$STAGES}; do
   echo "=== stage $S $(date -u +%FT%TZ)" | tee -a results/matrix_status.log
   $S
