@@ -31,7 +31,7 @@ the first engine measured **faster than llama.cpp's CPU** on this board.
 |---|---|
 | Build (on-board, ~4 min) | ✅ `scripts/build_mnn.sh` |
 | Speed vs llama.cpp CPU | ✅ **+9% pp / +30% tg @0.8B**, +8% / +19% @2B (fp16, big-core pinned) |
-| Quality parity vs llama.cpp | ⏳ [M1](ROADMAP.md) |
+| Quality parity vs llama.cpp | 🛠️ harness ready (`scripts/quality_matrix_mnn.sh`) — numbers ⏳ [M1](ROADMAP.md) |
 | Model matrix (4B+, int8, GGUF import) | ⏳ [M2, M3](ROADMAP.md) |
 | LFM2/LFM3 | ❌ not in `model_mapper` (only `lfm2_audio`) — llama.cpp stays the only LFM3 engine ([F12](FAILURES.md)); upstream work: [M7](ROADMAP.md) |
 | NPU (MNN Hexagon backend) | ❌ Android + QNN SDK → parent **F1** (`smmu_proxy` kernel gap) ([F13](FAILURES.md)) |
@@ -68,6 +68,11 @@ scripts/bench_mnn.sh models/Qwen3.5-0.8B-MNN q08
 
 # interactive sanity:
 echo "What is the capital of France?" | taskset -c 0-3 "$MNN/build/llm_demo" models/q08-text/config.json
+
+# quality suite (M1) — same suites/items as ../ventunoq-llamacpp-cpu+npu:
+python3 scripts/fetch_bench.py                    # bench/ corpora (committed once)
+scripts/quality_matrix_mnn.sh q_qwen08_smoke      # plumbing check, every suite at tiny n
+scripts/quality_matrix_mnn.sh                     # full matrix (hours; model deleted after)
 ```
 
 `-c 2` = fp16 ("Low") is the whole story: fp32 decode is **−65%** ([F10](FAILURES.md)).
@@ -114,7 +119,10 @@ README.md            this file
 BENCHMARKS.md        measured numbers + method equivalences
 FAILURES.md          F9+ — what breaks and why (MNN-specific)
 ROADMAP.md           M1–M9 — the deep-dive agenda
+bench/               quality corpora (scripts/fetch_bench.py; same items as sibling repo)
 scripts/             build_mnn.sh · dl_model.sh · text_only.py · bench_mnn.sh
+                     fetch_bench.py · llm_eval.cpp · quality_eval_mnn.py ·
+                     quality_matrix_mnn.sh · quality_parity.py
 results/             raw logs + DISK_LOG.md audit trail
 research/            kernel-audit.md (F8-safety source audit)
 MNN/                 gitignored — source clone + build (scripts/build_mnn.sh)

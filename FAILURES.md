@@ -64,6 +64,9 @@ because the kernel lacks `smmu_proxy` (parent F1, ioctl-level evidence in parent
 ## F14 — `llm_demo` has no HTTP API; serving needs a driver script 🛠️
 
 `llm_demo` is stdin/stdout interactive only — no OpenAI-compatible endpoint like
-`llama-server`. Quality harnesses (M1) must drive it as a subprocess (one process per eval
-batch, prompts on stdin, parse stdout) — `scripts/gsm8k_mnn.py` (M1 deliverable). Until
-then llama.cpp owns any client/serving workload.
+`llama-server`. Worse, its own batch mode (`llm_demo config prompt.txt`) reads **one prompt
+per line** and streams every answer into a single stdout with no separator — unusable for
+multi-line benchmark prompts. Delivered workaround (M1 harness): `scripts/llm_eval.cpp`, a
+batch driver built into the clone by `scripts/build_mnn.sh` — one prompt file in, one answer
+file out, greedy sampler, fresh KV per item, resume-safe — driven by
+`scripts/quality_eval_mnn.py`. llama.cpp still owns any client/serving workload.

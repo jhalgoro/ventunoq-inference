@@ -1,0 +1,201 @@
+{"_src": "allenai/winogrande cfg=winogrande_xl split=validation chunks=[(0, 100), (600, 100)]"}
+{"sentence": "Sarah was a much better surgeon than Maria so _ always got the easier cases.", "option1": "Sarah", "option2": "Maria", "answer": "2"}
+{"sentence": "Sarah was a much better surgeon than Maria so _ always got the harder cases.", "option1": "Sarah", "option2": "Maria", "answer": "1"}
+{"sentence": "They were worried the wine would ruin the bed and the blanket, but the _ was't ruined.", "option1": "blanket", "option2": "bed", "answer": "2"}
+{"sentence": "Terry tried to bake the eggplant in the toaster oven but the _ was too big.", "option1": "eggplant", "option2": "toaster", "answer": "1"}
+{"sentence": "At night, Jeffrey always stays up later than Hunter to watch TV because _ wakes up late.", "option1": "Jeffrey", "option2": "Hunter", "answer": "1"}
+{"sentence": "The cat of Sarah has some mouth problems, so she takes it to see Maria. _ is a responsible cat owner.", "option1": "Sarah", "option2": "Maria", "answer": "1"}
+{"sentence": "The home that my parents had when I was in school was a lot nicer than my house now because the _ was sophisticated.", "option1": "home", "option2": "house", "answer": "1"}
+{"sentence": "The home that my parents had when I was in school was a lot nicer than my house now because the _ is trashy.", "option1": "home", "option2": "house", "answer": "2"}
+{"sentence": "Natalie has a rich husband and lots of money, Jennifer is poor _ needs to make her clothes.", "option1": "Natalie", "option2": "Jennifer", "answer": "2"}
+{"sentence": "Joe immediately went to bakery before the bank because the _ had a limited supply of what he wanted.", "option1": "bakery", "option2": "bank", "answer": "1"}
+{"sentence": "Joe immediately went to bakery before the bank because the _ had a substantial supply of what he wanted.", "option1": "bakery", "option2": "bank", "answer": "2"}
+{"sentence": "I had to read an entire story for class tomorrow. Luckily, the _ was canceled.", "option1": "story", "option2": "class", "answer": "2"}
+{"sentence": "I had to read an entire story for class tomorrow. Luckily, the _ was short.", "option1": "story", "option2": "class", "answer": "1"}
+{"sentence": "He had enough time between classes to go to a cafe or to the library. He went to the _ because his paper could wait.", "option1": "cafe", "option2": "library", "answer": "1"}
+{"sentence": "He had enough time between classes to go to a cafe or to the library. He went to the _ because his paper was due soon.", "option1": "cafe", "option2": "library", "answer": "2"}
+{"sentence": "Lindsey like to read graphic novels but Natalie liked classic literature to read. _ bought the new Frank Miller comic at the book store.", "option1": "Lindsey", "option2": "Natalie", "answer": "1"}
+{"sentence": "Michael just bought brand new wheels for his truck unlike Leslie because _ wheels were new and perfect.", "option1": "Michael", "option2": "Leslie", "answer": "2"}
+{"sentence": "Michael just bought brand new wheels for his truck unlike Leslie because _ wheels were old and used.", "option1": "Michael", "option2": "Leslie", "answer": "1"}
+{"sentence": "Leslie was nervous around parrots but Neil was not, since _ was bitten by a bird early in life.", "option1": "Leslie", "option2": "Neil", "answer": "1"}
+{"sentence": "Christmas was a special holiday to Eric but not Adam since _ was a Jew.", "option1": "Eric", "option2": "Adam", "answer": "2"}
+{"sentence": "To make frosting I needed pudding that was at a store 15 minutes away but pre-made frosting was at a store 5 minutes away.  The _ was closer.", "option1": "pudding", "option2": "frosting", "answer": "2"}
+{"sentence": "Benjamin was chosen instead of Brett to be the makeup artist for the play because _ was less experienced.", "option1": "Benjamin", "option2": "Brett", "answer": "2"}
+{"sentence": "Cynthia violated the rights of Amy, because _ had too much passivity with other people.", "option1": "Cynthia", "option2": "Amy", "answer": "2"}
+{"sentence": "They had to eat a lot to gain the strength they had lost and be able to work, the _ was too much.", "option1": "work", "option2": "strength", "answer": "1"}
+{"sentence": "They had to eat a lot to gain the strength they had lost and be able to work, the _ was too little.", "option1": "work", "option2": "strength", "answer": "2"}
+{"sentence": "The roof of Rachel's home is old and falling apart, while Betty's is new. The home value of _ is lower.", "option1": "Rachel", "option2": "Betty", "answer": "1"}
+{"sentence": "All the clutter in the house excited Leslie but not Derrick because cleaning energized _ very much.", "option1": "Leslie", "option2": "Derrick", "answer": "1"}
+{"sentence": "The portions of food today were bigger than the sizes yesterday because the _ fed more people.", "option1": "portions", "option2": "sizes", "answer": "1"}
+{"sentence": "Since Craig threw aluminum cans in the trash and Benjamin recycled, _ was environmentally irresponsible.", "option1": "Craig", "option2": "Benjamin", "answer": "1"}
+{"sentence": "Christine was going to Jessica's house to do some cleaning in the kitchen, because _ was a energetic person.", "option1": "Christine", "option2": "Jessica", "answer": "1"}
+{"sentence": "The students were at their desks taking tests with pencils, they used the _ to hold the papers.", "option1": "desks", "option2": "pencils", "answer": "1"}
+{"sentence": "Mary thought poodles were a cool dog but Rachel thought Great Danes were cooler. _ bought a small dog bed for their pet.", "option1": "Mary", "option2": "Rachel", "answer": "1"}
+{"sentence": "Mary thought poodles were a cool dog but Rachel thought Great Danes were cooler. _ bought a gigantic dog bed for their pet.", "option1": "Mary", "option2": "Rachel", "answer": "2"}
+{"sentence": "Leslie had a lot of issues that Kyle was tired of dealing with, so _ felt abandoned when they finally moved out.", "option1": "Leslie", "option2": "Kyle", "answer": "1"}
+{"sentence": "Jessica enjoyed a simple, basic life with Betty, but _ was bored having a quiet existence.", "option1": "Jessica", "option2": "Betty", "answer": "2"}
+{"sentence": "I wanted to build a bathroom on the third floor of the house but I couldn't because the _ would be too full.", "option1": "bathroom", "option2": "floor", "answer": "2"}
+{"sentence": "Joel researched laws and helped to open a preschool for Eric. Because _ is very good with kids.", "option1": "Joel", "option2": "Eric", "answer": "2"}
+{"sentence": "Tanya told Emily she couldn't come to work because her cat had an infection, but _ was lying.", "option1": "Tanya", "option2": "Emily", "answer": "1"}
+{"sentence": "Angela thinks her husband might be cheating with Lindsey, and _ confesses at the dinner party.", "option1": "Angela", "option2": "Lindsey", "answer": "2"}
+{"sentence": "Donald's understanding of math isn't as good as Joseph's, so _ is more likely a professor.", "option1": "Donald", "option2": "Joseph", "answer": "2"}
+{"sentence": "Brian was jealous of Brett's new car because _ couldn't afford to buy a new car.", "option1": "Brian", "option2": "Brett", "answer": "1"}
+{"sentence": "The man used  his eyes to read the letters but the _ were too small.", "option1": "letters", "option2": "eyes", "answer": "1"}
+{"sentence": "Jill was on a budget so she only bought a new dress for the ceremony and wore an old hat. She figured the _ would be less noticeable.", "option1": "dress", "option2": "hat", "answer": "2"}
+{"sentence": "Jill was on a budget so she only bought a new dress for the ceremony and wore an old hat. She figured the _ would be more noticeable.", "option1": "dress", "option2": "hat", "answer": "1"}
+{"sentence": "On Monday, Patricia made Felicia eggs for an early breakfast, but _ does not like fried eggs.", "option1": "Patricia", "option2": "Felicia", "answer": "2"}
+{"sentence": "Since Craig wears clear contacts and William wears colored ones, it is safe to assume that _ loves the color of their eyes.", "option1": "Craig", "option2": "William", "answer": "1"}
+{"sentence": "Since Craig wears clear contacts and William wears colored ones, it is safe to assume that _ dislikes the color of their eyes.", "option1": "Craig", "option2": "William", "answer": "2"}
+{"sentence": "It was easy for Angela to become a vegetarian although Kayla couldn't do it. _ really missed the taste of chicken.", "option1": "Angela", "option2": "Kayla", "answer": "2"}
+{"sentence": "Hunter was a better baker than Logan so _ made the kitchen a mess when they tried to make an apple pie.", "option1": "Hunter", "option2": "Logan", "answer": "2"}
+{"sentence": "Tanya spent more on the children's birthday party than Amy. _ thought a magician was a good use of funds.", "option1": "Tanya", "option2": "Amy", "answer": "1"}
+{"sentence": "Judy bought new brushes to paint the etched glasses crack but it didn't fit. The _ was too wide.", "option1": "brush", "option2": "crack", "answer": "1"}
+{"sentence": "Judy bought new brushes to paint the etched glasses crack but it didn't fit. The _ was too narrow.", "option1": "brush", "option2": "crack", "answer": "2"}
+{"sentence": "I look forward to the Sunday newspaper so I can look at the comics.  This is the only reason I still get the _ in this day and age.", "option1": "newspaper", "option2": "comics", "answer": "1"}
+{"sentence": "Jennifer was more of a morning person than Natalie although _ always went to bed early and got a good night's rest.", "option1": "Jennifer", "option2": "Natalie", "answer": "2"}
+{"sentence": "Jennifer was more of a morning person than Natalie because _ always went to bed early and got a good night's rest.", "option1": "Jennifer", "option2": "Natalie", "answer": "1"}
+{"sentence": "Alcohol is a love of Matthew's, but Ryan can't stand the stuff because _ is a sober alcoholic.", "option1": "Matthew", "option2": "Ryan", "answer": "2"}
+{"sentence": "Joe brought the horse out to the country quite a distance and gave him food but the _ was too much.", "option1": "food", "option2": "distance", "answer": "2"}
+{"sentence": "Randy gave their heart to Brian, and _ soon told them that they should have kept their heart to themselves.", "option1": "Randy", "option2": "Brian", "answer": "2"}
+{"sentence": "Nick wanted to play a game on the floor, but Dennis was hesitant because of his knees. _ was disappointed.", "option1": "Nick", "option2": "Dennis", "answer": "1"}
+{"sentence": "Although she was being prosecuted, Monica was welcomed into the sanctuary of the church by Samantha because _ was a sinful criminal.", "option1": "Monica", "option2": "Samantha", "answer": "1"}
+{"sentence": "The battle was less fierce than the great war, because the _ lasted one year.", "option1": "battle", "option2": "war", "answer": "2"}
+{"sentence": "Laura used too much super glue on Erins hands, so _ needed to get to the doctor to separate their hands.", "option1": "Laura", "option2": "Erin", "answer": "2"}
+{"sentence": "James panicked when his phone fell on the table thinking it will break but the _ is soft.", "option1": "phone", "option2": "table", "answer": "2"}
+{"sentence": "James panicked when his phone fell on the table thinking it will break but the _ is strong.", "option1": "phone", "option2": "table", "answer": "1"}
+{"sentence": "John cannot touch the cup as it was just brought out of the refrigerator. He wanted some air to blow around it. The _ is very warm.", "option1": "cup", "option2": "air", "answer": "2"}
+{"sentence": "The fireman used several rags to polish the nozzles on the fire hose; when he was done the _ were dirty.", "option1": "nozzles", "option2": "rags", "answer": "2"}
+{"sentence": "Mary wanted to get another piercing in her ear, but the _ was much too tiny.", "option1": "ear", "option2": "piercing", "answer": "1"}
+{"sentence": "Mary wanted to get another piercing in her ear, but the _ was much too huge.", "option1": "ear", "option2": "piercing", "answer": "2"}
+{"sentence": "Laura just loved the taste of green beans but Felicia hated the taste of them. _ didn't have a second serving.", "option1": "Laura", "option2": "Felicia", "answer": "2"}
+{"sentence": "The bartender cut Carrie off but continued to serve Emily because _ was too drunk.", "option1": "Carrie", "option2": "Emily", "answer": "1"}
+{"sentence": "Blaze always wore a t-shirt instead of a shirt because he thought that the _ was stuffy and old fashioned.", "option1": "shirt", "option2": "t-shirt", "answer": "1"}
+{"sentence": "The paint would melt in the sun, so we used a varnish instead, since the _ was susceptible to heat.", "option1": "paint", "option2": "varnish", "answer": "1"}
+{"sentence": "I tried to make mini lamps by using glow sticks in mason jars, but had to get larger jars because the _ were too big.", "option1": "glow sticks", "option2": "jars", "answer": "1"}
+{"sentence": "Joel always liked to turn the heater up higher than Joseph did for the reason that _ was never cold.", "option1": "Joel", "option2": "Joseph", "answer": "2"}
+{"sentence": "Joel always liked to turn the heater up higher than Joseph did for the reason that _ was always cold.", "option1": "Joel", "option2": "Joseph", "answer": "1"}
+{"sentence": "The teen found the new hat was no substitute for his cool shirt.  The _ was just cool to wear to school.", "option1": "hat", "option2": "shirt", "answer": "2"}
+{"sentence": "Mary was helping Patricia's daughter put on makeup but  _ watches a lot of makeup tutorials.", "option1": "Mary", "option2": "Patricia", "answer": "2"}
+{"sentence": "Mary was helping Patricia's daughter put on makeup because _ watches a lot of makeup tutorials.", "option1": "Mary", "option2": "Patricia", "answer": "1"}
+{"sentence": "He wanted to kill time at the house instead of the playground, because everyone at the _ was fun.", "option1": "playground", "option2": "house", "answer": "2"}
+{"sentence": "Aaron didn't know Dennis had a peanut allergy, so when _ made peanut chicken an ambulance was called.", "option1": "Aaron", "option2": "Dennis", "answer": "1"}
+{"sentence": "Aaron didn't know Dennis had a peanut allergy, so when _ ate peanut chicken an ambulance was called.", "option1": "Aaron", "option2": "Dennis", "answer": "2"}
+{"sentence": "God liked to control the day and the night, but the _ was too bright.", "option1": "day", "option2": "night", "answer": "1"}
+{"sentence": "Brett asked Joel for advice and guidance about waxing his mustache, and afterwards _ felt burdened.", "option1": "Brett", "option2": "Joel", "answer": "2"}
+{"sentence": "The filter in the living room needed to be changed more often than the one in the bedroom because the _ was dirtier.", "option1": "living room", "option2": "bedroom", "answer": "1"}
+{"sentence": "The filter in the living room needed to be changed more often than the one in the bedroom because the _ was cleaner.", "option1": "living room", "option2": "bedroom", "answer": "2"}
+{"sentence": "Amy went over to the waiting room at the hospital to calm Samantha because _ was placid.", "option1": "Amy", "option2": "Samantha", "answer": "1"}
+{"sentence": "Megan forgot to buy deodorant at the store so they borrowed Jessica's deodorant and _ never found out.", "option1": "Megan", "option2": "Jessica", "answer": "2"}
+{"sentence": "Megan forgot to buy deodorant at the store so they borrowed Jessica's deodorant and _ hoped they never found out.", "option1": "Megan", "option2": "Jessica", "answer": "1"}
+{"sentence": "Amy thought she was the mirror image of Natalie , but _ could not be convinced to see the similarity.", "option1": "Amy", "option2": "Natalie", "answer": "2"}
+{"sentence": "Amy thought she was the mirror image of Natalie , but _ could not persuade her to see the similarity.", "option1": "Amy", "option2": "Natalie", "answer": "1"}
+{"sentence": "I helped my sister find her gold necklace. She couldn't wear her woven necklace to the ball because the _ was so casual.", "option1": "woven necklace", "option2": "ball", "answer": "1"}
+{"sentence": "Emily never had as much money to spend as Carrie, because _ had a good job.", "option1": "Emily", "option2": "Carrie", "answer": "2"}
+{"sentence": "The wooden doors at my friends work are worse than the wooden desks at my work, because the _ material is cheaper.", "option1": "doors", "option2": "desks", "answer": "1"}
+{"sentence": "The wooden doors at my friends work are worse than the wooden desks at my work, because the _ material is stronger.", "option1": "doors", "option2": "desks", "answer": "2"}
+{"sentence": "The arrow stuck to the bark but not the stone because the _ was flimsy.", "option1": "bark", "option2": "stone", "answer": "1"}
+{"sentence": "The arrow stuck to the bark but not the stone because the _ was hard.", "option1": "bark", "option2": "stone", "answer": "2"}
+{"sentence": "The leg of the pig body stuck out of the grave where it was buried because the _ is large.", "option1": "body", "option2": "grave", "answer": "1"}
+{"sentence": "The sheet recovered can easily be hiding between the space in the door. The _ is thin.", "option1": "sheet", "option2": "space", "answer": "1"}
+{"sentence": "The sheet recovered can easily be hiding between the space in the door. The _ is wide.", "option1": "sheet", "option2": "space", "answer": "2"}
+{"sentence": "Mike doesn't like the table in his living room as much as the couch. The _ resonates with the other decorations.", "option1": "table", "option2": "couch", "answer": "2"}
+{"sentence": "Neil told Lawrence that he was training to be a race car driver.  _ was excited.", "option1": "Neil", "option2": "Lawrence", "answer": "1"}
+{"sentence": "Neil told Lawrence that he was training to be a race car driver.  _ was worried about him.", "option1": "Neil", "option2": "Lawrence", "answer": "2"}
+{"sentence": "the water poured freely into the hole until it disappeared , the _ was  little.", "option1": "hole", "option2": "water", "answer": "2"}
+{"sentence": "the water poured freely into the hole until it disappeared , the _ was deep.", "option1": "hole", "option2": "water", "answer": "1"}
+{"sentence": "Elena was an excellent flight attendant when Sarah boarded the plane with a fear of flying because, _ was able to overcome their fears.", "option1": "Elena", "option2": "Sarah", "answer": "2"}
+{"sentence": "She wanted to sew a shirt from silk she bought and a jacket in denim from old jeans so the _ was recycled.", "option1": "denim", "option2": "silk", "answer": "1"}
+{"sentence": "Betty reluctantly confided in Rebecca that she was suffering from memory loss.  _ was distraught.", "option1": "Betty", "option2": "Rebecca", "answer": "1"}
+{"sentence": "Carla start doing sit-ups and pushups for her weak spots. The _ are for her abs.", "option1": "sit-ups", "option2": "pushups", "answer": "1"}
+{"sentence": "Carla start doing sit-ups and pushups for her weak spots. The _ are for her chest.", "option1": "sit-ups", "option2": "pushups", "answer": "2"}
+{"sentence": "Christopher was getting ready to wash Joel's hair,so _  got out shampoo by the sink and sat in the chair.", "option1": "Christopher", "option2": "Joel", "answer": "2"}
+{"sentence": "Dennis invited Joseph on a trip to the hatchery tomorrow morning because _ was also interested in fish.", "option1": "Dennis", "option2": "Joseph", "answer": "2"}
+{"sentence": "The man finally decided to become a guardian for the child at the orphanage because the _ was loving.", "option1": "orphanage", "option2": "guardian", "answer": "2"}
+{"sentence": "Angela's room was a lot lighter than Rebecca's room, because the light of _ went out.", "option1": "Angela", "option2": "Rebecca", "answer": "2"}
+{"sentence": "Megan wrote on the paper with a pencil unlike Jennifer who wrote with a pen, because _ wanted to erase it later.", "option1": "Megan", "option2": "Jennifer", "answer": "1"}
+{"sentence": "Megan wrote on the paper with a pencil unlike Jennifer who wrote with a pen, because _ wanted to keep it for later.", "option1": "Megan", "option2": "Jennifer", "answer": "2"}
+{"sentence": "Laura asked Rachel if she could borrow some clothes because _ loved her fashion sense.", "option1": "Laura", "option2": "Rachel", "answer": "1"}
+{"sentence": "When you buy food for your cat, choose dry instead of wet as the crunchy texture of the _ is better for their teeth.", "option1": "dry", "option2": "wet", "answer": "1"}
+{"sentence": "It was easier to get the soil loosened up with the pick than with the shovel, because the _ was solid.", "option1": "shovel", "option2": "pick", "answer": "2"}
+{"sentence": "Erin knew the perfect gift for the wedding  shower, but Samantha had to do some research, because _  was slightly acquainted with the bride.", "option1": "Erin", "option2": "Samantha", "answer": "2"}
+{"sentence": "The gothic lolita style suited Victoria better than Sarah because _ looked the worst in frilly dresses.", "option1": "Victoria", "option2": "Sarah", "answer": "2"}
+{"sentence": "Samantha couldn't see any alternatives, but Emily could, because _ wasn't nearly as open minded.", "option1": "Samantha", "option2": "Emily", "answer": "1"}
+{"sentence": "Joseph wanted to sell lemonade at a stand in the summer months instead of the spring months since people in the _ would be thirstier.", "option1": "summer", "option2": "spring", "answer": "1"}
+{"sentence": "After a boring meeting, Monica closed her eyes and dozed while Carrie took a walk, as _ had gone to bed late the night before.", "option1": "Monica", "option2": "Carrie", "answer": "1"}
+{"sentence": "After a boring meeting, Monica closed her eyes and dozed while Carrie took a walk, as _ had gone to bed early the night before.", "option1": "Monica", "option2": "Carrie", "answer": "2"}
+{"sentence": "My mom didn't fit the shape into the painting, because the _ was too awkward.", "option1": "shape", "option2": "painting", "answer": "1"}
+{"sentence": "My mom didn't fit the shape into the painting, because the _ was too complete.", "option1": "shape", "option2": "painting", "answer": "2"}
+{"sentence": "My mom always had training at the house, but not today because the _ was unavailable.", "option1": "training", "option2": "house", "answer": "2"}
+{"sentence": "Erin frequently suffered from hair loss while Samantha had healthy hair, as _ was never stressed out.", "option1": "Erin", "option2": "Samantha", "answer": "2"}
+{"sentence": "Jason was at practice all the time to try and get better than Christopher. _ needed more practice.", "option1": "Jason", "option2": "Christopher", "answer": "1"}
+{"sentence": "The team won a trophy instead of a plaque as a result of hard times as the _ was cheap to make.", "option1": "trophy", "option2": "plaque", "answer": "1"}
+{"sentence": "The creatures attacked Derrick while ignoring Ryan, because _ remembered to put on the repellent.", "option1": "Derrick", "option2": "Ryan", "answer": "2"}
+{"sentence": "Megan liked to read a book good more than Samantha because _ liked the peace and quiet.", "option1": "Megan", "option2": "Samantha", "answer": "1"}
+{"sentence": "Megan liked to read a book good more than Samantha because _ hated the peace and quiet.", "option1": "Megan", "option2": "Samantha", "answer": "2"}
+{"sentence": "Late at night, Rebecca was more tired than Jessica so _ was unable to go right to sleep.", "option1": "Rebecca", "option2": "Jessica", "answer": "2"}
+{"sentence": "Late at night, Rebecca was more tired than Jessica so _ was able to go right to sleep.", "option1": "Rebecca", "option2": "Jessica", "answer": "1"}
+{"sentence": "The woman pierced the customer's tongue with a needle before piercing his nose because the _ was numb.", "option1": "tongue", "option2": "nose", "answer": "1"}
+{"sentence": "The woman pierced the customer's tongue with a needle before piercing his nose because the _ was still sensitive.", "option1": "tongue", "option2": "nose", "answer": "2"}
+{"sentence": "Starting the engine of the car took less time unlike the truck since the _ 's engine was working at the time.", "option1": "car", "option2": "truck", "answer": "1"}
+{"sentence": "Neil used a chainsaw to cut down the tree instead of a regular saw like William, because _ believed in modern equipment.", "option1": "Neil", "option2": "William", "answer": "1"}
+{"sentence": "The shirts were straighter than the pants because the _ were hanging on the hanger.", "option1": "shirt", "option2": "pants", "answer": "1"}
+{"sentence": "The shirts were straighter than the pants although the _ were hanging on the hanger.", "option1": "shirt", "option2": "pants", "answer": "2"}
+{"sentence": "The man thought lifting the rock, not the log, would give him a hernia because the _ was lighter.", "option1": "rock", "option2": "log", "answer": "2"}
+{"sentence": "Maria was able to keep their weight off long term, unlike Felicia, because _ followed a healthy diet.", "option1": "Maria", "option2": "Felicia", "answer": "2"}
+{"sentence": "Maria was able to keep their weight off long term, unlike Felicia, because _ followed a crash diet.", "option1": "Maria", "option2": "Felicia", "answer": "1"}
+{"sentence": "The dog was more suspicious of the locker than of the package because the drugs were in the _ .", "option1": "locker", "option2": "package", "answer": "1"}
+{"sentence": "Justin usually paid for the gas when Craig always said he was broke. _ was generous.", "option1": "Justin", "option2": "Craig", "answer": "1"}
+{"sentence": "Erin loved people and wanted to help them while Katrina loved to help animals. _ volunteered at the local shelter.", "option1": "Erin", "option2": "Katrina", "answer": "2"}
+{"sentence": "Dennis did not enjoy their afternoon but Hunter did because _ left work after the sunset.", "option1": "Dennis", "option2": "Hunter", "answer": "1"}
+{"sentence": "Dennis did not enjoy their afternoon but Hunter did because _ left work after the sunrise.", "option1": "Dennis", "option2": "Hunter", "answer": "2"}
+{"sentence": "We were making orange jack o lanterns and  bought candles to put in the oranges, the candles did not fit. The _ were too big.", "option1": "candles", "option2": "oranges", "answer": "1"}
+{"sentence": "We were making orange jack o lanterns and  bought candles to put in the oranges, the candles did not fit. The _ were too small.", "option1": "candles", "option2": "oranges", "answer": "2"}
+{"sentence": "Natalie committed a bunch of good deeds in Samantha's name, because _ wanted all the credit.", "option1": "Natalie", "option2": "Samantha", "answer": "2"}
+{"sentence": "Natalie committed a bunch of good deeds in Samantha's name, because _ didn't want the credit.", "option1": "Natalie", "option2": "Samantha", "answer": "1"}
+{"sentence": "She wanted to shop for more clothes and ultimately decided on the velvet dress instead of the denim jacket because the _ was more casual.", "option1": "dress", "option2": "jacket", "answer": "2"}
+{"sentence": "Neil put the finishing touches on the android as he sold it off to Brian because _ was an engineer.", "option1": "Neil", "option2": "Brian", "answer": "1"}
+{"sentence": "Laura didn't buy anything at all for Betty's birthday, because _ forgot to mention it.", "option1": "Laura", "option2": "Betty", "answer": "2"}
+{"sentence": "Joel plans to go to Latin America next year where Dennis is currently living, _ has never been to Latin America.", "option1": "Joel", "option2": "Dennis", "answer": "1"}
+{"sentence": "Beautiful to Angela means something physical, while it's mental to Emily, so _ is deeper.", "option1": "Angela", "option2": "Emily", "answer": "2"}
+{"sentence": "Beautiful to Angela means something physical, while it's mental to Emily, so _ is shallower.", "option1": "Angela", "option2": "Emily", "answer": "1"}
+{"sentence": "Jason really wanted to get the job, but he felt like he flunked the interview. The manager called and said he could try the _  again next week.", "option1": "job", "option2": "interview", "answer": "2"}
+{"sentence": "I was wearing wool socks when I went to try on my new boots but I couldn't get them on because the _ were too small.", "option1": "boots", "option2": "socks", "answer": "1"}
+{"sentence": "I was wearing wool socks when I went to try on my new boots but I couldn't get them on because the _ were too large.", "option1": "boots", "option2": "socks", "answer": "2"}
+{"sentence": "The library always had more books than computers, most likely because the _ are smaller.", "option1": "books", "option2": "computers", "answer": "1"}
+{"sentence": "The library always had more books than computers, most likely because the _ are bigger.", "option1": "books", "option2": "computers", "answer": "2"}
+{"sentence": "The hair stylist gave Laura hair extensions and not Katrina because _ had very short hair.", "option1": "Laura", "option2": "Katrina", "answer": "1"}
+{"sentence": "Monica did not need a recipe in order to mix a cake but Angela did because _ was an instinctive baker.", "option1": "Monica", "option2": "Angela", "answer": "1"}
+{"sentence": "Craig had cereal for breakfast while Dennis had a shake, so _ finished drinking their breakfast.", "option1": "Craig", "option2": "Dennis", "answer": "2"}
+{"sentence": "Craig had cereal for breakfast while Dennis had a shake, so _ finished eating their breakfast.", "option1": "Craig", "option2": "Dennis", "answer": "1"}
+{"sentence": "Logan ended up calling the police over an incident involving Jason because _ was scratched by them.", "option1": "Logan", "option2": "Jason", "answer": "1"}
+{"sentence": "Carl needed a new top after ripping his epaulette shirt. He wanted a  flannel shirt because the _ is old.", "option1": "epaulette shirt", "option2": "flannel shirt", "answer": "1"}
+{"sentence": "Garrett was always feeling fatigued because of the energy his job demands. The _ of the job is too much.", "option1": "demand", "option2": "energy", "answer": "1"}
+{"sentence": "Ben had to respect his toys and his books to ensure they last long. However, it was difficult to respect the _ because they were fun.", "option1": "toys", "option2": "books", "answer": "1"}
+{"sentence": "He made a few dishes to serve. One was a salad and the other was a steak. The _ was healthy.", "option1": "salad", "option2": "steak", "answer": "1"}
+{"sentence": "Although Angela was overall a nicer person than Natalie, _ often did practice humility very regularlly.", "option1": "Angela", "option2": "Natalie", "answer": "2"}
+{"sentence": "Cynthia has a pond in their backyard, but Carrie cannot afford one, which means _ lives in the richer neighborhood.", "option1": "Cynthia", "option2": "Carrie", "answer": "1"}
+{"sentence": "Neil's cat was terrified of thunderstorms but Kyle's wasn't bothered by them. _ found their cat hiding under the bed after the loud crackle of thunder.", "option1": "Neil", "option2": "Kyle", "answer": "1"}
+{"sentence": "Jay could comfort sad people better instead of happy people because the _ people weren't realistic.", "option1": "sad", "option2": "happy", "answer": "2"}
+{"sentence": "Eric often thought of his annoying habits, like hitting his pen on his desk, and asked Ryan if it bothered him; _ said he was sorry he had done it.", "option1": "Eric", "option2": "Ryan", "answer": "1"}
+{"sentence": "Tanya wanted poppies for her wedding flowers but Carrie said that was an odd choice. _ pointed out it was a wedding and tradition mattered.", "option1": "Tanya", "option2": "Carrie", "answer": "2"}
+{"sentence": "Benjamin shaved his beard, but Nick had just grown one, so _ gave them all his old oils.", "option1": "Benjamin", "option2": "Nick", "answer": "1"}
+{"sentence": "I got more use in the gym than at the playground because the _ had more things to do.", "option1": "gym", "option2": "playground", "answer": "1"}
+{"sentence": "Monica can speak English and German but Samantha can only speak English because _ is trilingual.", "option1": "Monica", "option2": "Samantha", "answer": "2"}
+{"sentence": "All of the bands were not able to march on the fields at the same time because the _ were massive.", "option1": "bands", "option2": "fields", "answer": "1"}
+{"sentence": "Marty needed some sport and dress shoes, but could only buy one pair. He went with the _ since he would be going to a wedding.", "option1": "dress", "option2": "sport", "answer": "1"}
+{"sentence": "I like to drink mineral water over tap water when I travel outside of the USA because the _ water in other countries is safe.", "option1": "mineral", "option2": "tap", "answer": "1"}
+{"sentence": "Pine trees were a big part of Erin s Christmas tree farm while Megan was jewish but helped _ celebrate anyhow.", "option1": "Erin", "option2": "Megan", "answer": "1"}
+{"sentence": "Eating spicy foods better suited Robert and not Adam because _ never got acid reflux from salsa.", "option1": "Robert", "option2": "Adam", "answer": "1"}
+{"sentence": "Rachel hated their new in-laws, but tried to keep it secret from Monica.  Eventually _ told them.", "option1": "Rachel", "option2": "Monica", "answer": "1"}
+{"sentence": "Samantha was pretty good at math while Natalie was better at English. _ enrolled in a storytelling class this semester.", "option1": "Samantha", "option2": "Natalie", "answer": "2"}
+{"sentence": "Kenneth had worse skin than Craig so _ had to use more of the moisturizer.", "option1": "Kenneth", "option2": "Craig", "answer": "1"}
+{"sentence": "Kenneth had better skin than Craig so _ had to use more of the moisturizer.", "option1": "Kenneth", "option2": "Craig", "answer": "2"}
+{"sentence": "The cat Natalie owned would snuggle up on Jessica's lap because _ was nice to it all the time.", "option1": "Natalie", "option2": "Jessica", "answer": "2"}
+{"sentence": "Brian always tried to find ways to be productive at work unlike Kenneth, because _ was a hard worker.", "option1": "Brian", "option2": "Kenneth", "answer": "1"}
+{"sentence": "Tanya loved pepperoni on their pizza and Katrina loved sausage, so when it had just sausage _ was not very happy.", "option1": "Tanya", "option2": "Katrina", "answer": "1"}
+{"sentence": "Tanya loved pepperoni on their pizza and Katrina loved sausage, so when it had just pepperoni _ was not very happy.", "option1": "Tanya", "option2": "Katrina", "answer": "2"}
+{"sentence": "Jen planned a retreat to a mountain or the park. She chose the _ because it was warmer.", "option1": "mountain", "option2": "park", "answer": "2"}
+{"sentence": "Justin bought a new RV but Lawrence liked his old one, so _ decided to buy it.", "option1": "Justin", "option2": "Lawrence", "answer": "2"}
+{"sentence": "Justin bought a new RV but Lawrence liked his old one, so _ decided to sell it.", "option1": "Justin", "option2": "Lawrence", "answer": "1"}
+{"sentence": "Tanya was unrecognizable after Sarah was done beating them, so _ ended up going to jail.", "option1": "Tanya", "option2": "Sarah", "answer": "2"}
+{"sentence": "Frank wanted to put the burger on the barbecue, but the _ wasn't formed yet.", "option1": "barbecue", "option2": "burger", "answer": "2"}

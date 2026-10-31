@@ -65,6 +65,14 @@ interesting cross-engine question left is quality — M1 below.
 
 ### 4.1 Quality parity (M1) — MNN int4 vs llama.cpp Q4_0 / Q4_K_M
 
+Method: `scripts/quality_matrix_mnn.sh` → `scripts/quality_eval_mnn.py` → `llm_eval` driver
+(greedy sampler, fresh KV per item, `taskset -c 0-3`, engine defaults t4/fp16). Same
+`suites/n/prompts/stride()` as the sibling `quality_matrix.sh` on identical `bench/` items,
+so `scripts/quality_parity.py` joins MNN vs llama.cpp item-by-item. Deviations from the
+sibling harness: all six MC suites score gen-style (MNN exposes no logprobs → walk/raw-walk
+impossible); stop strings emulated by truncation; ppl via MNN's `ppl_eval` (its JSON
+`score` is the PPL — keep ppl out of parity globs).
+
 | Model | MNN int4 GSM8K | llama.cpp Q4_0 | llama.cpp Q4_K_M | ppl (gatsby) MNN vs Q4_0 |
 |---|---|---|---|---|
 | Qwen3.5-0.8B | ⏳ | ⏳ (parent harness) | ⏳ | ⏳ |

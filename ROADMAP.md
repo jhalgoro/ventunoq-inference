@@ -23,13 +23,19 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 MNN's int4 carries fp16 per-block scales (≈Q4_K-class on paper) — but the whole +30% decode
 claim is worthless if answers degrade. Measure, same corpora as the parent repo:
 
-- **GSM8K** via `scripts/gsm8k_mnn.py` (drives `llm_demo` as a subprocess, F14; same
-  questions/strict scorer as parent `scripts/gsm8k_eval.py`, N=50).
-- **Perplexity** on `bench/gatsby.txt` (parent corpus — copy it) for a continuous signal;
-  MNN ships no ppl tool, so score logprobs via the engine (or drop this leg and lean on
-  HumanEval-style behavioral diffs on 20 tasks).
+- **Harness (done)**: `scripts/quality_matrix_mnn.sh` → `scripts/quality_eval_mnn.py`, a
+  full port of the sibling `quality_eval.py` — gsm8k, humaneval, arc, hellaswag, winogrande,
+  openbookqa, commonsenseqa, mmlu, niah, ppl. Greedy everywhere; `scripts/fetch_bench.py`
+  uses the sibling's SPECS verbatim so `quality_parity.py` joins the two engines
+  item-by-item. Generation goes through `llm_eval` (`scripts/llm_eval.cpp`, built by
+  `build_mnn.sh`): one prompt file per item, greedy sampler, fresh KV per item, resume-safe.
+- **MC scoring**: all six MC suites use the gen style (3-shot greedy letter +
+  first-mention fallback). MNN exposes no logprobs, so the sibling's walk/raw-walk
+  styles are impossible — noted wherever MNN rows face llama.cpp rows.
+- **Perplexity**: MNN *does* ship a ppl tool after all — `tools/ppl_eval.cpp`, built by
+  `scripts/build_mnn.sh` — run on `bench/gatsby.txt` (ROADMAP v1 said it didn't).
 - Compare: MNN int4 vs llama.cpp **Q4_0** (speed rival) **and Q4_K_M** (quant rival),
-  same models 0.8B/2B.
+  same models 0.8B/2B — llama.cpp rows from sibling-harness runs on the same items.
 
 **Success =** a row in BENCHMARKS §4.1 per model; if MNN quality ≤ Q4_0 − noise, the CPU
 recommendation stays llama.cpp regardless of speed.
