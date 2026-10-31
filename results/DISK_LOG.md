@@ -248,3 +248,35 @@ eb89c15a0ae9712be2ee462bf43802de14200f20f93b73da6eb68c2ebdd28e4e  /tmp/opencode/
 ```
 /dev/mmcblk0p71   55G   27G   26G  51% /
 ```
+
+### 2026-10-31 02:21 UTC — DOWNLOAD (Gemma4-E2B-Q4KM): `/tmp/opencode/dl/gemma-4-E2B-it-Q4_K_M.gguf`
+```
+740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8  /tmp/opencode/dl/gemma-4-E2B-it-Q4_K_M.gguf
+```
+```
+/dev/mmcblk0p71   55G   25G   29G  47% /
+```
+
+### 2026-10-31 02:38 UTC — DELETE (tests finished): `/tmp/opencode/dl/gemma-4-E2B-it-Q4_K_M.gguf`
+```
+740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8  /tmp/opencode/dl/gemma-4-E2B-it-Q4_K_M.gguf
+```
+```
+/dev/mmcblk0p71   55G   25G   29G  47% /
+```
+
+### 2026-10-31 02:41 UTC — DOWNLOAD (Gemma4-E4B-Q4KM): `/tmp/opencode/dl/gemma-4-E4B-it-Q4_K_M.gguf`
+```
+85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87  /tmp/opencode/dl/gemma-4-E4B-it-Q4_K_M.gguf
+```
+```
+/dev/mmcblk0p71   55G   27G   27G  50% /
+```
+
+### 2026-10-31 03:31 UTC — DELETE (tests finished): `/tmp/opencode/dl/gemma-4-E4B-it-Q4_K_M.gguf`
+```
+85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87  /tmp/opencode/dl/gemma-4-E4B-it-Q4_K_M.gguf
+```
+```
+/dev/mmcblk0p71   55G   27G   27G  50% /
+```

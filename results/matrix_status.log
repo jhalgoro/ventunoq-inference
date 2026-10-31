@@ -80,3 +80,14 @@
 21:51:55 npu K2H-7B-Q4KM ngl=32 rows=0
 21:52:21 npu K2H-7B-Q4KM ngl=24 rows=0
 === matrix done 2026-10-30T21:52:27Z
+=== stage s_gemma_e2b 2026-10-31T02:19:47Z
+02:37:34 hex2cpu Gemma4-E2B-Q4KM rows=4
+02:38:37 npu Gemma4-E2B-Q4KM ngl=100 rows=4
+=== stage s_gemma_e4b 2026-10-31T02:38:41Z
+03:09:44 hex2cpu Gemma4-E4B-Q4KM rows=4
+03:09:55 npu Gemma4-E4B-Q4KM ngl=100 rows=0
+03:10:11 npu Gemma4-E4B-Q4KM ngl=40 rows=0
+03:10:37 npu Gemma4-E4B-Q4KM ngl=30 rows=0
+03:11:00 npu Gemma4-E4B-Q4KM ngl=24 rows=0
+03:31:38 npu Gemma4-E4B-Q4KM ngl=18 rows=4
+=== matrix done 2026-10-31T03:31:44Z

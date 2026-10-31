@@ -99,8 +99,11 @@ Full-offload family table (all Q4_K_M, `-ngl 100` MBUF 256/256 vs same-runner ct
 | Qwen3.5-2B | 880.1 · 824.9 · 22.1 | 57.9 · 46.6 · 15.2 | 17.7× / **1.45×** |
 | LFM2.5-2.6B | 684.4 · 574.4 · 17.8 | 40.3 · 34.2 · 13.2 | 16.8× / 1.35× |
 | LFM3-1.7B | 1033.2 · 905.9 · 25.6 | 65.5 · 54.2 · 19.7 | 16.7× / 1.30× |
+| **Gemma4-E2B** | 719.4 · 647.8 · 19.3 | 39.3 · 27.6 · 13.4 | **23.5×** / 1.44× |
 
-(LFM2.5 confirms build-to-build stability vs §2's 20261020 row: 684.4 vs 679.)
+(LFM2.5 confirms build-to-build stability vs §2's 20261020 row: 684.4 vs 679. E2B's 23.5×
+is the fleet max because its CPU long-ctx scaling is the worst measured (pp512→8192 −30%
+vs −10% on NPU); the NPU number itself is mid-band.)
 
 Partial-offload sweeps (MBUF 128/128; `—` = F3 crash before any row; ctrl = same-runner
 `-ngl 0` pp512 · pp8192 · tg128):
@@ -124,6 +127,8 @@ Partial-offload sweeps (MBUF 128/128; `—` = F3 crash before any row; ctrl = sa
 | K2-4B-Q4_0 *(same ctrl)* | 100 / 30 | — | — | — | 💥 F3 |
 | | 24 / 18 | 48.1 / 46.7 | 29.6 / 22.1 | **3.1 / 3.2** | ⚠️ fits, but decode ~0.40× CPU — **repack answer: fitting ≠ usable** |
 | K2-7B-Q4_K_M *(ctrl 13.0 · 8.5 · 4.4)* | 100/40/32/24 | — | — | — | ❌ **no usable depth** (898 MB block at ngl 24) |
+| Gemma4-E4B-Q4_K_M *(ctrl 19.5 · 15.6 · 7.0)* | 100/40/30/24 | — | — | — | ❌ F3 at every depth (419–537 MB buffers) |
+| | 18 | 28.5 | 23.3 | **3.8** | 💥 decode 0.54× CPU — **E4B = CPU-only** (prefill gain 1.5× isn't worth a halved decode) |
 
 Boundary rules (measured — these replace the inherited ~1.75 GiB heuristic):
 
@@ -131,11 +136,14 @@ Boundary rules (measured — these replace the inherited ~1.75 GiB heuristic):
    step below = F4 collapse zone (decode 2.6–3.5 t/s = 0.3–0.45× CPU); two below = decode
    ≤ CPU with nothing to show for it.
 2. **≥6B has no usable NPU config on this board** — 9B and K2-7B fail the F3 mapping at
-   *every* depth tried; 9B-Q4_0 `-ngl 8` decodes at 2.2 t/s. ≥6B = CPU-only.
+   *every* depth tried; 9B-Q4_0 `-ngl 8` decodes at 2.2 t/s. **Gemma4-E4B joins them at
+   4.98 GB** — every depth crashes or decodes ≤0.54× CPU. That set = CPU-only.
 3. **F3 is per-buffer VA mapping, not a weight budget** — fingerprint `HTP0 buffer mapping
    failed : domain_id 3 size <N> error 0x00000001`; the failing single buffer ranges
    134 MB (K2-4B ngl 30) → 898 MB (K2-7B ngl 24); non-monotonic in `-ngl` (4B-Q4_0: 24
-   fails, 30 works); Q8_0-LFM3 fits 1.94 GB of weights outright. Depends on allocator /
+   fails, 30 works); Q8_0-LFM3 fits 1.94 GB of weights outright, and Gemma4-E2B's 3.11 GB
+   Q4_K_M fits full-offload while Qwen3.5-4B's 2.5 GB Q4_K_M crashes at ngl 100 — bytes
+   do not predict fit. Depends on allocator /
    graph layout — and on build: §2's known-good 4B-Q4_0 `-ngl 24` row (20261020) crashes on
    b11996.
 4. **F4 confirmed live**: collapse caught at 4B-Q4_0 `-ngl 18` (2.6 vs CPU 7.7 t/s) and

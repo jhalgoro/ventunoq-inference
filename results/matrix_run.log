@@ -40,3 +40,11 @@ scripts/depth_matrix.sh: line 45: 452587 Aborted                 timeout 3600 $R
 scripts/depth_matrix.sh: line 45: 453388 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
 scripts/depth_matrix.sh: line 45: 454114 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
 === matrix done 2026-10-30T21:52:27Z
+HEX2=/tmp/opencode/pkg-snapdragon-20261029  HEX=/tmp/opencode/pkg-snapdragon  (runner2/lfm3: ok, runner1: ok)
+=== stage s_gemma_e2b 2026-10-31T02:19:47Z
+=== stage s_gemma_e4b 2026-10-31T02:38:41Z
+scripts/depth_matrix.sh: line 45: 487562 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
+scripts/depth_matrix.sh: line 45: 488745 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
+scripts/depth_matrix.sh: line 45: 489866 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
+scripts/depth_matrix.sh: line 45: 490726 Aborted                 timeout 3600 $R/bin/llama-bench -m "$F" --device HTP0 -ngl "$2" $SVC_NPU $ARGS ${3:-} -o csv > "$out" 2> "${out%.csv}.err"
+=== matrix done 2026-10-31T03:31:44Z
