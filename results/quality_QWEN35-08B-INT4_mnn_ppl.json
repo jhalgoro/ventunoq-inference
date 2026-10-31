@@ -1,0 +1,16 @@
+{
+ "tag": "QWEN35-08B-INT4",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 1076.4,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 31.081347,
+   "max_tokens": "full"
+  }
+ ]
+}

@@ -31,7 +31,7 @@ the first engine measured **faster than llama.cpp's CPU** on this board.
 |---|---|
 | Build (on-board, ~4 min) | ✅ `scripts/build_mnn.sh` |
 | Speed vs llama.cpp CPU | ✅ **+9% pp / +30% tg @0.8B**, +8% / +19% @2B (fp16, big-core pinned) |
-| Quality parity vs llama.cpp | 🛠️ harness ready (`scripts/quality_matrix_mnn.sh`) — numbers ⏳ [M1](ROADMAP.md) |
+| Quality parity vs llama.cpp | 🛠️ MNN side ✅ (0.8B: gsm8k 34%, ppl 31.1, MC flat) — llama.cpp rows ⏳ [M1](ROADMAP.md) |
 | Model matrix (4B+, int8, GGUF import) | ⏳ [M2, M3](ROADMAP.md) |
 | LFM2/LFM3 | ❌ not in `model_mapper` (only `lfm2_audio`) — llama.cpp stays the only LFM3 engine ([F12](FAILURES.md)); upstream work: [M7](ROADMAP.md) |
 | NPU (MNN Hexagon backend) | ❌ Android + QNN SDK → parent **F1** (`smmu_proxy` kernel gap) ([F13](FAILURES.md)) |

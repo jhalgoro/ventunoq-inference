@@ -75,8 +75,15 @@ impossible); stop strings emulated by truncation; ppl via MNN's `ppl_eval` (its 
 
 | Model | MNN int4 GSM8K | llama.cpp Q4_0 | llama.cpp Q4_K_M | ppl (gatsby) MNN vs Q4_0 |
 |---|---|---|---|---|
-| Qwen3.5-0.8B | ⏳ | ⏳ (parent harness) | ⏳ | ⏳ |
+| Qwen3.5-0.8B | **34.0%** (n=100) | ⏳ (parent harness) | ⏳ | **31.08** vs ⏳ |
 | Qwen3.5-2B | ⏳ | 22.0% (N=50, parent) | ⏳ | ⏳ |
+
+Full MNN row, Qwen3.5-0.8B int4 (`QWEN35-08B-INT4`, greedy no-think, 69 min for 10 suites):
+gsm8k 34.0 · humaneval 16.0 (n=50) · arc 33.0 · hellaswag 24.0 · winogrande 48.0 ·
+openbookqa 32.0 · commonsenseqa 26.0 · mmlu 20.2 (n=198) · **niah 5/5** (depths 0.1–0.9,
+~11k ctx) · ppl 31.08 (full gatsby). Generative suites are healthy; the MC block sits at
+or below chance (hellaswag 24% < 25%, mmlu 20.2% < 25%) — the known small-model
+gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same items decide.
 
 ### 4.2 Long context (M5) — pp curve + RSS growth per KV token vs llama.cpp's ~8.9 KB/tok
 

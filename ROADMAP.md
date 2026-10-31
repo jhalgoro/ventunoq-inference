@@ -34,6 +34,9 @@ claim is worthless if answers degrade. Measure, same corpora as the parent repo:
   styles are impossible — noted wherever MNN rows face llama.cpp rows.
 - **Perplexity**: MNN *does* ship a ppl tool after all — `tools/ppl_eval.cpp`, built by
   `scripts/build_mnn.sh` — run on `bench/gatsby.txt` (ROADMAP v1 said it didn't).
+- **Status (2026-10-31)**: MNN side of 0.8B measured — `QWEN35-08B-INT4` in BENCHMARKS
+  §4.1 (gsm8k 34%, niah 5/5, ppl 31.1; MC block at/below chance → gen-letter bias).
+  Remaining: llama.cpp Q4_0/Q4_K_M rows on the same items (sibling harness), then 2B.
 - Compare: MNN int4 vs llama.cpp **Q4_0** (speed rival) **and Q4_K_M** (quant rival),
   same models 0.8B/2B — llama.cpp rows from sibling-harness runs on the same items.
 

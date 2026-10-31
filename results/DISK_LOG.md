@@ -32,3 +32,19 @@ c93f71a2dbecf9328782bd38861656d8faa82e95e7f99607350074768a482054  mnn/Qwen3.5-2B
 ```
 /dev/mmcblk0p71   55G   21G   32G  40% /
 ```
+
+### 2026-10-31 20:59 UTC — DOWNLOAD: taobao-mnn/Qwen3.5-0.8B-MNN (462M)
+```
+4e25ef4cbfb49a33013d17300c2f68cd9c9ce8f2e3f7b947fd2c574ec297ca5e  models/Qwen3.5-0.8B-MNN/llm.mnn.weight
+/dev/mmcblk0p71   55G   21G   32G  40% /
+```
+
+### 2026-10-31 22:07 UTC — DELETE (quality suite done): `models/Qwen3.5-0.8B-MNN`
+```
+/dev/mmcblk0p71   55G   21G   32G  40% /
+```
+
+### 2026-10-31 22:07 UTC — DELETE (quality suite done): `models/Qwen3.5-0.8B-MNN-text`
+```
+/dev/mmcblk0p71   55G   21G   32G  40% /
+```
