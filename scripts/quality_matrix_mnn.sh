@@ -6,7 +6,12 @@
 # skips items whose answer file exists, so a killed run continues where it died.
 # Disk policy: model downloaded at stage start, deleted at stage end, both in DISK_LOG.md.
 # Usage: scripts/quality_matrix_mnn.sh [stage ...]   (default: q_qwen08)
+# Stages: q_qwen08 q_qwen08_smoke q_qwen2b q_qwen4b q_qwen9b q_qwen08base q_qwen2bbase
+#         q_dist08 q_dist2b q_dist4b q_dist9b q_all   (see ladder below for tags)
 # Smoke variant (plumbing check, ~15 min): scripts/quality_matrix_mnn.sh q_qwen08_smoke
+# One-shot full ladder, detached from any SSH/session (survives disconnect):
+#   cd ~/Code/ventunoq-mnn && setsid nohup scripts/quality_matrix_mnn.sh q_all \
+#     >> results/quality_all.out 2>&1 < /dev/null &
 set -u
 cd "$(dirname "$0")/.."
 MNN_SRC=${MNN_SRC:-$PWD/MNN}
@@ -41,14 +46,14 @@ del_model() { # $1 = model name (both dirs) — delete-after-suite policy
   rm -rf /tmp/opencode/mnn_tmp /tmp/opencode/qbatch
 }
 
-run_tasks() { # $1=config.json $2=tag $3="task:n ..."
-  local cfg=$1 tag=$2 spec task n out
+run_tasks() { # $1=config.json $2=tag $3="task:n ..." $4=mode (chat|base, default chat)
+  local cfg=$1 tag=$2 spec task n out mode=${4:-chat}
   for spec in $3; do
     task=${spec%%:*}; n=${spec##*:}
     out="results/quality_${tag}_mnn_${task}.json"
     if grep -q '"score"' "$out" 2>/dev/null; then log "skip $tag/mnn/$task (have score)"; continue; fi
     python3 scripts/quality_eval_mnn.py "$cfg" "$task" "$out" --tag "$tag" --engine mnn --n "$n" \
-      > "results/quality_${tag}_mnn_${task}.log" 2>&1
+      --mode "$mode" > "results/quality_${tag}_mnn_${task}.log" 2>&1
     if grep -q '"score"' "$out" 2>/dev/null; then
       log "done $tag/mnn/$task $(python3 -c "import json;d=json.load(open('$out'));print(f\"{d['score']:.3f} n={d['n']} {d['seconds']}s\")")"
     else
@@ -58,18 +63,41 @@ run_tasks() { # $1=config.json $2=tag $3="task:n ..."
 }
 
 # ---------------- stages ----------------
+q_stage() { # $1=model name $2=tag $3=mode $4="task:n ..." — download, run, delete
+  q_model "$1" || return
+  run_tasks "models/$1-text/config.json" "$2" "$4" "$3"
+  del_model "$1"
+}
+
 q_qwen08() { # M1 main row: Qwen3.5-0.8B MNN int4, chat mode
-  TAG=QWEN35-08B-INT4
-  q_model Qwen3.5-0.8B-MNN || return
-  run_tasks "models/Qwen3.5-0.8B-MNN-text/config.json" "$TAG" "$TASKS"
-  del_model Qwen3.5-0.8B-MNN
+  q_stage Qwen3.5-0.8B-MNN QWEN35-08B-INT4 chat "$TASKS"
 }
 
 q_qwen08_smoke() { # plumbing check: every suite at tiny n, same disk policy
-  TAG=QWEN35-08B-INT4-SMOKE
-  q_model Qwen3.5-0.8B-MNN || return
-  run_tasks "models/Qwen3.5-0.8B-MNN-text/config.json" "$TAG" "$TASKS_SMOKE"
-  del_model Qwen3.5-0.8B-MNN
+  q_stage Qwen3.5-0.8B-MNN QWEN35-08B-INT4-SMOKE chat "$TASKS_SMOKE"
+}
+
+# ---- q_all ladder: every board-viable taobao-mnn Qwen3.5 export, cheapest first.
+# 27B/35B-A3B/122B excluded (RAM); Qwen3.5-2B-Dflash is a spec-decode draft, not a
+# quality target. Est. total ~45 h at the 0.8B run's throughput (69 min for 0.8B).
+q_qwen2b()      { q_stage Qwen3.5-2B-MNN   QWEN35-2B-INT4 chat "$TASKS"; }
+q_qwen4b()      { q_stage Qwen3.5-4B-MNN   QWEN35-4B-INT4 chat "$TASKS"; }
+q_qwen9b()      { q_stage Qwen3.5-9B-MNN   QWEN35-9B-INT4 chat "$TASKS"; }
+# base variants: same weights without the chat template -> isolates template damage
+# from quant damage on the flat MC block (harness --mode base, use_template:false)
+q_qwen08base()  { q_stage Qwen3.5-0.8B-Base-MNN QWEN35-08B-INT4-BASE base "$TASKS"; }
+q_qwen2bbase()  { q_stage Qwen3.5-2B-Base-MNN   QWEN35-2B-INT4-BASE base "$TASKS"; }
+# reasoning-distilled variants: is the gsm8k-34%/flat-MC profile quant or recipe?
+q_dist08()      { q_stage Qwen3.5-0.8B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-08B-DIST chat "$TASKS"; }
+q_dist2b()      { q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-2B-DIST  chat "$TASKS"; }
+q_dist4b()      { q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-4B-DIST  chat "$TASKS"; }
+q_dist9b()      { q_stage Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-9B-DIST  chat "$TASKS"; }
+
+q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
+  for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do
+    log "--- ladder step $s"
+    $s
+  done
 }
 
 for S in ${@:-q_qwen08}; do
