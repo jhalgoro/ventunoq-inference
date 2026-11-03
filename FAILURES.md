@@ -70,3 +70,52 @@ multi-line benchmark prompts. Delivered workaround (M1 harness): `scripts/llm_ev
 batch driver built into the clone by `scripts/build_mnn.sh` — one prompt file in, one answer
 file out, greedy sampler, fresh KV per item, resume-safe — driven by
 `scripts/quality_eval_mnn.py`. llama.cpp still owns any client/serving workload.
+
+## F15 — 9B-MNN export splits embeddings into `embeddings_bf16.bin`; the hardcoded download list misses it 🛠️ (rerun on hold)
+
+`taobao-mnn/Qwen3.5-9B-MNN` ships an extra **`embeddings_bf16.bin` (2.0 GB)** that the
+0.8B/2B/4B repos don't have. The old `dl_model.sh` `FILES` list was the hardcoded classic
+six → embeddings never downloaded → the model emits **`!!!!` repetition on every prompt**:
+QWEN35-9B-INT4 scored 0.000 on all 10 suites (gsm8k `tail` = all `!`) and ppl = **248,300**
+vs 16–48 on healthy rows.
+
+Not a corrupt download: `sha256 llm.mnn.weight = 896bf5a7…` matches the HF LFS oid exactly
+(DISK_LOG 2026-11-02 20:34) — it is a missing-file bug in our fetch list. **Fixed:**
+`dl_model.sh` now derives the file list from the HF tree API (keeps the text-only `visual.*`
+exclusion), so any per-model extra file is picked up automatically. 9B rerun parked by
+choice — at ~19 h for the R1 suite it is the slowest row either way.
+
+## F16 — `taobao-mnn/Qwen3.5-9B-…-Opus-Reasoning-Distilled-MNN` is an empty placeholder; HF serves 15-byte `Entry not found` bodies with HTTP 200 📝
+
+The repo appears in the org API but its tree contains **only `.gitattributes`**.
+`curl …/resolve/main/<file>` answers 200 with a 15-byte body `Entry not found` — the old
+`dl_model.sh` "succeeded" (28K total), and the ladder died 2 s into `q_dist9b` with a
+`JSONDecodeError` in `text_only.py`. Guard added: `dl_model.sh` aborts on any downloaded
+file < 100 B containing "not found". Nothing to run until upstream uploads — recheck the
+tree API before scheduling a 9B-DIST suite.
+
+## F17 — Opus-distilled models think aloud and re-solve the few-shot prefix: R1 distilled rows score 0.000 on MC+humaneval+niah 📝 fixed (R2 protocol)
+
+The Claude-Opus-Reasoning-Distilled exports reason aloud ("Let me analyze each option:
+A… B… C…"), which breaks three sibling-pinned harness assumptions:
+
+1. **MC (16-token budget)** runs out mid-analysis → all six MC suites 0.000 via `gen-miss`.
+   Lifting the budget alone doesn't help: **the 3-shot prefix backfires** — the models
+   continue the shot block and re-answer the example questions, so "last Answer: X" matches
+   a *shot's* answer (probe: pred=B on 6/8, the shots' letters).
+2. **humaneval (512 tok)** → prose reasoning ("Time complexity: O(n²)…") is executed as
+   Python (SyntaxError 0.000); additionally `cut()` at the first ``` erased fenced code
+   before extraction could see it.
+3. **niah (24 tok)** → preamble only → 0/5.
+   (gsm8k survived on its 700-token budget: 0.55/0.65.)
+
+**R2 protocol** (`-DIST2` tags, `q_dist2b2`/`q_dist4b2`; plain-model rows untouched):
+`--no-mc-shots` + `--mc-instruction` ("think briefly, end with a line 'Answer: X'") +
+budgets MC 512 / HE 1024 / GSM 1024 / NIAH 128, via new `quality_eval_mnn.py` flags
+(`--mc-tokens --mc-instruction --no-mc-shots --he-tokens --gsm-tokens --niah-tokens`).
+Parsing is reasoning-safe: explicit "answer is X" (last match) first; letter/choice-text
+heuristics only on the tail; code extracted from fenced blocks or the first
+`def <entry_point>(`; niah takes the last 5-digit number. Probe trail (arc n=8, 2B-DIST):
+R1 0.000 → 96 tok 0.000 (shot-replay caught) → 192 tok+instr 0.000 (still shots) →
+zero-shot 256 tok 0.250 → +briefness instr 0.375 (chance 0.25) — parsing healthy, budget
+was the residual limit → final MC budget 512.

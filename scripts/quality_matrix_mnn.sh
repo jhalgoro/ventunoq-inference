@@ -19,6 +19,7 @@ export MNN_SRC
 
 LOG=results/DISK_LOG.md
 QLOG=results/quality_status.log
+EXTRA=()                                # extra quality_eval_mnn.py flags for run_tasks (R2)
 # same task:n list as the sibling matrix; ppl:0 = full gatsby.txt
 TASKS="gsm8k:100 humaneval:50 arc:100 hellaswag:100 winogrande:100 openbookqa:100 commonsenseqa:100 mmlu:198 niah:5 ppl:0"
 TASKS_SMOKE="gsm8k:5 humaneval:3 arc:5 hellaswag:5 winogrande:5 openbookqa:5 commonsenseqa:5 mmlu:6 niah:2 ppl:1"
@@ -53,7 +54,7 @@ run_tasks() { # $1=config.json $2=tag $3="task:n ..." $4=mode (chat|base, defaul
     out="results/quality_${tag}_mnn_${task}.json"
     if grep -q '"score"' "$out" 2>/dev/null; then log "skip $tag/mnn/$task (have score)"; continue; fi
     python3 scripts/quality_eval_mnn.py "$cfg" "$task" "$out" --tag "$tag" --engine mnn --n "$n" \
-      --mode "$mode" > "results/quality_${tag}_mnn_${task}.log" 2>&1
+      --mode "$mode" "${EXTRA[@]}" > "results/quality_${tag}_mnn_${task}.log" 2>&1
     if grep -q '"score"' "$out" 2>/dev/null; then
       log "done $tag/mnn/$task $(python3 -c "import json;d=json.load(open('$out'));print(f\"{d['score']:.3f} n={d['n']} {d['seconds']}s\")")"
     else
@@ -92,6 +93,23 @@ q_dist08()      { q_stage Qwen3.5-0.8B-Claude-4.6-Opus-Reasoning-Distilled-MNN Q
 q_dist2b()      { q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-2B-DIST  chat "$TASKS"; }
 q_dist4b()      { q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-4B-DIST  chat "$TASKS"; }
 q_dist9b()      { q_stage Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-MNN   QWEN35-9B-DIST  chat "$TASKS"; }
+# R2 reruns of the distilled rows: R1 scored 0 on MC+humaneval+niah because reasoning-
+# style output needs more than the sibling-pinned budgets, and the 3-shot MC prefix
+# makes these models re-solve the shots (F17). R2 protocol: zero-shot MC + explicit
+# "end with Answer: X" cue + lifted budgets; parsing is reasoning-safe. Deviation from
+# the sibling harness is deliberate and tagged (-DIST2), plain-model rows unchanged.
+DIST2_INSTR="Think briefly (at most 3 sentences; do NOT analyze the options one by one), then end your reply with a line 'Answer: X' where X is the option letter."
+q_dist2b2() {
+  EXTRA=(--mc-tokens 512 --he-tokens 1024 --gsm-tokens 1024 --niah-tokens 128
+         --no-mc-shots --mc-instruction "$DIST2_INSTR")
+  q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-2B-DIST2 chat "$TASKS"
+}
+q_dist4b2() {
+  EXTRA=(--mc-tokens 512 --he-tokens 1024 --gsm-tokens 1024 --niah-tokens 128
+         --no-mc-shots --mc-instruction "$DIST2_INSTR")
+  q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-4B-DIST2 chat "$TASKS"
+}
+q_all2() { for s in q_dist2b2 q_dist4b2; do log "--- ladder step $s"; $s; done; }
 
 q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
   for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do

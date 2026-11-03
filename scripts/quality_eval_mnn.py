@@ -31,6 +31,8 @@ TMP = "/tmp/opencode/mnn_tmp"          # llm_eval cwd: weight-mmap tmp cache liv
 CONFIG = "?"                            # model config.json (argv)
 MODE = "chat"                           # chat = engine applies the model's chat template
 NOTHINK = False                         # template has enable_thinking -> disable it
+MC_TOK, HE_TOK, GSM_TOK = 16, 512, 700  # sibling-pinned budgets; --*-tokens flags lift
+NIAH_TOK = 24                           # them for reasoning-style models (F17 R2 runs)
 SYSTEM = "You are a helpful assistant answering benchmark questions."  # sibling default
 BATCH = "?"                             # per-run scratch root for prompt/output files
 ENGINE = "mnn"
@@ -111,19 +113,47 @@ MC_SHOTS = (
     "B. to absorb water and nutrients\nC. to make seeds\nD. to catch sunlight\nAnswer: B\n\n"
     "Question: Which material is a good conductor of electricity?\nA. rubber\nB. plastic\nC. copper\nD. wood\nAnswer: C\n\n")
 
-def gen_letter(out, choices):
+MC_INSTR = ""                           # --mc-instruction; appended before "Answer:" (R2)
+MC_SHOTS_ON = True                      # --no-mc-shots (R2): reasoning models re-solve
+                                        # the shots instead of the real question (F17)
+
+def mc_prompt(base, instr):
+    """R2 (F17): reasoning models need an explicit 'end with Answer: X' instruction;
+    it goes between the lettered options and the final 'Answer:' cue. Empty instr =
+    sibling-identical prompt."""
+    if not instr:
+        return base
+    head = base[:-len("Answer:")] if base.endswith("Answer:") else base
+    return head + instr.strip() + "\nAnswer:"
+
+def gen_letter(out, choices, reason=False):
     """Greedy short generation after a lettered prompt; parse the answer letter,
     else first-mention of choice text in what was generated. (Sibling gen_letter
-    minus the server call: the batch output is already truncated at the stops.)"""
+    minus the server call: the batch output is already truncated at the stops.)
+    Explicit-answer patterns win first: reasoning-style models (F17) enumerate
+    every option letter before concluding, so "first bare letter" would grab a
+    spurious one from the analysis. Short "B"-style outputs are unaffected.
+    reason=True (F17 R2): the legacy first-letter/choice-text heuristics are
+    poison on analysis prose (enumeration lists A..D in order, then any choice
+    text may be quoted); trust only explicit answers and a letter at the tail."""
     out = strip_think(out)
-    m = re.search(r"\b([A-E])\b", out)
+    m = re.findall(r"answer(?:\s+is)?\s*[:=\-]?\s*\(?\s*([A-E])\b", out, re.I)
     if m:
-        return LETTERS.index(m.group(1)), out[:24], "gen-letter"
-    low = out.lower()
+        return LETTERS.index(m[-1].upper()), out[:24], "gen-letter"
+    if not reason:
+        m = re.search(r"\b([A-E])\b", out)
+        if m:
+            return LETTERS.index(m.group(1)), out[:24], "gen-letter"
+    low = (out[-200:] if reason else out).lower()
     hits = [(low.find(c.strip()[:12].lower()), i) for i, c in enumerate(choices)]
     hits = [(p, i) for p, i in hits if p >= 0]
-    if hits:
+    if hits and not reason:
         return min(hits)[1], out[:24], "gen-match"
+    if hits:
+        m = re.search(r"\b([A-E])\b\s*[.)]?\s*$", out.strip()[-40:])
+        if m:
+            return LETTERS.index(m.group(1)), out[-24:], "gen-letter"
+        return min(hits)[1], out[-24:], "gen-match"
     return None, out[:24], "gen-miss"
 
 # ---------------- generation suites ----------------
@@ -160,7 +190,7 @@ def run_gsm8k(n):
     prompts = [ctx + f"\n\n{p['question']}\n"
                "Solve step by step. End your reply with a line 'The answer is N'."
                for p in items]
-    outs = MNN.run(prompts, 700, "gsm8k", SYSTEM)
+    outs = MNN.run(prompts, GSM_TOK, "gsm8k", SYSTEM)
     det = []
     for i, (p, out) in enumerate(zip(items, outs)):
         out = cut(out, ["\nQ:"])
@@ -185,17 +215,31 @@ def _sandbox_limits():
                 pass
     return lim
 
+def extract_code(out, entry):
+    """Reasoning-style models (F17) wrap code in prose and/or fences; the sibling
+    harness assumes bare code, and cut()-ing at the first ``` would erase fenced
+    answers entirely. Prefer a fenced block containing the entry point, else the
+    text from its first definition. Bare-code outputs pass through unchanged."""
+    for b in re.findall(r"```(?:python)?\s*\n(.*?)```", out, re.S):
+        if f"def {entry}(" in b:
+            return b
+    i = out.find(f"def {entry}(")
+    if i < 0:
+        i = out.find("def ")
+    return out[i:] if i >= 0 else ""
+
 def run_humaneval(n):
     os.makedirs(SANDBOX, exist_ok=True)
     tasks = stride(rows("HumanEval.jsonl"), n)
     prompts = [("Complete the following Python function. Return ONLY the code — "
                 "the complete function including its signature, no explanations, "
                 "no markdown fences.\n\n" + t["prompt"]) for t in tasks]
-    outs = MNN.run(prompts, 512, "humaneval", SYSTEM)
+    outs = MNN.run(prompts, HE_TOK, "humaneval", SYSTEM)
     det = []
     for i, (t, out) in enumerate(zip(tasks, outs)):
+        out = extract_code(out, t["entry_point"])
         out = cut(out, ["\nif __name__", "```", "\nprint(", "\nclass "])
-        out = re.sub(r"^```(?:python)?\n?|```$", "", out.strip(), flags=re.M).strip("\n")
+        out = out.strip("\n")
         if out and out.lstrip().startswith("def " + t["entry_point"] + "("):
             k = out.find("):")                       # chat model restated the signature
             nl = out.find("\n", k)
@@ -271,12 +315,16 @@ def run_mc(task, n):
     else:
         items = [r for s in SUBJ for r in rows(f"{s}.jsonl")]
     items = stride(items, n)
-    prompts = [MC_SHOTS + fn(r)[0] for r in items]
-    outs = MNN.run(prompts, 16, task, SYSTEM)
+    prompts = [MC_SHOTS + mc_prompt(fn(r)[0], MC_INSTR) for r in items] \
+        if MC_SHOTS_ON else [mc_prompt(fn(r)[0], MC_INSTR) for r in items]
+    outs = MNN.run(prompts, MC_TOK, task, SYSTEM)
     det = []
     for i, (r, out) in enumerate(zip(items, outs)):
         _, _, choices, gold = fn(r)
-        pred, tail, method = gen_letter(cut(out, ["\n\n", "\nQ"]), choices)
+        # the "\n\n" cut fits short answers but amputates reasoning at its first
+        # blank line (F17) — reasoning mode reads the full generation instead
+        parsed = out if MC_TOK > 16 else cut(out, ["\n\n", "\nQ"])
+        pred, tail, method = gen_letter(parsed, choices, reason=MC_TOK > 16)
         det.append({"id": i, "ok": pred == gold, "pred": pred, "gold": gold,
                     "scores": [method == "gen-letter"], "method": str(method)})
         print(f"[{task} {i+1}] {'OK ' if det[-1]['ok'] else 'FAIL'} pred={pred} "
@@ -302,13 +350,19 @@ def run_niah(n):
         prompts.append(f"{ctx}\n\nQuestion: What is the secret passcode for vault {i + 1}? "
                        "Answer with only the number.")
         codes.append(code)
-    outs = MNN.run(prompts, 24, "niah", SYSTEM)
+    outs = MNN.run(prompts, NIAH_TOK, "niah", SYSTEM)
     for i, (d, code, out) in enumerate(zip(depths, codes, outs)):
-        out = cut(out, ["\n", "."])
-        nums = re.findall(r"\d+", out)
-        det.append({"id": i, "depth": d, "code": code, "got": nums[0] if nums else None,
-                    "ok": bool(nums) and nums[0] == code, "out": out[:60]})
-        print(f"[niah {i+1}] depth={d} {'OK' if det[-1]['ok'] else 'MISS'} got={nums[:1]} want={code}", flush=True)
+        if NIAH_TOK > 24:  # reasoning mode (F17): no cut — preamble precedes the number;
+            nums5 = re.findall(r"\b\d{5}\b", out)   # codes are 5-digit, take the last
+            got = nums5[-1] if nums5 else (re.findall(r"\d+", out) or [None])[-1]
+            out = out[-60:]
+        else:
+            out = cut(out, ["\n", "."])
+            nums = re.findall(r"\d+", out)
+            got = nums[0] if nums else None
+        det.append({"id": i, "depth": d, "code": code, "got": got,
+                    "ok": got == code, "out": out[:60]})
+        print(f"[niah {i+1}] depth={d} {'OK' if det[-1]['ok'] else 'MISS'} got={got} want={code}", flush=True)
     return det
 
 # ---------------- PPL (ppl_eval, not llm_eval) ----------------
@@ -357,9 +411,23 @@ def main():
     ap.add_argument("--mode", choices=("chat", "base"), default="chat",
                     help="chat = engine applies the model's chat template "
                          "(llm_eval default); base = use_template:false raw prompts")
+    ap.add_argument("--mc-tokens", type=int, default=16,
+                    help="generation budget per MC item (F17: reasoning models need more)")
+    ap.add_argument("--mc-instruction", default="",
+                    help="instruction appended to MC prompts before the Answer: cue "
+                         "(F17 R2: e.g. \"End your reply with a line 'Answer: X'.\")")
+    ap.add_argument("--no-mc-shots", action="store_true",
+                    help="drop the 3-shot prefix from MC prompts (F17 R2: reasoning "
+                         "models continue the shot block instead of answering)")
+    ap.add_argument("--he-tokens", type=int, default=512, help="humaneval budget")
+    ap.add_argument("--gsm-tokens", type=int, default=700, help="gsm8k budget")
+    ap.add_argument("--niah-tokens", type=int, default=24, help="niah budget")
     a = ap.parse_args()
-    global CONFIG, MODE, NOTHINK, BATCH, ENGINE, MNN
+    global CONFIG, MODE, NOTHINK, BATCH, ENGINE, MNN, MC_TOK, HE_TOK, GSM_TOK, MC_INSTR, MC_SHOTS_ON, NIAH_TOK
     CONFIG, MODE, ENGINE = a.config, a.mode, a.engine
+    MC_TOK, HE_TOK, GSM_TOK, NIAH_TOK = a.mc_tokens, a.he_tokens, a.gsm_tokens, a.niah_tokens
+    MC_INSTR = a.mc_instruction
+    MC_SHOTS_ON = not a.no_mc_shots
     CONFIG = os.path.abspath(CONFIG)
     NOTHINK = detect_thinking(CONFIG)
     BATCH = os.path.join(SCRATCH, f"{a.tag}_{a.mode}")

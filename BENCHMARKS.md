@@ -76,7 +76,8 @@ impossible); stop strings emulated by truncation; ppl via MNN's `ppl_eval` (its 
 | Model | MNN int4 GSM8K | llama.cpp Q4_0 | llama.cpp Q4_K_M | ppl (gatsby) MNN vs Q4_0 |
 |---|---|---|---|---|
 | Qwen3.5-0.8B | **34.0%** (n=100) | ⏳ (parent harness) | ⏳ | **31.08** vs ⏳ |
-| Qwen3.5-2B | ⏳ | 22.0% (N=50, parent) | ⏳ | ⏳ |
+| Qwen3.5-2B | **60.0%** (n=100) | 22.0% (N=50, parent) | ⏳ | **21.25** vs ⏳ |
+| Qwen3.5-4B | **91.0%** (n=100) | ⏳ | ⏳ | **16.63** vs ⏳ |
 
 Full MNN row, Qwen3.5-0.8B int4 (`QWEN35-08B-INT4`, greedy no-think, 69 min for 10 suites):
 gsm8k 34.0 · humaneval 16.0 (n=50) · arc 33.0 · hellaswag 24.0 · winogrande 48.0 ·
@@ -84,6 +85,33 @@ openbookqa 32.0 · commonsenseqa 26.0 · mmlu 20.2 (n=198) · **niah 5/5** (dept
 ~11k ctx) · ppl 31.08 (full gatsby). Generative suites are healthy; the MC block sits at
 or below chance (hellaswag 24% < 25%, mmlu 20.2% < 25%) — the known small-model
 gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same items decide.
+
+#### q_all ladder (2026-11-01 → 11-03), % correct, greedy, same items/stride as above
+
+| Row | GSM8K | HumanEval | ARC | HellaSwag | WinoGrande | OBQA | CSQA | MMLU | NIAH | ppl ↓ |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0.8B int4 | 34.0 | 16.0 | 33.0 | 24.0 | 48.0 | 32.0 | 26.0 | 20.2 | 5/5 | 31.08 |
+| 2B int4 | 60.0 | 34.0 | 69.0 | 57.0 | 59.0 | 68.0 | 51.0 | 40.4 | 5/5 | 21.25 |
+| **4B int4** | **91.0** | **58.0** | **87.0** | **80.0** | 61.0 | **88.0** | **80.0** | **66.2** | 5/5 | **16.63** |
+| 0.8B base | 1.0 | 0.0 | 63.0 | 32.0 | 53.0 | 66.0 | 53.0 | 51.0 | 2/5 | 25.88 |
+| 2B base | 41.0 | 2.0 | 79.0 | 47.0 | 57.0 | 76.0 | 63.0 | 55.0 | 0/5 | 19.19 |
+| 0.8B DIST (R1) | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 47.80 |
+| 2B DIST (R1) | 55.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 33.71 |
+| 4B DIST (R1) | 65.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 24.10 |
+| 2B DIST **R2** | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | 33.71 |
+| 4B DIST **R2** | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | 24.10 |
+
+- ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
+  output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2
+  protocol (`q_dist2b2`/`q_dist4b2`, zero-shot MC + brief-answer instruction, budgets
+  512/1024/1024/128) reruns those rows; R1 JSONs stay for provenance.
+- 9B int4 excluded from the table: export unusable as fetched (F15 — missing
+  `embeddings_bf16.bin` → `!!!` garbage, ppl 248,300); 9B DIST repo is an empty placeholder
+  (F16). Both parked (also the two slowest rows).
+- ppl is perplexity (not accuracy) — full gatsby, comparable within the column only.
+- Read: 4B int4 dominates every task; DIST rows' ppl (24–48 vs 17–21 same size) already
+  says the distillation *changed* the base weights, so the R2 question is whether that
+  trade ever pays off on accuracy vs the plain 4B.
 
 ### 4.2 Long context (M5) — pp curve + RSS growth per KV token vs llama.cpp's ~8.9 KB/tok
 
