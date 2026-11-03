@@ -98,7 +98,7 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 | 0.8B DIST (R1) | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 47.80 |
 | 2B DIST (R1) | 55.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 33.71 |
 | 4B DIST (R1) | 65.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 24.10 |
-| 2B DIST **R2** | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | 33.71 |
+| 2B DIST **R2** | 60.0 | 10.0† | 71.0 | 36.0† | 57.0 | 68.0 | 57.0 | ✗ | **5/5** | 33.71 |
 | 4B DIST **R2** | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | ⏳ | 24.10 |
 
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
@@ -109,6 +109,11 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
   `embeddings_bf16.bin` → `!!!` garbage, ppl 248,300); 9B DIST repo is an empty placeholder
   (F16). Both parked (also the two slowest rows).
 - ppl is perplexity (not accuracy) — full gatsby, comparable within the column only.
+- † 2B DIST R2 humaneval (10.0) and hellaswag (36.0) are still partly harness artifacts
+  (F19): 31/50 humaneval failures were an open-fence extraction bug (fixed, needs rerun),
+  and 41/100 hellaswag outputs never reached the "Answer: X" line inside the 512-tok
+  budget (57 cap-hits). mmlu ✗ = UnicodeDecodeError reading a cap-truncated output
+  (fixed, needs rerun). 4B DIST R2 runs with the fixed harness.
 - Read: 4B int4 dominates every task; DIST rows' ppl (24–48 vs 17–21 same size) already
   says the distillation *changed* the base weights, so the R2 question is whether that
   trade ever pays off on accuracy vs the plain 4B.

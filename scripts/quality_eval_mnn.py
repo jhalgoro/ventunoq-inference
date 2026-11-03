@@ -19,7 +19,7 @@ Differences from the llama.cpp harness (also noted in BENCHMARKS §4.1):
 
 TASKs: gsm8k humaneval arc hellaswag winogrande openbookqa commonsenseqa mmlu niah ppl
 """
-import argparse, json, os, re, shutil, subprocess, sys, time
+import argparse, json, os, re, shutil, subprocess, sys, textwrap, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BENCH = os.path.join(ROOT, "bench")
@@ -72,7 +72,9 @@ class MnnRunner:
         missing = [o for o in outs if not os.path.exists(o)]
         if missing:
             sys.exit(f"llm_eval finished but {len(missing)} outputs missing, e.g. {missing[0]}")
-        return [open(o).read() for o in outs]
+        # errors="replace": llm_eval can end an output mid-multibyte-char when generation
+        # stops at the token limit (2B-DIST2 mmlu crashed reading such a file, R2 ladder).
+        return [open(o, encoding="utf-8", errors="replace").read() for o in outs]
 
 def cut(text, stops):
     """Emulate server-side stop strings: keep the text before the earliest marker."""
@@ -218,17 +220,31 @@ def _sandbox_limits():
 def extract_code(out, entry):
     """Reasoning-style models (F17) wrap code in prose and/or fences; the sibling
     harness assumes bare code, and cut()-ing at the first ``` would erase fenced
-    answers entirely. Prefer the LAST fenced block containing the entry point —
-    reasoners show a sketch first and the final answer last — else the text from
-    the last definition. Bare-code outputs pass through unchanged."""
-    blocks = [b for b in re.findall(r"```(?:python)?\s*\n(.*?)```", out, re.S)
-              if f"def {entry}(" in b]
-    if blocks:
-        return blocks[-1]
+    answers entirely. Candidates best-first: LAST fenced block containing the entry
+    point — reasoners show a sketch first and the final answer last, and the R2
+    ladder showed the closed-fence regex misses a fence left OPEN when generation
+    hits the token cap (31/50 IndentationErrors: rfind then landed on a prose
+    re-statement of the signature) — else text from the last definition. Return the
+    first candidate that compiles (dedented variant included); bare code passes
+    through unchanged."""
+    cands = []
+    parts = out.split("```")  # odd indices are inside fences, incl. an open last one
+    fenced = [p for p in parts[1::2] if f"def {entry}(" in p]
+    if fenced:
+        cands.append(re.sub(r"^\s*python\s*\n", "", fenced[-1], count=1))
     i = out.rfind(f"def {entry}(")
     if i < 0:
         i = out.rfind("def ")
-    return out[i:] if i >= 0 else ""
+    if i >= 0:
+        cands.append(out[i:])
+    for c in cands:
+        for cand in (c, textwrap.dedent(c)):
+            try:
+                compile(cand, "<extract>", "exec")
+                return cand
+            except SyntaxError:
+                pass
+    return cands[0] if cands else ""
 
 def run_humaneval(n):
     os.makedirs(SANDBOX, exist_ok=True)

@@ -145,3 +145,28 @@ source hardlink never touched); `dl_model.sh` gets the file sizes from the tree 
 interrupted → resume); `disklog()` redirects to `$LOG`. Repro-verified: fresh download →
 text_only → re-download → both configs keep upstream size in the source, -text sizes
 parse OK, nlink=1 everywhere, engine probe initializes clean (arc n=3, 2/3).
+
+## F19 — R2 residuals on the 2B-DIST2 row: open fences, cap-truncated UTF-8, rambling MC 🛠️ fixed, rerun pending
+
+The R2 ladder row for 2B-DIST (2026-11-03 12:48→20:17 UTC) came back healthy on
+gsm8k 60.0 / arc 71.0 / winogrande 57.0 / obqa 68.0 / csqa 57.0 / niah 5/5 / ppl 33.71,
+but three cells were still harness-side, all with the same root: **reasoning outputs hit
+the token cap mid-stream**:
+1. **humaneval 10.0** — 31/50 IndentationError. When generation is cut inside a still-OPEN
+   fence (8/50 at exactly 1536 tok), the closed-fence regex matches nothing and the
+   `rfind("def <entry>(")` fallback lands on a *prose re-statement of the signature*
+   (docstring then looks over-indented). `extract_code` now builds candidates best-first
+   (last fence incl. unterminated ones via `split("```")`, then last def slice), tries each
+   raw + `textwrap.dedent`, and returns the first that `compile()`s. 7-case regression
+   (bare/closed/sketch+final/open/prose/indented/empty) passes.
+2. **mmlu FAILED** — `UnicodeDecodeError` at `open(o).read()`: the cap cut a multibyte
+   char at the tail of an output file. Reads now use `errors="replace"`. All 198 items had
+   generated; only scoring died.
+3. **hellaswag 36.0** — 57/100 cap-hits @512, 41 with no letter found (pred=None): the
+   brief-answer instruction is ignored on this suite and the model rambles past the
+   budget. Parsing is fine (arc: 63 cap-hits but only 5 None — those reach "Answer: X"
+   in time); the budget is the residual limit. Rerun needs a per-suite MC budget bump.
+
+The 4B-DIST2 stage (started 20:17 UTC) runs with fixes 1–2 live; after the ladder, rerun
+`{mmlu, humaneval}` (and hellaswag at a larger `--mc-tokens`) for 2B-DIST2 — delete those
+three JSONs first so the resume logic picks them up.
