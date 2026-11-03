@@ -218,14 +218,16 @@ def _sandbox_limits():
 def extract_code(out, entry):
     """Reasoning-style models (F17) wrap code in prose and/or fences; the sibling
     harness assumes bare code, and cut()-ing at the first ``` would erase fenced
-    answers entirely. Prefer a fenced block containing the entry point, else the
-    text from its first definition. Bare-code outputs pass through unchanged."""
-    for b in re.findall(r"```(?:python)?\s*\n(.*?)```", out, re.S):
-        if f"def {entry}(" in b:
-            return b
-    i = out.find(f"def {entry}(")
+    answers entirely. Prefer the LAST fenced block containing the entry point —
+    reasoners show a sketch first and the final answer last — else the text from
+    the last definition. Bare-code outputs pass through unchanged."""
+    blocks = [b for b in re.findall(r"```(?:python)?\s*\n(.*?)```", out, re.S)
+              if f"def {entry}(" in b]
+    if blocks:
+        return blocks[-1]
+    i = out.rfind(f"def {entry}(")
     if i < 0:
-        i = out.find("def ")
+        i = out.rfind("def ")
     return out[i:] if i >= 0 else ""
 
 def run_humaneval(n):
@@ -240,11 +242,11 @@ def run_humaneval(n):
         out = extract_code(out, t["entry_point"])
         out = cut(out, ["\nif __name__", "```", "\nprint(", "\nclass "])
         out = out.strip("\n")
-        if out and out.lstrip().startswith("def " + t["entry_point"] + "("):
-            k = out.find("):")                       # chat model restated the signature
-            nl = out.find("\n", k)
-            if k >= 0 and nl > k:
-                out = out[nl + 1:]
+        if out:  # chat model restated the signature? drop the restated def line —
+            m = re.match(r"[ \t]*def\s+" + re.escape(t["entry_point"]) + r"\s*\(.*?\)\s*(->[^:\n]*)?:[ \t]*\n",
+                         out, re.S)   # regex, not find("):"): annotated ") -> bool:" has no "):"
+            if m:
+                out = out[m.end():]
         # bench/HumanEval.jsonl tests define check(candidate) (no *_tests wrapper)
         script = t["prompt"] + out + "\n" + t["test"] + f"\ncheck({t['entry_point']})\n"
         path = os.path.join(SANDBOX, f"he_{i}.py")
@@ -347,8 +349,12 @@ def run_niah(n):
         cut_i = int(len(hay) * d)
         cut_i = hay.find("\n", cut_i) + 1
         ctx = hay[:cut_i] + "\n" + needle + "\n" + hay[cut_i:]
-        prompts.append(f"{ctx}\n\nQuestion: What is the secret passcode for vault {i + 1}? "
-                       "Answer with only the number.")
+        ask = (f"Question: What is the secret passcode for vault {i + 1}? "
+               "Answer with only the number.")
+        if NIAH_TOK > 24:  # F17: reasoners otherwise enumerate the whole haystack
+            ask += (" Find the passcode directly; do NOT list or enumerate the "
+                    "context. Think briefly, then end with only the 5-digit number.")
+        prompts.append(f"{ctx}\n\n{ask}")
         codes.append(code)
     outs = MNN.run(prompts, NIAH_TOK, "niah", SYSTEM)
     for i, (d, code, out) in enumerate(zip(depths, codes, outs)):

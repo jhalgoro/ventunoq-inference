@@ -100,12 +100,12 @@ q_dist9b()      { q_stage Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-MNN   Q
 # the sibling harness is deliberate and tagged (-DIST2), plain-model rows unchanged.
 DIST2_INSTR="Think briefly (at most 3 sentences; do NOT analyze the options one by one), then end your reply with a line 'Answer: X' where X is the option letter."
 q_dist2b2() {
-  EXTRA=(--mc-tokens 512 --he-tokens 1024 --gsm-tokens 1024 --niah-tokens 128
+  EXTRA=(--mc-tokens 512 --he-tokens 1536 --gsm-tokens 1024 --niah-tokens 512
          --no-mc-shots --mc-instruction "$DIST2_INSTR")
   q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-2B-DIST2 chat "$TASKS"
 }
 q_dist4b2() {
-  EXTRA=(--mc-tokens 512 --he-tokens 1024 --gsm-tokens 1024 --niah-tokens 128
+  EXTRA=(--mc-tokens 512 --he-tokens 1536 --gsm-tokens 1024 --niah-tokens 512
          --no-mc-shots --mc-instruction "$DIST2_INSTR")
   q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-4B-DIST2 chat "$TASKS"
 }

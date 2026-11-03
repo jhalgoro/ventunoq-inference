@@ -104,7 +104,7 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
   output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2
   protocol (`q_dist2b2`/`q_dist4b2`, zero-shot MC + brief-answer instruction, budgets
-  512/1024/1024/128) reruns those rows; R1 JSONs stay for provenance.
+  512/1536/1024/512) reruns those rows; R1 JSONs stay for provenance.
 - 9B int4 excluded from the table: export unusable as fetched (F15 — missing
   `embeddings_bf16.bin` → `!!!` garbage, ppl 248,300); 9B DIST repo is an empty placeholder
   (F16). Both parked (also the two slowest rows).

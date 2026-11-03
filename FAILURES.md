@@ -111,11 +111,14 @@ A… B… C…"), which breaks three sibling-pinned harness assumptions:
 
 **R2 protocol** (`-DIST2` tags, `q_dist2b2`/`q_dist4b2`; plain-model rows untouched):
 `--no-mc-shots` + `--mc-instruction` ("think briefly, end with a line 'Answer: X'") +
-budgets MC 512 / HE 1024 / GSM 1024 / NIAH 128, via new `quality_eval_mnn.py` flags
-(`--mc-tokens --mc-instruction --no-mc-shots --he-tokens --gsm-tokens --niah-tokens`).
-Parsing is reasoning-safe: explicit "answer is X" (last match) first; letter/choice-text
-heuristics only on the tail; code extracted from fenced blocks or the first
-`def <entry_point>(`; niah takes the last 5-digit number. Probe trail (arc n=8, 2B-DIST):
-R1 0.000 → 96 tok 0.000 (shot-replay caught) → 192 tok+instr 0.000 (still shots) →
-zero-shot 256 tok 0.250 → +briefness instr 0.375 (chance 0.25) — parsing healthy, budget
-was the residual limit → final MC budget 512.
+budgets MC 512 / HE 1536 / GSM 1024 / NIAH 512 (niah prompt also gains a "do NOT
+enumerate the context" cue), via new `quality_eval_mnn.py` flags (`--mc-tokens
+`--mc-instruction --no-mc-shots --he-tokens --gsm-tokens --niah-tokens`). Parsing is
+reasoning-safe: explicit "answer is X" (last match) first; letter/choice-text heuristics
+only on the tail; code extracted from the LAST fenced block / last `def <entry_point>(`
+(reasoners sketch, then finalize); niah takes the last 5-digit number. Probe trail
+(2B-DIST): arc n=8 — R1 0.000 → 96 tok 0.000 (shot-replay caught) → 192 tok+instr 0.000
+(still shots) → zero-shot 256 tok 0.250 → +briefness instr 0.375 (chance 0.25) → budget
+512. gsm8k n=6 @1024: 6/6 (R1 was 0.55). humaneval n=4: first-def extraction @1024 still
+0/4 (truncated/mismatched code) → last-def + 1536 tok. niah n=2: enumeration @128 1/2 →
+no-enumerate + 512.
