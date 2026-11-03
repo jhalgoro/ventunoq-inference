@@ -30,7 +30,8 @@ disklog() { # $1=what $2=file-or-dir
   echo "" >> $LOG
   echo "### $(date -u +'%F %R UTC') — $1: \`$2\`" >> $LOG
   echo '```' >> $LOG
-  [ -e "$2" ] && { sha256sum "$2"/* 2>/dev/null | grep -v tokenizer.txt || true; du -sh "$2" 2>/dev/null; }
+  # F18: the sha/du block must go to $LOG too (was leaking to stdout)
+  { [ -e "$2" ] && { sha256sum "$2"/* 2>/dev/null | grep -v tokenizer.txt || true; du -sh "$2" 2>/dev/null; }; } >> $LOG
   df -h / | tail -1 >> $LOG
   echo '```' >> $LOG
 }

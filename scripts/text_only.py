@@ -20,17 +20,21 @@ def main(src: str, dst: str | None) -> None:
     for f in ("visual.mnn", "visual.mnn.weight"):
         p = os.path.join(dst, f)
         if os.path.exists(p):
-            os.remove(p)
+            os.remove(p)  # unlink only — the source keeps its own link
 
-    lc = os.path.join(dst, "llm_config.json")
-    cfg = json.load(open(lc))
-    cfg["is_visual"] = False
-    json.dump(cfg, open(lc, "w"), indent=2)
+    # F18: write configs via tmp+rename so dst gets a NEW inode. open(path,"w")
+    # truncates the cp -al hardlink — the source copy mutates too, then a later
+    # dl_model.sh `curl -C -` resumes the shrunken file and appends garbage.
+    def rewrite(path, mutate):
+        cfg = json.load(open(path))
+        mutate(cfg)
+        tmp = path + ".tmp"
+        with open(tmp, "w") as fh:
+            json.dump(cfg, fh, indent=2)
+        os.replace(tmp, path)
 
-    c = os.path.join(dst, "config.json")
-    cfg = json.load(open(c))
-    cfg.pop("mllm", None)
-    json.dump(cfg, open(c, "w"), indent=2)
+    rewrite(os.path.join(dst, "llm_config.json"), lambda c: c.__setitem__("is_visual", False))
+    rewrite(os.path.join(dst, "config.json"), lambda c: c.pop("mllm", None))
     print(f"text-only copy: {dst}")
 
 

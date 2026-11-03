@@ -12,19 +12,32 @@ for name in "$@"; do
   # tree API decides the file list: exports differ per model (9B adds embeddings_bf16.bin,
   # F15) and a hardcoded list silently downloads "Entry not found" stubs from missing
   # repos (F16). Fall back to the classic six if the API is unreachable.
-  FILES=($(curl -s --max-time 30 "https://huggingface.co/api/models/taobao-mnn/$name/tree/main" \
+  TREE=$(curl -s --max-time 30 "https://huggingface.co/api/models/taobao-mnn/$name/tree/main" \
     | python3 -c "import json,sys
-print(' '.join(f['path'] for f in json.load(sys.stdin)
-      if f['path'].split('.')[-1] in ('json','txt','bin','mnn','weight')
-      and not f['path'].startswith('visual')))" 2>/dev/null))
-  [ ${#FILES[@]} -ge 6 ] || FILES=("${FILES_FALLBACK[@]}")
+for f in json.load(sys.stdin):
+    if f['path'].split('.')[-1] in ('json','txt','bin','mnn','weight') \
+       and not f['path'].startswith('visual'):
+        print(f['path'], f.get('size', 0))" 2>/dev/null) || true
+  declare -A RSIZE=()
+  FILES=()
+  while read -r p s; do [ -n "$p" ] && FILES+=("$p") && RSIZE["$p"]=$s; done <<< "$TREE"
+  [ ${#FILES[@]} -ge 6 ] || { FILES=("${FILES_FALLBACK[@]}"); RSIZE=(); }
   for f in "${FILES[@]}"; do
+    # F18: never re-touch a byte-complete file. `-C -` on a file that text_only.py had
+    # rewritten (smaller than upstream, via cp -al hardlinks) APPENDED upstream tail
+    # bytes after the JSON — engine then read default config (embeddings_bf16.bin,
+    # Reshape 18400->18336). Size-equal = done; oversize = clobbered, full re-download;
+    # undersize = interrupted, resume (F11).
+    dst="models/$name/$f" remote=${RSIZE[$f]:-0} have=0
+    [ -f "$dst" ] && have=$(wc -c < "$dst")
+    if [ "$remote" -gt 0 ] && [ "$have" -eq "$remote" ]; then continue; fi
+    [ "$remote" -gt 0 ] && [ "$have" -gt "$remote" ] && rm -f "$dst"
     curl -sL -C - --retry 3 --speed-limit 200000 --speed-time 30 \
-      --create-dirs -o "models/$name/$f" \
+      --create-dirs -o "$dst" \
       "https://huggingface.co/taobao-mnn/$name/resolve/main/$f"
     # F16 guard: HF serves 404s as a 200 with a 15-byte "Entry not found" body.
-    if [ -s "models/$name/$f" ] && [ "$(wc -c < "models/$name/$f")" -lt 100 ] \
-       && grep -q "not found" "models/$name/$f" 2>/dev/null; then
+    if [ -s "$dst" ] && [ "$(wc -c < "$dst")" -lt 100 ] \
+       && grep -q "not found" "$dst" 2>/dev/null; then
       echo "FATAL taobao-mnn/$name: '$f' missing upstream (HF 'Entry not found' stub) — repo is an empty placeholder (F16)" >&2
       exit 1
     fi

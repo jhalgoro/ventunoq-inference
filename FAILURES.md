@@ -121,4 +121,27 @@ only on the tail; code extracted from the LAST fenced block / last `def <entry_p
 (still shots) → zero-shot 256 tok 0.250 → +briefness instr 0.375 (chance 0.25) → budget
 512. gsm8k n=6 @1024: 6/6 (R1 was 0.55). humaneval n=4: first-def extraction @1024 still
 0/4 (truncated/mismatched code) → last-def + 1536 tok. niah n=2: enumeration @128 1/2 →
-no-enumerate + 512.
+no-enumerate + 512 → 2/2.
+
+## F18 — `cp -al` hardlink copies + `curl -C -` re-download: ladder poisoned its own distilled models before R2 🛠️ fixed
+
+The first `q_all2` launch (11-03 12:29) died in 90 s: every suite on both -DIST2 rows
+failed at engine init with `Can't open file:…/-text/embeddings_bf16.bin`, `Failed to open
+embedding file!`, `Reshape error: 18400 -> 18336`, `onForward returned no outputs` — yet
+the *same* `-text` dirs had run probes fine 4 h earlier. Chain: `text_only.py` rewrote
+`llm_config.json`/`config.json` with `open(path,"w")` — truncating the **shared cp -al
+inode**, so the source dir's copies shrank too (4901→4810, 652→452 B). The ladder stage
+then re-ran `dl_model.sh`, whose `curl -C -` saw shrunken files, resumed them against the
+upstream sizes and **appended upstream tail bytes after valid JSON**. MNN's config parse
+then fell back to defaults: `tie_embeddings` invalid → `DiskEmbedding` looks for
+`embeddings_bf16.bin` (llmconfig.hpp:129, only when offset==0/invalid) and default
+`hidden_size` → the rotary reshape error. DISK_LOG hid it: its DOWNLOAD entry hashes only
+`llm.mnn.weight` (never rewritten), and `disklog()` leaked the sha/du block to stdout
+instead of the log.
+
+Fixed on all three legs: `text_only.py` writes configs via tmp+`os.replace` (new inode,
+source hardlink never touched); `dl_model.sh` gets the file sizes from the tree API and
+**skips byte-complete files** (oversize = clobbered → full re-download; undersize =
+interrupted → resume); `disklog()` redirects to `$LOG`. Repro-verified: fresh download →
+text_only → re-download → both configs keep upstream size in the source, -text sizes
+parse OK, nlink=1 everywhere, engine probe initializes clean (arc n=3, 2/3).
