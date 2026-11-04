@@ -112,6 +112,17 @@ q_dist4b2() {
 }
 q_all2() { for s in q_dist2b2 q_dist4b2; do log "--- ladder step $s"; $s; done; }
 
+q_dist_fix() { # F19 fixups: rerun the suites the R2 ladder broke (2B humaneval open-fence
+  # extraction, 2B mmlu Unicode crash) or under-budgeted (hellaswag @512: 41-57% of
+  # reasoner outputs never reach "Answer: X"). Resume-safe — delete the affected JSONs
+  # first (2B: humaneval/hellaswag/mmlu; 4B: hellaswag); scored suites skip. hellaswag
+  # gets its own 1024-tok budget; mmlu stays at 512 for parity with the scored 4B row.
+  EXTRA=(--mc-tokens 512 --hellaswag-tokens 1024 --he-tokens 1536 --gsm-tokens 1024
+         --niah-tokens 512 --no-mc-shots --mc-instruction "$DIST2_INSTR")
+  q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-2B-DIST2 chat "$TASKS"
+  q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-4B-DIST2 chat "$TASKS"
+}
+
 q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
   for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do
     log "--- ladder step $s"

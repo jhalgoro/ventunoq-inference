@@ -32,6 +32,7 @@ CONFIG = "?"                            # model config.json (argv)
 MODE = "chat"                           # chat = engine applies the model's chat template
 NOTHINK = False                         # template has enable_thinking -> disable it
 MC_TOK, HE_TOK, GSM_TOK = 16, 512, 700  # sibling-pinned budgets; --*-tokens flags lift
+HS_TOK = 16  # hellaswag-only override (--hellaswag-tokens, F19; 0 => follow MC_TOK)
 NIAH_TOK = 24                           # them for reasoning-style models (F17 R2 runs)
 SYSTEM = "You are a helpful assistant answering benchmark questions."  # sibling default
 BATCH = "?"                             # per-run scratch root for prompt/output files
@@ -335,14 +336,15 @@ def run_mc(task, n):
     items = stride(items, n)
     prompts = [MC_SHOTS + mc_prompt(fn(r)[0], MC_INSTR) for r in items] \
         if MC_SHOTS_ON else [mc_prompt(fn(r)[0], MC_INSTR) for r in items]
-    outs = MNN.run(prompts, MC_TOK, task, SYSTEM)
+    tok = HS_TOK if task == "hellaswag" else MC_TOK  # F19: reasoners ramble on hellaswag
+    outs = MNN.run(prompts, tok, task, SYSTEM)
     det = []
     for i, (r, out) in enumerate(zip(items, outs)):
         _, _, choices, gold = fn(r)
         # the "\n\n" cut fits short answers but amputates reasoning at its first
         # blank line (F17) — reasoning mode reads the full generation instead
-        parsed = out if MC_TOK > 16 else cut(out, ["\n\n", "\nQ"])
-        pred, tail, method = gen_letter(parsed, choices, reason=MC_TOK > 16)
+        parsed = out if tok > 16 else cut(out, ["\n\n", "\nQ"])
+        pred, tail, method = gen_letter(parsed, choices, reason=tok > 16)
         det.append({"id": i, "ok": pred == gold, "pred": pred, "gold": gold,
                     "scores": [method == "gen-letter"], "method": str(method)})
         print(f"[{task} {i+1}] {'OK ' if det[-1]['ok'] else 'FAIL'} pred={pred} "
@@ -442,12 +444,15 @@ def main():
                     help="drop the 3-shot prefix from MC prompts (F17 R2: reasoning "
                          "models continue the shot block instead of answering)")
     ap.add_argument("--he-tokens", type=int, default=512, help="humaneval budget")
+    ap.add_argument("--hellaswag-tokens", type=int, default=0,
+                    help="override MC budget for hellaswag only (0 = follow --mc-tokens; F19)")
     ap.add_argument("--gsm-tokens", type=int, default=700, help="gsm8k budget")
     ap.add_argument("--niah-tokens", type=int, default=24, help="niah budget")
     a = ap.parse_args()
-    global CONFIG, MODE, NOTHINK, BATCH, ENGINE, MNN, MC_TOK, HE_TOK, GSM_TOK, MC_INSTR, MC_SHOTS_ON, NIAH_TOK
+    global CONFIG, MODE, NOTHINK, BATCH, ENGINE, MNN, MC_TOK, HE_TOK, GSM_TOK, MC_INSTR, MC_SHOTS_ON, NIAH_TOK, HS_TOK
     CONFIG, MODE, ENGINE = a.config, a.mode, a.engine
     MC_TOK, HE_TOK, GSM_TOK, NIAH_TOK = a.mc_tokens, a.he_tokens, a.gsm_tokens, a.niah_tokens
+    HS_TOK = a.hellaswag_tokens or a.mc_tokens
     MC_INSTR = a.mc_instruction
     MC_SHOTS_ON = not a.no_mc_shots
     CONFIG = os.path.abspath(CONFIG)
