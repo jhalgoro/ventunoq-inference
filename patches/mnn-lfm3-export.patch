@@ -1,0 +1,156 @@
+diff --git a/transformers/llm/export/utils/model.py b/transformers/llm/export/utils/model.py
+index bcd4706..ac7e661 100644
+--- a/transformers/llm/export/utils/model.py
++++ b/transformers/llm/export/utils/model.py
+@@ -285,10 +285,10 @@ class LlmModel(PreTrainedModel):
+ 
+         model.embed = Embedding(model.embed, config)
+ 
+-        # gemma3/gemma3_text/gemma4: dual rotary for sliding vs full attention layers
++        # gemma3/gemma3_text/gemma4/lfm3: dual rotary for sliding vs full attention layers
+         # rope_parameters has form {'sliding_attention': {'rope_theta': ...}, 'full_attention': {'rope_theta': ...}}
+         _rp = getattr(config, 'rope_parameters', None)
+-        _is_dual_rope = (model_type in ('gemma3', 'gemma3_text', 'gemma4')
++        _is_dual_rope = (model_type in ('gemma3', 'gemma3_text', 'gemma4', 'lfm3')
+                          and _rp is not None
+                          and isinstance(_rp, dict)
+                          and any(isinstance(v, dict) for v in _rp.values()))
+@@ -323,7 +323,20 @@ class LlmModel(PreTrainedModel):
+             })()
+             model.rotary_full = Rotary(full_config)
+             # Adjust rotary_dim for partial rotary factor
+-            if partial_factor < 1.0:
++            if partial_factor < 1.0 and model_type == 'lfm3':
++                # LFM3 HF pads inv_freq with zeros and applies rotate_half across the
++                # full head_dim, so pairs (i, i + head_dim/2) rotate while the trailing
++                # dims keep cos=1 / sin=0. Keep the table at head_dim width and zero
++                # the unused frequencies: the standard llama_rotary_pos / FusedRoPE
++                # path then matches HF bit-for-bit.
++                rope_angles = int(partial_factor * global_head_dim) // 2
++                theta_full = full_rp.get('rope_theta', 1000000.0)
++                freqs = 1.0 / (theta_full ** (torch.arange(0, 2 * rope_angles, 2, dtype=torch.float32) / global_head_dim))
++                model.rotary_full.rotary_dim = global_head_dim
++                model.rotary_full.theta = torch.cat(
++                    (freqs, torch.zeros(global_head_dim // 2 - rope_angles, dtype=torch.float32)))
++                model.rotary_full.build_rope_tables()
++            elif partial_factor < 1.0:
+                 rotary_dim = int(global_head_dim * partial_factor)
+                 model.rotary_full.rotary_dim = rotary_dim
+                 model.rotary_full.theta = 1.0 / (full_rp.get('rope_theta', 1000000.0) ** (torch.arange(0, rotary_dim, 2, dtype=torch.float32) / global_head_dim))
+diff --git a/transformers/llm/export/utils/model_mapper.py b/transformers/llm/export/utils/model_mapper.py
+index 4b31c7e..7b5311d 100644
+--- a/transformers/llm/export/utils/model_mapper.py
++++ b/transformers/llm/export/utils/model_mapper.py
+@@ -1011,6 +1011,61 @@ class ModelMapper:
+         }
+         self.regist('lfm2', lfm2_map)
+ 
++    def regist_lfm3(self):
++        # LFM3 = LFM2 conv layers + Llama attention with QK RMSNorm, a per-head
++        # sigmoid output gate (gate_proj: hidden -> num_heads), sandwich norms on
++        # both branch outputs, and per-layer-type rope (full: theta 1e6 partial
++        # 0.5; sliding: theta 1e4) with a third `sliding_attention` layer type.
++        lfm3_config = {
++            'hidden_size': 'hidden_size',
++            'num_attention_heads': 'num_attention_heads',
++            'num_hidden_layers': 'num_hidden_layers',
++            'num_key_value_heads': 'num_key_value_heads',
++            'rope_theta': 'rope_theta',
++            'rope_parameters': 'rope_parameters',
++            'max_position_embeddings': 'max_position_embeddings',
++            'layer_types': 'layer_types',
++            'conv_L_cache': 'conv_L_cache',
++            'sliding_window': 'sliding_window',
++        }
++        lfm3_model = {
++            'lm': 'lm_head',
++            'embed': 'model.embed_tokens',
++            'blocks': 'model.layers',
++            'final_layernorm': 'model.embedding_norm',
++        }
++        lfm3_decoder = {
++            'self_attn': 'self_attn',
++            'linear_attn': 'conv',
++            'mlp': 'feed_forward',
++            'input_layernorm': 'operator_norm',
++            'post_attention_layernorm': 'ffn_norm',
++            'post_operator_norm': 'post_operator_norm',
++            'post_ffn_norm': 'post_ffn_norm',
++        }
++        lfm3_attention = {
++            'q_proj': 'q_proj',
++            'k_proj': 'k_proj',
++            'v_proj': 'v_proj',
++            'o_proj': 'o_proj',
++            'q_norm': 'q_norm',
++            'k_norm': 'k_norm',
++            'gate_proj': 'gate_proj',
++        }
++        lfm3_linear_attention = {
++            'in_proj': 'in_proj',
++            'conv': 'conv',
++            'out_proj': 'out_proj',
++        }
++        lfm3_map = {
++            'config': lfm3_config,
++            'model': lfm3_model,
++            'decoder': lfm3_decoder,
++            'attention': lfm3_attention,
++            'linear_attention': lfm3_linear_attention,
++        }
++        self.regist('lfm3', lfm3_map)
++
+     def regist_lfm2_moe(self):
+         lfm2_moe_config = {
+             'hidden_size': 'hidden_size',
+diff --git a/transformers/llm/export/utils/transformers.py b/transformers/llm/export/utils/transformers.py
+index 46799a1..88c8631 100644
+--- a/transformers/llm/export/utils/transformers.py
++++ b/transformers/llm/export/utils/transformers.py
+@@ -138,6 +138,11 @@ class Attention(torch.nn.Module):
+             # norm.weight as gamma, so canonicalize the offset semantics first.
+             self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None), 1.0)
+             self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None), 1.0)
++        if config.model_type == 'lfm3':
++            # LFM3 q/k norms are plain-gamma RMSNorm over head_dim (eps=norm_eps);
++            # canonicalize so FusedRoPE can store norm.weight as gamma.
++            self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None))
++            self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None))
+         self.q_gate_proj = None
+         self.qk_norm_after_rope = getattr(config, 'qk_norm_after_rope', False)
+         if not self.qk_norm_after_rope:
+@@ -298,6 +303,11 @@ class Attention(torch.nn.Module):
+         value_states = None
+         if self.q_gate_proj is not None:
+             gate = self.q_gate_proj(hidden_states)
++        elif getattr(self, 'gate_proj', None) is not None:
++            # LFM3: per-head scalar gate (hidden -> num_heads); sigmoid is applied
++            # at the shared site below, broadcast here along head_dim.
++            gate = self.gate_proj(hidden_states)
++            gate = gate.unsqueeze(-1).expand(-1, -1, -1, self.head_dim).reshape(bsz, q_len, -1)
+         elif self.q_proj.out_features == 2 * self.num_heads * self.head_dim:
+             reshaped = query_states.view(bsz, q_len, self.num_heads, self.head_dim * 2)
+             query_states, gate = torch.split(reshaped, self.head_dim, dim=-1)
+@@ -1715,6 +1725,12 @@ class Decoder(torch.nn.Module):
+                 attention_mask=attention_mask,
+             )
+ 
++        # LFM3 sandwich norm: RMSNorm on the attention/conv branch output before
++        # the residual add (post_operator_norm); the FFN twin is below.
++        post_operator_norm = getattr(self, 'post_operator_norm', None)
++        if post_operator_norm is not None:
++            hidden_states = post_operator_norm(hidden_states)
++
+         # Fully Connected
+         if not hasattr(self, 'post_attention_layernorm'):
+             # phi
+@@ -1784,6 +1800,9 @@ class Decoder(torch.nn.Module):
+             residual = hidden_states
+             hidden_states = self.post_attention_layernorm(hidden_states)
+             hidden_states = self.mlp(hidden_states)
++            post_ffn_norm = getattr(self, 'post_ffn_norm', None)
++            if post_ffn_norm is not None:  # LFM3 sandwich norm on the FFN output
++                hidden_states = post_ffn_norm(hidden_states)
+             hidden_states = residual + hidden_states
+ 
+         # gemma4 PLE (Per-Layer Embeddings)

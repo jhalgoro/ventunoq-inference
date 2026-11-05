@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | Upstream LFM2/LFM3 into `model_mapper` (F12) | **high** | upstream appetite |
+| M7 | LFM3 → MNN export port (F12) — **patch done**, UM890 run pending | **high** | run `scripts/lfm3_um890.sh all` |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 
@@ -144,14 +144,21 @@ Run the sibling repo's `../ventunoq-llamacpp-cpu+npu/scripts/power_probe.py` (IN
 pp and tg next to llama.cpp-pinned and NPU rows. Hypothesis: MNN fp16 does *less work per
 joule* than llama.cpp f32-compute — the decode win should look even bigger in J/token.
 
-## M7 — Upstream: LFM2/LFM3 in `model_mapper` (highest ceiling, real work)
+## M7 — LFM3 → MNN export port (highest ceiling, real work)
 
-What it takes: map LFM's blocks (`feed_forward_network`, conv-gate / short conv attention
-of LFM2/LFM3) onto MNN geometry ops + a `gguf2mnn` template; validate logits vs llama.cpp
-token-by-token on a shared prompt (the parent's gsm8k parity method). First move: upstream
-issue citing F12 evidence + this repo's numbers (an engine that beats llama.cpp on ARM82
-adding Liquid support is a sellable ask). **Timebox**: spike the GGUF→mapper path for
-LFM2.5-2.6B (simpler arch) before committing to LFM3's tri-hybrid.
+**Status 2026-11-05: port written, execution pending on the UM890 PRO.** Full design + triage plan:
+[research/lfm3-port.md](research/lfm3-port.md). The original GGUF-spike framing is dead —
+`gguf2mnn.py` only understands llama/gpt2 tokenizers, so the path is **safetensors → `llmexport`**
+with **zero C++ changes** (engine already has the mix two-plane mask, `FusedLinearAttention(short_conv)`,
+gemma-style dual rotary, and tied-embed auto-detect). Delivered:
+`patches/mnn-lfm3-export.patch` (4 additive edits across `model_mapper.py`/`model.py`/`transformers.py`,
+applies to MNN `17236ad`) + `scripts/lfm3_um890.sh` (setup/download/export/test on x86). Key
+correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
+head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
+head_dim width with zeroed frequencies. Next: run `scripts/lfm3_um890.sh all` on the UM890, pass the
+`--test` HF-vs-trace gate, smoke `llm_demo`; then int8/hqq variants and optionally VL-2B (needs the
+vision tower, `lfm2_vl` pattern). Upstream MNN issue #5104 (LFM3-VL-2B request, 2026-11-04) has no
+implementation — this port is the contribution candidate once verified.
 
 ## M8 — Serving: concede or build?
 
