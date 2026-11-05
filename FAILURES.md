@@ -185,5 +185,7 @@ restates the entry point and compiles standalone, run it as-is (the test only ne
 entry defined); the old strip+glue path stays for bare completions (plain-model rows
 unchanged — parity). Verified on the saved probe outputs: bogus IndentationErrors gone,
 remaining failures are real `assert` failures in `check()`. Both DIST2 humaneval suites
-rerunning (`q_dist_fix` again, 11-05 01:39 UTC); first-pass 2B 10.0 / 4B 78.0 were
-undercounts.
+reran (`q_dist_fix` again, finished 11-05 03:30 UTC): 2B 10.0→**38.0** (22/45 residual
+failures are AssertionErrors — genuine logic), 4B 78.0→**74.0** (standalone execution
+exposes 3 NameErrors the gluing had papered over, so 4B's first pass was partly
+*over*counted).

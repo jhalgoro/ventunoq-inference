@@ -98,8 +98,8 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 | 0.8B DIST (R1) | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 47.80 |
 | 2B DIST (R1) | 55.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 33.71 |
 | 4B DIST (R1) | 65.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 24.10 |
-| 2B DIST **R2** | 60.0 | ⏳ | 71.0 | 52.0 | 57.0 | 68.0 | 57.0 | 51.0 | **5/5** | 33.71 |
-| 4B DIST **R2** | 72.0 | ⏳ | **92.0** | **68.0** | **68.0** | **93.0** | 77.0 | **79.3** | 5/5 | 24.10 |
+| 2B DIST **R2** | 60.0 | 38.0 | 71.0 | 52.0 | 57.0 | 68.0 | 57.0 | 51.0 | **5/5** | 33.71 |
+| 4B DIST **R2** | 72.0 | **74.0** | **92.0** | **68.0** | **68.0** | **93.0** | 77.0 | **79.3** | 5/5 | 24.10 |
 
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
   output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2
@@ -112,13 +112,15 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 - † hellaswag needed its own budget: at 512 tok the reasoners ramble past the cap
   without ever writing "Answer: X" (2B: 41/100 unparsed). Re-scored at 1024 tok
   (`q_dist_fix`, `--hellaswag-tokens`): 2B 36.0→52.0 (14 unparsed), 4B 57.0→68.0 (1).
-- ⏳ humaneval DIST rows rerunning (F19b): the assembly glued restated full functions
-  (def + re-emitted docstring) onto the prompt that already contains that docstring →
-  bogus IndentationError (31/50 on 2B-DIST2). Fixed: a restated function that compiles
-  standalone runs as-is. First-pass values were 2B 10.0 / 4B 78.0, both undercounts.
-- Read: 4B int4 dominates every task; DIST rows' ppl (24–48 vs 17–21 same size) already
-  says the distillation *changed* the base weights, so the R2 question is whether that
-  trade ever pays off on accuracy vs the plain 4B.
+- humaneval DIST rows re-scored after F19b (prompt+completion gluing produced bogus
+  IndentationError on restated functions): 2B 10.0→38.0 (failures now mostly real
+  AssertionErrors), 4B 78.0→74.0 (standalone execution exposes 3 NameErrors that the
+  prompt gluing had papered over).
+- Read (final): the distillation pays off only at 4B — 4B DIST beats 4B int4 on
+  humaneval +16, MMLU +13.1, WinoGrande +7, ARC/OBQA +5, but loses GSM8K −19,
+  HellaSwag −12, CSQA −3; 2B DIST ≈ 2B int4 (best: MMLU +10.6, humaneval +4; worst:
+  HellaSwag −5) and never approaches 4B int4. ppl (24–34 vs 17–21 same size) reflects
+  the reasoning-style vocabulary shift, not knowledge loss.
 
 ### 4.2 Long context (M5) — pp curve + RSS growth per KV token vs llama.cpp's ~8.9 KB/tok
 
