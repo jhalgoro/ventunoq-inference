@@ -170,3 +170,20 @@ the token cap mid-stream**:
 The 4B-DIST2 stage (started 20:17 UTC) runs with fixes 1–2 live; after the ladder, rerun
 `{mmlu, humaneval}` (and hellaswag at a larger `--mc-tokens`) for 2B-DIST2 — delete those
 three JSONs first so the resume logic picks them up.
+
+### F19b — humaneval still 10.0 after the "fix": the prompt+completion gluing, not extraction
+
+`q_dist_fix` round 1 (11-04) re-scored hellaswag 36.0→52.0 (2B) / 57.0→68.0 (4B) at 1024
+tok and filled 2B mmlu 51.0 — but 2B humaneval stayed 10.0 with byte-identical per-item
+results (greedy ⇒ same outputs, and the extractor genuinely picked the same slice: the
+open-fence theory was wrong). n=5 probe with raw outputs kept: the extracted functions
+**compile standalone**; the failures came from `run_humaneval` gluing them onto
+`t["prompt"]` after stripping the restated `def` line — and HumanEval prompts contain the
+docstring, which the reasoners re-emit → the second docstring lands after the prompt's
+closed one → `IndentationError` on a `"""` line (31/50). Fix: if the extracted text
+restates the entry point and compiles standalone, run it as-is (the test only needs the
+entry defined); the old strip+glue path stays for bare completions (plain-model rows
+unchanged — parity). Verified on the saved probe outputs: bogus IndentationErrors gone,
+remaining failures are real `assert` failures in `check()`. Both DIST2 humaneval suites
+rerunning (`q_dist_fix` again, 11-05 01:39 UTC); first-pass 2B 10.0 / 4B 78.0 were
+undercounts.

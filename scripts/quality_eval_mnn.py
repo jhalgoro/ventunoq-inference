@@ -259,13 +259,24 @@ def run_humaneval(n):
         out = extract_code(out, t["entry_point"])
         out = cut(out, ["\nif __name__", "```", "\nprint(", "\nclass "])
         out = out.strip("\n")
-        if out:  # chat model restated the signature? drop the restated def line —
+        full = False
+        if re.search(r"(^|\n)[ \t]*def\s+" + re.escape(t["entry_point"]) + r"\s*\(", out):
+            # Reasoning models restate the WHOLE function incl. the prompt's docstring
+            # (F19b): gluing that onto the prompt re-nests the docstring -> bogus
+            # IndentationError (31/50 on 2B-DIST2). If the restated function compiles
+            # standalone, run it as-is; the test only needs the entry point defined.
+            try:
+                compile(out, "<he>", "exec")
+                full = True
+            except SyntaxError:
+                pass
+        if not full and out:  # chat model restated the signature? drop the restated def line —
             m = re.match(r"[ \t]*def\s+" + re.escape(t["entry_point"]) + r"\s*\(.*?\)\s*(->[^:\n]*)?:[ \t]*\n",
                          out, re.S)   # regex, not find("):"): annotated ") -> bool:" has no "):"
             if m:
                 out = out[m.end():]
         # bench/HumanEval.jsonl tests define check(candidate) (no *_tests wrapper)
-        script = t["prompt"] + out + "\n" + t["test"] + f"\ncheck({t['entry_point']})\n"
+        script = (out if full else t["prompt"] + out) + "\n" + t["test"] + f"\ncheck({t['entry_point']})\n"
         path = os.path.join(SANDBOX, f"he_{i}.py")
         open(path, "w").write(script)
         try:
