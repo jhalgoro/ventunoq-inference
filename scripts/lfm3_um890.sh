@@ -13,7 +13,7 @@
 #   export    correctness gate (--test, HF-vs-torch trace) then llmexport int4.
 #   test      llm_demo smoke generation from the exported model.
 #
-# Requires: Ubuntu 22.04+/24.04, ~10 GB free disk, network. Everything is idempotent.
+# Requires: Fedora (dnf) or Debian/Ubuntu (apt), ~10 GB free disk, network. Everything is idempotent.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -28,9 +28,25 @@ VENV="$WORK/venv"
 PY="$VENV/bin/python"
 log() { echo "[lfm3] $*"; }
 
+install_deps() {
+  # root on the UM890 is common; only use sudo when not root and sudo exists
+  local SUDO=""
+  [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1 && SUDO=sudo
+  if command -v dnf >/dev/null 2>&1; then
+    # Fedora: gcc-c++ replaces build-essential; python3-pip provides venv/ensurepip
+    log "dnf: installing toolchain + python3-pip"
+    $SUDO dnf install -y gcc gcc-c++ make cmake git python3-pip python3-devel curl
+  elif command -v apt-get >/dev/null 2>&1; then
+    log "apt: installing toolchain + python3-venv"
+    $SUDO apt-get update -qq
+    $SUDO apt-get install -y -qq build-essential cmake git python3-venv python3-pip curl
+  else
+    log "no dnf/apt found — assuming cmake, compiler, git, python3 are already present"
+  fi
+}
+
 do_setup() {
-  sudo apt-get update -qq
-  sudo apt-get install -y -qq build-essential cmake git python3-venv python3-pip curl
+  install_deps
   mkdir -p "$WORK/models"
 
   if [ ! -d "$WORK/MNN/.git" ]; then
