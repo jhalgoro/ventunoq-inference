@@ -8,7 +8,7 @@
 # Usage: scripts/quality_matrix_mnn.sh [stage ...]   (default: q_qwen08)
 # Stages: q_qwen08 q_qwen08_smoke q_qwen2b q_qwen4b q_qwen9b q_qwen08base q_qwen2bbase
 #         q_dist08 q_dist2b q_dist4b q_dist9b q_all
-#         q_lfm3 q_lfm3_hqq q_lfm3_int8 q_lfm3_smoke q_lfm3_all   (M7, see below)
+#         q_lfm3_smoke q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2 q_lfm3_all   (M7, R2 protocol)
 # Smoke variant (plumbing check, ~15 min): scripts/quality_matrix_mnn.sh q_qwen08_smoke
 # One-shot full ladder, detached from any SSH/session (survives disconnect):
 #   cd ~/Code/ventunoq-mnn && setsid nohup scripts/quality_matrix_mnn.sh q_all \
@@ -126,9 +126,8 @@ q_dist_fix() { # F19 fixups: rerun the suites the R2 ladder broke (2B humaneval 
 
 # ---- M7 LFM3-1.7B rows: exported on the UM890 (scripts/lfm3_um890.sh export/export8/
 # exporthq, then push) and copied to lfm3-models/ on this board — .mnn is cross-arch.
-# No download/delete here: models are small and worth keeping for reruns. Plain protocol
-# (3-shot MC, sibling budgets): the exported jinja template renders the NON-thinking form,
-# so LFM3 behaves like a plain instruct model — comparable to the QWEN35-*-INT4 rows.
+# No download/delete here: models are small and worth keeping for reruns. Scored under
+# the R2 protocol (see q_lfm3_r2) — comparable with the QWEN35-*-DIST2 rows.
 lfm3_stage() { # $1=exported dir $2=tag [$3=tasks]
   local cfg="$1/config.json"
   if [ ! -f "$cfg" ]; then
@@ -141,7 +140,20 @@ q_lfm3()       { lfm3_stage lfm3-models/LFM3-1.7B-MNN           LFM3-1.7B-INT4; 
 q_lfm3_hqq()   { lfm3_stage lfm3-models/LFM3-1.7B-MNN-int4hqq   LFM3-1.7B-INT4-HQQ; }
 q_lfm3_int8()  { lfm3_stage lfm3-models/LFM3-1.7B-MNN-int8      LFM3-1.7B-INT8; }
 q_lfm3_smoke() { lfm3_stage lfm3-models/LFM3-1.7B-MNN           LFM3-1.7B-INT4-SMOKE "$TASKS_SMOKE"; }
-q_lfm3_all()   { for s in q_lfm3_smoke q_lfm3 q_lfm3_hqq q_lfm3_int8; do log "--- ladder step $s"; $s; done; }
+# LFM3 is thinking-style even rendered non-thinking: MC answers open with a reasoning
+# preamble ("The question asks...") and never reach a letter inside the sibling 16-tok
+# MC budget — smoke scored 0.00 on arc/hellaswag/openbookqa/mmlu (F17 verbatim). Score
+# under the R2 protocol (zero-shot MC + "Answer: X" cue + lifted budgets) so the rows
+# are comparable with the QWEN35-*-DIST2 ladder.
+lfm3_r2() { # $1=exported dir $2=tag
+  EXTRA=(--mc-tokens 512 --he-tokens 1536 --gsm-tokens 1024 --niah-tokens 512
+         --no-mc-shots --mc-instruction "$DIST2_INSTR")
+  lfm3_stage "$1" "$2"
+}
+q_lfm3_r2()      { lfm3_r2 lfm3-models/LFM3-1.7B-MNN          LFM3-1.7B-INT4-R2; }
+q_lfm3_hqq_r2()  { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int4hqq  LFM3-1.7B-INT4HQQ-R2; }
+q_lfm3_int8_r2() { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int8     LFM3-1.7B-INT8-R2; }
+q_lfm3_all()     { for s in q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2; do log "--- ladder step $s"; $s; done; }
 
 q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
   for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do
