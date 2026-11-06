@@ -66,7 +66,7 @@ The patch keeps the cos/sin tables at full `head_dim` width with the unused freq
 (`model.py`, lfm3 branch), so the standard `llama_rotary_pos` / FusedRoPE path reproduces HF
 bit-for-bit. Same table math as HF: `θ^(-2i/128)` for i < 32, zeros for i ≥ 32.
 
-## Patch anatomy (4 edits, 3 files, export-side Python only)
+## Patch anatomy (5 edits, 4 files, export-side Python only)
 
 1. **`utils/model_mapper.py` — `regist_lfm3()`**: config (`sliding_window`, `rope_parameters`,
    `layer_types`, `conv_L_cache`), model (`model.embedding_norm` → `final_layernorm`), decoder
@@ -78,9 +78,14 @@ bit-for-bit. Same table math as HF: `θ^(-2i/128)` for i < 32, zeros for i ≥ 3
    `variance_epsilon`) so FusedRoPE stores them as gamma.
 4. **`utils/transformers.py` — `Attention.forward` / `Decoder.forward`**: `gate_proj` branch (per-head
    sigmoid gate, expand to head_dim) before the shared sigmoid site; `post_operator_norm` after the
-   attention/conv branch and `post_ffn_norm` after the MLP, both getattr-guarded `is not None`.
+   attention/conv branch and `post_ffn_norm` after the MLP, both getattr-guarded `is not None`. The
+   per-head scalar gate is first expanded to a full-width `hidden→hidden` Linear (rows repeated per
+   head, numerically identical) so the converter's gated-attention C4 fusion matches (see runtime
+   issue log 2).
+5. **`llmexport.py` — `lfm3` jinja override**: simplified ChatML chat template written into
+   `llm_config.json` (see "Chat template gap" below).
 
-`do_map` sets unmapped sources to `None`, so every hook is inert for non-lfm3 models; all four edits are
+`do_map` sets unmapped sources to `None`, so every hook is inert for non-lfm3 models; all edits are
 additive branches. `py_compile` clean; patch reverse-applies against `17236ad`.
 
 ## Run + verification plan (UM890)

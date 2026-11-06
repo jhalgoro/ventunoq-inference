@@ -155,8 +155,8 @@ simplified ChatML `jinja` override now ships in the patch). Full design + triage
 `gguf2mnn.py` only understands llama/gpt2 tokenizers, so the path is **safetensors → `llmexport`**
 with **zero C++ changes** (engine already has the mix two-plane mask, `FusedLinearAttention(short_conv)`,
 gemma-style dual rotary, and tied-embed auto-detect). Delivered:
-`patches/mnn-lfm3-export.patch` (4 additive edits across `model_mapper.py`/`model.py`/`transformers.py`,
-applies to MNN `17236ad`) + `scripts/lfm3_um890.sh` (setup/download/export/test on x86). Key
+`patches/mnn-lfm3-export.patch` (additive edits across `model_mapper.py`/`model.py`/`transformers.py`
+plus the ChatML `jinja` override in `llmexport.py`, applies to MNN `17236ad`) + `scripts/lfm3_um890.sh` (setup/download/export/test on x86). Key
 correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
 head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
 head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890.
