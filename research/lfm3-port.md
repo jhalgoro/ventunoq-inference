@@ -1,6 +1,9 @@
 # LFM3 → MNN export port (M7)
 
-**Status:** patch written + self-contained UM890 driver ready; execution pending on the Minisforum UM890 PRO
+**Status:** patch written + self-contained UM890 driver ready; executing on the Minisforum UM890
+PRO. First run (Fedora 44, GCC 16.2.1) hit a libstdc++-16 `__int128` redefinition bug on all
+`-std=gnu++XX` targets (unrelated to the patch; protobuf with `CXX_EXTENSIONS OFF` built fine) —
+fixed in `b436509` via strict `-DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF`; re-run pending.
 (x86_64 — this QCS8300 board has no torch and is too small for the export).
 **Artifacts:** [`patches/mnn-lfm3-export.patch`](../patches/mnn-lfm3-export.patch) (applies to MNN
 `17236ad`, verified with `git apply --reverse --check`) ·
