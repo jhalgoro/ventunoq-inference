@@ -4,6 +4,15 @@
 PRO. First run (Fedora 44, GCC 16.2.1) hit a libstdc++-16 `__int128` redefinition bug on all
 `-std=gnu++XX` targets (unrelated to the patch; protobuf with `CXX_EXTENSIONS OFF` built fine) —
 fixed in `b436509` via strict `-DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF`; re-run pending.
+
+**Runtime issue log.** (1) torch-side `--test` gate passed on first try (thinking trace + "Paris").
+(2) llm_demo decode died with `Compute Shape Error for /layers.2/self_attn/o_proj` — layer 2 is the
+first attention layer; the converter's `FuseTransformerC4::fuseAttentionOutputC4` gate pattern
+requires the gate projection to carry `num_heads*head_dim` channels, but LFM3's per-head scalar
+gate (`hidden→16` + broadcast/Tile) broke the matcher, leaving the Attention op with
+`output_c4=false` and o_proj fed an NHWC tensor. Fixed export-side by expanding the gate weight
+rows per head into a `hidden→hidden` Linear (numerically identical, ~+2 MB/layer int4). Lesson for
+any gated-attention port: the gate must be a plain full-width projection, never a broadcast.
 (x86_64 — this QCS8300 board has no torch and is too small for the export).
 **Artifacts:** [`patches/mnn-lfm3-export.patch`](../patches/mnn-lfm3-export.patch) (applies to MNN
 `17236ad`, verified with `git apply --reverse --check`) ·

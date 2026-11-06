@@ -104,10 +104,10 @@ index 4b31c7e..7b5311d 100644
          lfm2_moe_config = {
              'hidden_size': 'hidden_size',
 diff --git a/transformers/llm/export/utils/transformers.py b/transformers/llm/export/utils/transformers.py
-index 46799a1..88c8631 100644
+index 46799a1..46d1b08 100644
 --- a/transformers/llm/export/utils/transformers.py
 +++ b/transformers/llm/export/utils/transformers.py
-@@ -138,6 +138,11 @@ class Attention(torch.nn.Module):
+@@ -138,6 +138,27 @@ class Attention(torch.nn.Module):
              # norm.weight as gamma, so canonicalize the offset semantics first.
              self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None), 1.0)
              self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None), 1.0)
@@ -116,22 +116,37 @@ index 46799a1..88c8631 100644
 +            # canonicalize so FusedRoPE can store norm.weight as gamma.
 +            self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None))
 +            self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None))
++            gate_proj = getattr(self, 'gate_proj', None)
++            if gate_proj is not None and gate_proj.out_features == self.num_heads:
++                # Expand the per-head scalar gate to a per-channel gate (rows
++                # repeated head_dim times, numerically identical) so the gate
++                # projection has num_heads*head_dim channels: a broadcast/Tile in
++                # the gate chain breaks the converter's gated-attention C4 fusion
++                # (FuseTransformerC4), leaving o_proj with a layout mismatch.
++                head_index = torch.arange(self.num_heads).repeat_interleave(self.head_dim)
++                expanded = torch.nn.Linear(
++                    gate_proj.in_features, self.num_heads * self.head_dim,
++                    bias=gate_proj.bias is not None,
++                    dtype=gate_proj.weight.dtype, device=gate_proj.weight.device)
++                expanded.weight.data = gate_proj.weight.data[head_index].clone()
++                if gate_proj.bias is not None:
++                    expanded.bias.data = gate_proj.bias.data[head_index].clone()
++                self.gate_proj = expanded
          self.q_gate_proj = None
          self.qk_norm_after_rope = getattr(config, 'qk_norm_after_rope', False)
          if not self.qk_norm_after_rope:
-@@ -298,6 +303,11 @@ class Attention(torch.nn.Module):
+@@ -298,6 +319,10 @@ class Attention(torch.nn.Module):
          value_states = None
          if self.q_gate_proj is not None:
              gate = self.q_gate_proj(hidden_states)
 +        elif getattr(self, 'gate_proj', None) is not None:
-+            # LFM3: per-head scalar gate (hidden -> num_heads); sigmoid is applied
-+            # at the shared site below, broadcast here along head_dim.
++            # LFM3 output gate, expanded to per-channel in __init__; sigmoid is
++            # applied at the shared site below.
 +            gate = self.gate_proj(hidden_states)
-+            gate = gate.unsqueeze(-1).expand(-1, -1, -1, self.head_dim).reshape(bsz, q_len, -1)
          elif self.q_proj.out_features == 2 * self.num_heads * self.head_dim:
              reshaped = query_states.view(bsz, q_len, self.num_heads, self.head_dim * 2)
              query_states, gate = torch.split(reshaped, self.head_dim, dim=-1)
-@@ -1715,6 +1725,12 @@ class Decoder(torch.nn.Module):
+@@ -1715,6 +1740,12 @@ class Decoder(torch.nn.Module):
                  attention_mask=attention_mask,
              )
  
@@ -144,7 +159,7 @@ index 46799a1..88c8631 100644
          # Fully Connected
          if not hasattr(self, 'post_attention_layernorm'):
              # phi
-@@ -1784,6 +1800,9 @@ class Decoder(torch.nn.Module):
+@@ -1784,6 +1815,9 @@ class Decoder(torch.nn.Module):
              residual = hidden_states
              hidden_states = self.post_attention_layernorm(hidden_states)
              hidden_states = self.mlp(hidden_states)

@@ -59,6 +59,8 @@ do_setup() {
     log "lfm3 patch already applied"
   else
     log "applying $(basename "$PATCH")"
+    # a stale/older patch revision may sit in the tree — reset export utils first
+    git -C "$WORK/MNN" checkout -- transformers/llm/export 2>/dev/null || true
     git -C "$WORK/MNN" apply "$PATCH"
   fi
 
