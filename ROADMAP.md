@@ -160,9 +160,11 @@ plus the ChatML `jinja` override in `llmexport.py`, applies to MNN `17236ad`) + 
 correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
 head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
 head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890.
-Next: int8/hqq variants, quality-matrix rows, and optionally VL-2B (needs the
-vision tower, `lfm2_vl` pattern). Upstream MNN issue #5104 (LFM3-VL-2B request, 2026-11-04) has no
-implementation — this port is the contribution candidate, now verified end-to-end; PR prep next.
+In flight: quant variants (`export8`/`exporthq` steps) + quality-matrix rows (`q_lfm3_all` stage
+runs on this board from `lfm3-models/` pushed off the UM890). Upstream MNN issue #5104
+(LFM3-VL-2B request, 2026-11-04) has no implementation — this port is the contribution
+candidate. **TODO (parked): upstream PR after the variant + quality validation lands.**
+VL-2B remains parked too (needs the vision tower, `lfm2_vl` pattern).
 
 ## M8 — Serving: concede or build?
 

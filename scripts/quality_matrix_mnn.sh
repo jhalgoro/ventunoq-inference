@@ -7,7 +7,8 @@
 # Disk policy: model downloaded at stage start, deleted at stage end, both in DISK_LOG.md.
 # Usage: scripts/quality_matrix_mnn.sh [stage ...]   (default: q_qwen08)
 # Stages: q_qwen08 q_qwen08_smoke q_qwen2b q_qwen4b q_qwen9b q_qwen08base q_qwen2bbase
-#         q_dist08 q_dist2b q_dist4b q_dist9b q_all   (see ladder below for tags)
+#         q_dist08 q_dist2b q_dist4b q_dist9b q_all
+#         q_lfm3 q_lfm3_hqq q_lfm3_int8 q_lfm3_smoke q_lfm3_all   (M7, see below)
 # Smoke variant (plumbing check, ~15 min): scripts/quality_matrix_mnn.sh q_qwen08_smoke
 # One-shot full ladder, detached from any SSH/session (survives disconnect):
 #   cd ~/Code/ventunoq-mnn && setsid nohup scripts/quality_matrix_mnn.sh q_all \
@@ -122,6 +123,25 @@ q_dist_fix() { # F19 fixups: rerun the suites the R2 ladder broke (2B humaneval 
   q_stage Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-2B-DIST2 chat "$TASKS"
   q_stage Qwen3.5-4B-Claude-4.6-Opus-Reasoning-Distilled-MNN QWEN35-4B-DIST2 chat "$TASKS"
 }
+
+# ---- M7 LFM3-1.7B rows: exported on the UM890 (scripts/lfm3_um890.sh export/export8/
+# exporthq, then push) and copied to lfm3-models/ on this board — .mnn is cross-arch.
+# No download/delete here: models are small and worth keeping for reruns. Plain protocol
+# (3-shot MC, sibling budgets): the exported jinja template renders the NON-thinking form,
+# so LFM3 behaves like a plain instruct model — comparable to the QWEN35-*-INT4 rows.
+lfm3_stage() { # $1=exported dir $2=tag [$3=tasks]
+  local cfg="$1/config.json"
+  if [ ! -f "$cfg" ]; then
+    log "MISSING $cfg — export on the UM890 and run scripts/lfm3_um890.sh push there first"
+    return 1
+  fi
+  run_tasks "$cfg" "$2" "${3:-$TASKS}" chat
+}
+q_lfm3()       { lfm3_stage lfm3-models/LFM3-1.7B-MNN           LFM3-1.7B-INT4; }
+q_lfm3_hqq()   { lfm3_stage lfm3-models/LFM3-1.7B-MNN-int4hqq   LFM3-1.7B-INT4-HQQ; }
+q_lfm3_int8()  { lfm3_stage lfm3-models/LFM3-1.7B-MNN-int8      LFM3-1.7B-INT8; }
+q_lfm3_smoke() { lfm3_stage lfm3-models/LFM3-1.7B-MNN           LFM3-1.7B-INT4-SMOKE "$TASKS_SMOKE"; }
+q_lfm3_all()   { for s in q_lfm3_smoke q_lfm3 q_lfm3_hqq q_lfm3_int8; do log "--- ladder step $s"; $s; done; }
 
 q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
   for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do

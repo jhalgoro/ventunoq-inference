@@ -6,6 +6,10 @@ models/
 *.gguf
 *.mnn.weight
 
+# lfm3 (M7): export workspace on the UM890; exported dirs pushed to the board
+lfm3-work/
+lfm3-models/
+
 # python
 __pycache__/
 *.pyc
