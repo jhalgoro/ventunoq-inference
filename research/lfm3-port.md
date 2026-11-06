@@ -145,6 +145,27 @@ a single user message, no system block — and the answer names 2, 3, 5 directly
 Thinking mode = replace the empty block with the open text tag; parked for benchmark
 comparability with the non-thinking matrix.
 
+## Board-side validation (QCS8300, 2026-11-06)
+
+Exported dirs pushed from the UM890 (`scripts/lfm3_um890.sh push` → `lfm3-models/`). The board's
+MNN build is the same revision (`17236ad`) and needed no patch (engine-side lfm3 support is
+upstream). Results:
+
+- **ARM output is byte-identical to x86** on the greedy primes prompt — engine parity across
+  architectures confirmed for all three quant variants.
+- `llm_demo` decode (all 8 cores, greedy): int4 **21.7**, int4+HQQ **21.8**, int8 **12.6** tok/s
+  (prefill 55–63). int8 pays the memory-bound decode tax at 2× size. Pinned `llm_bench -pg 512,128`
+  regime runs (comparable with §1/§3 of BENCHMARKS, incl. the llama.cpp Q4_K_M baseline 49.0/11.7)
+  are scheduled after the quality ladder to avoid load contamination.
+- **Quality protocol:** smoke under the plain sibling protocol scored 0.00 on arc/hellaswag/
+  openbookqa/mmlu — LFM3 answers MC with a reasoning preamble ("The question asks…") and never
+  reaches a letter inside the 16-token MC budget: the F17 reasoning-style failure verbatim, even
+  with the non-thinking template. Rows are therefore scored under the **R2 protocol**
+  (`q_lfm3_*_r2` stages: zero-shot MC + "Answer: X" cue + lifted budgets), matching the
+  QWEN35-*-DIST2 rows. R2 probe: arc 5/5.
+- Variant smokes (UM890): int8 1.8 GB, int4+HQQ 970 MB — both answer the primes prompt correctly;
+  HQQ costs zero runtime vs plain int4.
+
 ## Upstream angle
 
 MNN issue [#5104](https://github.com/alibaba/MNN/issues/5104) (2026-11-04) requests LFM3-VL-2B; no
