@@ -113,10 +113,13 @@ do_export() {
 do_test() {
   local cfg="$OUT_DIR/config.json"
   [ -f "$cfg" ] || { log "no $cfg — run 'export' first"; exit 1; }
-  log "llm_demo smoke (greedy, short)"
+  log "llm_demo smoke (greedy, max 512 tokens)"
   sed -i 's#"sampler_type".*#"sampler_type": "greedy",#' "$cfg" 2>/dev/null || true
-  # one line = one prompt; the engine applies the ChatML template itself
-  printf 'Name the three smallest prime numbers.' | "$WORK/MNN/build/llm_demo" "$cfg" 2>&1 | tail -40
+  # Must pass the prompt as a FILE arg: with stdin-only, llm_demo enters its
+  # chat() REPL which never checks getline EOF — it re-prefills the growing
+  # conversation forever. File mode runs each prompt once and exits.
+  printf 'Name the three smallest prime numbers.\n' > "$WORK/prompt.txt"
+  timeout 900 "$WORK/MNN/build/llm_demo" "$cfg" "$WORK/prompt.txt" 512 2>&1 | tail -60
   log "smoke done — compare vs HF reference in research/lfm3-port.md"
 }
 

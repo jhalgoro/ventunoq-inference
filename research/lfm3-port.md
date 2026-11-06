@@ -13,6 +13,10 @@ gate (`hidden→16` + broadcast/Tile) broke the matcher, leaving the Attention o
 `output_c4=false` and o_proj fed an NHWC tensor. Fixed export-side by expanding the gate weight
 rows per head into a `hidden→hidden` Linear (numerically identical, ~+2 MB/layer int4). Lesson for
 any gated-attention port: the gate must be a plain full-width projection, never a broadcast.
+(3) after the gate fix, decode ran (gemm/attention/KV-cache all healthy in perf+gdb) but llm_demo
+never exited: with stdin-only it enters `chat()`, whose REPL loop ignores getline EOF and re-prefills
+the ever-growing conversation indefinitely. Harness fix: pass prompt via file arg
+(`llm_demo cfg prompt.txt 512` → `eval()` path, terminates on EOS/max tokens).
 (x86_64 — this QCS8300 board has no torch and is too small for the export).
 **Artifacts:** [`patches/mnn-lfm3-export.patch`](../patches/mnn-lfm3-export.patch) (applies to MNN
 `17236ad`, verified with `git apply --reverse --check`) ·
