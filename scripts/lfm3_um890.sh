@@ -113,11 +113,8 @@ do_test() {
   [ -f "$cfg" ] || { log "no $cfg — run 'export' first"; exit 1; }
   log "llm_demo smoke (greedy, short)"
   sed -i 's#"sampler_type".*#"sampler_type": "greedy",#' "$cfg" 2>/dev/null || true
-  cat <<'EOF' | "$WORK/MNN/build/llm_demo" "$cfg"
-<|im_start|>user
-Name the three smallest prime numbers.<|im_end|>
-<|im_start|>assistant
-EOF
+  # one line = one prompt; the engine applies the ChatML template itself
+  printf 'Name the three smallest prime numbers.' | "$WORK/MNN/build/llm_demo" "$cfg" 2>&1 | tail -40
   log "smoke done — compare vs HF reference in research/lfm3-port.md"
 }
 
