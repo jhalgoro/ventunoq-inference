@@ -73,7 +73,12 @@ do_setup() {
 
   if [ ! -x "$WORK/MNN/build/llm_demo" ]; then
     log "building MNN (x86, llm+lowmem+transformer_fuse+converter) — a few minutes"
+    # Strict ISO C++17: Fedora 44's GCC 16 libstdc++ defines std::abs(__int128) and
+    # __is_integer<__int128> twice when the legacy extension-int list (GNU dialect only)
+    # is also active -> redefinition errors in every -std=gnu++XX target. -std=c++XX
+    # disables the legacy path (bundled protobuf, CXX_EXTENSIONS OFF, built fine).
     cmake -S "$WORK/MNN" -B "$WORK/MNN/build" -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF \
       -DMNN_BUILD_LLM=ON -DMNN_LOW_MEMORY=ON -DMNN_SUPPORT_TRANSFORMER_FUSE=ON \
       -DMNN_BUILD_CONVERTER=ON -DMNN_BUILD_TOOLS=ON
     cmake --build "$WORK/MNN/build" -j"$(nproc)"
