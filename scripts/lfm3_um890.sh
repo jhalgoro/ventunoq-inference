@@ -120,11 +120,15 @@ do_test() {
   log "smoke done — compare vs HF reference in research/lfm3-port.md"
 }
 
-case "${1:-all}" in
-  setup)    do_setup ;;
-  download) do_download ;;
-  export)   do_export ;;
-  test)     do_test ;;
-  all)      do_setup; do_download; do_export; do_test ;;
-  *) echo "usage: $0 {setup|download|export|test|all}"; exit 2 ;;
-esac
+# accept one or more steps, e.g. `setup export test`
+run_step() {
+  case "$1" in
+    setup)    do_setup ;;
+    download) do_download ;;
+    export)   do_export ;;
+    test)     do_test ;;
+    all)      do_setup; do_download; do_export; do_test ;;
+    *) echo "usage: $0 {setup|download|export|test|all} [more steps...]"; exit 2 ;;
+  esac
+}
+for step in "${@:-all}"; do run_step "$step"; done
