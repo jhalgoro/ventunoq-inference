@@ -1,3 +1,37 @@
+diff --git a/transformers/llm/export/llmexport.py b/transformers/llm/export/llmexport.py
+index caf915a..9f8c6dc 100644
+--- a/transformers/llm/export/llmexport.py
++++ b/transformers/llm/export/llmexport.py
+@@ -145,6 +145,29 @@ class LlmExporter(torch.nn.Module):
+                 'bos': '<bos>',
+                 'eos': '<turn|>'
+             }
++        # lfm3 keeps its template in chat_template.jinja (macros/namespaces/generation
++        # tags), which neither tokenizer_config.json nor the minja parser covers.
++        # Simplified ChatML; think block is `<|im_start|>...<|im_end|>` (plain text),
++        # turn closes with eos `<|im_end|>`. Renders the non-thinking form
++        # (`<|im_start|><|im_end|>`) like the HF template with enable_thinking=false.
++        # lfm3 keeps its template in chat_template.jinja (macros/namespaces/generation
++        # tags), which neither tokenizer_config.json nor the minja parser covers.
++        # Simplified ChatML: turns use the pipe special tokens, the think block uses
++        # the pipe-free text tags; renders the non-thinking form like the HF template
++        # with enable_thinking=false (model closes think with the text tag itself).
++        # lfm3 keeps its chat template in chat_template.jinja (macros, namespaces,
++        # generation tags): tokenizer_config.json has no chat_template key and the
++        # minja parser cannot take the real one, so the engine fell back to raw
++        # concatenation (untemplated, out-of-distribution prompts). Simplified
++        # ChatML below; turns use the pipe special tokens, the think block uses the
++        # pipe-free text tags. Renders the non-thinking form (empty think block)
++        # like the HF template with enable_thinking=false.
++        if self.model_type == 'lfm3':
++            self.llm_config['jinja'] = {
++                'chat_template': '{{ bos_token }}{% for message in messages %}<|im_start|>{{ message.role }}\n{% if message.role == "assistant" %}<think></think>{% endif %}{{ message.content }}<|im_end|>\n{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant\n<think></think>{% endif %}',
++                'bos': '<|startoftext|>',
++                'eos': '<|im_end|>'
++            }
+         # glm_ocr's HF template is too complex for minja parser, use simplified version
+         if self.model_type == 'glm_ocr':
+             self.llm_config['jinja'] = {
 diff --git a/transformers/llm/export/utils/model.py b/transformers/llm/export/utils/model.py
 index bcd4706..ac7e661 100644
 --- a/transformers/llm/export/utils/model.py

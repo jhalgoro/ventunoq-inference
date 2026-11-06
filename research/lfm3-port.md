@@ -100,6 +100,36 @@ scripts/lfm3_um890.sh all        # setup → download → export → test
 - **mix-mask tracing** — the two-plane mask is built at runtime from config; a wrong `sliding_window`
   (0) silently degrades sliding layers to full attention (quality, not garbage).
 
+## Chat template gap — smoke answered the wrong thing (2026-11-06)
+
+Symptom: first UM890 smoke decoded cleanly (45.5 tok/s) but answered a generic greeting;
+`prompt tokens num = 11` — far too few for template + question.
+
+Root cause: LFM3 ships its chat template **only** in `chat_template.jinja` (12 KB: macros,
+namespaces, custom `{% generation %}` tags). `tokenizer_config.json` has no `chat_template`
+key, so the exporter's `get_chat_template()` found nothing, wrote no `jinja` block into
+`llm_config.json`, and the engine's `Tokenizer::apply_chat_template` fell back to raw message
+concatenation (`tokenizer.cpp:1022`). The model saw an untemplated, out-of-distribution prompt
+— fluent but unconditioned output.
+
+Template facts (from the raw HF file): turns are ChatML — `<|im_start|>{role}\n…<|im_end|>\n`
+(pipe special tokens, both in `added_tokens`); bos is `<|startoftext|>`; the assistant's thinking block
+uses **pipe-free text tags** `<think>`…`</think>` (plain text, BPE-split, not special tokens);
+`enable_thinking` defaults true; the non-thinking form is an empty block `<think></think>`
+directly after `<|im_start|>assistant\n`, and assistant history turns get the same empty block
+prepended when thinking is not carried over. eos is `<|im_end|>`.
+
+Fix (`llmexport.py`, same pattern as the `gemma4`/`glm_ocr` overrides): an `lfm3` branch writes
+a simplified minja-parseable ChatML `jinja` block rendering the **non-thinking** form. Verified
+by jinja2 render: bos + system/user/assistant turns + empty think block at the generation
+prompt. Engine plumbing note: `Llm::setChatTemplate` consumes only `jinja.chat_template` and
+`jinja.eos`; the `bos_token` jinja variable comes from `tokenizer.mtok` (populated from
+`tokenizer_config.json`'s `bos_token`, which LFM3 does define), so `{{ bos_token }}` renders.
+
+Expected after re-export: prompt tokens ~40 (was 11) and a direct answer naming 2, 3, 5.
+Thinking mode = replace the empty block with the open text tag; parked for benchmark
+comparability with the non-thinking matrix.
+
 ## Upstream angle
 
 MNN issue [#5104](https://github.com/alibaba/MNN/issues/5104) (2026-11-04) requests LFM3-VL-2B; no
