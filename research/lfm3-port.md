@@ -1,7 +1,10 @@
 # LFM3 → MNN export port (M7)
 
-**Status:** patch written + self-contained UM890 driver ready; executing on the Minisforum UM890
-PRO. First run (Fedora 44, GCC 16.2.1) hit a libstdc++-16 `__int128` redefinition bug on all
+**Status: verified end-to-end on the Minisforum UM890 PRO (2026-11-06).** torch gate passed, int4
+export 970 MB, `llm_demo` greedy smoke answers the primes prompt correctly (prefill 132 / decode
+44 tok/s, clean exit). Next: int8/hqq variants, quality-matrix rows, upstream PR.
+
+History: first run (Fedora 44, GCC 16.2.1) hit a libstdc++-16 `__int128` redefinition bug on all
 `-std=gnu++XX` targets (unrelated to the patch; protobuf with `CXX_EXTENSIONS OFF` built fine) —
 fixed in `b436509` via strict `-DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF`; re-run pending.
 
@@ -17,6 +20,11 @@ any gated-attention port: the gate must be a plain full-width projection, never 
 never exited: with stdin-only it enters `chat()`, whose REPL loop ignores getline EOF and re-prefills
 the ever-growing conversation indefinitely. Harness fix: pass prompt via file arg
 (`llm_demo cfg prompt.txt 512` → `eval()` path, terminates on EOS/max tokens).
+(4) smoke then answered a generic greeting (11 prompt tokens) — no chat template reached the
+engine: LFM3 ships its template only in `chat_template.jinja`, which neither the exporter nor
+minja handles; fixed export-side with a simplified ChatML `jinja` override (details below).
+Re-exported smoke answers correctly: 18 prompt tokens, 126 tokens at 44.1 tok/s, direct
+non-thinking "2, 3, and 5".
 (x86_64 — this QCS8300 board has no torch and is too small for the export).
 **Artifacts:** [`patches/mnn-lfm3-export.patch`](../patches/mnn-lfm3-export.patch) (applies to MNN
 `17236ad`, verified with `git apply --reverse --check`) ·
@@ -126,7 +134,9 @@ prompt. Engine plumbing note: `Llm::setChatTemplate` consumes only `jinja.chat_t
 `jinja.eos`; the `bos_token` jinja variable comes from `tokenizer.mtok` (populated from
 `tokenizer_config.json`'s `bos_token`, which LFM3 does define), so `{{ bos_token }}` renders.
 
-Expected after re-export: prompt tokens ~40 (was 11) and a direct answer naming 2, 3, 5.
+Result after re-export (2026-11-06): prompt tokens 18 (was 11) — `llm_demo`'s eval path templates
+a single user message, no system block — and the answer names 2, 3, 5 directly, non-thinking form,
+126 tokens at 44.1 tok/s.
 Thinking mode = replace the empty block with the open text tag; parked for benchmark
 comparability with the non-thinking matrix.
 

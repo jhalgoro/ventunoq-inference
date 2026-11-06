@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — **patch done**, UM890 run pending | **high** | run `scripts/lfm3_um890.sh all` |
+| M7 | LFM3 → MNN export port (F12) — **verified on UM890** (int4, 44 tok/s decode) | **high** | int8/hqq variants → quality bench → upstream PR (#5104) |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 
@@ -146,7 +146,11 @@ joule* than llama.cpp f32-compute — the decode win should look even bigger in 
 
 ## M7 — LFM3 → MNN export port (highest ceiling, real work)
 
-**Status 2026-11-05: port written, execution pending on the UM890 PRO.** Full design + triage plan:
+**Status 2026-11-06: verified end-to-end on the UM890 PRO** — torch gate passed, int4 export
+970 MB, `llm_demo` greedy smoke answers correctly (prefill 132 / decode 44 tok/s). Two runtime
+gaps found and fixed export-side (zero C++ changes): the o_proj gate-layout converter miss (gate
+expanded to full width) and the chat-template gap (LFM3 ships `chat_template.jinja` only; a
+simplified ChatML `jinja` override now ships in the patch). Full design + triage plan:
 [research/lfm3-port.md](research/lfm3-port.md). The original GGUF-spike framing is dead —
 `gguf2mnn.py` only understands llama/gpt2 tokenizers, so the path is **safetensors → `llmexport`**
 with **zero C++ changes** (engine already has the mix two-plane mask, `FusedLinearAttention(short_conv)`,
@@ -155,10 +159,10 @@ gemma-style dual rotary, and tied-embed auto-detect). Delivered:
 applies to MNN `17236ad`) + `scripts/lfm3_um890.sh` (setup/download/export/test on x86). Key
 correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
 head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
-head_dim width with zeroed frequencies. Next: run `scripts/lfm3_um890.sh all` on the UM890, pass the
-`--test` HF-vs-trace gate, smoke `llm_demo`; then int8/hqq variants and optionally VL-2B (needs the
+head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890.
+Next: int8/hqq variants, quality-matrix rows, and optionally VL-2B (needs the
 vision tower, `lfm2_vl` pattern). Upstream MNN issue #5104 (LFM3-VL-2B request, 2026-11-04) has no
-implementation — this port is the contribution candidate once verified.
+implementation — this port is the contribution candidate, now verified end-to-end; PR prep next.
 
 ## M8 — Serving: concede or build?
 
