@@ -9,6 +9,7 @@
 # Stages: q_qwen08 q_qwen08_smoke q_qwen2b q_qwen4b q_qwen9b q_qwen08base q_qwen2bbase
 #         q_dist08 q_dist2b q_dist4b q_dist9b q_all
 #         q_lfm3_smoke q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2 q_lfm3_all   (M7, R2 protocol)
+#         q_minicpm5_smoke q_minicpm5_r2 q_minicpm5_hqq_r2 q_minicpm5_int8_r2 q_minicpm5_all (M9)
 # Smoke variant (plumbing check, ~15 min): scripts/quality_matrix_mnn.sh q_qwen08_smoke
 # One-shot full ladder, detached from any SSH/session (survives disconnect):
 #   cd ~/Code/ventunoq-mnn && setsid nohup scripts/quality_matrix_mnn.sh q_all \
@@ -154,6 +155,31 @@ q_lfm3_r2()      { lfm3_r2 lfm3-models/LFM3-1.7B-MNN          LFM3-1.7B-INT4-R2;
 q_lfm3_hqq_r2()  { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int4hqq  LFM3-1.7B-INT4HQQ-R2; }
 q_lfm3_int8_r2() { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int8     LFM3-1.7B-INT8-R2; }
 q_lfm3_all()     { for s in q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2; do log "--- ladder step $s"; $s; done; }
+
+# ---- M9 MiniCPM5-2B rows: stock llama arch, exported on the UM890 (scripts/minicpm5_um890.sh
+# export/export8/exporthq, then push) into minicpm5-models/ on this board. Thinking-style
+# like LFM3 (template has reasoning_content): run q_minicpm5_smoke first — if MC answers carry
+# a reasoning preamble (F17), the R2 protocol below is the comparable row.
+mc5_stage() { # $1=exported dir $2=tag [$3=tasks]
+  local cfg="$1/config.json"
+  if [ ! -f "$cfg" ]; then
+    log "MISSING $cfg — export on the UM890 and run scripts/minicpm5_um890.sh push there first"
+    return 1
+  fi
+  run_tasks "$cfg" "$2" "${3:-$TASKS}" chat
+}
+q_minicpm5_smoke() { mc5_stage minicpm5-models/MiniCPM5-2B-MNN MINICPM5-2B-SMOKE "$TASKS_SMOKE"; }
+mc5_r2() { # $1=exported dir $2=tag — R2 protocol, same budgets as lfm3_r2/DIST2
+  EXTRA=(--mc-tokens 512 --he-tokens 1536 --gsm-tokens 1024 --niah-tokens 512
+         --no-mc-shots --mc-instruction "$DIST2_INSTR")
+  mc5_stage "$1" "$2"
+}
+q_minicpm5_r2()      { mc5_r2 minicpm5-models/MiniCPM5-2B-MNN          MINICPM5-2B-INT4-R2; }
+q_minicpm5_hqq_r2()  { mc5_r2 minicpm5-models/MiniCPM5-2B-MNN-int4hqq  MINICPM5-2B-INT4HQQ-R2; }
+q_minicpm5_int8_r2() { mc5_r2 minicpm5-models/MiniCPM5-2B-MNN-int8     MINICPM5-2B-INT8-R2; }
+# `all` = the default int4 row only; int8/hqq ladder steps exist but stay opt-in
+# (~13 extra board-hours; LFM3 already showed HQQ net negative — decide after the int4 row).
+q_minicpm5_all()     { log "--- ladder step q_minicpm5_r2"; q_minicpm5_r2; }
 
 q_all() { # one-shot ladder; resume-safe per suite, so re-run after any interruption
   for s in q_qwen2b q_qwen08base q_qwen2bbase q_qwen4b q_dist08 q_dist2b q_dist4b q_qwen9b q_dist9b; do

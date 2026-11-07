@@ -175,6 +175,33 @@ upstream). Results:
 ## Upstream angle
 
 MNN issue [#5104](https://github.com/alibaba/MNN/issues/5104) (2026-11-04) requests LFM3-VL-2B; no
-implementation exists. This text-only port is the prerequisite half and a reasonable contribution
-candidate once verified end-to-end on the UM890. VL-2B additionally needs the vision tower (mirror the
-`lfm2_vl` pattern: `MODEL_CLASS_MAPPING` entry + visual mapper) — parked until 1.7B text works.
+implementation exists. **User decision (2026-11-07): the PR must ship LFM3-VL-2B, not text-only** —
+otherwise it is apples and oranges vs what #5104 asks. Text half is done and validated; VL scoping:
+
+- **Text tower: free.** VL `text_config` == the ported LFM3-1.7B exactly (same `layer_types` incl.
+  sliding_attention, same rope_parameters) — the existing lfm3 mapper/patch applies unchanged.
+- **Data API is Qwen2-VL-shaped**: `pixel_values (N, 3·2·16²)` grouped by 2×2 merge block +
+  `image_grid_thw`; patchify permutation matches MNN's `Qwen2Vision.vision_reshape` layout;
+  prompt = `<|vision_start|>` + N×`<|image_pad|>` + `<|vision_end|>` (ids 125009/125030/125010,
+  video 125029); mean/std 0.5, resample BICUBIC, smart_resize factor 32, pixels ∈ [65536, 16.7M].
+- **Zero C++ changes looks achievable**: export `processor_family = "qwen2_vl"` → C++ `Qwen`
+  processor: `Patch::prepare` = the same smart_resize (factor patch·merge, min/max pixels via
+  config, INTER_CUBIC, temporal dup); `Qwen::gridPositions` emits **(2, N) block-major h/w coords
+  = exactly** `Lfm3VlVisionRotaryEmbedding.forward`'s documented input; `attentionInputs` =
+  block-diagonal bidirectional mask = HF's per-frame full attention. No mrope: `Lfm3VlModel.forward`
+  passes 1-D position_ids through, and `Omni::gen_position_ids` falls back to plain positions when
+  the graph's position input has dim[0]==1.
+- **The one real gap**: the traced vision graph's contract is (patches, position_ids,
+  attention_mask) — no `grid_thw` — but the vision tower's gated depthwise **2D conv** layers
+  (`Lfm3VlVisionConv2d`, kernel 3, per-frame zero pad) need the frame grid. ONNX Reshape in the MNN
+  converter takes a constant shape only → rewrite the conv as **9 shifted gathers** with
+  neighbor indices/masks derived elementwise from position_ids (frame start = `i // (h·w)`,
+  block-major offset formula) — mathematically identical to HF, fully dynamic, no data-dependent
+  shapes. Verify numerically against the HF reference.
+- Vision tower: 14 layers (conv,conv,attn,then alternating), hidden 1024, 16 heads / 8 kv,
+  head_dim 64, GQA + per-head q/k RMSNorm, axial rope (inv_freq from head_dim//4, cat h|w,
+  rotate_half over full 64), MLP silu-gate 2560; projector LayerNorm→Linear(4096)→GELU→Linear(2048)
+  with 2×2 downsample. Model ships custom code (`modeling_lfm3_vl.py`, transformers ≥5.19-dev APIs:
+  `vision_utils.get_vision_position_ids/get_vision_attention_seqlens`).
+- Chat template: 12 KB `chat_template.jinja` → same minja gap as text; extend the llmexport lfm3
+  jinja override to `lfm3_vl` (non-thinking + vision placeholder).

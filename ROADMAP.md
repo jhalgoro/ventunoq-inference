@@ -13,9 +13,10 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — **done**: variants + R2 quality + pinned bench in BENCHMARKS | **high** | upstream PR (#5104) — parked TODO, green-light pending |
+| M7 | LFM3 → MNN export port (F12) — text **done** + validated; PR re-scoped to ship LFM3-VL-2B | **high** | LFM3-VL-2B vision export (scoped, in progress) → then PR (#5104) |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
+| M10 | MiniCPM5-2B → MNN: convert + validate (stock llama arch, no patch) | low | UM890 export → board smoke/bench → R2 row |
 
 ---
 
@@ -160,12 +161,20 @@ plus the ChatML `jinja` override in `llmexport.py`, applies to MNN `17236ad`) + 
 correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
 head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
 head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890;
-quant variants, R2 quality ladder (3 variants × 10 suites, zero failures) and pinned benchmarks
+quant variants, R2 quality ladder (3 variants, zero failures) and pinned benchmarks
 are in BENCHMARKS §1/§4.1 — int4 75.4/21.4 pp/tg (+54%/+83% vs llama.cpp Q4_K_M), HQQ rejected
-(net negative), int8 kept as quality tier. Upstream MNN issue #5104 (LFM3-VL-2B request,
-2026-11-04) has no implementation — this port is the contribution candidate.
-**TODO (parked): upstream PR — validation is complete, awaiting user green-light.**
-VL-2B remains parked too (needs the vision tower, `lfm2_vl` pattern).
+(net negative), int8 kept as quality tier.
+**PR scope (user decision 2026-11-07): ship LFM3-VL-2B too** — a text-only PR against issue
+#5104 (which asks for VL-2B) would be apples and oranges. Scoping done: VL `text_config` is
+byte-equivalent to the ported LFM3-1.7B (incl. sliding_attention layers); the vision tower
+(14-layer conv/attn hybrid, axial rope) traces under the C++ `qwen2_vl` processor contract
+(patches + (2,N) block-major position ids + block-diagonal mask — the C++ `Qwen::gridPositions`
+already produces exactly the (2,N) axial rope input HF expects; no mrope: text graph takes 1-D
+positions). Open work: `Lfm3VlVision` export class, incl. a grid-free rewrite of the vision
+gated-conv layer (the traced graph gets no `grid_thw`, so the 2D depthwise conv must become
+9 shifted gathers with position-derived masks).
+VL chat template + tokenizer live in `chat_template.jinja` (same minja gap → extend the lfm3
+jinja override).
 
 ## M8 — Serving: concede or build?
 
@@ -181,6 +190,22 @@ Current draft — M1–M6 refine the numbers, nothing else changes it:
 | Workload | Engine | Command shape |
 |---|---|---|
 | CPU chat/code, Qwen-class ≤2B | **MNN fp16** | `taskset -c 0-3 llm_bench/llm_demo -t 4 -c 2` |
-| CPU, LFM2/LFM3 | llama.cpp (MNN lacks arch, F12) | `-t 4 --cpu-mask 0xf --cpu-strict 1` |
+| CPU, LFM2/LFM3 | **MNN fp16** (M7 port: 75.4/21.4 pp/tg, +54%/+83% vs llama.cpp Q4_K_M) | same shape; `scripts/lfm3_um890.sh` to export |
 | Anything NPU (prefill-heavy ≤1.75 GiB) | llama.cpp Hexagon runner (F13) | `-ngl 100` recipe in parent — M3.5 may add MNN-QNN |
 | HTTP serving / concurrency | llama.cpp `llama-server` | parent repo §5 |
+
+## M10 — MiniCPM5-2B → MNN (convert + validate)
+
+`openbmb/MiniCPM5-2B` (2026, ~2.5B): plain `LlamaForCausalLM` — model_type `llama`, GQA 16:2,
+head_dim 128, rope_theta 5e6, 42×2048/6144, 131K ctx, no custom code → **zero porting work**,
+pure pipeline: export → smoke → board parity → pinned bench → R2 quality row. Risk checks done
+(2026-11-07): eos is a list `[1, 130073]` but lives in `generation_config.json`, which
+llmexport's tokenizer writer already flattens into the stop list (so `<|im_end|>` stops
+generation); chat template is ChatML with reasoning_content + XML tool blocks — if minja
+rejects it, reuse the lfm3 jinja-override pattern (non-thinking render). Thinking-style model →
+score under the R2 protocol like the LFM3/DIST2 rows. Official GGUF repos exist → llama.cpp
+Q4_K_M baseline for the §1-style comparison.
+
+Driver: `scripts/minicpm5_um890.sh` (reuses the lfm3-work venv + MNN build; steps
+setup/download/export/export8/exporthq/test/push). Board: `q_minicpm5_smoke` then
+`q_minicpm5_all` (int4 R2; int8/hqq stages exist but opt-in — LFM3 showed HQQ net negative).
