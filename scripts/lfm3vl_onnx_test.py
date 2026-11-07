@@ -67,7 +67,11 @@ def main():
         MODEL_DIR, trust_remote_code=True, dtype=torch.float32)
     model.eval()
     with torch.no_grad():
-        ref = model.model.get_image_features(pixel_values, grid_thw).last_hidden_state
+        # pooler_output = multi_modal_projector(vision_tower) per image — the same
+        # post-merge features our visual.onnx emits (last_hidden_state is the
+        # pre-projector, pre-merge vision tower output).
+        out = model.model.get_image_features(pixel_values, grid_thw)
+    ref = torch.cat(out.pooler_output, dim=0).float()
     print(f'HF image_embeds {tuple(ref.shape)}')
 
     # C++ qwen2_vl processor contract: merged patches in merge-block order
@@ -78,7 +82,7 @@ def main():
     frames = np.concatenate([np.repeat(i, int(g[0] * g[1] * g[2]))
                              for i, g in enumerate(grid_thw)])
     mask = np.zeros((1, n, n), dtype=np.float32)
-    mask[frames[:, None] != frames[None, :]] = torch.finfo(torch.float32).min
+    mask[0, frames[:, None] != frames[None, :]] = torch.finfo(torch.float32).min
 
     sess = InferenceSession(ONNX_PATH, providers=['CPUExecutionProvider'])
     got = torch.from_numpy(sess.run(None, {
