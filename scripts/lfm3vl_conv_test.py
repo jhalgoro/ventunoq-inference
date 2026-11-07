@@ -96,7 +96,7 @@ def main():
     # --- ONNX round-trip of the rewrite ---------------------------------------
     onnx_path = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'lfm3vl_conv.onnx')
     conv, rewrite = make_pair()
-    x = torch.randn(8 * 8, C)
+    x = torch.randn(2 * 8 * 8, C)
     pos = grid_positions(2, 8, 8)
     want = rewrite(x, pos.float())
     torch.onnx.export(rewrite, (x, pos), onnx_path,
