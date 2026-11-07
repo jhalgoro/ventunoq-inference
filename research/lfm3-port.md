@@ -155,8 +155,9 @@ upstream). Results:
   architectures confirmed for all three quant variants.
 - `llm_demo` decode (all 8 cores, greedy): int4 **21.7**, int4+HQQ **21.8**, int8 **12.6** tok/s
   (prefill 55–63). int8 pays the memory-bound decode tax at 2× size. Pinned `llm_bench -pg 512,128`
-  regime runs (comparable with §1/§3 of BENCHMARKS, incl. the llama.cpp Q4_K_M baseline 49.0/11.7)
-  are scheduled after the quality ladder to avoid load contamination.
+  regime (comparable with §1/§3 of BENCHMARKS): int4 **75.4 ± 0.2 / 21.4 ± 0.0** pp/tg, HQQ
+  75.7 / 21.4, int8 77.6 / **12.4** — vs the llama.cpp Q4_K_M baseline 49.0/11.7 that is
+  **+54% pp / +83% tg**, the largest cross-engine gap in the table (BENCHMARKS §1).
 - **Quality protocol:** smoke under the plain sibling protocol scored 0.00 on arc/hellaswag/
   openbookqa/mmlu — LFM3 answers MC with a reasoning preamble ("The question asks…") and never
   reaches a letter inside the 16-token MC budget: the F17 reasoning-style failure verbatim, even
@@ -165,6 +166,11 @@ upstream). Results:
   QWEN35-*-DIST2 rows. R2 probe: arc 5/5.
 - Variant smokes (UM890): int8 1.8 GB, int4+HQQ 970 MB — both answer the primes prompt correctly;
   HQQ costs zero runtime vs plain int4.
+- **Full R2 ladder done (2026-11-07, zero failures, ~12.4 h for all three variants).** Rows in
+  BENCHMARKS §4.1. Verdicts: LFM3-1.7B beats 2B-DIST2 on 7/10 tasks (gsm8k 86 vs 60, mmlu 69.2
+  vs 51), loses hellaswag (41 vs 52) and ppl (39.7 vs 33.7). HQQ **net negative** (worse on 7/10;
+  humaneval +18 doesn't redeem gsm8k −8) — plain int4 stays the recipe. int8 is the quality tier
+  (humaneval 38→72, mmlu 77.3, ppl 33.0 at 2B parity) for 2× size and −42% decode.
 
 ## Upstream angle
 

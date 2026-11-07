@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — **verified on UM890** (int4, 44 tok/s decode) | **high** | int8/hqq variants → quality bench → upstream PR (#5104) |
+| M7 | LFM3 → MNN export port (F12) — **done**: variants + R2 quality + pinned bench in BENCHMARKS | **high** | upstream PR (#5104) — parked TODO, green-light pending |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 
@@ -159,11 +159,12 @@ gemma-style dual rotary, and tied-embed auto-detect). Delivered:
 plus the ChatML `jinja` override in `llmexport.py`, applies to MNN `17236ad`) + `scripts/lfm3_um890.sh` (setup/download/export/test on x86). Key
 correctness finding: HF partial RoPE zero-pads inv_freq and pairs `(i, i+head_dim/2)` across the full
 head — MNN's `phi_rotary_pos` auto-detect path is numerically wrong here, so the patch keeps cos/sin at
-head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890.
-In flight: quant variants (`export8`/`exporthq` steps) + quality-matrix rows (`q_lfm3_all` stage
-runs on this board from `lfm3-models/` pushed off the UM890). Upstream MNN issue #5104
-(LFM3-VL-2B request, 2026-11-04) has no implementation — this port is the contribution
-candidate. **TODO (parked): upstream PR after the variant + quality validation lands.**
+head_dim width with zeroed frequencies. Done: `scripts/lfm3_um890.sh all` ran green on the UM890;
+quant variants, R2 quality ladder (3 variants × 10 suites, zero failures) and pinned benchmarks
+are in BENCHMARKS §1/§4.1 — int4 75.4/21.4 pp/tg (+54%/+83% vs llama.cpp Q4_K_M), HQQ rejected
+(net negative), int8 kept as quality tier. Upstream MNN issue #5104 (LFM3-VL-2B request,
+2026-11-04) has no implementation — this port is the contribution candidate.
+**TODO (parked): upstream PR — validation is complete, awaiting user green-light.**
 VL-2B remains parked too (needs the vision tower, `lfm2_vl` pattern).
 
 ## M8 — Serving: concede or build?

@@ -26,6 +26,11 @@ llama.cpp baselines are the parent repo's: **v0.8.0 b11972** (official Ubuntu-ar
 |---|---|---|---|---|
 | Qwen3.5-0.8B | 148.7 / 31.9 | 106.2 / 27.0 | **162.7 ± 0.1 / 41.5 ± 0.1** | +9.4% / **+30%** |
 | Qwen3.5-2B | 69.8 / 16.1 | — | **75.7 ± 0.1 / 19.2 ± 0.0** | +8.4% / **+19%** |
+| LFM3-1.7B | — | 49.0 / 11.7 | **75.4 ± 0.2 / 21.4 ± 0.0** | **+54% / +83% vs Q4_K_M** ¹ |
+
+¹ LFM3 has no llama.cpp Q4_0 baseline (§3), so the last cell compares against the like-model
+Q4_K_M. Largest cross-engine gap in the table — plausible cause: llama.cpp's LFM3 support is
+weeks old while MNN's conv/linear-attention ops are mature; int8 MNN trades tg for quality (§4.1).
 
 - MNN's int4 weights carry fp16 per-block scales (≈Q4_K-class quality) and compute in ARM82
   fp16 — the win is kernel + quant format together.
@@ -100,6 +105,16 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 | 4B DIST (R1) | 65.0 | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | ✗ | 24.10 |
 | 2B DIST **R2** | 60.0 | 38.0 | 71.0 | 52.0 | 57.0 | 68.0 | 57.0 | 51.0 | **5/5** | 33.71 |
 | 4B DIST **R2** | 72.0 | **74.0** | **92.0** | **68.0** | **68.0** | **93.0** | 77.0 | **79.3** | 5/5 | 24.10 |
+| LFM3 int4 **R2** | 86.0 | 38.0 | 80.0 | 41.0 | 66.0 | 72.0 | 53.0 | 69.2 | 5/5 | 39.65 |
+| LFM3 int4+HQQ **R2** | 78.0 | 56.0 | 79.0 | 40.0 | 63.0 | 69.0 | 48.0 | 67.2 | 5/5 | 41.08 |
+| LFM3 int8 **R2** | 86.0 | 72.0 | 81.0 | 46.0 | 68.0 | 70.0 | 55.0 | 77.3 | 5/5 | 33.03 |
+
+- LFM3-1.7B rows (2026-11-06/07, M7): exported on the UM890 (`scripts/lfm3_um890.sh`), scored
+  via `q_lfm3_*_r2` — same R2 protocol/budgets as the DIST2 rows. Read: at 1.7B it beats 2B
+  DIST2 on 7/10 tasks (gsm8k +26, MMLU +18, ARC +9) and loses HellaSwag −11 and ppl — reasoning-
+  shaped strength, commonsense/literary weakness. HQQ is **net negative** here (worse 7/10; its
+  HumanEval +18 doesn't redeem gsm8k −8) — plain int4 stays the recipe. int8 is the quality tier
+  (HumanEval 0.38→0.72, MMLU +8, ppl at 2B parity) for 2× size and −42% decode (12.4 vs 21.4 tg).
 
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
   output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2
