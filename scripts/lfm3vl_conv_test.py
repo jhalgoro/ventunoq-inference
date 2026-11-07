@@ -94,15 +94,18 @@ def main():
         print(f'  torch t={t} grid={h}x{w}: max abs diff {err:.3e} {"OK" if ok else "FAIL"}')
 
     # --- ONNX round-trip of the rewrite ---------------------------------------
+    # export through MNN's own onnx_export wrapper (dynamo=False, opset 15) so the
+    # gate exercises the exact production export path, not the dynamo exporter
     onnx_path = os.path.join(os.environ.get('TMPDIR', '/tmp'), 'lfm3vl_conv.onnx')
+    from utils.torch_utils import onnx_export
     conv, rewrite = make_pair()
     x = torch.randn(2 * 8 * 8, C)
     pos = grid_positions(2, 8, 8)
     want = rewrite(x, pos.float())
-    torch.onnx.export(rewrite, (x, pos), onnx_path,
-                      input_names=['hidden_states', 'position_ids'],
-                      output_names=['output'],
-                      dynamic_axes={'hidden_states': {0: 'size'}, 'position_ids': {1: 'size'}})
+    onnx_export(rewrite, (x, pos), onnx_path,
+                input_names=['hidden_states', 'position_ids'],
+                output_names=['output'],
+                dynamic_axes={'hidden_states': {0: 'size'}, 'position_ids': {1: 'size'}})
     import onnxruntime as ort
     sess = ort.InferenceSession(onnx_path, providers=['CPUExecutionProvider'])
     got = torch.from_numpy(sess.run(None, {'hidden_states': x.numpy(),
