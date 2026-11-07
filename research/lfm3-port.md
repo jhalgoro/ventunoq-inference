@@ -233,7 +233,7 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   recomposition cat(h_freqs|w_freqs) repeated ×2 over head_dim (verified elementwise).
 - **Projector + MLP** reused as HF modules verbatim: LayerNorm → reshape(-1, 4096) (constant shape,
   Qwen2Vision-merger precedent) → linear_1 → gelu → linear_2; vision MLP is HF `Lfm3VlMLP` (w1/w3/w2).
-- **Graph contract**: inputs `patches (N, 3·2·16²=96)`, `position_ids (2,N)`, `attention_mask (1,N,N)`,
+- **Graph contract**: inputs `patches (N, 3·2·16²=1536)`, `position_ids (2,N)`, `attention_mask (1,N,N)`,
   dynamic `size` axis; `processor_family="qwen2_vl"`, `patch_layout="merged"` → C++ `Qwen` processor
   (Bidirectional mask for images, BlockDiagonal per frame for video); main-config gets
   image_mean/norm=0.5·255 & 1/(0.5·255), size_unit 32, min/max pixels, token ids 125009/125010/125030.
