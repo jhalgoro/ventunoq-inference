@@ -74,7 +74,8 @@ do_setup() {
     "$PY" -m pip install -q --upgrade pip
     "$PY" -m pip install -q torch --index-url https://download.pytorch.org/whl/cpu
     "$PY" -m pip install -q 'transformers>=5.12' 'huggingface_hub[cli]' \
-      sentencepiece onnx onnxslim onnxruntime tqdm numpy yaspin requests Pillow datasets
+      sentencepiece onnx onnxslim onnxruntime tqdm numpy yaspin requests Pillow datasets \
+      torchvision
   fi
 
   if [ ! -x "$WORK/MNN/build/llm_demo" ]; then

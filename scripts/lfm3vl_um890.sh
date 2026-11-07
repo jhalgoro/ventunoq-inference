@@ -35,6 +35,7 @@ log() { echo "[lfm3vl] $*"; }
 do_setup() {
   # reuse the text-port setup step wholesale (deps, MNN clone+patch, venv, build)
   "$REPO_ROOT/scripts/lfm3_um890.sh" setup
+  ensure_torchvision
 }
 
 do_download() {
@@ -75,7 +76,15 @@ do_onnxexport() {
   "$PY" llmexport.py --path "$MODEL_DIR" --export onnx --dst_path "$ONNX_DIR"
 }
 
+ensure_torchvision() {
+  # HF image processor custom code imports torchvision (reference side only)
+  "$PY" -c 'import torchvision' 2>/dev/null && return
+  log "installing torchvision (CPU) for the HF image processor"
+  "$PY" -m pip install -q torchvision --index-url https://download.pytorch.org/whl/cpu
+}
+
 do_onnxtest() {
+  ensure_torchvision
   make_image
   [ -f "$ONNX_DIR/onnx/visual.onnx" ] || do_onnxexport
   log "visual.onnx (ORT) vs HF get_image_features"
