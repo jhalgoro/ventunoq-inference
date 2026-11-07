@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — text **done** + validated; PR re-scoped to ship LFM3-VL-2B | **high** | LFM3-VL-2B vision export (scoped, in progress) → then PR (#5104) |
+| M7 | LFM3 → MNN export port (F12) — text **done** + validated; PR re-scoped to ship LFM3-VL-2B | **high** | LFM3-VL-2B vision export **implemented** → UM890 numerical gates + smoke → then PR (#5104) |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 | M10 | MiniCPM5-2B → MNN: convert + validate (stock llama arch, no patch) | low | UM890 export → board smoke/bench → R2 row |
@@ -170,9 +170,13 @@ byte-equivalent to the ported LFM3-1.7B (incl. sliding_attention layers); the vi
 (14-layer conv/attn hybrid, axial rope) traces under the C++ `qwen2_vl` processor contract
 (patches + (2,N) block-major position ids + block-diagonal mask — the C++ `Qwen::gridPositions`
 already produces exactly the (2,N) axial rope input HF expects; no mrope: text graph takes 1-D
-positions). Open work: `Lfm3VlVision` export class, incl. a grid-free rewrite of the vision
-gated-conv layer (the traced graph gets no `grid_thw`, so the 2D depthwise conv must become
-9 shifted gathers with position-derived masks).
+positions). **VL export implemented (2026-11-07)**: `Lfm3VlVision` in `utils/vision.py` with the
+grid-free 9-gather rewrite of the gated depthwise conv (numpy-validated bitwise vs HF; frame-offset
+fix keeps multi-frame taps per frame), MNN `Attention`+`VisionRotary` reuse for the attn layers,
+HF projector/MLP verbatim, `regist_lfm3_vl` mapper, jinja override extended — all still zero C++
+changes, patch regenerated (5 files, applies clean to `17236ad`). Driver `scripts/lfm3vl_um890.sh`
++ conv/onnx numerical gates written. Open: UM890 run (convtest → onnxtest → `--test` → int4 export
+→ llm_demo image smoke → board QA), then PR vs #5104.
 VL chat template + tokenizer live in `chat_template.jinja` (same minja gap → extend the lfm3
 jinja override).
 

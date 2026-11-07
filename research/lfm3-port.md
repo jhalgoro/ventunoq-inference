@@ -205,3 +205,53 @@ otherwise it is apples and oranges vs what #5104 asks. Text half is done and val
   `vision_utils.get_vision_position_ids/get_vision_attention_seqlens`).
 - Chat template: 12 KB `chat_template.jinja` → same minja gap as text; extend the llmexport lfm3
   jinja override to `lfm3_vl` (non-thinking + vision placeholder).
+
+## VL implementation record (2026-11-07, export-side, zero C++ changes)
+
+All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pure Python export:
+
+- **`utils/vision.py` — `Lfm3VlVision(Vision)`** (registered `lfm3_vl`). Subclasses `Vision`
+  directly, NOT `Qwen2Vision`: `Lfm3VlModel` uses plain 1-D text positions, and `Llm.get_position_ids`
+  routes to `visual.get_position_ids` whenever it exists (Qwen2VL mrope) — absent attribute keeps the
+  1-D fallback, which is also what `Omni::gen_position_ids` picks (module position input dim[0]==1).
+  Qwen2Vision helpers reused by class-body aliasing: `refresh_image_resize_config`,
+  `reset_multimodal_state`, `str_to_ids` (`<img>` prompt parsing), `vision_reshape` (temporal dup +
+  merged flatten — identical to the HF processor's merge-block (c,tp,p,p) flatten),
+  `vision_position_ids` (== C++ `Qwen::gridPositions`), `vision_attention_mask` (per-frame blocks),
+  `images_forward`, `embed`, `smart_resize` (factor 32, [65536, 16.7M], BICUBIC == C++
+  `qwenVlSmartResize` + `resizeImage(INTER_CUBIC)`).
+- **`Lfm3VlVisionConv`** — the grid-free rewrite of `Lfm3VlVisionConv2d`: in_proj chunk(value,scale,key),
+  gated=value·key, then nine shifted `index_select` gathers whose merge-block source index and validity
+  masks come from position_ids arithmetic; `frame_base = floor(i/(grid_h·grid_w))·(grid_h·grid_w)` keeps
+  multi-frame taps inside their frame. Output `out_proj(scale·convolved)` == HF.
+  **Numerically validated bitwise-exact** (numpy port vs HF reference on C++ gridPositions order,
+  t=1..3, grids 2×2…14×30: max abs diff 0). `scripts/lfm3vl_conv_test.py` repeats this in torch +
+  ONNX/ORT round-trip on the UM890.
+- **Attention layers** reuse MNN `Attention` (kv_cache/`past_key_value` inert in vision — never set;
+  `export_fused_attn` False → HF `q_layernorm`/`k_layernorm` traced directly, norm-before-rope like HF)
+  + `VisionRotary(rotary_dim=head_dim//2=32, theta=1e6)`: its cos/sin is exactly HF's axial
+  recomposition cat(h_freqs|w_freqs) repeated ×2 over head_dim (verified elementwise).
+- **Projector + MLP** reused as HF modules verbatim: LayerNorm → reshape(-1, 4096) (constant shape,
+  Qwen2Vision-merger precedent) → linear_1 → gelu → linear_2; vision MLP is HF `Lfm3VlMLP` (w1/w3/w2).
+- **Graph contract**: inputs `patches (N, 3·2·16²=96)`, `position_ids (2,N)`, `attention_mask (1,N,N)`,
+  dynamic `size` axis; `processor_family="qwen2_vl"`, `patch_layout="merged"` → C++ `Qwen` processor
+  (Bidirectional mask for images, BlockDiagonal per frame for video); main-config gets
+  image_mean/norm=0.5·255 & 1/(0.5·255), size_unit 32, min/max pixels, token ids 125009/125010/125030.
+  visual quant_bit 8 (class default).
+- **`utils/model_mapper.py` `regist_lfm3_vl`**: deepcopy of the lfm3 map, config keys prefixed
+  `text_config.`, model paths under `model.language_model.*`, `visual`→`model.vision_tower`,
+  `multi_modal_projector`→`model.multi_modal_projector`. `init_models` discovers `regist_*`
+  alphabetically, so `lfm3` exists before `lfm3_vl` deep-copies it.
+- **`utils/model.py`**: MODEL_CLASS_MAPPING `lfm3_vl`→`AutoModelForImageTextToText` (custom code via
+  auto_map); dual-rope + zero-padded partial-rotary conditions extended to `lfm3_vl`.
+- **`llmexport.py`**: jinja ChatML override extended to `lfm3_vl`; `--test "<img>…</img>…"` runs the
+  full torch-side VL pipeline (str_to_ids → vision forward → embed → text backbone).
+- **Driver**: `scripts/lfm3vl_um890.sh` (setup/download/convtest/onnxexport/onnxtest/export/test/push)
+  + `scripts/lfm3vl_onnx_test.py` (ORT `visual.onnx` vs HF `get_image_features` on one image: HF
+  pixel_values feed `patches` directly — same merge-block contract — with gridPositions ids and the
+  per-frame mask). llm_demo image prompt syntax: `<img>/path/file.jpg</img>` in the prompt file
+  (`kOmniMultimodalRegex`).
+- Static checks pass (py_compile ×5, AST alias audit, conv math bitwise-exact); patch applies clean to
+  `17236ad`. **Pending on UM890**: convtest → onnxexport → onnxtest → `--test` gate → int4 b64 export →
+  llm_demo image smoke → board QA. Video math (frame_base, BlockDiagonal) is implemented but only
+  images are tested in this pass.
