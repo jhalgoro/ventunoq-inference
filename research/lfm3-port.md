@@ -291,6 +291,9 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   tg128 **21.43 ± 0.01** — text parity with LFM3-1.7B int4 (75.4/21.4) despite the 2B text tower
   + loaded vision module (953 MiB). No llama.cpp baseline exists for LFM3-VL.
 - **Quality**: `q_lfm3vl_smoke` plumbing PASS (all 10 suites, ~13 min; MC suites non-zero even
-  under the plain protocol at n=5). Full **R2 ladder** `q_lfm3vl_r2` running detached
-  (`results/quality_lfm3vl.out`, resume-safe; scores → BENCHMARKS §4.1 row when done).
+  under the plain protocol at n=5). Full **R2 ladder** `q_lfm3vl_r2` DONE (2.5 h, 10/10 suites):
+  gsm8k 72, humaneval 40, arc 71, hellaswag 53, winogrande 68, obqa 76, csqa 61, mmlu 55,
+  niah 5/5, ppl 151.77 → BENCHMARKS §4.1 row. 8-task mean 62.0 ≈ text-only 1.7B int4 (63.2) with
+  a commonsense↑/reasoning↓ shape; ppl is a checkpoint domain weakness (fluent Austen probe),
+  not an export artifact.
 - **Vision speed**: 0.21 MP image → 1.59 s board (0.132 MP/s), 0.84 s UM890 x86 (0.248 MP/s).

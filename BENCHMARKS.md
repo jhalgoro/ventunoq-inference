@@ -113,6 +113,7 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 | LFM3 int4 **R2** | 86.0 | 38.0 | 80.0 | 41.0 | 66.0 | 72.0 | 53.0 | 69.2 | 5/5 | 39.65 |
 | LFM3 int4+HQQ **R2** | 78.0 | 56.0 | 79.0 | 40.0 | 63.0 | 69.0 | 48.0 | 67.2 | 5/5 | 41.08 |
 | LFM3 int8 **R2** | 86.0 | 72.0 | 81.0 | 46.0 | 68.0 | 70.0 | 55.0 | 77.3 | 5/5 | 33.03 |
+| LFM3-VL-2B int4 **R2** | 72.0 | 40.0 | 71.0 | 53.0 | 68.0 | 76.0 | 61.0 | 55.0 | **5/5** | 151.77 |
 
 - LFM3-1.7B rows (2026-11-06/07, M7): exported on the UM890 (`scripts/lfm3_um890.sh`), scored
   via `q_lfm3_*_r2` — same R2 protocol/budgets as the DIST2 rows. Read: at 1.7B it beats 2B
@@ -120,6 +121,14 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
   shaped strength, commonsense/literary weakness. HQQ is **net negative** here (worse 7/10; its
   HumanEval +18 doesn't redeem gsm8k −8) — plain int4 stays the recipe. int8 is the quality tier
   (HumanEval 0.38→0.72, MMLU +8, ppl at 2B parity) for 2× size and −42% decode (12.4 vs 21.4 tg).
+
+- LFM3-VL-2B row (2026-11-08, M7 VL): exported on the UM890 (`scripts/lfm3vl_um890.sh`, int4 b64 /
+  visual int8), scored via `q_lfm3vl_r2` — same R2 protocol. 8-task mean 62.0 vs 63.2 for the
+  text-only 1.7B int4: parity overall, different shape — commonsense up (HellaSwag +12, CSQA +8,
+  OBQA +4) vs reasoning/knowledge down (gsm8k −14, ARC −9, MMLU −14.2). ppl 151.8 is a large
+  literary-domain regression, but an Austen continuation probe is fluent and on-style, and task
+  scores are healthy — read as a vision-mix checkpoint property on 1925 prose, not an export
+  artifact (the LFM3 family was already the ppl laggard: 39.7 vs Qwen2B 21.3).
 
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
   output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2
