@@ -1,6 +1,6 @@
 # MiniCPM5-2B → MNN (M10) — zero-patch conversion record
 
-**Status 2026-11-08: done.** `openbmb/MiniCPM5-2B` is plain `LlamaForCausalLM`
+**Status 2026-11-08: closed.** `openbmb/MiniCPM5-2B` is plain `LlamaForCausalLM`
 (model_type `llama`, GQA 16:2, head_dim 128, rope_theta 5e6, 42×2048/6144, 131K ctx,
 untied 130560-vocab head, single 5.04 GB safetensors, `PreTrainedTokenizerFast`) — stock
 `llmexport`, **no MNN changes at all**. Pipeline: UM890 export → board smoke/bench → R2.
@@ -38,6 +38,8 @@ untied 130560-vocab head, single 5.04 GB safetensors, `PreTrainedTokenizerFast`)
   flip; LFM3-1.7B +15/+22/+6 on WG/OBQA/CSQA) — checkpoint behavior, not harness noise.
 
 ## Open
+
+M10 closed 2026-11-08. Parked, non-blocking:
 
 - llama.cpp Q4_K_M baseline (official GGUFs exist) for the §1 cross-engine cell — parent repo.
 - int8 variant (opt-in `q_minicpm5_int8_r2`) if the quality tier is ever wanted; HQQ skipped

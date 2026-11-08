@@ -16,7 +16,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board) | **high** | open upstream PR vs #5104 with `patches/mnn-lfm3-export.patch` |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
-| M10 | MiniCPM5-2B → MNN: **done** — zero-patch export, all gates green, §1+§4.1 rows in | low | llama.cpp Q4_K_M baseline (parent repo) |
+| M10 | MiniCPM5-2B → MNN: **closed** — zero-patch export, all gates green, §1+§4.1 rows in | low | — (Q4_K_M baseline parked → parent repo) |
 
 ---
 
@@ -229,4 +229,6 @@ download, `--test` gate, int4 b64 export 1.7G, x86 smoke 35.8 tok/s) → board s
 pinned bench **57.3/18.4** pp/tg (§1) → R2 ladder 10/10 in 2.8 h: gsm8k 76, humaneval 52
 (best int4), arc 75, mmlu 58.1, niah 5/5, ppl 31.9 (§4.1). Reasoning-shaped, commonsense-weak,
 speed behind Qwen3.5-2B (42 layers, 130K untied vocab). Full record:
-[research/minicpm5-port.md](research/minicpm5-port.md). Remaining: llama.cpp Q4_K_M baseline.
+[research/minicpm5-port.md](research/minicpm5-port.md). **Closed 2026-11-08** — the llama.cpp
+Q4_K_M cross-engine cell is parked to the parent repo (official GGUFs make it a routine run
+there; nothing on our side blocks on it).
