@@ -9,6 +9,7 @@
 # Stages: q_qwen08 q_qwen08_smoke q_qwen2b q_qwen4b q_qwen9b q_qwen08base q_qwen2bbase
 #         q_dist08 q_dist2b q_dist4b q_dist9b q_all
 #         q_lfm3_smoke q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2 q_lfm3_all   (M7, R2 protocol)
+#         q_lfm3vl_smoke q_lfm3vl_r2 q_lfm3vl_all   (M7 LFM3-VL-2B, R2 protocol)
 #         q_minicpm5_smoke q_minicpm5_r2 q_minicpm5_hqq_r2 q_minicpm5_int8_r2 q_minicpm5_all (M9)
 # Smoke variant (plumbing check, ~15 min): scripts/quality_matrix_mnn.sh q_qwen08_smoke
 # One-shot full ladder, detached from any SSH/session (survives disconnect):
@@ -155,6 +156,15 @@ q_lfm3_r2()      { lfm3_r2 lfm3-models/LFM3-1.7B-MNN          LFM3-1.7B-INT4-R2;
 q_lfm3_hqq_r2()  { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int4hqq  LFM3-1.7B-INT4HQQ-R2; }
 q_lfm3_int8_r2() { lfm3_r2 lfm3-models/LFM3-1.7B-MNN-int8     LFM3-1.7B-INT8-R2; }
 q_lfm3_all()     { for s in q_lfm3_r2 q_lfm3_hqq_r2 q_lfm3_int8_r2; do log "--- ladder step $s"; $s; done; }
+
+# ---- M7 LFM3-VL-2B rows: text tower scored under the same R2 protocol as the LFM3 rows
+# (thinking-style template, same MC preamble behavior — q_lfm3_smoke precedent). Exported
+# on the UM890 (scripts/lfm3vl_um890.sh export, int4 b64 / visual int8) and pushed to
+# lfm3-models/LFM3-VL-2B-MNN. The vision module loads at init but is unused in chat mode;
+# board binaries must carry MNN_BUILD_OPENCV+MNN_IMGCODECS (scripts/build_mnn.sh).
+q_lfm3vl_smoke() { lfm3_stage lfm3-models/LFM3-VL-2B-MNN LFM3-VL-2B-INT4-SMOKE "$TASKS_SMOKE"; }
+q_lfm3vl_r2()    { lfm3_r2 lfm3-models/LFM3-VL-2B-MNN LFM3-VL-2B-INT4-R2; }
+q_lfm3vl_all()   { log "--- ladder step q_lfm3vl_r2"; q_lfm3vl_r2; }
 
 # ---- M9 MiniCPM5-2B rows: stock llama arch, exported on the UM890 (scripts/minicpm5_um890.sh
 # export/export8/exporthq, then push) into minicpm5-models/ on this board. Thinking-style
