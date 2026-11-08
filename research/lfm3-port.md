@@ -281,3 +281,16 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   1.59 s (0.131 MP/s), 223 prompt tokens (204 embeds), coherent "colorful static noise / TV snow"
   description, prefill 70.6 / decode 21.8 tok/s. Video math (frame_base, BlockDiagonal) is
   implemented but only images are tested in this pass.
+
+## Pre-PR benchmarks (2026-11-07/08, board)
+
+- **Board binaries must carry vision**: `llm_bench`/`llm_eval`/`ppl_eval` were Oct-31 builds that
+  fail VL init ("Unsupported vision processor family"). `scripts/build_mnn.sh` now configures
+  `MNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON` permanently; all four tools rebuilt.
+- **Speed** (`scripts/bench_mnn.sh`, big-core pinned, `-pg 512,128`): pp512 **75.27 ± 0.23**,
+  tg128 **21.43 ± 0.01** — text parity with LFM3-1.7B int4 (75.4/21.4) despite the 2B text tower
+  + loaded vision module (953 MiB). No llama.cpp baseline exists for LFM3-VL.
+- **Quality**: `q_lfm3vl_smoke` plumbing PASS (all 10 suites, ~13 min; MC suites non-zero even
+  under the plain protocol at n=5). Full **R2 ladder** `q_lfm3vl_r2` running detached
+  (`results/quality_lfm3vl.out`, resume-safe; scores → BENCHMARKS §4.1 row when done).
+- **Vision speed**: 0.21 MP image → 1.59 s board (0.132 MP/s), 0.84 s UM890 x86 (0.248 MP/s).
