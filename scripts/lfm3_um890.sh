@@ -78,8 +78,12 @@ do_setup() {
       torchvision
   fi
 
-  if [ ! -x "$WORK/MNN/build/llm_demo" ]; then
-    log "building MNN (x86, llm+lowmem+transformer_fuse+converter) — a few minutes"
+  # Vision (llm_demo <img> smoke) needs LLM_SUPPORT_VISION, which the llm engine
+  # cmake only defines with MNN_BUILD_OPENCV=ON; imread needs MNN_IMGCODECS=ON.
+  # Reconfigure when the existing build predates those flags (stale cache check).
+  if [ ! -x "$WORK/MNN/build/llm_demo" ] || \
+     ! grep -q "MNN_BUILD_OPENCV:BOOL=ON" "$WORK/MNN/build/CMakeCache.txt" 2>/dev/null; then
+    log "building MNN (x86, llm+lowmem+transformer_fuse+converter+opencv/imgcodecs) — a few minutes"
     # Strict ISO C++17: Fedora 44's GCC 16 libstdc++ defines std::abs(__int128) and
     # __is_integer<__int128> twice when the legacy extension-int list (GNU dialect only)
     # is also active -> redefinition errors in every -std=gnu++XX target. -std=c++XX
@@ -87,7 +91,8 @@ do_setup() {
     cmake -S "$WORK/MNN" -B "$WORK/MNN/build" -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_CXX_STANDARD=17 -DCMAKE_CXX_EXTENSIONS=OFF \
       -DMNN_BUILD_LLM=ON -DMNN_LOW_MEMORY=ON -DMNN_SUPPORT_TRANSFORMER_FUSE=ON \
-      -DMNN_BUILD_CONVERTER=ON -DMNN_BUILD_TOOLS=ON
+      -DMNN_BUILD_CONVERTER=ON -DMNN_BUILD_TOOLS=ON \
+      -DMNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON
     cmake --build "$WORK/MNN/build" -j"$(nproc)"
   fi
   log "setup done"

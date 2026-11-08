@@ -260,6 +260,14 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   llm_demo image prompt syntax: `<img>/path/file.jpg</img>` in the prompt file
   (`kOmniMultimodalRegex`).
 - Static checks pass (py_compile ×5, AST alias audit, conv math bitwise-exact); patch applies clean to
-  `17236ad`. **Pending on UM890**: convtest → onnxexport → onnxtest → `--test` gate → int4 b64 export →
-  llm_demo image smoke → board QA. Video math (frame_base, BlockDiagonal) is implemented but only
-  images are tested in this pass.
+  `17236ad`. **UM890 gates PASS (2026-11-07)**: convtest (5 torch grids + ONNX round-trip, ≤9e-8);
+  onnxtest ORT `visual.onnx` vs HF pooler_output (204, 2048), max rel **3.78e-6**; `--test` gate
+  produced a coherent greedy description of the synthetic static-noise image ("random, multicolored
+  pixel noise … TV-static-like"), int4 b64 export 1.2 G pushed to the board.
+- **llm_demo vision build flags**: first UM890 smoke failed at init with `Unsupported vision
+  processor family: qwen2_vl` — the `Qwen` processor registration is inside `#ifdef
+  LLM_SUPPORT_VISION` (omni.cpp), which the llm engine cmake defines only with `MNN_BUILD_OPENCV=ON`;
+  `<img>` imread needs `MNN_IMGCODECS=ON`. Build step in `scripts/lfm3_um890.sh` now passes both and
+  reconfigures when a stale `CMakeCache.txt` lacks them. The board MNN build needs the same flags.
+  Remaining: rebuilt-llm_demo smoke on UM890 → board QA. Video math (frame_base, BlockDiagonal) is
+  implemented but only images are tested in this pass.

@@ -133,6 +133,7 @@ do_push() {
     scp -q -r "$d" "$PUSH_TARGET:$PUSH_PATH/"
   fi
   log "push done — on the board: llm_demo $PUSH_PATH/$name/config.json"
+  log "note: board llm_demo must be built with -DMNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON (vision)"
 }
 
 # accept one or more steps, e.g. `setup download convtest`
