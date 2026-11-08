@@ -242,7 +242,9 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   `temporal` times, `Qwen::patchInputs` skips `packPatches` for `input_layout=pixels` and appends
   `gridPositions` + per-frame mask. Output `image_embeds (N/4, 1, llm_dim)` (tbc, no permute:
   `output_axes=None`). Main-config gets image_mean/norm=0.5·255 & 1/(0.5·255), size_unit 32, min/max
-  pixels, token ids 125009/125010/125030. visual quant_bit 8 (class default).
+  pixels, token ids 125009/125010/125030. Placeholder strings are LFM3-specific —
+  `<|image|>`/`<|video|>` (NOT qwen-style `*_pad`), resolved from the tokenizer's
+  `added_tokens_decoder` by id. visual quant_bit 8 (class default).
 - **`utils/model_mapper.py` `regist_lfm3_vl`**: deepcopy of the lfm3 map, config keys prefixed
   `text_config.`, model paths under `model.language_model.*`, `visual`→`model.vision_tower`,
   `multi_modal_projector`→`model.multi_modal_projector`. `init_models` discovers `regist_*`
