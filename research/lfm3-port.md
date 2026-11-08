@@ -269,5 +269,9 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   LLM_SUPPORT_VISION` (omni.cpp), which the llm engine cmake defines only with `MNN_BUILD_OPENCV=ON`;
   `<img>` imread needs `MNN_IMGCODECS=ON`. Build step in `scripts/lfm3_um890.sh` now passes both and
   reconfigures when a stale `CMakeCache.txt` lacks them. The board MNN build needs the same flags.
-  Remaining: rebuilt-llm_demo smoke on UM890 → board QA. Video math (frame_base, BlockDiagonal) is
-  implemented but only images are tested in this pass.
+  **UM890 llm_demo image smoke PASS (2026-11-07)** after rebuild: vision 0.84 s (0.248 MP/s),
+  223 prompt tokens (204 image embeds + 19 text), coherent "colorful static noise / TV snow"
+  description matching the HF reference; prefill 221.5 tok/s, decode 43.9 tok/s. Build warnings
+  (COMPUTE / CPU_SET* macro redefines in upstream SSE GemmInt8 + CPURuntime) are pre-existing
+  upstream MNN, semantically identical glibc-compat macros. Remaining: board QA. Video math
+  (frame_base, BlockDiagonal) is implemented but only images are tested in this pass.
