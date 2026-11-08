@@ -216,7 +216,7 @@ index 46799a1..8720450 100644
  
          # gemma4 PLE (Per-Layer Embeddings)
 diff --git a/transformers/llm/export/utils/vision.py b/transformers/llm/export/utils/vision.py
-index 8005ed1..8f0ae06 100644
+index 8005ed1..3a607b4 100644
 --- a/transformers/llm/export/utils/vision.py
 +++ b/transformers/llm/export/utils/vision.py
 @@ -7,7 +7,9 @@ import numpy as np
@@ -238,7 +238,7 @@ index 8005ed1..8f0ae06 100644
              'hunyuan_vl': HunyuanVLVision,
          }
          if model_type in visual_models:
-@@ -2822,3 +2825,203 @@ class Lfm2VlVision(Vision):
+@@ -2822,3 +2825,210 @@ class Lfm2VlVision(Vision):
                          "pixel_values": { 0: "size" },
                      })
          return onnx_model
@@ -355,10 +355,17 @@ index 8005ed1..8f0ae06 100644
 +        self.llm_config['vision_start'] = self.vision_start_id
 +        self.llm_config['vision_end'] = self.vision_end_id
 +        self.llm_config['image_pad'] = self.image_pad_id
-+        self.vision_start_token = '<|vision_start|>'
-+        self.vision_end_token = '<|vision_end|>'
-+        self.image_pad_token = '<|image_pad|>'
-+        self.video_pad_token = '<|video_pad|>'
++        # Placeholder strings come from the tokenizer's added-token table: LFM3-VL uses
++        # <|image|>/<|video|> (ids 125030/125029), NOT the qwen-style *_pad tokens.
++        hf_tok = getattr(self.tokenizer, 'tokenizer', self.tokenizer)
++        added = getattr(hf_tok, 'added_tokens_decoder', {})
++        def token_str(token_id, fallback):
++            entry = added.get(int(token_id))
++            return getattr(entry, 'content', fallback)
++        self.vision_start_token = token_str(self.vision_start_id, '<|vision_start|>')
++        self.vision_end_token = token_str(self.vision_end_id, '<|vision_end|>')
++        self.image_pad_token = token_str(self.image_pad_id, '<|image|>')
++        self.video_pad_token = token_str(self.video_pad_id, '<|video|>')
 +        self.refresh_image_resize_config()
 +        config = self.vision_config
 +        head_dim = config.hidden_size // config.num_attention_heads
