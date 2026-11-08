@@ -1,0 +1,13 @@
+=== SELF-DIFF VL int4 vs itself (sanity) ===
+   5 |  11227  11227   == |  3.9453  3.9453 |   0.00000   0.0000000 |  raw
+   6 |   5635   5635   == |  0.7969  0.7969 |   0.00000   0.0000000 |  input
+   7 |    918    918   == |  5.9062  5.9062 |   0.00000   0.0000000 |  into
+
+summary: argmax disagreements=0, first at step -1, worst maxAbsDiff=0.00000
+distribution: mean KL(A||B)=0.000000, teacher-forced mean NLL A=0.17490 B=0.17490 (log-ppl)
+
+=== REFERENCE LFM3-1.7B int4 (A) vs int8 (B), 64 tok ===
+stop token at step 56
+
+summary: argmax disagreements=9, first at step 11, worst maxAbsDiff=9.23633
+distribution: mean KL(A||B)=0.205993, teacher-forced mean NLL A=0.47518 B=0.50309 (log-ppl)

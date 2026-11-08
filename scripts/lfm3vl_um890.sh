@@ -13,10 +13,19 @@
 #   onnxexport llmexport --export onnx (keeps onnx/visual.onnx for the ORT gate).
 #   onnxtest   scripts/lfm3vl_onnx_test.py — visual.onnx (ORT) vs HF get_image_features on one image.
 #   export     correctness gate (--test with an image prompt, torch side) then llmexport int4 (block 64).
+#   export8    llmexport int8 (block 64) -> <out>-int8  (reference for the logits-diff gate).
 #   test       llm_demo image smoke generation from the exported model.
-#   push       copy exported model to the QCS8300 board (LFM3VL_PUSH_TARGET/_PATH).
+#   push       copy exported model(s) to the QCS8300 board (LFM3VL_PUSH_TARGET/_PATH).
+#
+# Fidelity review (is the MNN conversion faithful? see research/lfm3vl-fidelity.md):
+#   hfppl      HF checkpoint ppl on bench/gatsby.txt — the ppl_eval twin, decisive test
+#              separating checkpoint-on-literary-prose from export loss (MNN int4: 151.77).
+#   logitsdiff teacher-forced int4-vs-int8 logits diff (llm_logits_diff, text prompt):
+#              quantization-only divergence; compare vs the LFM3-1.7B board reference
+#              (KL 0.206, 9/56 argmax disagreements). Needs the export8 step.
 #
 # Recommended order: setup download convtest onnxexport onnxtest export test push
+#                     + fidelity: export8 logitsdiff hfppl
 # Requires: see lfm3_um890.sh. Everything is idempotent.
 set -euo pipefail
 
@@ -116,22 +125,54 @@ do_test() {
   log "smoke done — description should mention the image content (HF reference in research/lfm3-port.md)"
 }
 
+do_export8() {
+  local out="$OUT_DIR-int8"
+  cd "$WORK/MNN/transformers/llm/export"
+  log "export int8 (block 64) -> $out  (reference for the logits-diff gate)"
+  "$PY" llmexport.py --path "$MODEL_DIR" --export mnn --quant_bit 8 \
+    --quant_block 64 --dst_path "$out" \
+    --mnnconvert "$WORK/MNN/build/MNNConvert"
+  log "exported: $(du -sh "$out" | cut -f1)"
+}
+
+do_hfppl() {
+  # HF-side twin of MNN ppl_eval — the decisive checkpoint-vs-export test (see
+  # research/lfm3vl-fidelity.md). CPU torch, ~50-100 min on the UM890 for full gatsby.
+  log "HF perplexity on bench/gatsby.txt (ppl_eval twin; MNN int4 scored 151.77)"
+  "$PY" "$REPO_ROOT/scripts/lfm3vl_hf_ppl.py" "$MODEL_DIR" "$REPO_ROOT/bench/gatsby.txt" \
+    --mnn-config "$OUT_DIR/llm_config.json"
+}
+
+do_logitsdiff() {
+  local int8="$OUT_DIR-int8"
+  local bin="$WORK/MNN/build/llm_logits_diff"
+  [ -f "$OUT_DIR/config.json" ] || { log "no $OUT_DIR — run the export step first"; exit 1; }
+  [ -f "$int8/config.json" ] || { log "no $int8 — run the export8 step first"; exit 1; }
+  [ -x "$bin" ] || cmake --build "$WORK/MNN/build" --target llm_logits_diff >/dev/null
+  printf 'Explain what a tokenizer does in a language model, in two sentences.\n' > "$WORK/fid-prompt.txt"
+  log "teacher-forced logits diff: int4 (A) vs int8 (B), 64 steps"
+  "$bin" "$OUT_DIR/config.json" "$int8/config.json" "$WORK/fid-prompt.txt" 64 | tail -6
+  log "read: LFM3-1.7B int4-vs-int8 board reference = mean KL 0.206, 9/56 argmax disagreements"
+}
+
 PUSH_TARGET="${LFM3VL_PUSH_TARGET:-arduino@localhost}"
 PUSH_PATH="${LFM3VL_PUSH_PATH:-/home/arduino/Code/ventunoq-mnn/lfm3-models}"
 do_push() {
-  local d name
   ssh "$PUSH_TARGET" "mkdir -p '$PUSH_PATH'"
   local have_rsync=no
   command -v rsync >/dev/null 2>&1 && ssh "$PUSH_TARGET" "command -v rsync" >/dev/null 2>&1 && have_rsync=yes
-  d="$OUT_DIR"; name="$(basename "$d")"
-  [ -f "$d/config.json" ] || { log "skip push (not exported)"; return; }
-  log "pushing $name ($(du -sh "$d" | cut -f1)) -> $PUSH_TARGET:$PUSH_PATH"
-  if [ "$have_rsync" = yes ]; then
-    rsync -a --delete "$d/" "$PUSH_TARGET:$PUSH_PATH/$name/"
-  else
-    ssh "$PUSH_TARGET" "rm -rf '$PUSH_PATH/$name'"
-    scp -q -r "$d" "$PUSH_TARGET:$PUSH_PATH/"
-  fi
+  local d name
+  for d in "$OUT_DIR" "$OUT_DIR-int8"; do
+    name="$(basename "$d")"
+    [ -f "$d/config.json" ] || { log "skip $name (not exported)"; continue; }
+    log "pushing $name ($(du -sh "$d" | cut -f1)) -> $PUSH_TARGET:$PUSH_PATH"
+    if [ "$have_rsync" = yes ]; then
+      rsync -a --delete "$d/" "$PUSH_TARGET:$PUSH_PATH/$name/"
+    else
+      ssh "$PUSH_TARGET" "rm -rf '$PUSH_PATH/$name'"
+      scp -q -r "$d" "$PUSH_TARGET:$PUSH_PATH/"
+    fi
+  done
   log "push done — on the board: llm_demo $PUSH_PATH/$name/config.json"
   log "note: board llm_demo must be built with -DMNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON (vision)"
 }
@@ -145,10 +186,13 @@ run_step() {
     onnxexport) do_onnxexport ;;
     onnxtest)   do_onnxtest ;;
     export)     do_export ;;
+    export8)    do_export8 ;;
     test)       do_test ;;
     push)       do_push ;;
+    hfppl)      do_hfppl ;;
+    logitsdiff) do_logitsdiff ;;
     all)        do_setup; do_download; do_convtest; do_onnxexport; do_onnxtest; do_export; do_test ;;
-    *) echo "usage: $0 {setup|download|convtest|onnxexport|onnxtest|export|test|push|all} [more steps...]"; exit 2 ;;
+    *) echo "usage: $0 {setup|download|convtest|onnxexport|onnxtest|export|export8|test|push|hfppl|logitsdiff|all} [more steps...]"; exit 2 ;;
   esac
 }
 for step in "${@:-all}"; do run_step "$step"; done

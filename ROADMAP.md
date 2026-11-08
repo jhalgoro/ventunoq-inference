@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board) | **high** | open upstream PR vs #5104 with `patches/mnn-lfm3-export.patch` |
+| M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board); PR parked pending fidelity review ([research/lfm3vl-fidelity.md](research/lfm3vl-fidelity.md)) | **high** | UM890 fidelity runs (`export8 logitsdiff hfppl`) → then reopen PR vs #5104 |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 | M10 | MiniCPM5-2B → MNN: **closed** — zero-patch export, all gates green, §1+§4.1 rows in | low | — (Q4_K_M baseline parked → parent repo) |
