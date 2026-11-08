@@ -10,6 +10,14 @@ models/
 lfm3-work/
 lfm3-models/
 
+# minicpm5 (M10): exported dirs pushed to the board
+minicpm5-models/
+
+# harness scratch: run markers, console captures, local opencode config
+results/*_done
+results/*.out
+opencode.json
+
 # python
 __pycache__/
 *.pyc

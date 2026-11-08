@@ -1,0 +1,16 @@
+{
+ "tag": "QWEN35-08B-DIST",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 1041.4,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 47.801662,
+   "max_tokens": "full"
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "tag": "LFM3-VL-2B-INT4-R2",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 1665.1,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 151.772293,
+   "max_tokens": "full"
+  }
+ ]
+}

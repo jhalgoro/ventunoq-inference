@@ -1,0 +1,710 @@
+{
+ "tag": "QWEN35-4B-DIST",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 100,
+ "score": 0.65,
+ "seconds": 8469.5,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "got": null,
+   "gold": "18",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": "2",
+   "gold": "18",
+   "tail": "**Step 3: Set up the equation**\nAfter selling to the orange house, she has 5 vacuum cleaners left:\n(1/2) \u00d7 (2x/3 - 2) = "
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": " cartons \u2713\n- Cost per carton: $4.00 \u2713\n- Total cost: 4 \u00d7 $4.00 = $16.00 \u2713\n\nAll calculations check out.\n\nThe answer is 16\n"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "\n\n**Verification:**\n- Suzy: 1 year old \u2713\n- Ben: 2 \u00d7 1 = 2 years old \u2713\n- Brandon: 4 \u00d7 2 = 8 years old \u2713\n\nThe answer is 8\n"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "got": "40",
+   "gold": "40",
+   "tail": "0 \u2713\n- Friday: 0 \u00d7 $60 = $0 \u2713, 12 \u00d7 $40 = $480 \u2713, $0 + $480 = $480 \u2713\n- Difference: $520 - $480 = $40 \u2713\n\nThe answer is 40\n"
+  },
+  {
+   "id": 5,
+   "ok": true,
+   "got": "595",
+   "gold": "595",
+   "tail": " + 140 + 280 = 595\n\n**Verification:**\n- 175 - 35 = 140 \u2713\n- 2 \u00d7 140 = 280 \u2713\n- 175 + 140 + 280 = 595 \u2713\n\nThe answer is 595\n"
+  },
+  {
+   "id": 6,
+   "ok": true,
+   "got": "10",
+   "gold": "10",
+   "tail": "ters each)\n- Water given to boy: 6 liters\n- Total given: 14 liters\n- Remaining: 24 - 14 = 10 liters \u2713\n\nThe answer is 10\n"
+  },
+  {
+   "id": 7,
+   "ok": false,
+   "got": "72",
+   "gold": "36",
+   "tail": "2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72\n"
+  },
+  {
+   "id": 8,
+   "ok": false,
+   "got": "72",
+   "gold": "3",
+   "tail": " sales \u00d7 2 = April sales)\n</analysis>\n\nNatalia sold 48 clips in April.\n\nIn May, she sold half as many clips:\n48 \u00f7 2 = 24"
+  },
+  {
+   "id": 9,
+   "ok": true,
+   "got": "240",
+   "gold": "240",
+   "tail": "- Weekly usage: 2 pads \u00d7 30 sheets = 60 sheets \u2713\n- Monthly usage: 60 sheets \u00d7 4 weeks = 240 sheets \u2713\n\nThe answer is 240\n"
+  },
+  {
+   "id": 10,
+   "ok": true,
+   "got": "13",
+   "gold": "13",
+   "tail": "*\n- Monday: 4 miles \u2713\n- Tuesday: 24 miles \u2713\n- Wednesday: 13 miles \u2713\n- Total: 4 + 24 + 13 = 41 miles \u2713\n\nThe answer is 13\n"
+  },
+  {
+   "id": 11,
+   "ok": false,
+   "got": null,
+   "gold": "2125",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 12,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": " + 7 = 24 feet \u2713\n- Wednesday: 2/3 \u00d7 24 = 16 feet \u2713\n\nThe calculations check out. 24 \u00d7 2/3 = 48/3 = 16.\n\nThe answer is 16\n"
+  },
+  {
+   "id": 13,
+   "ok": true,
+   "got": "18000",
+   "gold": "18000",
+   "tail": "*Verification:**\n- Monthly payment: $1,500\n- Months in a year: 12\n- Total: $1,500 \u00d7 12 = $18,000 \u2713\n\nThe answer is 18000\n"
+  },
+  {
+   "id": 14,
+   "ok": false,
+   "got": "72",
+   "gold": "5",
+   "tail": "2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72\n"
+  },
+  {
+   "id": 15,
+   "ok": true,
+   "got": "55",
+   "gold": "55",
+   "tail": "day = 5 + 6 = 11 paiis\n\nSince each paiis contains 5 liters:\nTotal liters per day = 11 \u00d7 5 = 55 liters\n\nThe answer is 55\n"
+  },
+  {
+   "id": 16,
+   "ok": true,
+   "got": "250",
+   "gold": "250",
+   "tail": "0 customers\n- Day 2: 150 customers (100 + 50)\n- Day 3: 250 customers\n\nTotal: 100 + 150 + 250 = 500 \u2713\n\nThe answer is 250\n"
+  },
+  {
+   "id": 17,
+   "ok": false,
+   "got": null,
+   "gold": "33",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 18,
+   "ok": true,
+   "got": "21",
+   "gold": "21",
+   "tail": "- John: 27 \u00d7 2 = 54 candies \u2713 (John has twice as many as Robert)\n- Difference: 54 - 33 = 21 candies \u2713\n\nThe answer is 21\n"
+  },
+  {
+   "id": 19,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "g floor: 3\n- 4 times starting floor: 4 \u00d7 3 = 12\n- Plus 6: 12 + 6 = 18\n\nBill is now on the 18th floor.\n\nThe answer is 18\n"
+  },
+  {
+   "id": 20,
+   "ok": false,
+   "got": "6",
+   "gold": "118000",
+   "tail": "otal fees\nNet proceeds from sale = $400,000 - $32,000 = **$368,000**\n\n**Step 6: Account for the remaining loan amount**\n"
+  },
+  {
+   "id": 21,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tail": ".00 + $2.00 = $7.00\n\n**Verification:**\n- 20 \u00d7 0.25 = 5.00 \u2713\n- 4 \u00d7 0.50 = 2.00 \u2713\n- 5.00 + 2.00 = 7.00 \u2713\n\nThe answer is 7\n"
+  },
+  {
+   "id": 22,
+   "ok": true,
+   "got": "83",
+   "gold": "83",
+   "tail": "al: 21 + 18 + 42 = 81\n- Extra points given: 2 players \u00d7 1 point = 2 points\n- New total: 81 + 2 = 83 \u2713\n\nThe answer is 83\n"
+  },
+  {
+   "id": 23,
+   "ok": true,
+   "got": "10",
+   "gold": "10",
+   "tail": "ves (half of 20 remaining) \u2713\n- Total sold: 40 + 10 = 50 loaves\n- Remaining for evening: 10 loaves\n\n**The answer is 10**\n"
+  },
+  {
+   "id": 24,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": " = 3 men\n- Women who left: 10 - 3 = 7 women\n- Original women: 15\n- Women remaining: 15 - 7 = 8 women \u2713\n\nThe answer is 8\n"
+  },
+  {
+   "id": 25,
+   "ok": true,
+   "got": "100",
+   "gold": "100",
+   "tail": "e:**\n$3,450 - $3,350 = $100\n\nFurniture United's offer is $100 more expensive than Cozy Homes' offer.\n\nThe answer is 100\n"
+  },
+  {
+   "id": 26,
+   "ok": true,
+   "got": "9",
+   "gold": "9",
+   "tail": "ys)\n- **Husband's snack:** 7 cookies (1 \u00d7 7 days)\n- **Jenny's share:** 9 cookies\n\n**Total accounted for:** $20 + 7 + 9 ="
+  },
+  {
+   "id": 27,
+   "ok": false,
+   "got": "2.00",
+   "gold": "4",
+   "tail": "illy took half his change and spent it on gumballs\n- Half of his change = $2.00\n- Full change after buying candy = $2.00"
+  },
+  {
+   "id": 28,
+   "ok": false,
+   "got": "72",
+   "gold": "240000",
+   "tail": "ia sold 48 clips in April.\n\nIn May, she sold half as many clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both"
+  },
+  {
+   "id": 29,
+   "ok": false,
+   "got": "72",
+   "gold": "80",
+   "tail": "alf as many clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both months:\n48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 30,
+   "ok": true,
+   "got": "12",
+   "gold": "12",
+   "tail": "cation:**\n- Erica = 30 \u2713\n- Beth = 30 + 5 = 35 \u2713\n- Alice = 35 + 7 = 42 \u2713\n- Difference = 42 - 30 = 12 \u2713\n\nThe answer is 12\n"
+  },
+  {
+   "id": 31,
+   "ok": false,
+   "got": "72",
+   "gold": "25",
+   "tail": "alf as many clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both months:\n48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 32,
+   "ok": true,
+   "got": "11",
+   "gold": "11",
+   "tail": "\u2713\n- Soup: 25% more than $4 = $4 \u00d7 1.25 = $5 \u2713\n- Cake: Half of $4 = $2 \u2713\n- Total: $4 + $5 + $2 = $11 \u2713\n\nThe answer is 11\n"
+  },
+  {
+   "id": 33,
+   "ok": false,
+   "got": "4",
+   "gold": "17",
+   "tail": " arrive at T + 4 - 5 = T - 1 minutes\n- Bernadette should leave at (T - 1) - 16 = T - 17 minutes\n\n**Step 4: Find the time"
+  },
+  {
+   "id": 34,
+   "ok": false,
+   "got": "2400",
+   "gold": "6400",
+   "tail": "alue of rubies**\n2 \u00d7 $1200 = $2400\n\n**Step 6: Calculate total value of all jewels**\n$4000 (sapphires) + $2400 (rubies) ="
+  },
+  {
+   "id": 35,
+   "ok": true,
+   "got": "1",
+   "gold": "1",
+   "tail": "id $9.00\n- Becky paid $8.00\n- Difference: $9.00 - $8.00 = **$1.00**\n\nKelly paid $1.00 more than Becky.\n\nThe answer is 1\n"
+  },
+  {
+   "id": 36,
+   "ok": true,
+   "got": "15400",
+   "gold": "15400",
+   "tail": "0 \u00d7 1.20 = $1800 \u2713\n- Hotel total: 3 \u00d7 $1800 = $5,400 \u2713\n- Grand total: $10,000 + $5,400 = $15,400 \u2713\n\nThe answer is 15400\n"
+  },
+  {
+   "id": 37,
+   "ok": true,
+   "got": "25",
+   "gold": "25",
+   "tail": "- $2.00 | $2.00 |\n| Final cost | $2.00 | $2.00 |\n| Cost per razor | $2.00 \u00f7 8 | 25\u00a2 |\n\n## Final Answer\nThe answer is 25\n"
+  },
+  {
+   "id": 38,
+   "ok": false,
+   "got": "72",
+   "gold": "144",
+   "tail": "f snowshoes, Mario needs 6 pairs.\n\nStep 3: Calculate total cost\nCost = 6 pairs \u00d7 $12.00/pair = $72.00\n\nThe answer is 72\n"
+  },
+  {
+   "id": 39,
+   "ok": true,
+   "got": "280",
+   "gold": "280",
+   "tail": "\n- Double Rob's time = 2 \u00d7 120 = 240 minutes\n- 240 + 40 = 280 minutes \u2713\n\nThe calculation is correct.\n\nThe answer is 280\n"
+  },
+  {
+   "id": 40,
+   "ok": true,
+   "got": "300",
+   "gold": "300",
+   "tail": "r + 2 monitors\n   $2,400 = $1,100 + $700 + 2 monitors\n   $2,400 = $1,800 + 2 monitors\n   2 monitors = $2,400 - $1,800\n  "
+  },
+  {
+   "id": 41,
+   "ok": true,
+   "got": "130",
+   "gold": "130",
+   "tail": "ites these again\n- Total: 65 \u00d7 1 = 65 letters\n\n**Total letters written:**\n52 + 13 + 65 = 130 letters\n\nThe answer is 130\n"
+  },
+  {
+   "id": 42,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": "ps\n\nTo reach the daily recommendation of 4 cups, Juan needs to reduce his intake by: 20 - 4 = 16 cups\n\nThe answer is 16\n"
+  },
+  {
+   "id": 43,
+   "ok": true,
+   "got": "100",
+   "gold": "100",
+   "tail": "20 + 15 + 30 = 65 roses\n- Weekly deficit: 65 - 40 = 25 roses\n- Monthly deficit: 25 \u00d7 4 = 100 roses \u2713\n\nThe answer is 100\n"
+  },
+  {
+   "id": 44,
+   "ok": true,
+   "got": "800",
+   "gold": "800",
+   "tail": "needed**\n- Water ratio: 100 ml per 200 calories\n- Water needed = 1600 \u00f7 200 \u00d7 100 = 8 \u00d7 100 = 800 ml\n\nThe answer is 800\n"
+  },
+  {
+   "id": 45,
+   "ok": false,
+   "got": null,
+   "gold": "48",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 46,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": "8 ounces \u2713  \n- Player 3: 16 ounces \u2713\n- Players 4 & 5: 0 ounces each \u2713\n- Sum: 6 + 8 + 16 = 30 ounces \u2713\n\nThe answer is 30\n"
+  },
+  {
+   "id": 47,
+   "ok": true,
+   "got": "72",
+   "gold": "72",
+   "tail": "alf as many clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both months:\n48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 48,
+   "ok": true,
+   "got": "216",
+   "gold": "216",
+   "tail": "c foot of earth.\n\nTotal time = 72 cubic feet \u00d7 3 seconds per cubic foot\nTotal time = 216 seconds\n\n**The answer is 216**\n"
+  },
+  {
+   "id": 49,
+   "ok": false,
+   "got": null,
+   "gold": "75",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 50,
+   "ok": true,
+   "got": "120",
+   "gold": "120",
+   "tail": "0 = $150 |\n| **Total** | **$360** |\n| **Share** | $360 \u00f7 3 = **$120** |\n\nAll calculations check out.\n\nThe answer is 120\n"
+  },
+  {
+   "id": 51,
+   "ok": true,
+   "got": "576",
+   "gold": "576",
+   "tail": "\n**Alternative verification:**\n- 96 \u00f7 6 = 16 times more potatoes than 6\n- 36 \u00d7 16 = 576 hash brown \u2713\n\nThe answer is 576\n"
+  },
+  {
+   "id": 52,
+   "ok": false,
+   "got": null,
+   "gold": "32",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 53,
+   "ok": true,
+   "got": "9",
+   "gold": "9",
+   "tail": "= 9 \\text{ hours}$$\n\n**Verification:**\n- 9 hours \u00d7 $700/hour = $6300 \u2713\n- This equals the goal exactly.\n\nThe answer is 9\n"
+  },
+  {
+   "id": 54,
+   "ok": true,
+   "got": "175",
+   "gold": "175",
+   "tail": "gave 3 sacks to her cousin and 4 sacks to her brother.\nTotal sacks = 3 + 4 = 7 sacks\n\nStep 2: Calculate total kilograms\n"
+  },
+  {
+   "id": 55,
+   "ok": true,
+   "got": "87",
+   "gold": "87",
+   "tail": "- Dora: 15 \u2713\n- Father: 8 + 2(15) = 8 + 30 = 38 \u2713\n- Mother: 38 - 4 = 34 \u2713\n- Total: 15 + 38 + 34 = 87 \u2713\n\nThe answer is 87\n"
+  },
+  {
+   "id": 56,
+   "ok": true,
+   "got": "28",
+   "gold": "28",
+   "tail": "52 + $24 = $76 \u2713\n- Second park: 2 \u00d7 $14 + 2 \u00d7 $10 = $28 + $20 = $48 \u2713\n- Difference: $76 - $48 = $28 \u2713\n\nThe answer is 28\n"
+  },
+  {
+   "id": 57,
+   "ok": true,
+   "got": "60000",
+   "gold": "60000",
+   "tail": "result: **60,000 hours**\n\n## Final Answer\n\nThe 20 playlists will last a total of **60,000 hours**.\n\nThe answer is 60000\n"
+  },
+  {
+   "id": 58,
+   "ok": false,
+   "got": "72",
+   "gold": "50",
+   "tail": "nd half as many in May.\n\nClips sold in May = 48 \u00f7 2 = 24 clips\n\nTotal clips sold = 48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 59,
+   "ok": true,
+   "got": "155",
+   "gold": "155",
+   "tail": "ney spent: (3/5 \u00d7 $200) + (140 \u00d7 $0.25) = $120 + $35 = $155 \u2713\n- Money remaining: $235 - $155 = $80 \u2713\n\nThe answer is 155\n"
+  },
+  {
+   "id": 60,
+   "ok": true,
+   "got": "4",
+   "gold": "4",
+   "tail": " $4\n\n**Verification:**\n- 3 loaves of bread = 3 \u00d7 $2 = $6 \u2713\n- 2 bagels = 2 \u00d7 $1 = $2 \u2713\n- $6 - $2 = $4 \u2713\n\nThe answer is 4\n"
+  },
+  {
+   "id": 61,
+   "ok": false,
+   "got": "83",
+   "gold": "79",
+   "tail": "she drops 18 petals.\n\n**Step 5: Calculate remaining petals**\n\nRemaining petals = 101 - 18 = 83 petals\n\nThe answer is 83\n"
+  },
+  {
+   "id": 62,
+   "ok": false,
+   "got": "15",
+   "gold": "153",
+   "tail": "+ 12 = 153 cards\n\n**Step 7: Verify the solution**\n- Total: 153 + 141 + 47 = 341 \u2713\n- Becca has 12 more than Smendrick: 15"
+  },
+  {
+   "id": 63,
+   "ok": true,
+   "got": "2",
+   "gold": "2",
+   "tail": "\u00f7 5 = 2 cows\n\n**Verification:**\n- Total cows: 3 + 2 = 5 cows\n- Total milk: 5 \u00d7 5 = 25 liters per day \u2713\n\nThe answer is 2\n"
+  },
+  {
+   "id": 64,
+   "ok": false,
+   "got": null,
+   "gold": "123",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 65,
+   "ok": true,
+   "got": "23",
+   "gold": "23",
+   "tail": " Blue: 30 (3 \u00d7 10 = 30 \u2713)\n- Yellow: 23\n- Total: 12 + 10 + 30 + 23 = 75 \u2713\n\nAll calculations check out.\n\nThe answer is 23\n"
+  },
+  {
+   "id": 66,
+   "ok": false,
+   "got": "72",
+   "gold": "575",
+   "tail": "s (given)\n- May sales: 48 \u00f7 2 = 24 clips \u2713\n- Total: 48 + 24 = 72 clips \u2713\n\nThe calculation is correct.\n\nThe answer is 72\n"
+  },
+  {
+   "id": 67,
+   "ok": true,
+   "got": "1",
+   "gold": "1",
+   "tail": "\n**Verification:**\n- 2 carrots \u00d7 $1 = $2\n- 1 salad = $6\n- 1 yogurt = $3\n- Total = $2 + $6 + $3 = $11 \u2713\n\nThe answer is 1\n"
+  },
+  {
+   "id": 68,
+   "ok": true,
+   "got": "5",
+   "gold": "5",
+   "tail": "s than sleep) \u2713\n- Dog walk: 1 hour \u2713\n- Total: 10 + 8 + 1 = 19 hours \u2713\n- Free time: 24 - 19 = 5 hours \u2713\n\nThe answer is 5\n"
+  },
+  {
+   "id": 69,
+   "ok": true,
+   "got": "90",
+   "gold": "90",
+   "tail": "**\n- Total revenue: 300 \u00d7 $0.80 = $240\n- Total cost: 300 \u00d7 $0.50 = $150\n- Profit: $240 - $150 = $90 \u2713\n\nThe answer is 90\n"
+  },
+  {
+   "id": 70,
+   "ok": false,
+   "got": "72",
+   "gold": "24",
+   "tail": "alf as many clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both months:\n48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 71,
+   "ok": false,
+   "got": "72",
+   "gold": "17",
+   "tail": " of 48 = 48 \u00f7 2 = 24 clips\n\nTo find the total clips sold in both months:\n- Total = 48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 72,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tail": "many as Jeffrey) \u2713\n- Jordan carried 4 balls (twice as many as Jason) \u2713\n- Total = 4 + 2 + 1 = 7 balls \u2713\n\nThe answer is 7\n"
+  },
+  {
+   "id": 73,
+   "ok": false,
+   "got": "72",
+   "gold": "120",
+   "tail": "sold in both months:\n- Total clips = Clips in April + Clips in May\n- Total clips = 48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 74,
+   "ok": true,
+   "got": "63",
+   "gold": "63",
+   "tail": "- Edgar: 18 pretzels/day\n- Brother: 18 \u00d7 1/2 = 9 pretzels/day \u2713\n- Weekly total: 9 \u00d7 7 = 63 pretzels \u2713\n\nThe answer is 63\n"
+  },
+  {
+   "id": 75,
+   "ok": true,
+   "got": "50",
+   "gold": "50",
+   "tail": "es \u2713\n- 1500 \u00d7 1/2 = 750 cookies given to church \u2713\n- 750 cookies \u00f7 15 cookies per person = 50 people \u2713\n\nThe answer is 50\n"
+  },
+  {
+   "id": 76,
+   "ok": false,
+   "got": "5",
+   "gold": "94",
+   "tail": " after 5 hours at 9% loss per hour**\n\nEach hour, the charge is multiplied by (1 - 0.09) = 0.91.\n\nAfter 5 hours: Charge ="
+  },
+  {
+   "id": 77,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": ": 30\n- Eggs not found: 10\n- Total: 60 + 30 + 10 = 100 \u2713\n\nThis matches the original total of 100 eggs.\n\nThe answer is 30\n"
+  },
+  {
+   "id": 78,
+   "ok": false,
+   "got": "1",
+   "gold": "4",
+   "tail": "ears\n\n**Verification:**\n- In 4 years at $75,000/year = $300,000 \u2713\n- This equals the loans ($200,000) plus lost wages ($1"
+  },
+  {
+   "id": 79,
+   "ok": true,
+   "got": "110",
+   "gold": "110",
+   "tail": "\n| 2nd | -50 descend, +100 board | 140 - 50 + 100 | 190 |\n| 3rd | -80 descend | 190 - 80 | 110 |\n\n**The answer is 110**\n"
+  },
+  {
+   "id": 80,
+   "ok": true,
+   "got": "95",
+   "gold": "95",
+   "tail": "380 \u00f7 4 = 95\n\n**Step 4: Verify the answer**\n- 95 \u00d7 4 = 380 \u2713\n- This confirms our total is correct\n\n**The answer is 95**\n"
+  },
+  {
+   "id": 81,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "rst, I need to find out how many toothpicks Melanie has saved so far:\n   - She saves 10 toothpicks per week\n   - She has"
+  },
+  {
+   "id": 82,
+   "ok": true,
+   "got": "1080",
+   "gold": "1080",
+   "tail": "osauurs eat: 270 kg remaining = 270 kg (matches the given information)\n\nThe calculation checks out.\n\nThe answer is 1080\n"
+  },
+  {
+   "id": 83,
+   "ok": false,
+   "got": "72",
+   "gold": "40",
+   "tail": " clips sold in both months:\n- April sales: 48 clips\n- May sales: 24 clips\n- Total: 48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 84,
+   "ok": true,
+   "got": "5",
+   "gold": "5",
+   "tail": "fishes bought: 2 + 1 + 2 + 3 = 8\n- Total fishes after: 19 + 8 = 27\n- Check: 11 male + 16 female = 27 \u2713\n\nThe answer is 5\n"
+  },
+  {
+   "id": 85,
+   "ok": false,
+   "got": "5",
+   "gold": "45000",
+   "tail": "per month\n\n**Step 5: Find the total amount of money they all have together**\nTotal = Valerie's salary + Brother's salary"
+  },
+  {
+   "id": 86,
+   "ok": false,
+   "got": "39",
+   "gold": "291",
+   "tail": "3 = **291 sunflowers**\n\n## Verification:\n- Individual sunflowers over 3 days: 13 \u00d7 3 = 39 sunflowers\n- Sunflowers in bou"
+  },
+  {
+   "id": 87,
+   "ok": true,
+   "got": "7300",
+   "gold": "7300",
+   "tail": "200 current bottles = 11,500 total bottles\n- 11,500 bottles \u00f7 5 bottles per person = 2,300 people \u2713\n\nThe answer is 7300\n"
+  },
+  {
+   "id": 88,
+   "ok": true,
+   "got": "93",
+   "gold": "93",
+   "tail": " 12, 24, 48\n- 6 \u00f7 3 = 2 \u2713\n- 12 \u00f7 6 = 2 \u2713\n- 24 \u00f7 12 = 2 \u2713\n- 48 \u00f7 24 = 2 \u2713\n\n**Step 4: Calculate the total**\nTotal clouds ="
+  },
+  {
+   "id": 89,
+   "ok": false,
+   "got": "72",
+   "gold": "6",
+   "tail": "2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72\n"
+  },
+  {
+   "id": 90,
+   "ok": true,
+   "got": "140",
+   "gold": "140",
+   "tail": "\n- Total White Oak: 20 + 30 = 50\n- Total Lodgepole Pine: 40 + 50 = 90\n- Grand total: 50 + 90 = 140 \u2713\n\nThe answer is 140\n"
+  },
+  {
+   "id": 91,
+   "ok": true,
+   "got": "448",
+   "gold": "448",
+   "tail": " Total: $112 + 336 = 448$ mL \u2713\n\nBoth methods give the same result, confirming our answer is correct.\n\nThe answer is 448\n"
+  },
+  {
+   "id": 92,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tail": "otal treats = 3 + 7 = 10 \u2713\n- This matches our requirement of 10 treats for 5 people at 2 treats each \u2713\n\nThe answer is 3\n"
+  },
+  {
+   "id": 93,
+   "ok": true,
+   "got": "520",
+   "gold": "520",
+   "tail": "tion:**\n- Weekly spending: $1.00 + $3.00 + $6.00 = $10.00\n- Annual spending: $10.00 \u00d7 52 = $520.00 \u2713\n\nThe answer is 520\n"
+  },
+  {
+   "id": 94,
+   "ok": false,
+   "got": null,
+   "gold": "30",
+   "tail": "ep by step.\n\nFirst, I need to understand what's being asked: You are a helpful assistant answering benchmark questions.\n"
+  },
+  {
+   "id": 95,
+   "ok": false,
+   "got": "72",
+   "gold": "36",
+   "tail": "d the total clips sold in both months:\n- Total = April sales + May sales\n- Total = 48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 96,
+   "ok": true,
+   "got": "665",
+   "gold": "665",
+   "tail": " 432\n- Benny's shells: 86\n- Total: 214 + 432 + 86 = 732 \u2713\n- After removing cracked: 732 - 67 = 665 \u2713\n\nThe answer is 665\n"
+  },
+  {
+   "id": 97,
+   "ok": true,
+   "got": "27",
+   "gold": "27",
+   "tail": "e: 18 pens \u2713\n- Timothy: 3 \u00d7 18 = 54 pens \u2713\n- Sarah: 54 \u00f7 2 = 27 pens \u2713\n\nThe calculations are correct.\n\nThe answer is 27\n"
+  },
+  {
+   "id": 98,
+   "ok": false,
+   "got": "72",
+   "gold": "2325",
+   "tail": "y clips:\n48 \u00f7 2 = 24 clips\n\nTo find the total number of clips sold in both months:\n48 + 24 = 72 clips\n\nThe answer is 72\n"
+  },
+  {
+   "id": 99,
+   "ok": true,
+   "got": "14",
+   "gold": "14",
+   "tail": "er person\n\n**Verification:**\n- 4 people \u00d7 14 slices = 56 slices \u2713\n- 7 pizzas \u00d7 8 slices = 56 slices \u2713\n\nThe answer is 14\n"
+  }
+ ]
+}

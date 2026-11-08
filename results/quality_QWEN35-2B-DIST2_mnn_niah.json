@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-2B-DIST2",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 1.0,
+ "seconds": 976.1,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "36132",
+   "ok": true,
+   "out": "he passcode is explicitly stated as \"36132\"\n</think>\n\n36132\n"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "98253",
+   "ok": true,
+   "out": "ract just the number \"98253\" as the answer.\n</think>\n\n98253\n"
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "48594",
+   "ok": true,
+   "out": ": 48594\n</think>\n\nThe secret passcode for vault 3 is 48594.\n"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": "28611",
+   "ok": true,
+   "out": " a fact in the text. The passcode is 28611.\n</think>\n\n28611\n"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": "58512",
+   "ok": true,
+   "out": "ult 5 is 58512.\"\n\nSo the passcode is 58512.\n</think>\n\n58512\n"
+  }
+ ]
+}

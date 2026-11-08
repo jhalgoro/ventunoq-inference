@@ -1,0 +1,160 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-2B-Claude-4.6-Opus-Reasoning-Distilled-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-2B-DIST_chat
+[1/50] 00000.txt chars=1595 gen=512 tok 29.0s
+[2/50] 00001.txt chars=1963 gen=512 tok 28.0s
+[3/50] 00002.txt chars=1761 gen=476 tok 27.0s
+[4/50] 00003.txt chars=1853 gen=512 tok 29.0s
+[5/50] 00004.txt chars=1528 gen=512 tok 28.0s
+[6/50] 00005.txt chars=991 gen=512 tok 30.0s
+[7/50] 00006.txt chars=1654 gen=512 tok 29.0s
+[8/50] 00007.txt chars=1188 gen=318 tok 18.0s
+[9/50] 00008.txt chars=586 gen=137 tok 8.0s
+[10/50] 00009.txt chars=1290 gen=512 tok 29.0s
+[11/50] 00010.txt chars=1416 gen=512 tok 29.0s
+[12/50] 00011.txt chars=1353 gen=512 tok 29.0s
+[13/50] 00012.txt chars=988 gen=287 tok 17.0s
+[14/50] 00013.txt chars=1606 gen=512 tok 29.0s
+[15/50] 00014.txt chars=1226 gen=512 tok 28.0s
+[16/50] 00015.txt chars=943 gen=316 tok 18.0s
+[17/50] 00016.txt chars=785 gen=275 tok 16.0s
+[18/50] 00017.txt chars=663 gen=201 tok 12.0s
+[19/50] 00018.txt chars=1215 gen=512 tok 29.0s
+[20/50] 00019.txt chars=1179 gen=512 tok 29.0s
+[21/50] 00020.txt chars=1391 gen=473 tok 28.0s
+[22/50] 00021.txt chars=768 gen=209 tok 13.0s
+[23/50] 00022.txt chars=1058 gen=318 tok 19.0s
+[24/50] 00023.txt chars=781 gen=214 tok 13.0s
+[25/50] 00024.txt chars=945 gen=265 tok 16.0s
+[26/50] 00025.txt chars=590 gen=163 tok 10.0s
+[27/50] 00026.txt chars=1684 gen=512 tok 29.0s
+[28/50] 00027.txt chars=1905 gen=512 tok 29.0s
+[29/50] 00028.txt chars=1434 gen=512 tok 28.0s
+[30/50] 00029.txt chars=1194 gen=359 tok 21.0s
+[31/50] 00030.txt chars=1474 gen=512 tok 29.0s
+[32/50] 00031.txt chars=1108 gen=512 tok 30.0s
+[33/50] 00032.txt chars=880 gen=243 tok 14.0s
+[34/50] 00033.txt chars=1347 gen=377 tok 23.0s
+[35/50] 00034.txt chars=1436 gen=512 tok 29.0s
+[36/50] 00035.txt chars=1308 gen=512 tok 30.0s
+[37/50] 00036.txt chars=955 gen=302 tok 19.0s
+[38/50] 00037.txt chars=1424 gen=370 tok 23.0s
+[39/50] 00038.txt chars=1472 gen=512 tok 30.0s
+[40/50] 00039.txt chars=1201 gen=512 tok 30.0s
+[41/50] 00040.txt chars=925 gen=512 tok 30.0s
+[42/50] 00041.txt chars=991 gen=268 tok 16.0s
+[43/50] 00042.txt chars=1853 gen=512 tok 29.0s
+[44/50] 00043.txt chars=1378 gen=326 tok 19.0s
+[45/50] 00044.txt chars=859 gen=265 tok 16.0s
+[46/50] 00045.txt chars=890 gen=248 tok 15.0s
+[47/50] 00046.txt chars=1295 gen=512 tok 31.0s
+[48/50] 00047.txt chars=994 gen=294 tok 17.0s
+[49/50] 00048.txt chars=1601 gen=512 tok 30.0s
+[50/50] 00049.txt chars=1556 gen=454 tok 26.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=50 generated=50 skipped=0
+[humaneval 1] HumanEval/0 FAIL is > 0.5. Returns False. ✓
+                                                     
+[humaneval 2] HumanEval/3 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 3] HumanEval/7 FAIL   File "/tmp/opencode/sandbox/he_2.py", line 11
+    Let me analyze this problem:
+[humaneval 4] HumanEval/10 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 5] HumanEval/13 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 6] HumanEval/17 FAIL File "/tmp/opencode/sandbox/he_5.py", line 64
+    Wait, that doesn't match the e
+[humaneval 7] HumanEval/20 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 8] HumanEval/23 FAIL   File "/tmp/opencode/sandbox/he_7.py", line 10
+    Let me think about how to ap
+[humaneval 9] HumanEval/27 FAIL   File "/tmp/opencode/sandbox/he_8.py", line 8
+    Let me think about how to app
+[humaneval 10] HumanEval/30 FAIL   File "/tmp/opencode/sandbox/he_9.py", line 15
+    - `get_positive([-1, 2, -4, 
+[humaneval 11] HumanEval/33 FAIL   File "/tmp/opencode/sandbox/he_10.py", line 21
+    - Index 0: not divisible by
+[humaneval 12] HumanEval/37 FAIL   File "/tmp/opencode/sandbox/he_11.py", line 15
+    - sort_even([1, 2, 3]) → [1
+[humaneval 13] HumanEval/40 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 14] HumanEval/43 FAIL   File "/tmp/opencode/sandbox/he_13.py", line 28
+    - `[1, 3, 5, 0]` → False (n
+[humaneval 15] HumanEval/47 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 16] HumanEval/50 FAIL   File "/tmp/opencode/sandbox/he_15.py", line 14
+    Let me analyze this problem
+[humaneval 17] HumanEval/53 FAIL   File "/tmp/opencode/sandbox/he_16.py", line 19
+    - add(2, 3) = 2 + 3 = 5 ✓
+ 
+[humaneval 18] HumanEval/57 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 19] HumanEval/60 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 20] HumanEval/63 FAIL   File "/tmp/opencode/sandbox/he_19.py", line 28
+    - fibfib(0) = 0 ✓
+         
+[humaneval 21] HumanEval/67 FAIL   File "/tmp/opencode/sandbox/he_20.py", line 18
+    - "5 apples and 6 oranges",
+[humaneval 22] HumanEval/70 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 23] HumanEval/73 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 24] HumanEval/77 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 25] HumanEval/80 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 26] HumanEval/83 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 27] HumanEval/86 FAIL   File "/tmp/opencode/sandbox/he_26.py", line 23
+    - 'Hi' → 'Hi' (already sort
+[humaneval 28] HumanEval/90 FAIL  to write a function `next_smallest(lst)` that returns the 2nd smallest element 
+[humaneval 29] HumanEval/93 FAIL code/sandbox/he_28.py", line 20
+    2. Swap case of all letters (uppercase → low
+[humaneval 30] HumanEval/96 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 31] HumanEval/100 FAIL   File "/tmp/opencode/sandbox/he_30.py", line 16
+    Let me analyze this problem
+[humaneval 32] HumanEval/103 FAIL . Average = 3.0. Rounded = 3. Binary = "11" ✓
+                                  
+[humaneval 33] HumanEval/106 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 34] HumanEval/110 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 35] HumanEval/113 FAIL   File "/tmp/opencode/sandbox/he_34.py", line 14
+    Let me analyze this problem
+[humaneval 36] HumanEval/116 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 37] HumanEval/120 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 38] HumanEval/123 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 39] HumanEval/126 FAIL   File "/tmp/opencode/sandbox/he_38.py", line 21
+    - is_sorted([1, 2, 2, 2, 3,
+[humaneval 40] HumanEval/130 FAIL e_39.py", line 26
+    Wait, there's something odd here. For tri(3), it uses tri(
+[humaneval 41] HumanEval/133 FAIL   File "/tmp/opencode/sandbox/he_40.py", line 19
+    - [1,2,3] → 14
+            
+[humaneval 42] HumanEval/136 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 43] HumanEval/140 FAIL   File "/tmp/opencode/sandbox/he_42.py", line 19
+    - "Example" → "Example" (no
+[humaneval 44] HumanEval/143 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 45] HumanEval/146 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 46] HumanEval/150 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 47] HumanEval/153 FAIL   File "/tmp/opencode/sandbox/he_46.py", line 25
+    4. If there's a tie, return
+[humaneval 48] HumanEval/156 FAIL complete function including its signature, no explanations, no markdown fences.
+
+[humaneval 49] HumanEval/160 FAIL en 5 * 4 = 20, then 20 - 5 = 15. That's not right.
+                             
+[humaneval 50] HumanEval/163 FAIL complete function including its signature, no explanations, no markdown fences.
+
+
+humaneval QWEN35-2B-DIST/mnn: 0/50 = 0.0% -> results/quality_QWEN35-2B-DIST_mnn_humaneval.json

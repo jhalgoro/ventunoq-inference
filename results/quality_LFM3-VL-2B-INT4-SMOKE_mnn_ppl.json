@@ -1,0 +1,16 @@
+{
+ "tag": "LFM3-VL-2B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 24.2,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 251.913345,
+   "max_tokens": 1000
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "tag": "LFM3-VL-2B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 3,
+ "score": 0.3333,
+ "seconds": 26.1,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": ", line 1, in <module>\n    def has_close_elements(numbers: List[float], threshold: float) -> bool:\n                                    ^^^^\nNameError: name 'List' is not defined. Did you mean: 'list'?\n",
+   "comp_tail": "):\n        diff = abs(numbers[i] - numbers[i + 1])\n        if diff < threshold:\n            return True\n    return False"
+  },
+  {
+   "id": "HumanEval/82",
+   "ok": true,
+   "err": "",
+   "comp_tail": "alse\n    for i in range(2, int(length ** 0.5) + 1):\n        if length % i == 0:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "k(generate_integers)\n  File \"/tmp/opencode/sandbox/he_2.py\", line 12, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": ", a - 1)\n    for num in range(start, end + 1):\n        if num % 2 == 0:\n            result.append(num)\n    return result"
+  }
+ ]
+}

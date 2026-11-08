@@ -1,0 +1,199 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-Base-MNN-text/config.json mode=base nothink=False batch=/tmp/opencode/qbatch/QWEN35-08B-INT4-BASE_base
+[1/50] 00000.txt chars=1448 gen=512 tok 13.0s
+[2/50] 00001.txt chars=1962 gen=512 tok 13.0s
+[3/50] 00002.txt chars=1808 gen=512 tok 13.0s
+[4/50] 00003.txt chars=2427 gen=512 tok 14.0s
+[5/50] 00004.txt chars=1223 gen=512 tok 12.0s
+[6/50] 00005.txt chars=1710 gen=512 tok 14.0s
+[7/50] 00006.txt chars=1382 gen=512 tok 14.0s
+[8/50] 00007.txt chars=1597 gen=512 tok 12.0s
+[9/50] 00008.txt chars=13193 gen=512 tok 13.0s
+[10/50] 00009.txt chars=544 gen=512 tok 13.0s
+[11/50] 00010.txt chars=2082 gen=512 tok 13.0s
+[12/50] 00011.txt chars=1425 gen=512 tok 13.0s
+[13/50] 00012.txt chars=1721 gen=512 tok 14.0s
+[14/50] 00013.txt chars=1481 gen=512 tok 13.0s
+[15/50] 00014.txt chars=2046 gen=512 tok 13.0s
+[16/50] 00015.txt chars=1723 gen=512 tok 13.0s
+[17/50] 00016.txt chars=818 gen=512 tok 13.0s
+[18/50] 00017.txt chars=1037 gen=512 tok 13.0s
+[19/50] 00018.txt chars=1197 gen=512 tok 13.0s
+[20/50] 00019.txt chars=1463 gen=512 tok 13.0s
+[21/50] 00020.txt chars=262 gen=83 tok 4.0s
+[22/50] 00021.txt chars=117 gen=52 tok 2.0s
+[23/50] 00022.txt chars=163 gen=85 tok 3.0s
+[24/50] 00023.txt chars=74 gen=42 tok 2.0s
+[25/50] 00024.txt chars=51 gen=20 tok 2.0s
+[26/50] 00025.txt chars=34 gen=11 tok 0.0s
+[27/50] 00026.txt chars=35 gen=10 tok 2.0s
+[28/50] 00027.txt chars=2516 gen=512 tok 13.0s
+[29/50] 00028.txt chars=1881 gen=512 tok 13.0s
+[30/50] 00029.txt chars=473 gen=151 tok 5.0s
+[31/50] 00030.txt chars=1621 gen=512 tok 13.0s
+[32/50] 00031.txt chars=202 gen=79 tok 3.0s
+[33/50] 00032.txt chars=41 gen=11 tok 1.0s
+[34/50] 00033.txt chars=1769 gen=512 tok 14.0s
+[35/50] 00034.txt chars=1672 gen=512 tok 14.0s
+[36/50] 00035.txt chars=78 gen=25 tok 2.0s
+[37/50] 00036.txt chars=40 gen=13 tok 1.0s
+[38/50] 00037.txt chars=1811 gen=512 tok 14.0s
+[39/50] 00038.txt chars=32 gen=9 tok 2.0s
+[40/50] 00039.txt chars=121 gen=48 tok 3.0s
+[41/50] 00040.txt chars=1224 gen=512 tok 14.0s
+[42/50] 00041.txt chars=107 gen=33 tok 1.0s
+[43/50] 00042.txt chars=1274 gen=512 tok 13.0s
+[44/50] 00043.txt chars=49 gen=12 tok 2.0s
+[45/50] 00044.txt chars=40 gen=12 tok 1.0s
+[46/50] 00045.txt chars=1314 gen=512 tok 13.0s
+[47/50] 00046.txt chars=398 gen=91 tok 4.0s
+[48/50] 00047.txt chars=1573 gen=512 tok 13.0s
+[49/50] 00048.txt chars=82 gen=28 tok 2.0s
+[50/50] 00049.txt chars=1286 gen=512 tok 13.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=50 generated=50 skipped=0
+[humaneval 1] HumanEval/0 FAIL   File "/tmp/opencode/sandbox/he_0.py", line 60
+    """ Check if in given list o
+[humaneval 2] HumanEval/3 FAIL   File "/tmp/opencode/sandbox/he_1.py", line 14
+    for operation in operations:
+[humaneval 3] HumanEval/7 FAIL pencode/sandbox/he_2.py", line 65
+    """ Filter an input list of strings only f
+[humaneval 4] HumanEval/10 FAIL andbox/he_3.py", line 58, in <module>
+    check(make_palindrome)
+  File "/tmp/op
+[humaneval 5] HumanEval/13 FAIL   File "/tmp/opencode/sandbox/he_4.py", line 10
+    return 0
+    ^^^^^^^^
+Syntax
+[humaneval 6] HumanEval/17 FAIL   File "/tmp/opencode/sandbox/he_5.py", line 17
+    return [int(x) for x in musi
+[humaneval 7] HumanEval/20 FAIL   File "/tmp/opencode/sandbox/he_6.py", line 49
+    """ From
+    ^
+SyntaxError: 
+[humaneval 8] HumanEval/23 FAIL   File "/tmp/opencode/sandbox/he_7.py", line 10
+    return 0
+    ^^^^^^^^
+Syntax
+[humaneval 9] HumanEval/27 FAIL   File "/tmp/opencode/sandbox/he_8.py", line 177
+    (
+    ^
+SyntaxError: '(' wa
+[humaneval 10] HumanEval/30 FAIL 0, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 1
+[humaneval 11] HumanEval/33 FAIL pencode/sandbox/he_10.py", line 19, in check
+    assert tuple(candidate([1, 2, 3
+[humaneval 12] HumanEval/37 FAIL   File "/tmp/opencode/sandbox/he_11.py", line 58
+    def
+       ^
+SyntaxError: i
+[humaneval 13] HumanEval/40 FAIL   File "/tmp/opencode/sandbox/he_12.py", line 24
+    """
+    ^
+SyntaxError: unte
+[humaneval 14] HumanEval/43 FAIL   File "/tmp/opencode/sandbox/he_13.py", line 76
+    """
+    ^
+SyntaxError: unte
+[humaneval 15] HumanEval/47 FAIL   check(median)
+  File "/tmp/opencode/sandbox/he_14.py", line 22, in check
+    a
+[humaneval 16] HumanEval/50 FAIL  return "".join([chr(((ord(ch) - 5 + ord("a")) % 26) + ord("a")) for ch in s])
+ 
+[humaneval 17] HumanEval/53 FAIL   File "/tmp/opencode/sandbox/he_16.py", line 10
+    return x + y
+    ^^^^^^^^^^
+[humaneval 18] HumanEval/57 FAIL   File "/tmp/opencode/sandbox/he_17.py", line 60
+    assert
+          ^
+SyntaxEr
+[humaneval 19] HumanEval/60 FAIL pencode/sandbox/he_18.py", line 30, in <module>
+    check(sum_to_n)
+  File "/tmp
+[humaneval 20] HumanEval/63 FAIL 19.py", line 68
+    """The FibFib number sequence is a sequence similar to the F
+[humaneval 21] HumanEval/67 FAIL   File "/tmp/opencode/sandbox/he_20.py", line 15
+    return n - s - n
+    ^^^^^^
+[humaneval 22] HumanEval/70 FAIL heck(strange_sort_list)
+  File "/tmp/opencode/sandbox/he_21.py", line 17, in che
+[humaneval 23] HumanEval/73 FAIL <module>
+    check(smallest_change)
+  File "/tmp/opencode/sandbox/he_22.py", lin
+[humaneval 24] HumanEval/77 FAIL le "/tmp/opencode/sandbox/he_23.py", line 26, in check
+    assert candidate(1) =
+[humaneval 25] HumanEval/80 FAIL <module>
+    check(is_happy)
+  File "/tmp/opencode/sandbox/he_24.py", line 20, i
+[humaneval 26] HumanEval/83 FAIL /sandbox/he_25.py", line 23, in <module>
+    check(starts_one_ends)
+  File "/tmp
+[humaneval 27] HumanEval/86 FAIL he_26.py", line 31, in <module>
+    check(anti_shuffle)
+  File "/tmp/opencode/sa
+[humaneval 28] HumanEval/90 FAIL 0, in <module>
+    check(next_smallest)
+  File "/tmp/opencode/sandbox/he_27.py",
+[humaneval 29] HumanEval/93 FAIL candidate('TEST') == 'tgst', "This prints if this assert fails 1 (good for debug
+[humaneval 30] HumanEval/96 FAIL dbox/he_29.py", line 45, in <module>
+    check(count_up_to)
+  File "/tmp/opencod
+[humaneval 31] HumanEval/100 FAIL   File "/tmp/opencode/sandbox/he_30.py", line 73
+    """
+    ^
+SyntaxError: unte
+[humaneval 32] HumanEval/103 FAIL 31.py", line 41, in <module>
+    check(rounded_avg)
+  File "/tmp/opencode/sandbo
+[humaneval 33] HumanEval/106 FAIL , line 20, in <module>
+    check(f)
+  File "/tmp/opencode/sandbox/he_32.py", lin
+[humaneval 34] HumanEval/110 FAIL tmp/opencode/sandbox/he_33.py", line 68
+    """In this problem, you will impleme
+[humaneval 35] HumanEval/113 FAIL sandbox/he_34.py", line 45
+    """Given a list of strings, where each string con
+[humaneval 36] HumanEval/116 FAIL   check(sort_array)
+  File "/tmp/opencode/sandbox/he_35.py", line 18, in check
+ 
+[humaneval 37] HumanEval/120 FAIL e>
+    check(maximum)
+  File "/tmp/opencode/sandbox/he_36.py", line 32, in check
+[humaneval 38] HumanEval/123 FAIL   File "/tmp/opencode/sandbox/he_37.py", line 60
+    """
+    ^
+SyntaxError: unte
+[humaneval 39] HumanEval/126 FAIL dbox/he_38.py", line 41, in <module>
+    check(is_sorted)
+  File "/tmp/opencode/
+[humaneval 40] HumanEval/130 FAIL , line 41, in <module>
+    check(tri)
+  File "/tmp/opencode/sandbox/he_39.py", l
+[humaneval 41] HumanEval/133 FAIL t candidate([1.4,4.2,0])==29, "This prints if this assert fails 1 (good for debu
+[humaneval 42] HumanEval/136 FAIL mallest_integers)
+  File "/tmp/opencode/sandbox/he_41.py", line 22, in check
+   
+[humaneval 43] HumanEval/140 FAIL xample") == "Example", "This prints if this assert fails 1 (good for debugging!)
+[humaneval 44] HumanEval/143 FAIL e>
+    check(words_in_sentence)
+  File "/tmp/opencode/sandbox/he_43.py", line 27
+[humaneval 45] HumanEval/146 FAIL <module>
+    check(specialFilter)
+  File "/tmp/opencode/sandbox/he_44.py", line 
+[humaneval 46] HumanEval/150 FAIL   File "/tmp/opencode/sandbox/he_45.py", line 91
+    def check(candidate):
+Inden
+[humaneval 47] HumanEval/153 FAIL  'zeR00', 'NuLl__', '123NoooneB321']) == '__YESIMHERE.NuLl__'
+           ^^^^^^^
+[humaneval 48] HumanEval/156 FAIL   File "/tmp/opencode/sandbox/he_47.py", line 68
+    """
+    ^
+SyntaxError: unte
+[humaneval 49] HumanEval/160 FAIL lgebra)
+  File "/tmp/opencode/sandbox/he_48.py", line 32, in check
+    assert ca
+[humaneval 50] HumanEval/163 FAIL (generate_integers)
+  File "/tmp/opencode/sandbox/he_49.py", line 16, in check
+ 
+
+humaneval QWEN35-08B-INT4-BASE/mnn: 0/50 = 0.0% -> results/quality_QWEN35-08B-INT4-BASE_mnn_humaneval.json

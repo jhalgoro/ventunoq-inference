@@ -1,0 +1,160 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-2B-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-2B-INT4_chat
+[1/50] 00000.txt chars=552 gen=178 tok 11.0s
+[2/50] 00001.txt chars=577 gen=152 tok 10.0s
+[3/50] 00002.txt chars=380 gen=107 tok 8.0s
+[4/50] 00003.txt chars=653 gen=190 tok 12.0s
+[5/50] 00004.txt chars=334 gen=117 tok 8.0s
+[6/50] 00005.txt chars=1132 gen=355 tok 21.0s
+[7/50] 00006.txt chars=636 gen=216 tok 14.0s
+[8/50] 00007.txt chars=154 gen=48 tok 4.0s
+[9/50] 00008.txt chars=257 gen=66 tok 5.0s
+[10/50] 00009.txt chars=263 gen=134 tok 9.0s
+[11/50] 00010.txt chars=1859 gen=512 tok 28.0s
+[12/50] 00011.txt chars=695 gen=238 tok 15.0s
+[13/50] 00012.txt chars=672 gen=223 tok 14.0s
+[14/50] 00013.txt chars=621 gen=208 tok 13.0s
+[15/50] 00014.txt chars=335 gen=146 tok 9.0s
+[16/50] 00015.txt chars=206 gen=61 tok 6.0s
+[17/50] 00016.txt chars=130 gen=58 tok 4.0s
+[18/50] 00017.txt chars=429 gen=154 tok 9.0s
+[19/50] 00018.txt chars=260 gen=120 tok 9.0s
+[20/50] 00019.txt chars=193 gen=90 tok 7.0s
+[21/50] 00020.txt chars=161 gen=46 tok 6.0s
+[22/50] 00021.txt chars=137 gen=42 tok 4.0s
+[23/50] 00022.txt chars=729 gen=236 tok 15.0s
+[24/50] 00023.txt chars=503 gen=169 tok 11.0s
+[25/50] 00024.txt chars=195 gen=76 tok 6.0s
+[26/50] 00025.txt chars=331 gen=116 tok 7.0s
+[27/50] 00026.txt chars=262 gen=66 tok 6.0s
+[28/50] 00027.txt chars=126 gen=40 tok 5.0s
+[29/50] 00028.txt chars=808 gen=193 tok 12.0s
+[30/50] 00029.txt chars=316 gen=99 tok 7.0s
+[31/50] 00030.txt chars=195 gen=68 tok 7.0s
+[32/50] 00031.txt chars=607 gen=212 tok 13.0s
+[33/50] 00032.txt chars=593 gen=189 tok 12.0s
+[34/50] 00033.txt chars=833 gen=258 tok 17.0s
+[35/50] 00034.txt chars=833 gen=260 tok 16.0s
+[36/50] 00035.txt chars=121 gen=36 tok 5.0s
+[37/50] 00036.txt chars=89 gen=31 tok 5.0s
+[38/50] 00037.txt chars=1151 gen=326 tok 20.0s
+[39/50] 00038.txt chars=738 gen=294 tok 20.0s
+[40/50] 00039.txt chars=325 gen=147 tok 11.0s
+[41/50] 00040.txt chars=517 gen=178 tok 12.0s
+[42/50] 00041.txt chars=320 gen=99 tok 7.0s
+[43/50] 00042.txt chars=820 gen=232 tok 14.0s
+[44/50] 00043.txt chars=397 gen=117 tok 9.0s
+[45/50] 00044.txt chars=447 gen=125 tok 9.0s
+[46/50] 00045.txt chars=597 gen=194 tok 11.0s
+[47/50] 00046.txt chars=497 gen=106 tok 10.0s
+[48/50] 00047.txt chars=644 gen=233 tok 14.0s
+[49/50] 00048.txt chars=1116 gen=285 tok 18.0s
+[50/50] 00049.txt chars=179 gen=64 tok 6.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=50 generated=50 skipped=0
+[humaneval 1] HumanEval/0 PASS 
+[humaneval 2] HumanEval/3 PASS 
+[humaneval 3] HumanEval/7 PASS 
+[humaneval 4] HumanEval/10 FAIL ox/he_3.py", line 54, in <module>
+    check(make_palindrome)
+  File "/tmp/openco
+[humaneval 5] HumanEval/13 PASS 
+[humaneval 6] HumanEval/17 FAIL module>
+    check(parse_music)
+  File "/tmp/opencode/sandbox/he_5.py", line 62, 
+[humaneval 7] HumanEval/20 FAIL "/tmp/opencode/sandbox/he_6.py", line 39, in check
+    assert candidate([1.0, 2.
+[humaneval 8] HumanEval/23 PASS 
+[humaneval 9] HumanEval/27 FAIL ine 27, in <module>
+    check(flip_case)
+  File "/tmp/opencode/sandbox/he_8.py",
+[humaneval 10] HumanEval/30 PASS 
+[humaneval 11] HumanEval/33 FAIL pencode/sandbox/he_10.py", line 65, in check
+    assert tuple(candidate([1, 2, 3
+[humaneval 12] HumanEval/37 FAIL /sandbox/he_11.py", line 25, in sort_even
+    return [odd_values[i] for i in odd
+[humaneval 13] HumanEval/40 FAIL     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_12.py", line 41, in
+[humaneval 14] HumanEval/43 PASS 
+[humaneval 15] HumanEval/47 PASS 
+[humaneval 16] HumanEval/50 FAIL decode_shift)
+  File "/tmp/opencode/sandbox/he_15.py", line 32, in check
+    ass
+[humaneval 17] HumanEval/53 PASS 
+[humaneval 18] HumanEval/57 FAIL  44, in <module>
+    check(monotonic)
+  File "/tmp/opencode/sandbox/he_17.py", l
+[humaneval 19] HumanEval/60 PASS 
+[humaneval 20] HumanEval/63 PASS 
+[humaneval 21] HumanEval/67 FAIL e "/tmp/opencode/sandbox/he_20.py", line 16, in fruit_distribution
+    apples = 
+[humaneval 22] HumanEval/70 FAIL heck(strange_sort_list)
+  File "/tmp/opencode/sandbox/he_21.py", line 20, in che
+[humaneval 23] HumanEval/73 PASS 
+[humaneval 24] HumanEval/77 FAIL mp/opencode/sandbox/he_23.py", line 41, in check
+    assert candidate(64) == Tru
+[humaneval 25] HumanEval/80 PASS 
+[humaneval 26] HumanEval/83 FAIL dbox/he_25.py", line 32, in <module>
+    check(starts_one_ends)
+  File "/tmp/ope
+[humaneval 27] HumanEval/86 FAIL sandbox/he_26.py", line 38, in <module>
+    check(anti_shuffle)
+  File "/tmp/ope
+[humaneval 28] HumanEval/90 FAIL .py", line 32, in <module>
+    check(next_smallest)
+  File "/tmp/opencode/sandbo
+[humaneval 29] HumanEval/93 FAIL candidate('TEST') == 'tgst', "This prints if this assert fails 1 (good for debug
+[humaneval 30] HumanEval/96 FAIL dbox/he_29.py", line 39, in <module>
+    check(count_up_to)
+  File "/tmp/opencod
+[humaneval 31] HumanEval/100 FAIL n <module>
+    check(make_a_pile)
+  File "/tmp/opencode/sandbox/he_30.py", line 
+[humaneval 32] HumanEval/103 FAIL 31.py", line 49, in <module>
+    check(rounded_avg)
+  File "/tmp/opencode/sandbo
+[humaneval 33] HumanEval/106 FAIL ^^^^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_32.py", line 22, in f
+    result.a
+[humaneval 34] HumanEval/110 FAIL exchange)
+  File "/tmp/opencode/sandbox/he_33.py", line 35, in check
+    assert 
+[humaneval 35] HumanEval/113 FAIL 7']) == ["the number of odd elements 4n the str4ng 4 of the 4nput."], "Test 1"
+ 
+[humaneval 36] HumanEval/116 FAIL   check(sort_array)
+  File "/tmp/opencode/sandbox/he_35.py", line 21, in check
+ 
+[humaneval 37] HumanEval/120 PASS 
+[humaneval 38] HumanEval/123 FAIL    check(get_odd_collatz)
+  File "/tmp/opencode/sandbox/he_37.py", line 50, in c
+[humaneval 39] HumanEval/126 FAIL  3, 4]) == False, "This prints if this assert fails 5 (good for debugging!)"
+   
+[humaneval 40] HumanEval/130 FAIL , line 51, in <module>
+    check(tri)
+  File "/tmp/opencode/sandbox/he_39.py", l
+[humaneval 41] HumanEval/133 FAIL p/opencode/sandbox/he_40.py", line 28, in <genexpr>
+    return sum(int(math.ceil
+[humaneval 42] HumanEval/136 FAIL mallest_integers)
+  File "/tmp/opencode/sandbox/he_41.py", line 26, in check
+   
+[humaneval 43] HumanEval/140 FAIL Hanif_", "This prints if this assert fails 2 (good for debugging!)"
+           ^
+[humaneval 44] HumanEval/143 FAIL n_sentence)
+  File "/tmp/opencode/sandbox/he_43.py", line 42, in check
+    asser
+[humaneval 45] HumanEval/146 PASS 
+[humaneval 46] HumanEval/150 PASS 
+[humaneval 47] HumanEval/153 PASS 
+[humaneval 48] HumanEval/156 FAIL 47.py", line 61, in <module>
+    check(int_to_mini_roman)
+  File "/tmp/opencode/
+[humaneval 49] HumanEval/160 FAIL ^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_48.py", line 57, in do_algebra
+    ex
+[humaneval 50] HumanEval/163 FAIL (generate_integers)
+  File "/tmp/opencode/sandbox/he_49.py", line 22, in check
+ 
+
+humaneval QWEN35-2B-INT4/mnn: 17/50 = 34.0% -> results/quality_QWEN35-2B-INT4_mnn_humaneval.json

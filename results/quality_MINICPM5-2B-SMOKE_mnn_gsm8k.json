@@ -1,0 +1,45 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 5,
+ "score": 0.8,
+ "seconds": 91.7,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "ggs, so she has 13 - 4 = 9 eggs left. She sells these at $2 per egg, so she earns 9 * 2 = 18 dollars. The answer is 18.\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": "68",
+   "gold": "31",
+   "tail": " the price. Twice the rewards amount is 2 * $4 = $8. \n\nSo, the final amount paid is $76 - $8 = $68. \n\nThe answer is 68.\n"
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tail": "ond mixture: $2 + $5 = $7\n\nNow, find the difference between the two costs:\n- Difference: $10 - $7 = $3\n\nThe answer is 3\n"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tail": "y in a year:\n- She has 0.5 pairs per month.\n- There are 12 months in a year.\n- So, 0.5 * 12 = 6 pairs.\n\nThe answer is 6\n"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "got": "14",
+   "gold": "14",
+   "tail": " 8 = 56.\n\nNext, divide the slices equally among the 4 people:\n- Each person gets 56 / 4 = 14 slices.\n\nThe answer is 14.\n"
+  }
+ ]
+}

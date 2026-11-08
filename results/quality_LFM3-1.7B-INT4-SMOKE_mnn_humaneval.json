@@ -1,0 +1,28 @@
+{
+ "tag": "LFM3-1.7B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 3,
+ "score": 0.3333,
+ "seconds": 54.6,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "e \"/tmp/opencode/sandbox/he_0.py\", line 22, in check\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.3) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": ""
+  },
+  {
+   "id": "HumanEval/82",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "k(generate_integers)\n  File \"/tmp/opencode/sandbox/he_2.py\", line 12, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "ult = []\n    for num in range(start, end + 1):\n        if num % 2 == 0:\n            result.append(num)\n    return result"
+  }
+ ]
+}

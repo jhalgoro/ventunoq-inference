@@ -1,0 +1,146 @@
+config=/home/arduino/Code/ventunoq-mnn/lfm3-models/LFM3-VL-2B-MNN/config.json mode=chat nothink=False batch=/tmp/opencode/qbatch/LFM3-VL-2B-INT4-R2_chat
+[1/50] 00000.txt chars=478 gen=154 tok 10.0s
+[2/50] 00001.txt chars=176 gen=45 tok 4.0s
+[3/50] 00002.txt chars=354 gen=100 tok 7.0s
+[4/50] 00003.txt chars=963 gen=250 tok 14.0s
+[5/50] 00004.txt chars=265 gen=89 tok 6.0s
+[6/50] 00005.txt chars=744 gen=219 tok 14.0s
+[7/50] 00006.txt chars=359 gen=98 tok 7.0s
+[8/50] 00007.txt chars=154 gen=44 tok 3.0s
+[9/50] 00008.txt chars=206 gen=50 tok 4.0s
+[10/50] 00009.txt chars=114 gen=33 tok 4.0s
+[11/50] 00010.txt chars=596 gen=191 tok 12.0s
+[12/50] 00011.txt chars=543 gen=186 tok 11.0s
+[13/50] 00012.txt chars=237 gen=71 tok 6.0s
+[14/50] 00013.txt chars=149 gen=38 tok 4.0s
+[15/50] 00014.txt chars=343 gen=130 tok 8.0s
+[16/50] 00015.txt chars=221 gen=68 tok 5.0s
+[17/50] 00016.txt chars=130 gen=53 tok 4.0s
+[18/50] 00017.txt chars=3907 gen=999 tok 51.0s
+[19/50] 00018.txt chars=260 gen=102 tok 6.0s
+[20/50] 00019.txt chars=1315 gen=460 tok 25.0s
+[21/50] 00020.txt chars=188 gen=58 tok 6.0s
+[22/50] 00021.txt chars=474 gen=108 tok 8.0s
+[23/50] 00022.txt chars=194 gen=63 tok 5.0s
+[24/50] 00023.txt chars=116 gen=44 tok 5.0s
+[25/50] 00024.txt chars=170 gen=59 tok 5.0s
+[26/50] 00025.txt chars=105 gen=40 tok 3.0s
+[27/50] 00026.txt chars=234 gen=57 tok 5.0s
+[28/50] 00027.txt chars=176 gen=46 tok 4.0s
+[29/50] 00028.txt chars=390 gen=92 tok 7.0s
+[30/50] 00029.txt chars=696 gen=220 tok 13.0s
+[31/50] 00030.txt chars=224 gen=61 tok 5.0s
+[32/50] 00031.txt chars=596 gen=188 tok 12.0s
+[33/50] 00032.txt chars=593 gen=175 tok 10.0s
+[34/50] 00033.txt chars=829 gen=248 tok 15.0s
+[35/50] 00034.txt chars=840 gen=235 tok 15.0s
+[36/50] 00035.txt chars=82 gen=25 tok 4.0s
+[37/50] 00036.txt chars=62 gen=18 tok 4.0s
+[38/50] 00037.txt chars=224 gen=69 tok 7.0s
+[39/50] 00038.txt chars=127 gen=37 tok 6.0s
+[40/50] 00039.txt chars=1031 gen=340 tok 20.0s
+[41/50] 00040.txt chars=548 gen=179 tok 11.0s
+[42/50] 00041.txt chars=230 gen=72 tok 6.0s
+[43/50] 00042.txt chars=843 gen=193 tok 11.0s
+[44/50] 00043.txt chars=193 gen=45 tok 5.0s
+[45/50] 00044.txt chars=348 gen=87 tok 7.0s
+[46/50] 00045.txt chars=306 gen=97 tok 6.0s
+[47/50] 00046.txt chars=1462 gen=373 tok 22.0s
+[48/50] 00047.txt chars=799 gen=244 tok 14.0s
+[49/50] 00048.txt chars=1340 gen=333 tok 20.0s
+[50/50] 00049.txt chars=211 gen=70 tok 5.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=50 generated=50 skipped=0
+[humaneval 1] HumanEval/0 FAIL , line 1, in <module>
+    def has_close_elements(numbers: List[float], threshold
+[humaneval 2] HumanEval/3 FAIL /tmp/opencode/sandbox/he_1.py", line 1, in <module>
+    def below_zero(operation
+[humaneval 3] HumanEval/7 FAIL ine 1, in <module>
+    def filter_by_substring(strings: List[str], substring: st
+[humaneval 4] HumanEval/10 FAIL ox/he_3.py", line 41, in <module>
+    check(make_palindrome)
+  File "/tmp/openco
+[humaneval 5] HumanEval/13 PASS 
+[humaneval 6] HumanEval/17 FAIL /sandbox/he_5.py", line 1, in <module>
+    def parse_music(music_string: str) ->
+[humaneval 7] HumanEval/20 FAIL ine 1, in <module>
+    def find_closest_elements(numbers: List[float]) -> Tuple[
+[humaneval 8] HumanEval/23 PASS 
+[humaneval 9] HumanEval/27 PASS 
+[humaneval 10] HumanEval/30 PASS 
+[humaneval 11] HumanEval/33 FAIL  line 26, in check
+    assert tuple(candidate([5, 6, 3, 4, 8, 9, 2])) == tuple([
+[humaneval 12] HumanEval/37 FAIL t_even)
+  File "/tmp/opencode/sandbox/he_11.py", line 20, in check
+    assert tu
+[humaneval 13] HumanEval/40 PASS 
+[humaneval 14] HumanEval/43 PASS 
+[humaneval 15] HumanEval/47 PASS 
+[humaneval 16] HumanEval/50 FAIL ile "/tmp/opencode/sandbox/he_15.py", line 19, in check
+    encoded_str = encode
+[humaneval 17] HumanEval/53 PASS 
+[humaneval 18] HumanEval/57 PASS 
+[humaneval 19] HumanEval/60 PASS 
+[humaneval 20] HumanEval/63 FAIL /opencode/sandbox/he_19.py", line 40, in <module>
+    check(fibfib)
+  File "/tmp
+[humaneval 21] HumanEval/67 FAIL ges = map(int, s.split(" apples ")[0].split(" and ")[1].split(" oranges")[0].spl
+[humaneval 22] HumanEval/70 PASS 
+[humaneval 23] HumanEval/73 PASS 
+[humaneval 24] HumanEval/77 FAIL /tmp/opencode/sandbox/he_23.py", line 13, in check
+    assert candidate(-1) == T
+[humaneval 25] HumanEval/80 FAIL 0, in <module>
+    check(is_happy)
+  File "/tmp/opencode/sandbox/he_24.py", line
+[humaneval 26] HumanEval/83 FAIL andbox/he_25.py", line 20, in <module>
+    check(starts_one_ends)
+  File "/tmp/o
+[humaneval 27] HumanEval/86 PASS 
+[humaneval 28] HumanEval/90 PASS 
+[humaneval 29] HumanEval/93 FAIL candidate('TEST') == 'tgst', "This prints if this assert fails 1 (good for debug
+[humaneval 30] HumanEval/96 PASS 
+[humaneval 31] HumanEval/100 FAIL 
+[humaneval 32] HumanEval/103 FAIL 31.py", line 38, in <module>
+    check(rounded_avg)
+  File "/tmp/opencode/sandbo
+[humaneval 33] HumanEval/106 FAIL ^^^^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_32.py", line 13, in f
+    result.a
+[humaneval 34] HumanEval/110 FAIL k(exchange)
+  File "/tmp/opencode/sandbox/he_33.py", line 21, in check
+    asser
+[humaneval 35] HumanEval/113 FAIL he number of odd elements {count}n the str{i}ng {count} of the {count}nput.")
+  
+[humaneval 36] HumanEval/116 PASS 
+[humaneval 37] HumanEval/120 FAIL le>
+    check(maximum)
+  File "/tmp/opencode/sandbox/he_36.py", line 6, in check
+[humaneval 38] HumanEval/123 FAIL    check(get_odd_collatz)
+  File "/tmp/opencode/sandbox/he_37.py", line 14, in c
+[humaneval 39] HumanEval/126 FAIL  3, 4]) == False, "This prints if this assert fails 5 (good for debugging!)"
+   
+[humaneval 40] HumanEval/130 FAIL ^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_39.py", line 30, in tri
+    result.ap
+[humaneval 41] HumanEval/133 FAIL t candidate([1.4,4.2,0])==29, "This prints if this assert fails 1 (good for debu
+[humaneval 42] HumanEval/136 PASS 
+[humaneval 43] HumanEval/140 FAIL s assert fails 3 (good for debugging!)"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[humaneval 44] HumanEval/143 FAIL ^^^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_43.py", line 5, in words_in_sentenc
+[humaneval 45] HumanEval/146 PASS 
+[humaneval 46] HumanEval/150 FAIL rt candidate(7, 34, 12) == 34
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/openc
+[humaneval 47] HumanEval/153 PASS 
+[humaneval 48] HumanEval/156 PASS 
+[humaneval 49] HumanEval/160 FAIL ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/opencode/sandbox/he_48.py"
+[humaneval 50] HumanEval/163 FAIL (generate_integers)
+  File "/tmp/opencode/sandbox/he_49.py", line 12, in check
+ 
+
+humaneval LFM3-VL-2B-INT4-R2/mnn: 20/50 = 40.0% -> results/quality_LFM3-VL-2B-INT4-R2_mnn_humaneval.json

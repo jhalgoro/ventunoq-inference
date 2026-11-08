@@ -1,0 +1,70 @@
+{
+ "tag": "LFM3-VL-2B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "mmlu",
+ "n": 6,
+ "score": 0.5,
+ "seconds": 22.0,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "pred": 3,
+   "gold": 2,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": 2,
+   "gold": 0,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "pred": 3,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "pred": 1,
+   "gold": 1,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "pred": 3,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 5,
+   "ok": false,
+   "pred": 0,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  }
+ ]
+}

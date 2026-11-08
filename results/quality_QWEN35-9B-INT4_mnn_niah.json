@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-9B-INT4",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 3932.9,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": null,
+   "ok": false,
+   "out": "!!!!!!!!!!!!!!!!!!!!!!!!"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": null,
+   "ok": false,
+   "out": "!!!!!!!!!!!!!!!!!!!!!!!!"
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": null,
+   "ok": false,
+   "out": "!!!!!!!!!!!!!!!!!!!!!!!!"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": null,
+   "ok": false,
+   "out": "!!!!!!!!!!!!!!!!!!!!!!!!"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": null,
+   "ok": false,
+   "out": "!!!!!!!!!!!!!!!!!!!!!!!!"
+  }
+ ]
+}

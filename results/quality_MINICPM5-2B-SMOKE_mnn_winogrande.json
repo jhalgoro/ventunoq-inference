@@ -1,0 +1,60 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "winogrande",
+ "n": 5,
+ "score": 0.4,
+ "seconds": 20.9,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "pred": 1,
+   "gold": 1,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": 1,
+   "gold": 0,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "pred": 1,
+   "gold": 0,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "pred": 1,
+   "gold": 1,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  }
+ ]
+}

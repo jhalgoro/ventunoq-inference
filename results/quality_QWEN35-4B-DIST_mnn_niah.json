@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-4B-DIST",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 2301.1,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "1",
+   "ok": false,
+   "out": "Let me carefully read through this problem to find the secre"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "2",
+   "ok": false,
+   "out": "The user is asking me to find the secret passcode for vault "
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "3",
+   "ok": false,
+   "out": "Let me carefully read through this problem to find the secre"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": null,
+   "ok": false,
+   "out": "Let me carefully analyze this question"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": "5",
+   "ok": false,
+   "out": "Let me carefully analyze this question to find the secret pa"
+  }
+ ]
+}

@@ -1,0 +1,310 @@
+{
+ "tag": "QWEN35-2B-INT4",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 50,
+ "score": 0.34,
+ "seconds": 543.0,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": true,
+   "err": "",
+   "comp_tail": "       diff = abs(numbers[i] - numbers[j])\n            if diff < threshold:\n                return True\n    return False"
+  },
+  {
+   "id": "HumanEval/3",
+   "ok": true,
+   "err": "",
+   "comp_tail": "nce = 0\n    for op in operations:\n        balance += op\n        if balance < 0:\n            return True\n    return False"
+  },
+  {
+   "id": "HumanEval/7",
+   "ok": true,
+   "err": "",
+   "comp_tail": "c', 'bacd', 'cde', 'array'], 'a')\n    ['abc', 'bacd', 'array']\n    \"\"\"\n    return [s for s in strings if substring in s]"
+  },
+  {
+   "id": "HumanEval/10",
+   "ok": false,
+   "err": "ox/he_3.py\", line 54, in <module>\n    check(make_palindrome)\n  File \"/tmp/opencode/sandbox/he_3.py\", line 49, in check\n    assert candidate('x') == 'x'\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "n - 1 - i]:\n        i -= 1\n    prefix = string[:i+1]\n    suffix = string[i+1:]\n    return prefix + suffix + suffix[::-1]"
+  },
+  {
+   "id": "HumanEval/13",
+   "ok": true,
+   "err": "",
+   "comp_tail": "\"\n    if a == 0:\n        return b\n    if b == 0:\n        return a\n    while b != 0:\n        a, b = b, a % b\n    return a"
+  },
+  {
+   "id": "HumanEval/17",
+   "ok": false,
+   "err": "module>\n    check(parse_music)\n  File \"/tmp/opencode/sandbox/he_5.py\", line 62, in check\n    assert candidate('o o o o') == [4, 4, 4, 4]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "     result.append(1)\n            i += 1\n        else:\n            result.append(1)\n            i += 1\n    return result"
+  },
+  {
+   "id": "HumanEval/20",
+   "ok": false,
+   "err": "\"/tmp/opencode/sandbox/he_6.py\", line 39, in check\n    assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "tain at least two elements\")\n    \n    min_val = min(numbers)\n    max_val = max(numbers)\n    \n    return min_val, max_val"
+  },
+  {
+   "id": "HumanEval/23",
+   "ok": true,
+   "err": "",
+   "comp_tail": "   \"\"\" Return length of given string\n    >>> strlen('')\n    0\n    >>> strlen('abc')\n    3\n    \"\"\"\n    return len(string)"
+  },
+  {
+   "id": "HumanEval/27",
+   "ok": false,
+   "err": "ine 27, in <module>\n    check(flip_case)\n  File \"/tmp/opencode/sandbox/he_8.py\", line 24, in check\n    assert candidate('Hello!') == 'hELLO!'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "> flip_case('Hello')\n    'hELLO'\n    \"\"\"\n    return ''.join(char if char.islower() else char.upper() for char in string)"
+  },
+  {
+   "id": "HumanEval/30",
+   "ok": true,
+   "err": "",
+   "comp_tail": "positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    [5, 3, 2, 3, 9, 123, 1]\n    \"\"\"\n    return [x for x in l if x > 0]"
+  },
+  {
+   "id": "HumanEval/33",
+   "ok": false,
+   "err": "pencode/sandbox/he_10.py\", line 65, in check\n    assert tuple(candidate([1, 2, 3])) == tuple(sort_third([1, 2, 3]))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: 'NoneType' object is not iterable\n",
+   "comp_tail": "  indices = indices[:len(indices)]\n    indices = indices[:len(indices)]\n    indices = indices[:len(indices)]\n    indices"
+  },
+  {
+   "id": "HumanEval/37",
+   "ok": false,
+   "err": "/sandbox/he_11.py\", line 25, in sort_even\n    return [odd_values[i] for i in odd_indices] + [sorted_even_values[i] for i in even_indices]\n            ~~~~~~~~~~^^^\nIndexError: list index out of range\n",
+   "comp_tail": "es = sorted(even_values)\n    return [odd_values[i] for i in odd_indices] + [sorted_even_values[i] for i in even_indices]"
+  },
+  {
+   "id": "HumanEval/40",
+   "ok": false,
+   "err": "    ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/opencode/sandbox/he_12.py\", line 41, in triples_sum_to_zero\n    if i + seen[0] + seen[1] == 0:\n           ~~~~^^^\nTypeError: 'set' object is not subscriptable\n",
+   "comp_tail": "een) == len(l):\n            return False\n        if i + seen[0] + seen[1] == 0:\n            return True\n    return False"
+  },
+  {
+   "id": "HumanEval/43",
+   "ok": true,
+   "err": "",
+   "comp_tail": " if x == 0:\n            return False\n        if -x in seen:\n            return True\n        seen.add(x)\n    return False"
+  },
+  {
+   "id": "HumanEval/47",
+   "ok": true,
+   "err": "",
+   "comp_tail": "   if n % 2 == 0:\n        return (sorted_l[n // 2 - 1] + sorted_l[n // 2]) / 2\n    else:\n        return sorted_l[n // 2]"
+  },
+  {
+   "id": "HumanEval/50",
+   "ok": false,
+   "err": "decode_shift)\n  File \"/tmp/opencode/sandbox/he_15.py\", line 32, in check\n    assert candidate(copy.deepcopy(encoded_str)) == str\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": " function. Returns decoded string.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])"
+  },
+  {
+   "id": "HumanEval/53",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n    return x + y"
+  },
+  {
+   "id": "HumanEval/57",
+   "ok": false,
+   "err": " 44, in <module>\n    check(monotonic)\n  File \"/tmp/opencode/sandbox/he_17.py\", line 34, in check\n    assert candidate([1, 2, 4, 10]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "1):\n        if l[i] < l[i+1]:\n            return False\n        if l[i] > l[i+1]:\n            return True\n    return True"
+  },
+  {
+   "id": "HumanEval/60",
+   "ok": true,
+   "err": "",
+   "comp_tail": "050\n    >>> sum_to_n(5)\n    15\n    >>> sum_to_n(10)\n    55\n    >>> sum_to_n(1)\n    1\n    \"\"\"\n    return n * (n + 1) // 2"
+  },
+  {
+   "id": "HumanEval/63",
+   "ok": true,
+   "err": "",
+   "comp_tail": "= 2:\n        return 1\n    a, b, c = 0, 0, 1\n    for i in range(3, n + 1):\n        a, b, c = b, c, a + b + c\n    return c"
+  },
+  {
+   "id": "HumanEval/67",
+   "ok": false,
+   "err": "e \"/tmp/opencode/sandbox/he_20.py\", line 16, in fruit_distribution\n    apples = int(parts[0].strip())\n             ^^^^^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: '5 apples'\n",
+   "comp_tail": " s.split(\" and \")\n    apples = int(parts[0].strip())\n    oranges = int(parts[1].strip())\n    return n - apples - oranges"
+  },
+  {
+   "id": "HumanEval/70",
+   "ok": false,
+   "err": "heck(strange_sort_list)\n  File \"/tmp/opencode/sandbox/he_21.py\", line 20, in check\n    assert candidate([1, 2, 3, 4]) == [1, 4, 2, 3]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "    if not lst:\n        return []\n    sorted_lst = sorted(lst)\n    return sorted_lst[::2] + sorted_lst[1::2]"
+  },
+  {
+   "id": "HumanEval/73",
+   "ok": true,
+   "err": "",
+   "comp_tail": "s = 0\n    for i in range(n // 2):\n        if arr[i] != arr[n - 1 - i]:\n            mismatches += 1\n    return mismatches"
+  },
+  {
+   "id": "HumanEval/77",
+   "ok": false,
+   "err": "mp/opencode/sandbox/he_23.py\", line 41, in check\n    assert candidate(64) == True, \"Fourth test error: \" + str(candidate(64))\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Fourth test error: False\n",
+   "comp_tail": "eturn True\n    if a < 0:\n        a = -a\n    n = int(a ** (1/3))\n    if n ** 3 == a:\n        return True\n    return False"
+  },
+  {
+   "id": "HumanEval/80",
+   "ok": true,
+   "err": "",
+   "comp_tail": "e(len(s) - 2):\n        if s[i] == s[i+1] or s[i] == s[i+2] or s[i+1] == s[i+2]:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/83",
+   "ok": false,
+   "err": "dbox/he_25.py\", line 32, in <module>\n    check(starts_one_ends)\n  File \"/tmp/opencode/sandbox/he_25.py\", line 24, in check\n    assert candidate(3) == 180\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "  for i in range(10**(n-1), 10**n):\n        if i % 10 == 1 or i // 10 % 10 == 1:\n            count += 1\n    return count"
+  },
+  {
+   "id": "HumanEval/86",
+   "ok": false,
+   "err": "sandbox/he_26.py\", line 38, in <module>\n    check(anti_shuffle)\n  File \"/tmp/opencode/sandbox/he_26.py\", line 32, in check\n    assert candidate('') == ''\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "d(word))\n            result.append(sorted_word)\n        else:\n            result.append(' ')\n    return ' '.join(result)"
+  },
+  {
+   "id": "HumanEval/90",
+   "ok": false,
+   "err": ".py\", line 32, in <module>\n    check(next_smallest)\n  File \"/tmp/opencode/sandbox/he_27.py\", line 23, in check\n    assert candidate([1, 1]) == None\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "    if not lst:\n        return None\n    lst = sorted(lst)\n    return lst[1] if len(lst) > 1 else None"
+  },
+  {
+   "id": "HumanEval/93",
+   "ok": false,
+   "err": "candidate('TEST') == 'tgst', \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n",
+   "comp_tail": "se:\n                result.append(char.upper())\n        else:\n            result.append(char)\n    return ''.join(result)"
+  },
+  {
+   "id": "HumanEval/96",
+   "ok": false,
+   "err": "dbox/he_29.py\", line 39, in <module>\n    check(count_up_to)\n  File \"/tmp/opencode/sandbox/he_29.py\", line 27, in check\n    assert candidate(5) == [2,3]\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "              is_prime = False\n                break\n        if is_prime:\n            primes.append(i)\n    return primes"
+  },
+  {
+   "id": "HumanEval/100",
+   "ok": false,
+   "err": "n <module>\n    check(make_a_pile)\n  File \"/tmp/opencode/sandbox/he_30.py\", line 28, in check\n    assert candidate(3) == [3, 5, 7], \"Test 3\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 3\n",
+   "comp_tail": "esult.append(n)\n    if n % 2 == 0:\n        result.append(n + 1)\n    else:\n        result.append(n + 2)\n    return result"
+  },
+  {
+   "id": "HumanEval/103",
+   "ok": false,
+   "err": "31.py\", line 49, in <module>\n    check(rounded_avg)\n  File \"/tmp/opencode/sandbox/he_31.py\", line 32, in check\n    assert candidate(1, 5) == \"0b11\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "(range(n, m + 1))\n    avg = total / (m - n + 1)\n    rounded_avg_val = round(avg)\n    return format(rounded_avg_val, 'b')"
+  },
+  {
+   "id": "HumanEval/106",
+   "ok": false,
+   "err": "^^^^^^^^^^^^\n  File \"/tmp/opencode/sandbox/he_32.py\", line 22, in f\n    result.append(math.factorial(i))\n                  ^^^^\nNameError: name 'math' is not defined. Did you forget to import 'math'?\n",
+   "comp_tail": "        result.append(math.factorial(i))\n        else:\n            result.append(sum(range(1, i + 1)))\n    return result"
+  },
+  {
+   "id": "HumanEval/110",
+   "ok": false,
+   "err": "exchange)\n  File \"/tmp/opencode/sandbox/he_33.py\", line 35, in check\n    assert candidate([1, 2, 3, 4], [1, 2, 3, 4]) == \"YES\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "n(lst1)):\n        if lst1[i] % 2 == 0:\n            even_count += 1\n    return \"YES\" if even_count == len(lst1) else \"NO\""
+  },
+  {
+   "id": "HumanEval/113",
+   "ok": false,
+   "err": "7']) == [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "   count += 1\n        result.append(f\"the number of odd elements {count}n the str{s} of the {s}nput.\")\n    return result"
+  },
+  {
+   "id": "HumanEval/116",
+   "ok": false,
+   "err": "  check(sort_array)\n  File \"/tmp/opencode/sandbox/he_35.py\", line 21, in check\n    assert candidate([1,5,2,3,4]) == [1, 2, 4, 3, 5]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "    def count_ones(n):\n        return bin(n).count('1')\n    \n    return sorted(arr, key=count_ones)"
+  },
+  {
+   "id": "HumanEval/120",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    if k == 0:\n        return []\n    arr.sort()\n    return arr[-k:]"
+  },
+  {
+   "id": "HumanEval/123",
+   "ok": false,
+   "err": "   check(get_odd_collatz)\n  File \"/tmp/opencode/sandbox/he_37.py\", line 50, in check\n    assert candidate(14) == [1, 5, 7, 11, 13, 17]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": " current = 3 * current + 1\n        if current % 2 == 1:\n            sequence.append(current)\n    return sorted(sequence)"
+  },
+  {
+   "id": "HumanEval/126",
+   "ok": false,
+   "err": " 3, 4]) == False, \"This prints if this assert fails 5 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 5 (good for debugging!)\n",
+   "comp_tail": "    return True\n    for i in range(len(lst) - 1):\n        if lst[i+1] < lst[i]:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/130",
+   "ok": false,
+   "err": ", line 51, in <module>\n    check(tri)\n  File \"/tmp/opencode/sandbox/he_39.py\", line 38, in check\n    assert candidate(3) == [1, 3, 2.0, 8.0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "           c = a + b\n        else:\n            c = a + b + b\n        a, b = b, c\n    return [1, 3] + [c for c in [a, b]]"
+  },
+  {
+   "id": "HumanEval/133",
+   "ok": false,
+   "err": "p/opencode/sandbox/he_40.py\", line 28, in <genexpr>\n    return sum(int(math.ceil(x)) ** 2 for x in lst)\n                   ^^^^\nNameError: name 'math' is not defined. Did you forget to import 'math'?\n",
+   "comp_tail": " be 29\n    For lst = [-2.4,1,1] the output should be 6\n    \n\n    \"\"\"\n    return sum(int(math.ceil(x)) ** 2 for x in lst)"
+  },
+  {
+   "id": "HumanEval/136",
+   "ok": false,
+   "err": "mallest_integers)\n  File \"/tmp/opencode/sandbox/he_41.py\", line 26, in check\n    assert candidate([2, 4, 1, 3, 5, 7]) == (None, 1)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "None, max(positive))\n    if not positive:\n        return (max(negative), None)\n    return (max(negative), min(positive))"
+  },
+  {
+   "id": "HumanEval/140",
+   "ok": false,
+   "err": "Hanif_\", \"This prints if this assert fails 2 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 2 (good for debugging!)\n",
+   "comp_tail": "d('_')\n            i += 1\n        else:\n            result.append(text[i])\n            i += 1\n    return ''.join(result)"
+  },
+  {
+   "id": "HumanEval/143",
+   "ok": false,
+   "err": "n_sentence)\n  File \"/tmp/opencode/sandbox/he_43.py\", line 42, in check\n    assert candidate(\"lets go for swimming\") == \"go for\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "    return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/146",
+   "ok": true,
+   "err": "",
+   "comp_tail": "um[-1])\n                if first_digit % 2 == 1 and last_digit % 2 == 1:\n                    count += 1\n    return count"
+  },
+  {
+   "id": "HumanEval/150",
+   "ok": true,
+   "err": "",
+   "comp_tail": " == 0:\n                return False\n        return True\n\n    if is_prime(n):\n        return x\n    else:\n        return y"
+  },
+  {
+   "id": "HumanEval/153",
+   "ok": true,
+   "err": "",
+   "comp_tail": "st_strength = strength\n            strongest_extension = extension\n    \n    return f\"{class_name}.{strongest_extension}\""
+  },
+  {
+   "id": "HumanEval/156",
+   "ok": false,
+   "err": "47.py\", line 61, in <module>\n    check(int_to_mini_roman)\n  File \"/tmp/opencode/sandbox/he_47.py\", line 42, in check\n    assert candidate(19) == 'xix'\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "     if number >= i:\n            result += mappings[i]\n            number -= i\n            break\n    return result[::-1]"
+  },
+  {
+   "id": "HumanEval/160",
+   "ok": false,
+   "err": "^^^^^^^^^\n  File \"/tmp/opencode/sandbox/he_48.py\", line 57, in do_algebra\n    expression = op * expression\n                 ~~~^~~~~~~~~~~~\nTypeError: can't multiply sequence by non-int of type 'str'\n",
+   "comp_tail": "\n        op = operator[i]\n        operand[i + 1] = expression\n        expression = op * expression\n    return expression"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "(generate_integers)\n  File \"/tmp/opencode/sandbox/he_49.py\", line 22, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "b, a\n    result = []\n    for i in range(a, b + 1):\n        if i % 2 == 0:\n            result.append(i)\n    return result"
+  }
+ ]
+}

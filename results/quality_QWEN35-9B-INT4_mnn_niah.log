@@ -1,0 +1,20 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-9B-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-9B-INT4_chat
+[1/5] 00000.txt chars=24 gen=24 tok 784.0s
+[2/5] 00001.txt chars=24 gen=24 tok 787.0s
+[3/5] 00002.txt chars=24 gen=24 tok 784.0s
+[4/5] 00003.txt chars=24 gen=24 tok 784.0s
+[5/5] 00004.txt chars=24 gen=24 tok 782.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+Can't open file:/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-9B-MNN-text/embeddings_bf16.bin
+Failed to open embedding file!
+DONE items=5 generated=5 skipped=0
+[niah 1] depth=0.1 MISS got=[] want=36132
+[niah 2] depth=0.3 MISS got=[] want=98253
+[niah 3] depth=0.5 MISS got=[] want=48594
+[niah 4] depth=0.7 MISS got=[] want=28611
+[niah 5] depth=0.9 MISS got=[] want=58512
+
+niah QWEN35-9B-INT4/mnn: 0/5 = 0.0% -> results/quality_QWEN35-9B-INT4_mnn_niah.json

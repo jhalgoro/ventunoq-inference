@@ -1,0 +1,16 @@
+{
+ "tag": "LFM3-1.7B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 23.9,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 142.507675,
+   "max_tokens": 1000
+  }
+ ]
+}

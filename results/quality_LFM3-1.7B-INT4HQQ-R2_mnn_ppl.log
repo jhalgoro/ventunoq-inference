@@ -1,0 +1,4 @@
+config=/home/arduino/Code/ventunoq-mnn/lfm3-models/LFM3-1.7B-MNN-int4hqq/config.json mode=chat nothink=False batch=/tmp/opencode/qbatch/LFM3-1.7B-INT4HQQ-R2_chat
+[ppl] gatsby perplexity = 41.080322
+
+ppl LFM3-1.7B-INT4HQQ-R2/mnn: 1/1 = 100.0% -> results/quality_LFM3-1.7B-INT4HQQ-R2_mnn_ppl.json

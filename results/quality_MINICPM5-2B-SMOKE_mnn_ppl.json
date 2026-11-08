@@ -1,0 +1,16 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 30.8,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 33.242836,
+   "max_tokens": 1000
+  }
+ ]
+}

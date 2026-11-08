@@ -1,0 +1,28 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 3,
+ "score": 0.3333,
+ "seconds": 37.1,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": ", line 1, in <module>\n    def has_close_elements(numbers: List[float], threshold: float) -> bool:\n                                    ^^^^\nNameError: name 'List' is not defined. Did you mean: 'list'?\n",
+   "comp_tail": "1, len(sorted_nums)):\n        if sorted_nums[i] - sorted_nums[i-1] < threshold:\n            return True\n    return False"
+  },
+  {
+   "id": "HumanEval/82",
+   "ok": true,
+   "err": "",
+   "comp_tail": "        return False\n    for i in range(2, length):\n        if length % i == 0:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "k(generate_integers)\n  File \"/tmp/opencode/sandbox/he_2.py\", line 21, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "sult = []\n    for num in range(low, high + 1):\n        if num % 2 == 0:\n            result.append(num)\n    return result"
+  }
+ ]
+}

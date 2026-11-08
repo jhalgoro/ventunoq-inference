@@ -1,0 +1,11 @@
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+| model                          |  modelSize | backend    | threads | precision  | test          | speed(tok/s) |
+| ------------------------------ | ---------: | ---------- | ----: | ---------- | ------------- | ------------ |
+| LFM3-VL-2B-MNN                 | 953.27 MiB | CPU        |     4 | Low        | pp512         | 75.27 ± 0.23 |
+| LFM3-VL-2B-MNN                 | 953.27 MiB | CPU        |     4 | Low        | tg128         | 21.43 ± 0.01 |
+| LFM3-VL-2B-MNN                 | 953.27 MiB | CPU        |     4 | Low        | pp512+tg128   | 75.38 ± 0.08<br>20.64 ± 0.02 |
+decode wall speed (incl. sampling): 20.62 ± 0.02 tok/s
+

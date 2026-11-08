@@ -1,0 +1,120 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-Claude-4.6-Opus-Reasoning-Distilled-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-08B-DIST_chat
+[1/100] 00000.txt chars=2112 gen=700 tok 20.0s
+[2/100] 00001.txt chars=1768 gen=700 tok 21.0s
+[3/100] 00002.txt chars=1178 gen=371 tok 12.0s
+[4/100] 00003.txt chars=1829 gen=700 tok 21.0s
+[5/100] 00004.txt chars=2184 gen=700 tok 20.0s
+[6/100] 00005.txt chars=1292 gen=469 tok 15.0s
+[7/100] 00006.txt chars=1173 gen=439 tok 14.0s
+[8/100] 00007.txt chars=1907 gen=700 tok 21.0s
+[9/100] 00008.txt chars=2071 gen=700 tok 21.0s
+[10/100] 00009.txt chars=1381 gen=482 tok 14.0s
+[11/100] 00010.txt chars=1461 gen=539 tok 17.0s
+[12/100] 00011.txt chars=2031 gen=700 tok 20.0s
+[13/100] 00012.txt chars=1980 gen=700 tok 21.0s
+[14/100] 00013.txt chars=1874 gen=663 tok 19.0s
+[15/100] 00014.txt chars=1907 gen=700 tok 21.0s
+[16/100] 00015.txt chars=1185 gen=410 tok 14.0s
+[17/100] 00016.txt chars=1777 gen=700 tok 20.0s
+[18/100] 00017.txt chars=1874 gen=689 tok 20.0s
+[19/100] 00018.txt chars=1324 gen=459 tok 15.0s
+[20/100] 00019.txt chars=837 gen=289 tok 10.0s
+[21/100] 00020.txt chars=1435 gen=700 tok 20.0s
+[22/100] 00021.txt chars=1791 gen=700 tok 21.0s
+[23/100] 00022.txt chars=2098 gen=700 tok 20.0s
+[24/100] 00023.txt chars=2108 gen=682 tok 20.0s
+[25/100] 00024.txt chars=1603 gen=568 tok 17.0s
+[26/100] 00025.txt chars=1749 gen=700 tok 21.0s
+[27/100] 00026.txt chars=1656 gen=529 tok 16.0s
+[28/100] 00027.txt chars=1924 gen=700 tok 21.0s
+[29/100] 00028.txt chars=1472 gen=559 tok 17.0s
+[30/100] 00029.txt chars=1395 gen=510 tok 16.0s
+[31/100] 00030.txt chars=1301 gen=472 tok 14.0s
+[32/100] 00031.txt chars=1092 gen=369 tok 13.0s
+[33/100] 00032.txt chars=1898 gen=700 tok 20.0s
+[34/100] 00033.txt chars=2250 gen=700 tok 21.0s
+[35/100] 00034.txt chars=1281 gen=485 tok 15.0s
+[36/100] 00035.txt chars=1340 gen=526 tok 16.0s
+[37/100] 00036.txt chars=1338 gen=554 tok 17.0s
+[38/100] 00037.txt chars=1663 gen=700 tok 21.0s
+[39/100] 00038.txt chars=1179 gen=435 tok 14.0s
+[40/100] 00039.txt chars=1415 gen=483 tok 15.0s
+[41/100] 00040.txt chars=1577 gen=653 tok 19.0s
+[42/100] 00041.txt chars=2195 gen=700 tok 20.0s
+[43/100] 00042.txt chars=803 gen=244 tok 10.0s
+[44/100] 00043.txt chars=1692 gen=487 tok 15.0s
+[45/100] 00044.txt chars=1433 gen=700 tok 21.0s
+[46/100] 00045.txt chars=1798 gen=700 tok 20.0s
+[47/100] 00046.txt chars=1910 gen=616 tok 18.0s
+[48/100] 00047.txt chars=971 gen=372 tok 13.0s
+[49/100] 00048.txt chars=1304 gen=456 tok 14.0s
+[50/100] 00049.txt chars=1667 gen=682 tok 20.0s
+[51/100] 00050.txt chars=1240 gen=493 tok 16.0s
+[52/100] 00051.txt chars=1380 gen=518 tok 15.0s
+[53/100] 00052.txt chars=818 gen=343 tok 13.0s
+[54/100] 00053.txt chars=1457 gen=486 tok 15.0s
+[55/100] 00054.txt chars=1002 gen=326 tok 11.0s
+[56/100] 00055.txt chars=1209 gen=481 tok 15.0s
+[57/100] 00056.txt chars=2082 gen=700 tok 21.0s
+[58/100] 00057.txt chars=1226 gen=431 tok 14.0s
+[59/100] 00058.txt chars=998 gen=427 tok 14.0s
+[60/100] 00059.txt chars=1716 gen=700 tok 20.0s
+[61/100] 00060.txt chars=908 gen=330 tok 11.0s
+[62/100] 00061.txt chars=758 gen=288 tok 11.0s
+[63/100] 00062.txt chars=2466 gen=700 tok 21.0s
+[64/100] 00063.txt chars=758 gen=226 tok 8.0s
+[65/100] 00064.txt chars=1588 gen=545 tok 17.0s
+[66/100] 00065.txt chars=1548 gen=550 tok 17.0s
+[67/100] 00066.txt chars=1701 gen=700 tok 20.0s
+[68/100] 00067.txt chars=897 gen=311 tok 11.0s
+[69/100] 00068.txt chars=1310 gen=413 tok 14.0s
+[70/100] 00069.txt chars=1355 gen=469 tok 15.0s
+[71/100] 00070.txt chars=2048 gen=700 tok 20.0s
+[72/100] 00071.txt chars=2039 gen=700 tok 21.0s
+[73/100] 00072.txt chars=2137 gen=700 tok 20.0s
+[74/100] 00073.txt chars=1363 gen=471 tok 15.0s
+[75/100] 00074.txt chars=1050 gen=365 tok 12.0s
+[76/100] 00075.txt chars=2002 gen=700 tok 21.0s
+[77/100] 00076.txt chars=1923 gen=700 tok 21.0s
+[78/100] 00077.txt chars=1296 gen=440 tok 14.0s
+[79/100] 00078.txt chars=1731 gen=700 tok 21.0s
+[80/100] 00079.txt chars=2206 gen=700 tok 20.0s
+[81/100] 00080.txt chars=1095 gen=447 tok 14.0s
+[82/100] 00081.txt chars=1939 gen=700 tok 21.0s
+[83/100] 00082.txt chars=2003 gen=700 tok 21.0s
+[84/100] 00083.txt chars=1581 gen=678 tok 19.0s
+[85/100] 00084.txt chars=1384 gen=476 tok 16.0s
+[86/100] 00085.txt chars=1957 gen=700 tok 20.0s
+[87/100] 00086.txt chars=1459 gen=700 tok 20.0s
+[88/100] 00087.txt chars=1769 gen=589 tok 18.0s
+[89/100] 00088.txt chars=1565 gen=700 tok 21.0s
+[90/100] 00089.txt chars=1434 gen=427 tok 14.0s
+[91/100] 00090.txt chars=1369 gen=552 tok 17.0s
+[92/100] 00091.txt chars=1185 gen=423 tok 13.0s
+[93/100] 00092.txt chars=1653 gen=700 tok 21.0s
+[94/100] 00093.txt chars=2015 gen=700 tok 20.0s
+[95/100] 00094.txt chars=1639 gen=700 tok 21.0s
+[96/100] 00095.txt chars=2162 gen=700 tok 21.0s
+[97/100] 00096.txt chars=1215 gen=469 tok 14.0s
+[98/100] 00097.txt chars=1362 gen=465 tok 15.0s
+[99/100] 00098.txt chars=1823 gen=649 tok 19.0s
+[100/100] 00099.txt chars=1085 gen=354 tok 12.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=100 generated=100 skipped=0
+Traceback (most recent call last):
+  File "/home/arduino/Code/ventunoq-mnn/scripts/quality_eval_mnn.py", line 386, in <module>
+    main()
+  File "/home/arduino/Code/ventunoq-mnn/scripts/quality_eval_mnn.py", line 377, in main
+    det = fn(a.n) if a.task not in ("arc", "hellaswag", "winogrande", "openbookqa",
+          ^^^^^^^
+  File "/home/arduino/Code/ventunoq-mnn/scripts/quality_eval_mnn.py", line 163, in run_gsm8k
+    outs = MNN.run(prompts, 700, "gsm8k", SYSTEM)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/arduino/Code/ventunoq-mnn/scripts/quality_eval_mnn.py", line 73, in run
+    return [open(o).read() for o in outs]
+            ^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc3 in position 1906: unexpected end of data
