@@ -63,6 +63,9 @@ def main():
     # --- mirror ppl_eval windowing -------------------------------------------------
     stride, context_length = 512, 768  # ppl_eval defaults: stride=512, ctx=stride+stride/2
     mc = args.mnn_config
+    if mc and not os.path.isfile(mc):
+        print(f"[hf-ppl] --mnn-config {mc} not found; using window defaults")
+        mc = None
     if mc is None:
         guess = args.model_dir.rstrip("/") + "-MNN/llm_config.json"
         mc = guess if os.path.isfile(guess) else None

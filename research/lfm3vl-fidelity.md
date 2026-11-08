@@ -73,6 +73,12 @@ scripts/lfm3vl_um890.sh hfppl        # HF gatsby ppl, CPU torch (~1 h)
 
 Paste the three summaries back and the verdict writes itself from the matrix above.
 
+**Board fallback (no UM890 needed):** `scripts/lfm3vl_board_fidelity.sh all` runs the same
+three measurements on the QCS8300 — locally-created venv (torch CPU aarch64; this board needs
+the `--without-pip` + get-pip bootstrap, handled by the script), public 3.85 GB checkpoint
+download, then `hfppl` (~2–4 h on 8 cores), `export8` via the board's patched MNN tree, and
+`logitsdiff` int4-vs-int8. Logs land in `results/fidelity_lfm3vl_*.log|txt`.
+
 ## Honest gaps
 
 * `llm_logits_diff` compares two MNN exports — it cannot see ONNX→MNN conversion errors
