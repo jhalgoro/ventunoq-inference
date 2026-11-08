@@ -120,6 +120,7 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
 | LFM3 int4+HQQ **R2** | 78.0 | 56.0 | 79.0 | 40.0 | 63.0 | 69.0 | 48.0 | 67.2 | 5/5 | 41.08 |
 | LFM3 int8 **R2** | 86.0 | 72.0 | 81.0 | 46.0 | 68.0 | 70.0 | 55.0 | 77.3 | 5/5 | 33.03 |
 | LFM3-VL-2B int4 **R2** | 72.0 | 40.0 | 71.0 | 53.0 | 68.0 | 76.0 | 61.0 | 55.0 | **5/5** | 151.77 |
+| MiniCPM5-2B int4 **R2** | 76.0 | 52.0 | 75.0 | 50.0 | 51.0 | 50.0 | 47.0 | 58.1 | 5/5 | 31.93 |
 
 - LFM3-1.7B rows (2026-11-06/07, M7): exported on the UM890 (`scripts/lfm3_um890.sh`), scored
   via `q_lfm3_*_r2` — same R2 protocol/budgets as the DIST2 rows. Read: at 1.7B it beats 2B
@@ -135,6 +136,15 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
   literary-domain regression, but an Austen continuation probe is fluent and on-style, and task
   scores are healthy — read as a vision-mix checkpoint property on 1925 prose, not an export
   artifact (the LFM3 family was already the ppl laggard: 39.7 vs Qwen2B 21.3).
+
+- MiniCPM5-2B row (2026-11-08, M10): stock llama arch, zero export-side changes
+  (`scripts/minicpm5_um890.sh`, int4 b64; the real HF chat_template.jinja passes minja — no
+  override needed, unlike lfm3). Scored via `q_minicpm5_r2` (thinking-style: plain-protocol
+  smoke scored MC 0.0 on 4/6 suites via 16-tok gen-miss, R2 fixes extraction — audit: 0–1%
+  gen-miss left). 8-task mean 57.4 ≈ 2B DIST2's 56.8; reasoning-shaped: best int4 HumanEval
+  (52), gsm8k 76, MMLU 58.1, healthy ppl 31.9 — but the commonsense block is genuinely weak
+  (WinoGrande 51 ≈ coin flip, OBQA 50, CSQA 47; LFM3-1.7B +15/+22/+6). Speed is the other
+  weakness: 57/18 pp/tg vs Qwen3.5-2B's 76/19 — 42 layers, 130K untied vocab at 2.49B params.
 
 - ✗ = harness artifact, not a model score: R1 distilled rows died on the reasoning-style
   output (F17 — 16-tok MC budget, shot-prefix replay, prose-as-code, 24-tok niah). The R2

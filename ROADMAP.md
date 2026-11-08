@@ -16,7 +16,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board) | **high** | open upstream PR vs #5104 with `patches/mnn-lfm3-export.patch` |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
-| M10 | MiniCPM5-2B → MNN: **exported + board smoke/bench done** (zero patch) | low | R2 quality ladder → §4.1 row; llama.cpp Q4_K_M baseline |
+| M10 | MiniCPM5-2B → MNN: **done** — zero-patch export, all gates green, §1+§4.1 rows in | low | llama.cpp Q4_K_M baseline (parent repo) |
 
 ---
 
@@ -213,7 +213,7 @@ pure pipeline: export → smoke → board parity → pinned bench → R2 quality
 - Chat template ships as `chat_template.jinja` (tokenizer_config has no `chat_template` key,
   transformers 5.x style) with reasoning_content + XML tool blocks — **minja gate PASS**
   (2026-11-08, `MNN/build/apply_template` against the real template): renders correct ChatML,
-  `<s>` bos, non-thinking `<|im_start|>assistant\n<|im_start|>\n\n<|im_end|>` form under
+  `<s>` bos, non-thinking `<|im_start|>assistant\n<think>\n\n</think>` form under
   `enable_thinking=false`. **No jinja override needed** — unlike lfm3/gemma4/glm_ocr/hunyuan_vl.
 - Thinking-style model (`<|im_start|>`/`<|thought_begin|>` tokens) → score under the R2
   protocol like the LFM3/DIST2 rows.
@@ -223,3 +223,10 @@ Official GGUF repos exist → llama.cpp Q4_K_M baseline for the §1-style compar
 Driver: `scripts/minicpm5_um890.sh` (reuses the lfm3-work venv + MNN build; steps
 setup/download/export/export8/exporthq/test/push). Board: `q_minicpm5_smoke` then
 `q_minicpm5_all` (int4 R2; int8/hqq stages exist but opt-in — LFM3 showed HQQ net negative).
+
+**Status 2026-11-08: DONE, zero porting work as predicted.** UM890 pipeline green (4.7G
+download, `--test` gate, int4 b64 export 1.7G, x86 smoke 35.8 tok/s) → board smoke PASS →
+pinned bench **57.3/18.4** pp/tg (§1) → R2 ladder 10/10 in 2.8 h: gsm8k 76, humaneval 52
+(best int4), arc 75, mmlu 58.1, niah 5/5, ppl 31.9 (§4.1). Reasoning-shaped, commonsense-weak,
+speed behind Qwen3.5-2B (42 layers, 130K untied vocab). Full record:
+[research/minicpm5-port.md](research/minicpm5-port.md). Remaining: llama.cpp Q4_K_M baseline.
