@@ -76,8 +76,14 @@ Paste the three summaries back and the verdict writes itself from the matrix abo
 **Board fallback (no UM890 needed):** `scripts/lfm3vl_board_fidelity.sh all` runs the same
 three measurements on the QCS8300 — locally-created venv (torch CPU aarch64; this board needs
 the `--without-pip` + get-pip bootstrap, handled by the script), public 3.85 GB checkpoint
-download, then `hfppl` (~2–4 h on 8 cores), `export8` via the board's patched MNN tree, and
+download, then `hfppl` (~1.5 h), `export8` via the board's patched MNN tree, and
 `logitsdiff` int4-vs-int8. Logs land in `results/fidelity_lfm3vl_*.log|txt`.
+
+**Board dtype trap (measured 2026-11-08):** torch CPU aarch64 on this SoC does half-precision
+matmul at ~0.2–0.3 GF/s vs **50.6 GF/s in fp32** (250× penalty, one bf16 warmup alone takes
+~3 min) — a bf16 hfppl run burned 5 h without finishing 10 chunks. `hfppl` therefore defaults
+to `--fp32` on the board (override: `HFPPL_EXTRA`). HF fp32 is the *stronger* reference anyway:
+any MNN-vs-HF gap it shows is export+quantization, with no dtype excuse.
 
 ## Honest gaps
 

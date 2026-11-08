@@ -55,9 +55,12 @@ do_download() {
 
 do_hfppl() {
   [ -f "$MODEL_DIR/config.json" ] || { log "no $MODEL_DIR — run download first"; exit 1; }
-  log "HF gatsby ppl (decisive test; MNN int4 = 151.77). Long run on CPU: ~2-4 h."
+  # --fp32 is MANDATORY on this board: torch aarch64 CPU half-precision matmul is
+  # ~250x slower than fp32 here (measured 2026-11-08: fp32 50.6 GF/s vs bf16 0.3 GF/s).
+  local extra="${HFPPL_EXTRA:---fp32}"
+  log "HF gatsby ppl (decisive test; MNN int4 = 151.77) [$extra]"
   "$PY" "$REPO_ROOT/scripts/lfm3vl_hf_ppl.py" "$MODEL_DIR" "$REPO_ROOT/bench/gatsby.txt" \
-    --mnn-config "$INT4_DIR/llm_config.json" | tee "$RES/fidelity_lfm3vl_hf_ppl.log"
+    --mnn-config "$INT4_DIR/llm_config.json" $extra | tee "$RES/fidelity_lfm3vl_hf_ppl.log"
 }
 
 do_export8() {

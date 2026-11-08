@@ -32,6 +32,9 @@ import time
 
 import torch
 
+if hasattr(sys.stdout, "reconfigure"):  # visible progress through tee/pipes
+    sys.stdout.reconfigure(line_buffering=True)
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -123,11 +126,12 @@ def main():
             print(f"Compute: {begin}/{seq_len}, loss={loss:.6f}", flush=True)
         if end == seq_len:
             break
-        if loss_number % 10 == 0:
+        if loss_number % 1 == 0:
             done = end / seq_len * 100
             rate = (time.time() - t0) / loss_number
+            eta = rate * (seq_len / stride - loss_number) / 60
             print(f"[hf-ppl] {done:5.1f}% chunks={loss_number} running_ppl="
-                  f"{math.exp(loss_sum / loss_number):8.2f} ({rate:.1f} s/chunk)", flush=True)
+                  f"{math.exp(loss_sum / loss_number):8.2f} ({rate:.1f} s/chunk, eta {eta:.0f}m)")
 
     ppl = math.exp(loss_sum / loss_number)
     print(f"[hf-ppl] HF Perplexity: {ppl:.4f}  ({loss_number} chunks, "
