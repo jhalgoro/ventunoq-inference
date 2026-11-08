@@ -273,5 +273,11 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   223 prompt tokens (204 image embeds + 19 text), coherent "colorful static noise / TV snow"
   description matching the HF reference; prefill 221.5 tok/s, decode 43.9 tok/s. Build warnings
   (COMPUTE / CPU_SET* macro redefines in upstream SSE GemmInt8 + CPURuntime) are pre-existing
-  upstream MNN, semantically identical glibc-compat macros. Remaining: board QA. Video math
-  (frame_base, BlockDiagonal) is implemented but only images are tested in this pass.
+  upstream MNN, semantically identical glibc-compat macros.
+- **Board QA PASS (2026-11-07, ventunoq aarch64)**: rebuilt llm_demo with the same vision flags
+  (warnings only: upstream `%d`-vs-`size_t` in Pipeline.cpp, GCC flatbuffers `-Wstringop-overread`
+  false positives, CPU_SET macro redefines). First "hang" was llm_demo exiting silently on a
+  missing prompt file (`prompts.empty() -> return 1`). Smoke on the seed-42 test image: vision
+  1.59 s (0.131 MP/s), 223 prompt tokens (204 embeds), coherent "colorful static noise / TV snow"
+  description, prefill 70.6 / decode 21.8 tok/s. Video math (frame_base, BlockDiagonal) is
+  implemented but only images are tested in this pass.
