@@ -28,6 +28,7 @@ llama.cpp baselines are the parent repo's: **v0.8.0 b11972** (official Ubuntu-ar
 | Qwen3.5-2B | 69.8 / 16.1 | — | **75.7 ± 0.1 / 19.2 ± 0.0** | +8.4% / **+19%** |
 | LFM3-1.7B | — | 49.0 / 11.7 | **75.4 ± 0.2 / 21.4 ± 0.0** | **+54% / +83% vs Q4_K_M** ¹ |
 | LFM3-VL-2B | — | — | **75.3 ± 0.2 / 21.4 ± 0.0** | text parity with the 1.7B row ² |
+| MiniCPM5-2B | — | pending ³ | **57.3 ± 0.3 / 18.4 ± 0.1** | — ³ |
 
 ¹ LFM3 has no llama.cpp Q4_0 baseline (§3), so the last cell compares against the like-model
 Q4_K_M. Largest cross-engine gap in the table — plausible cause: llama.cpp's LFM3 support is
@@ -36,6 +37,11 @@ weeks old while MNN's conv/linear-attention ops are mature; int8 MNN trades tg f
 Text pp/tg is at parity with the text-only 1.7B int4 row despite the bigger text tower and the
 loaded vision module (953 MiB runtime) — text tokens never touch the vision path. Vision tower
 (int8 visual, 0.21 MP image): 1.58 s on the board (0.132 MP/s), 0.84 s on UM890 x86 (0.248 MP/s).
+³ MiniCPM5-2B (2026-11-08, M10): stock llama arch, zero export-side changes (UM890 export
+`scripts/minicpm5_um890.sh`, int4 b64, 1.18 GiB runtime). pp/tg below Qwen3.5-2B (57/18 vs
+76/19) — 2.49B params in 42 layers vs 2B, plus a 130K-vocab untied head. llama.cpp Q4_K_M
+baseline pending (official GGUFs exist; parent-repo run). Thinking-style: decode budgets in
+§4.1 must cover ~400-token reasoning preambles (R2 protocol).
 
 - MNN's int4 weights carry fp16 per-block scales (≈Q4_K-class quality) and compute in ARM82
   fp16 — the win is kernel + quant format together.

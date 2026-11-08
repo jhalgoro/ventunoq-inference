@@ -16,7 +16,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board) | **high** | open upstream PR vs #5104 with `patches/mnn-lfm3-export.patch` |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
-| M10 | MiniCPM5-2B → MNN: convert + validate (stock llama arch, no patch) | low | UM890 export → board smoke/bench → R2 row |
+| M10 | MiniCPM5-2B → MNN: **exported + board smoke/bench done** (zero patch) | low | R2 quality ladder → §4.1 row; llama.cpp Q4_K_M baseline |
 
 ---
 
