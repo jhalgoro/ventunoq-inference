@@ -30,7 +30,9 @@ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \
 # OPENCV+IMGCODECS: LLM_SUPPORT_VISION (patch-layout vision processors like qwen2_vl,
 # which LFM3-VL reuses) is only defined with MNN_BUILD_OPENCV; imread needs MNN_IMGCODECS.
 # Without them any is_visual model fails init: "Unsupported vision processor family".
-ninja -C build llm_demo llm_bench llm_eval ppl_eval > /tmp/mnn_build.log
+ninja -C build llm_demo llm_bench llm_eval ppl_eval apply_template > /tmp/mnn_build.log
+# apply_template: engine minja gate — apply_template <test.json> 1 renders chat templates
+# (pre-check an HF chat_template.jinja is parseable before paying for a full export).
 echo "OK: $MNN_SRC/build/{llm_bench,llm_demo,llm_eval,ppl_eval}"
 # sanity — must print "i8sdot:1, fp16:1, i8mm:0" on this board (kernel-audit §4):
 taskset -c 0-3 build/llm_bench 2>&1 | grep -m1 "device supports" || true

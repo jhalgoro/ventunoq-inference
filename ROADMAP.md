@@ -206,12 +206,19 @@ Current draft — M1–M6 refine the numbers, nothing else changes it:
 `openbmb/MiniCPM5-2B` (2026, ~2.5B): plain `LlamaForCausalLM` — model_type `llama`, GQA 16:2,
 head_dim 128, rope_theta 5e6, 42×2048/6144, 131K ctx, no custom code → **zero porting work**,
 pure pipeline: export → smoke → board parity → pinned bench → R2 quality row. Risk checks done
-(2026-11-07): eos is a list `[1, 130073]` but lives in `generation_config.json`, which
-llmexport's tokenizer writer already flattens into the stop list (so `<|im_end|>` stops
-generation); chat template is ChatML with reasoning_content + XML tool blocks — if minja
-rejects it, reuse the lfm3 jinja-override pattern (non-thinking render). Thinking-style model →
-score under the R2 protocol like the LFM3/DIST2 rows. Official GGUF repos exist → llama.cpp
-Q4_K_M baseline for the §1-style comparison.
+(2026-11-07/08, all **verified on the board** against the live HF files):
+- eos is a list `[1, 130073]` but lives in `generation_config.json`, which
+  `utils/tokenizer.py` flattens into `stop_ids` (both via `tokenizer.generation_config` and a
+  raw-JSON fallback) — `<|im_end|>` stops generation.
+- Chat template ships as `chat_template.jinja` (tokenizer_config has no `chat_template` key,
+  transformers 5.x style) with reasoning_content + XML tool blocks — **minja gate PASS**
+  (2026-11-08, `MNN/build/apply_template` against the real template): renders correct ChatML,
+  `<s>` bos, non-thinking `<|im_start|>assistant\n<|im_start|>\n\n<|im_end|>` form under
+  `enable_thinking=false`. **No jinja override needed** — unlike lfm3/gemma4/glm_ocr/hunyuan_vl.
+- Thinking-style model (`<|im_start|>`/`<|thought_begin|>` tokens) → score under the R2
+  protocol like the LFM3/DIST2 rows.
+- 5.04 GB single safetensors, `PreTrainedTokenizerFast`, untied embeddings (130560×2048).
+Official GGUF repos exist → llama.cpp Q4_K_M baseline for the §1-style comparison.
 
 Driver: `scripts/minicpm5_um890.sh` (reuses the lfm3-work venv + MNN build; steps
 setup/download/export/export8/exporthq/test/push). Board: `q_minicpm5_smoke` then
