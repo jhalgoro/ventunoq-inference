@@ -3,9 +3,11 @@
 
 Feeds the same normalized image two ways on the UM890:
   reference: HF Lfm3Vl get_image_features(processor pixel_values, image_grid_thw)
+             -> pooler_output (multi_modal_projector applied, 4:1 merged)
   under test: onnxruntime on the exported visual.onnx, fed exactly what the C++
-  qwen2_vl patch processor emits — merge-block patches (HF pixel_values share
-  that layout), Qwen::gridPositions position_ids, per-frame block mask.
+  Qwen processor feeds with input_layout 'pixels': raw normalized frames
+  (temporal, 3, H, W) rebuilt by inverting the HF processor patchify
+  permutation, Qwen::gridPositions position_ids, per-frame block mask.
 
 Usage: python3 lfm3vl_onnx_test.py <model_dir> <onnx_dir_or_file> [image.jpg]
   <onnx_dir_or_file>: visual.onnx, or a dir holding it (also checks onnx/,
@@ -74,10 +76,26 @@ def main():
     ref = torch.cat(out.pooler_output, dim=0).float()
     print(f'HF image_embeds {tuple(ref.shape)}')
 
-    # C++ qwen2_vl processor contract: merged patches in merge-block order
-    # (identical to HF pixel_values), (2, N) grid positions, per-frame mask.
-    n = int(grid_thw.prod(-1).sum())
-    assert pixel_values.shape[0] == n, (pixel_values.shape, n)
+    # C++ contract (input_layout 'pixels', omni.cpp Patch::prepare/Qwen::patchInputs):
+    # raw normalized frames (temporal_patch_size, 3, gh*p, gw*p) + Qwen::gridPositions
+    # ids + per-frame block mask; the merge-block patchify lives INSIDE visual.onnx
+    # (Vision.export_inputs). Rebuild the frames by inverting the HF processor's
+    # patchify permutation (f, tp, c, bh, m, p, bw, m2, p2) -> rows
+    # (bh, bw, m, m2, c, tp, p, p2), so the gate also verifies the in-graph flatten.
+    assert len(grid_thw) == 1, 'single image only'
+    vc = model.config.vision_config
+    c, tp = 3, int(vc.temporal_patch_size)
+    p, m = int(vc.patch_size), int(vc.spatial_merge_size)
+    gt, gh, gw = (int(v) for v in grid_thw[0])
+    n = gt * gh * gw
+    assert pixel_values.shape == (n, c * tp * p * p), tuple(pixel_values.shape)
+    patched = pixel_values.float().reshape(gt, gh // m, gw // m, m, m, c, tp, p, p)
+    frames_raw = patched.permute(0, 6, 5, 1, 3, 7, 2, 4, 8).reshape(gt * tp, c, gh * p, gw * p)
+    # self-check: forward flatten of the rebuilt frames must reproduce HF pixel_values
+    re_patched = frames_raw.reshape(gt, tp, c, gh // m, m, p, gw // m, m, p) \
+        .permute(0, 3, 6, 4, 7, 2, 1, 5, 8).reshape(n, c * tp * p * p)
+    assert torch.equal(re_patched, patched.reshape(n, c * tp * p * p)), 'permutation inverse mismatch'
+
     position_ids = np.concatenate([grid_positions(*(int(v) for v in g)) for g in grid_thw], axis=1)
     frames = np.concatenate([np.repeat(i, int(g[0] * g[1] * g[2]))
                              for i, g in enumerate(grid_thw)])
@@ -86,7 +104,7 @@ def main():
 
     sess = InferenceSession(ONNX_PATH, providers=['CPUExecutionProvider'])
     got = torch.from_numpy(sess.run(None, {
-        'patches': pixel_values.numpy(),
+        'pixel_values': frames_raw.numpy(),
         'position_ids': position_ids,
         'attention_mask': mask,
     })[0])

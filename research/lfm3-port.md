@@ -233,11 +233,16 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
   recomposition cat(h_freqs|w_freqs) repeated ×2 over head_dim (verified elementwise).
 - **Projector + MLP** reused as HF modules verbatim: LayerNorm → reshape(-1, 4096) (constant shape,
   Qwen2Vision-merger precedent) → linear_1 → gelu → linear_2; vision MLP is HF `Lfm3VlMLP` (w1/w3/w2).
-- **Graph contract**: inputs `patches (N, 3·2·16²=1536)`, `position_ids (2,N)`, `attention_mask (1,N,N)`,
-  dynamic `size` axis; `processor_family="qwen2_vl"`, `patch_layout="merged"` → C++ `Qwen` processor
-  (Bidirectional mask for images, BlockDiagonal per frame for video); main-config gets
-  image_mean/norm=0.5·255 & 1/(0.5·255), size_unit 32, min/max pixels, token ids 125009/125010/125030.
-  visual quant_bit 8 (class default).
+- **Graph contract** (UM890-verified): base `Vision.export_onnx` for `patch_layout='merged'` replaces the
+  patch input with **raw normalized frames** — inputs `pixel_values (temporal, 3, gh·p, gw·p)`,
+  `position_ids (2,N)`, `attention_mask (1,N,N)`; the merge-block patchify is *inside* the graph
+  (`Vision.export_inputs`, same permute as the HF processor). `get_config` writes
+  `vision_processor = {family: qwen2_vl, input_layout: pixels, output_layout: tbc, patch/merge/temporal}`;
+  C++ `Patch::prepare` resizes (INTER_CUBIC, mean/norm from config) and `_Concat`s the image
+  `temporal` times, `Qwen::patchInputs` skips `packPatches` for `input_layout=pixels` and appends
+  `gridPositions` + per-frame mask. Output `image_embeds (N/4, 1, llm_dim)` (tbc, no permute:
+  `output_axes=None`). Main-config gets image_mean/norm=0.5·255 & 1/(0.5·255), size_unit 32, min/max
+  pixels, token ids 125009/125010/125030. visual quant_bit 8 (class default).
 - **`utils/model_mapper.py` `regist_lfm3_vl`**: deepcopy of the lfm3 map, config keys prefixed
   `text_config.`, model paths under `model.language_model.*`, `visual`→`model.vision_tower`,
   `multi_modal_projector`→`model.multi_modal_projector`. `init_models` discovers `regist_*`
@@ -247,9 +252,10 @@ All pieces live in `patches/mnn-lfm3-export.patch` (regenerated, 5 files) — pu
 - **`llmexport.py`**: jinja ChatML override extended to `lfm3_vl`; `--test "<img>…</img>…"` runs the
   full torch-side VL pipeline (str_to_ids → vision forward → embed → text backbone).
 - **Driver**: `scripts/lfm3vl_um890.sh` (setup/download/convtest/onnxexport/onnxtest/export/test/push)
-  + `scripts/lfm3vl_onnx_test.py` (ORT `visual.onnx` vs HF `get_image_features` on one image: HF
-  pixel_values feed `patches` directly — same merge-block contract — with gridPositions ids and the
-  per-frame mask). llm_demo image prompt syntax: `<img>/path/file.jpg</img>` in the prompt file
+  + `scripts/lfm3vl_onnx_test.py` (ORT `visual.onnx` vs HF `get_image_features().pooler_output` on one
+  image: raw frames rebuilt by inverting the HF patchify permutation — bitwise self-checked — plus
+  gridPositions ids and the per-frame mask, i.e. exactly the C++ `input_layout=pixels` feed).
+  llm_demo image prompt syntax: `<img>/path/file.jpg</img>` in the prompt file
   (`kOmniMultimodalRegex`).
 - Static checks pass (py_compile ×5, AST alias audit, conv math bitwise-exact); patch applies clean to
   `17236ad`. **Pending on UM890**: convtest → onnxexport → onnxtest → `--test` gate → int4 b64 export →
