@@ -26,11 +26,14 @@ EOF
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \
   -DMNN_BUILD_LLM=ON -DMNN_ARM82=ON -DMNN_LOW_MEMORY=ON \
   -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_AVX512=OFF \
-  -DMNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON > /tmp/mnn_cmake.log
+  -DMNN_BUILD_OPENCV=ON -DMNN_IMGCODECS=ON \
+  -DMNN_BUILD_CONVERTER=ON > /tmp/mnn_cmake.log
 # OPENCV+IMGCODECS: LLM_SUPPORT_VISION (patch-layout vision processors like qwen2_vl,
 # which LFM3-VL reuses) is only defined with MNN_BUILD_OPENCV; imread needs MNN_IMGCODECS.
 # Without them any is_visual model fails init: "Unsupported vision processor family".
-ninja -C build llm_demo llm_bench llm_eval ppl_eval apply_template > /tmp/mnn_build.log
+# CONVERTER: MNNConvert is what llmexport uses for onnx->mnn; without it an on-board
+# export dies with "ModuleNotFoundError: No module named 'MNN'" (pymnn fallback).
+ninja -C build llm_demo llm_bench llm_eval ppl_eval apply_template MNNConvert > /tmp/mnn_build.log
 # apply_template: engine minja gate — apply_template <test.json> 1 renders chat templates
 # (pre-check an HF chat_template.jinja is parseable before paying for a full export).
 echo "OK: $MNN_SRC/build/{llm_bench,llm_demo,llm_eval,ppl_eval}"

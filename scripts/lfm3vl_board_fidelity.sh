@@ -65,6 +65,10 @@ do_hfppl() {
 
 do_export8() {
   [ -f "$MODEL_DIR/config.json" ] || { log "no $MODEL_DIR — run download first"; exit 1; }
+  # llmexport falls back to pymnn when --mnnconvert is invalid -> cryptic
+  # ModuleNotFoundError; require the binary (build_mnn.sh now builds it).
+  [ -x "$REPO_ROOT/MNN/build/MNNConvert" ] || { log "no MNNConvert — run build_mnn.sh (needs MNN_BUILD_CONVERTER=ON)"; exit 1; }
+  rm -rf "$OUT8_DIR"   # stale partial exports have confused reruns before
   cd "$REPO_ROOT/MNN/transformers/llm/export"
   log "int8 MNN export on the board (patched tree) -> $OUT8_DIR"
   "$PY" llmexport.py --path "$MODEL_DIR" --export mnn --quant_bit 8 \
