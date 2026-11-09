@@ -135,7 +135,11 @@ gen-letter bias, not obviously an MNN effect; the llama.cpp rows on the same ite
   OBQA +4) vs reasoning/knowledge down (gsm8k −14, ARC −9, MMLU −14.2). ppl 151.8 is a large
   literary-domain regression, but an Austen continuation probe is fluent and on-style, and task
   scores are healthy — read as a vision-mix checkpoint property on 1925 prose, not an export
-  artifact (the LFM3 family was already the ppl laggard: 39.7 vs Qwen2B 21.3).
+  artifact (the LFM3 family was already the ppl laggard: 39.7 vs Qwen2B 21.3). **Fidelity
+  review closed (2026-11-08, [research/lfm3vl-fidelity.md](research/lfm3vl-fidelity.md)):**
+  the HF fp32 checkpoint itself scores **137.6** on this exact probe — int4 costs ~14 ppl, and
+  int4-vs-int8 logits KL (0.236) matches the text-only family reference (0.206). Checkpoint
+  property confirmed, conversion faithful.
 
 - MiniCPM5-2B row (2026-11-08, M10): stock llama arch, zero export-side changes
   (`scripts/minicpm5_um890.sh`, int4 b64; the real HF chat_template.jinja passes minja — no

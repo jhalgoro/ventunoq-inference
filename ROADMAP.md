@@ -13,7 +13,7 @@ items are **L** ([../ventunoq-llamacpp-cpu+npu/ROADMAP.md](../ventunoq-llamacpp-
 | M4 | Kernel knobs: KleidiAI, ARM82-off, OpenCL/Vulkan probes | low | F2 for GPU |
 | M5 | Long context: pp curves + KV memory vs llama.cpp's 8.9 KB/tok | low | — |
 | M6 | Sustained + energy: throttle curve, W and J/token vs llama.cpp | low | reuse L4 probe |
-| M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board); PR parked pending fidelity review ([research/lfm3vl-fidelity.md](research/lfm3vl-fidelity.md)) | **high** | UM890 fidelity runs (`export8 logitsdiff hfppl`) → then reopen PR vs #5104 |
+| M7 | LFM3 → MNN export port (F12) — text **done** + validated; VL-2B export **done**, all gates green (UM890 + board); fidelity review **closed 2026-11-08**: HF fp32 ppl **137.6** ≈ MNN int4 151.8 → checkpoint property, conversion faithful ([research/lfm3vl-fidelity.md](research/lfm3vl-fidelity.md)) | **high** | reopen PR vs #5104 with the fidelity evidence attached |
 | M8 | Serving shape: subprocess driver, or concede to llama-server? | medium | — |
 | M9 | Decision table: when MNN, when llama.cpp (the repo's product) | trivial | M1–M6 |
 | M10 | MiniCPM5-2B → MNN: **closed** — zero-patch export, all gates green, §1+§4.1 rows in | low | — (Q4_K_M baseline parked → parent repo) |
@@ -178,8 +178,11 @@ changes, patch regenerated (5 files, applies clean to `17236ad`). Driver `script
 + conv/onnx numerical gates written. **All gates green 2026-11-07**: UM890 convtest ≤9e-8, ORT
 `visual.onnx` vs HF rel 3.78e-6, `--test` + `llm_demo` image smoke coherent (vision 0.84 s,
 decode 43.9 tok/s); board (`ventunoq`) llm_demo rebuilt with `MNN_BUILD_OPENCV`+`MNN_IMGCODECS`
-(vision support cmake gate) and smoke PASS (vision 1.59 s, decode 21.8 tok/s). **Only the PR vs
-#5104 remains.**
+(vision support cmake gate) and smoke PASS (vision 1.59 s, decode 21.8 tok/s). **Fidelity review
+closed 2026-11-08** (board-only, UM890 unavailable): HF fp32 gatsby ppl 137.57 vs MNN int4
+151.77 + VL int4-vs-int8 logits KL 0.236 vs family 0.206 → the ppl row is a checkpoint property,
+the conversion is faithful ([research/lfm3vl-fidelity.md](research/lfm3vl-fidelity.md)). **Only
+the PR vs #5104 remains** — parked by the user pending this evidence, ready to reopen.
 VL chat template + tokenizer live in `chat_template.jinja` (same minja gap → extend the lfm3
 jinja override).
 
