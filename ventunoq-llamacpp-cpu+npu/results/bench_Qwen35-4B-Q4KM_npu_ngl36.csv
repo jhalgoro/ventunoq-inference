@@ -1,0 +1,36 @@
+[New LWP 407218]
+[New LWP 407217]
+[New LWP 407216]
+[New LWP 406605]
+[New LWP 406604]
+[New LWP 406601]
+[New LWP 406600]
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000ffff9f357a34 in __GI___wait4 (pid=407219, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+#0  0x0000ffff9f357a34 in __GI___wait4 (pid=407219, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+30	in ../sysdeps/unix/sysv/linux/wait4.c
+#1  0x0000ffff9f7d00bc in ggml_print_backtrace () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#2  0x0000ffff9f7e625c in ggml_uncaught_exception() () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#3  0x0000ffff9f5da570 in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000ffff9f5d0e04 in std::terminate() () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000ffff9f5da908 in __cxa_throw () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#6  0x0000ffff9f8c0f50 in ggml_hexagon_shared_buffer::mmap(bool) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-hexagon.so.0
+#7  0x0000ffff9f8ca594 in ggml_hexagon_session::enqueue_op(htp_opnode const&) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-hexagon.so.0
+#8  0x0000ffff9f8cfe84 in ggml_backend_hexagon_graph_compute(ggml_backend*, ggml_cgraph*) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-hexagon.so.0
+#9  0x0000ffff9f7f1748 in ggml_backend_sched_graph_compute_async () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#10 0x0000ffff9fcd2ab0 in llama_context::graph_compute(ggml_cgraph*, bool) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#11 0x0000ffff9fcd28b4 in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#12 0x0000ffff9fcd40c0 in llama_context::decode(llama_batch_ext const&) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#13 0x0000ffffa0356458 in test_prompt(llama_context*, int, int, int) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama-bench-impl.so
+#14 0x0000ffffa034e3a4 in llama_bench(int, char**) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama-bench-impl.so
+#15 0x0000ffff9f2a84c4 in __libc_start_call_main (main=main@entry=0xaaaae72308a8 <main>, argc=argc@entry=25, argv=argv@entry=0xffffdd819e88) at ../sysdeps/nptl/libc_start_call_main.h:58
+#16 0x0000ffff9f2a8598 in __libc_start_main_impl (main=0xaaaae72308a8 <main>, argc=25, argv=0xffffdd819e88, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>) at ../csu/libc-start.c:360
+#17 0x0000aaaae72307b0 in _start ()
+[Inferior 1 (process 406597) detached]

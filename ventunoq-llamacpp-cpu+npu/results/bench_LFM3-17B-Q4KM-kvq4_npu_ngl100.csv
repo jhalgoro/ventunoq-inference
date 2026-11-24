@@ -1,0 +1,31 @@
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,lazy_mode,embeddings,no_op_offload,no_host,repack,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+[New LWP 398057]
+[New LWP 398056]
+[New LWP 398053]
+[New LWP 398052]
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000ffff84657a34 in __GI___wait4 (pid=398498, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+#0  0x0000ffff84657a34 in __GI___wait4 (pid=398498, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+30	in ../sysdeps/unix/sysv/linux/wait4.c
+#1  0x0000ffff84ad00bc in ggml_print_backtrace () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#2  0x0000ffff84acf460 in ggml_abort () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#3  0x0000ffff84aefd60 in ggml_backend_sched_backend_id_from_cur(ggml_backend_sched*, ggml_tensor*) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#4  0x0000ffff84aed06c in ggml_backend_sched_split_graph () from /tmp/opencode/pkg-snapdragon-20261029/lib/libggml-base.so.0
+#5  0x0000ffff84fce14c in llama_context::graph_reserve(unsigned int, unsigned int, unsigned int, llama_memory_context_i const*, bool, unsigned long*) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#6  0x0000ffff84fcf2a0 in llama_context::resolve_fused_ops(llama_memory_context_i const*, unsigned int)::$_0::operator()(llm_fused_op_probe const&, bool&) const () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#7  0x0000ffff84fccb18 in llama_context::resolve_fused_ops(llama_memory_context_i const*, unsigned int) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#8  0x0000ffff84fcb2a4 in llama_context::sched_reserve() () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#9  0x0000ffff84fc9db8 in llama_context::llama_context(llama_model const&, llama_context_params) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#10 0x0000ffff84fdb1a8 in llama_init_from_model () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama.so.0
+#11 0x0000ffff8564dd90 in llama_bench(int, char**) () from /tmp/opencode/pkg-snapdragon-20261029/lib/libllama-bench-impl.so
+#12 0x0000ffff845a84c4 in __libc_start_call_main (main=main@entry=0xaaaabea408a8 <main>, argc=argc@entry=29, argv=argv@entry=0xffffdb6002e8) at ../sysdeps/nptl/libc_start_call_main.h:58
+#13 0x0000ffff845a8598 in __libc_start_main_impl (main=0xaaaabea408a8 <main>, argc=29, argv=0xffffdb6002e8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>) at ../csu/libc-start.c:360
+#14 0x0000aaaabea407b0 in _start ()
+[Inferior 1 (process 398051) detached]
