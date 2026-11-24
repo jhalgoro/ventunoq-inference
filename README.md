@@ -64,13 +64,6 @@ Each subproject follows the same internal map: `README.md` (story) · `BENCHMARK
 (numbers) · `FAILURES.md` (root causes) · `ROADMAP.md` (fix paths) · `scripts/`
 (reproducible harnesses) · `results/` (raw data) · `research/` (sourced notes).
 
-## Provenance
-
-Migrated from `arduino@localhost:/home/arduino/Code` (the board itself) with full commit
-history preserved — each project merged in via `git subtree`, so original authors, dates and
-messages remain intact under their subdirectories. Large transient artifacts (model weights,
-build trees) were excluded per the disk policy above.
-
 ## License
 
 MIT (scripts, docs, results). Fetched code and model weights remain under their upstream
