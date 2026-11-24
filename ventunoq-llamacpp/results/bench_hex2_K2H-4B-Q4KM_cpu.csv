@@ -1,0 +1,10 @@
+ggml-hex: Loading driver libcdsprpc.so
+ggml-hex: FASTRPC_GET_DOMAINS query failed (0x6c), using static CDSP domains
+ggml-hex: Hexagon backend (experimental) : allocating new registry : ndev 1
+ggml-hex: Hexagon Arch version v75, DMA64 disabled
+ggml-hex: device 0: HTP0 (phys=0, virt=0, domain=cdsp:3)
+build_commit,build_number,cpu_info,gpu_info,backends,model_filename,model_type,model_size,model_n_params,n_batch,n_ubatch,n_threads,cpu_mask,cpu_strict,poll,type_k,type_v,n_gpu_layers,n_cpu_moe,split_mode,main_gpu,no_kv_offload,flash_attn,devices,tensor_split,tensor_buft_overrides,load_mode,lazy_mode,embeddings,no_op_offload,no_host,repack,fit_target,fit_min_ctx,n_prompt,n_gen,n_depth,test_time,avg_ns,stddev_ns,avg_ts,stddev_ts
+"707616feb","11754","CPU","Hexagon","HTP","models/K2-Horizon-4B-Q4_K_M.gguf","k2-horizon 4B Q4_K - Medium","3145139200","5058255360","1024","512","4","0x0f","0","50","f16","f16","0","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","1","0","0","512","0","0","2026-10-29T11:26:21Z","27305694923","3491573500","19.143995","3.880684"
+"707616feb","11754","CPU","Hexagon","HTP","models/K2-Horizon-4B-Q4_K_M.gguf","k2-horizon 4B Q4_K - Medium","3145139200","5058255360","1024","512","4","0x0f","0","50","f16","f16","0","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","1","0","0","8192","0","0","2026-10-29T11:27:47Z","708792404416","1368103618","11.568327","0.496177"
+"707616feb","11754","CPU","Hexagon","HTP","models/K2-Horizon-4B-Q4_K_M.gguf","k2-horizon 4B Q4_K - Medium","3145139200","5058255360","1024","512","4","0x0f","0","50","f16","f16","0","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","1","0","0","0","32","0","2026-10-29T12:04:31Z","84898041577","4174649","0.376923","0.000019"
+"707616feb","11754","CPU","Hexagon","HTP","models/K2-Horizon-4B-Q4_K_M.gguf","k2-horizon 4B Q4_K - Medium","3145139200","5058255360","1024","512","4","0x0f","0","50","f16","f16","0","0","layer","0","0","1","auto","0.00","none","auto","auto","0","0","0","1","0","0","0","128","0","2026-10-29T12:07:24Z","16221678781","3145657","7.890675","0.001530"

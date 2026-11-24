@@ -1,0 +1,38 @@
+[1/20] HumanEval/0: PASS
+[2/20] HumanEval/1: FAIL Traceback (most recent call last):
+  File "/tmp/tmpm9y_8e6a.py", line 47, in <mo
+[3/20] HumanEval/2: PASS
+[4/20] HumanEval/3: FAIL Traceback (most recent call last):
+  File "/tmp/tmp1i2yck1y.py", line 43, in <mo
+[5/20] HumanEval/4: PASS
+[6/20] HumanEval/5: FAIL Traceback (most recent call last):
+  File "/tmp/tmpunop1rqr.py", line 34, in <mo
+[7/20] HumanEval/6: FAIL recent call last):
+  File "/tmp/tmpaxtfq_l4.py", line 38, in <module>
+    check(
+[8/20] HumanEval/7: PASS
+[9/20] HumanEval/8: PASS
+[10/20] HumanEval/9: FAIL Traceback (most recent call last):
+  File "/tmp/tmpufgv3ifj.py", line 36, in <mo
+[11/20] HumanEval/10: FAIL <module>
+    check(make_palindrome)
+  File "/tmp/tmp54oa2kxo.py", line 58, in ch
+[12/20] HumanEval/11: FAIL le "/tmp/tmp184r_9pc.py", line 28, in check
+    assert candidate('111000', '1010
+[13/20] HumanEval/12: PASS
+[14/20] HumanEval/13: PASS
+[15/20] HumanEval/14: FAIL :
+  File "/tmp/tmpzq6ch6u7.py", line 25, in <module>
+    check(all_prefixes)
+  F
+[16/20] HumanEval/15: PASS
+[17/20] HumanEval/16: FAIL Traceback (most recent call last):
+  File "/tmp/tmpdr7k1ade.py", line 28, in <mo
+[18/20] HumanEval/17: FAIL Traceback (most recent call last):
+  File "/tmp/tmpj01bryrm.py", line 45, in <mo
+[19/20] HumanEval/18: FAIL Traceback (most recent call last):
+  File "/tmp/tmphjgrbak2.py", line 32, in <mo
+[20/20] HumanEval/19: FAIL Traceback (most recent call last):
+  File "/tmp/tmp6dq34k3q.py", line 46, in <mo
+
+HumanEval pass@1: 8/20 -> results/humaneval_Qwen3.5-2B-Q4_K_M.json

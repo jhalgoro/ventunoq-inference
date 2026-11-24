@@ -1,0 +1,110 @@
+SOURCE: https://www.liquid.ai/blog
+TITLE: Models | Liquid AI
+================================================================================
+NEWS
+/
+MODELS
+
+News and Updates
+All
+Models
+Engineering
+Case studies
+Company news
+Research
+OCT 27, 2026
+MODELS
+Introducing LFM3: Every Modality for Specialized Intelligence
+10.15.2026
+MODELS
+d1-ultra: Introducing the World’s Best Decision Model
+10.13.2026
+MODELS
+LFM2.5-24B-A2B: Built for Fast On-Device Agents
+10.07.2026
+MODELS
+Open d1: Edge decision models for text, vision, and audio
+10.05.2026
+MODELS
+Introducing d1: The most capable decision model, now with vision
+09.24.2026
+MODELS
+LFM2.5-VL-DSpark: Accelerating vision-language models on edge and beyond
+08.20.2026
+MODELS
+LFM2.5-DSpark: Up to 3.2x Faster Inference from H100 to MacBook
+08.19.2026
+MODELS
+LFM2.5 Q4_0: Quantization-Aware Distillation for Edge Deployment
+08.12.2026
+MODELS
+LFM2.5-VL-3B: A Better and Faster Vision-Language Model for the Edge
+08.04.2026
+MODELS
+LFM2.5-2.6B: Deploy Agents Everywhere
+07.28.2026
+MODELS
+LFM2.5-Encoders: Fast at Long Context, Even on CPU
+06.25.2026
+MODELS
+LFM2.5-230M: Built to Run Anywhere
+06.18.2026
+MODELS
+LFM2.5 Retrievers: Bi-directional LFMs for Fast Multilingual Search
+05.28.2026
+MODELS
+LFM2.5-8B-A1B: An Even Better On-Device Mixture of Experts
+04.08.2026
+MODELS
+LFM2.5-VL-450M: Structured Visual Intelligence, Edge to Cloud
+03.31.2026
+MODELS
+LFM2.5-350M: No Size Left Behind
+03.05.2026
+MODELS
+No Cloud, No Waiting: Tool-Calling Agents on Consumer Hardware with LFM2-24B-A2B
+02.24.2026
+MODELS
+LFM2-24B-A2B: Scaling Up the LFM2 Architecture
+01.20.2026
+MODELS
+LFM2.5-1.2B-Thinking: On-Device Reasoning Under 1GB
+01.07.2026
+MODELS
+The Future of Meeting Summarization: Local, Fast, Private, and Fully Secure
+01.05.2026
+MODELS
+Introducing LFM2.5: The Next Generation of On-Device AI
+10.28.2025
+MODELS
+LFM2-ColBERT-350M: One Model to Embed Them All
+10.22.2025
+PRODUCT
+How Liquid AI Uses ExecuTorch to Power Efficient, Flexible On-Device Intelligence
+10.22.2025
+MODELS
+LFM2-VL-3B: A New Efficient Vision-Language for the Edge
+10.07.2025
+MODELS
+LFM2-8B-A1B: An Efficient On-device Mixture-of-Experts
+10.01.2025
+MODELS
+LFM2-Audio: An End-to-End Audio Foundation Model
+09.25.2025
+MODELS
+Introducing Liquid Nanos — frontier‑grade performance on everyday devices
+09.23.2025
+MODELS
+Introducing LFM2-2.6B: Redefining Efficiency in Language Models
+08.18.2025
+PRODUCT
+From Cloud to Keyboard: LEAP Expands to Laptops with Cutting-Edge AMD Ryzen™ Power
+08.12.2025
+MODELS
+LFM2-VL: Efficient Vision-Language Models
+07.24.2025
+PRODUCT
+Liquid <> .txt Collaboration
+1
+2
+Next

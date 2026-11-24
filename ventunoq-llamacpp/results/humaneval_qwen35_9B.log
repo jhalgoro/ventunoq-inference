@@ -1,0 +1,16 @@
+[1/10] HumanEval/0: PASS
+[2/10] HumanEval/1: FAIL Traceback (most recent call last):
+  File "/tmp/tmp27fb3cdc.py", line 37, in <mo
+[3/10] HumanEval/2: PASS
+[4/10] HumanEval/3: PASS
+[5/10] HumanEval/4: PASS
+[6/10] HumanEval/5: PASS
+[7/10] HumanEval/6: PASS
+[8/10] HumanEval/7: PASS
+[9/10] HumanEval/8: FAIL module>
+    check(sum_product)
+  File "/tmp/tmpi51hif52.py", line 24, in check
+ 
+[10/10] HumanEval/9: PASS
+
+HumanEval pass@1: 8/10 -> results/humaneval_Qwen3.5-9B-Q4_K_M.json

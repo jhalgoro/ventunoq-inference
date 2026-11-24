@@ -1,0 +1,49 @@
+ggml-hex: Loading driver libcdsprpc.so
+ggml-hex: FASTRPC_GET_DOMAINS query failed (0x6c), using static CDSP domains
+ggml-hex: Hexagon backend (experimental) : allocating new registry : ndev 2
+ggml-hex: Hexagon Arch version v75, DMA64 disabled
+ggml-hex: device 0: HTP0 (phys=0, virt=0, domain=cdsp:3)
+ggml-hex: device 1: HTP1 (phys=0, virt=1, domain=cdsp:3)
+ggml-hex: HTP0 buffer mapping failed : domain_id 3 size 561401856 fd 19 error 0x00000001
+[New LWP 196894]
+[New LWP 196893]
+[New LWP 196892]
+[New LWP 196872]
+[New LWP 196871]
+[New LWP 196868]
+[New LWP 196867]
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
+0x0000ffffa1387a34 in __GI___wait4 (pid=196895, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+warning: 30	../sysdeps/unix/sysv/linux/wait4.c: No such file or directory
+#0  0x0000ffffa1387a34 in __GI___wait4 (pid=196895, stat_loc=0x0, options=0, usage=0x0) at ../sysdeps/unix/sysv/linux/wait4.c:30
+30	in ../sysdeps/unix/sysv/linux/wait4.c
+#1  0x0000ffffa17ffffc in ggml_print_backtrace () from /tmp/opencode/pkg-snapdragon/lib/libggml-base.so.0
+#2  0x0000ffffa1815eac in ggml_uncaught_exception() () from /tmp/opencode/pkg-snapdragon/lib/libggml-base.so.0
+#3  0x0000ffffa160a570 in ?? () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#4  0x0000ffffa1600e04 in std::terminate() () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#5  0x0000ffffa160a908 in __cxa_throw () from /lib/aarch64-linux-gnu/libstdc++.so.6
+#6  0x0000ffffa18df01c in ggml_hexagon_shared_buffer::mmap(bool) () from /tmp/opencode/pkg-snapdragon/lib/libggml-hexagon.so.0
+#7  0x0000ffffa18ea614 in ggml_hexagon_session::enqueue_op(htp_opnode const&) () from /tmp/opencode/pkg-snapdragon/lib/libggml-hexagon.so.0
+#8  0x0000ffffa18fcca0 in ggml_backend_hexagon_graph_compute(ggml_backend*, ggml_cgraph*) () from /tmp/opencode/pkg-snapdragon/lib/libggml-hexagon.so.0
+#9  0x0000ffffa1821398 in ggml_backend_sched_graph_compute_async () from /tmp/opencode/pkg-snapdragon/lib/libggml-base.so.0
+#10 0x0000ffffa1ccd528 in llama_context::graph_compute(ggml_cgraph*, bool) () from /tmp/opencode/pkg-snapdragon/lib/libllama.so.0
+#11 0x0000ffffa1ccd32c in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /tmp/opencode/pkg-snapdragon/lib/libllama.so.0
+#12 0x0000ffffa1cceb3c in llama_context::decode(llama_batch_ext const&) () from /tmp/opencode/pkg-snapdragon/lib/libllama.so.0
+#13 0x0000ffffa2346438 in test_prompt(llama_context*, int, int, int) () from /tmp/opencode/pkg-snapdragon/lib/libllama-bench-impl.so
+#14 0x0000ffffa233e3a4 in llama_bench(int, char**) () from /tmp/opencode/pkg-snapdragon/lib/libllama-bench-impl.so
+#15 0x0000ffffa12d84c4 in __libc_start_call_main (main=main@entry=0xaaaadd9b08a8 <main>, argc=argc@entry=25, argv=argv@entry=0xffffe8aef2c8) at ../sysdeps/nptl/libc_start_call_main.h:58
+warning: 58	../sysdeps/nptl/libc_start_call_main.h: No such file or directory
+#16 0x0000ffffa12d8598 in __libc_start_main_impl (main=0xaaaadd9b08a8 <main>, argc=25, argv=0xffffe8aef2c8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=<optimized out>) at ../csu/libc-start.c:360
+warning: 360	../csu/libc-start.c: No such file or directory
+#17 0x0000aaaadd9b07b0 in _start ()
+[Inferior 1 (process 196864) detached]
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  ggml-hex: fastrpc_mmap failed (see log for details)
+timeout: the monitored command dumped core

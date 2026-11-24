@@ -1,0 +1,410 @@
+{
+ "model": "Qwen3.5-2B-Q4_K_M",
+ "dataset": "GSM8K-test",
+ "n": 50,
+ "accuracy": 0.22,
+ "correct": 11,
+ "seconds": 2344.1,
+ "details": [
+  {
+   "idx": 0,
+   "ok": false,
+   "got": "26",
+   "gold": "18",
+   "tokens": 512,
+   "out_tail": ". It ends with \"A:\".\nThis suggests I need to generate a *new* Q&A pair that follows the same style, OR perhaps there was a question missing from the prompt text"
+  },
+  {
+   "idx": 1,
+   "ok": false,
+   "got": "624",
+   "gold": "3",
+   "tokens": 297,
+   "out_tail": "** There are 52 weeks in a year. We multiply the weekly rate by 52.\n    $$12 \\text{ pages/week} \\times 52 \\text{ weeks} = 624 \\text{ pages}$$\n\nThe answer is 624"
+  },
+  {
+   "idx": 2,
+   "ok": false,
+   "got": "72",
+   "gold": "70000",
+   "tokens": 222,
+   "out_tail": "y compared to April, so we divide her April sales by 2: $48 / 2 = 24$ clips. Then, we add the clips from both months together: $48 + 24 = 72$.\n\nThe answer is 72"
+  },
+  {
+   "idx": 3,
+   "ok": true,
+   "got": "540",
+   "gold": "540",
+   "tokens": 504,
+   "out_tail": "g the question text? Or maybe I need to generate a new Q&A pair based on the pattern established by the previous 4 examples.\n\nLet's look at the structure again."
+  },
+  {
+   "idx": 4,
+   "ok": false,
+   "got": "6",
+   "gold": "20",
+   "tokens": 512,
+   "out_tail": "says \"She gives the chickens their feed in three separate meals.\"\n- Interpretation A: She gives 3 cups per chicken per day. Total daily requirement = 20 * 3 = 6"
+  },
+  {
+   "idx": 5,
+   "ok": false,
+   "got": "624",
+   "gold": "64",
+   "tokens": 318,
+   "out_tail": "roduction:**\n    There are 52 weeks in a year. We multiply the weekly total by 52.\n    $12 \\text{ pages/week} \\times 52 = 624 \\text{ pages}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 6,
+   "ok": false,
+   "got": "78",
+   "gold": "260",
+   "tokens": 267,
+   "out_tail": "*May Total:** $21.5 \\times 2 = 43 \\text{ apples}$ (since there are two people)\n\nAdding these together gives us the grand total:\n$35 + 43 = 78$\n\nThe answer is 78"
+  },
+  {
+   "idx": 7,
+   "ok": false,
+   "got": "20",
+   "gold": "160",
+   "tokens": 346,
+   "out_tail": " is needed:** Subtract the total received from the original amount needed.\n    $$100 - \\$80 = \\$20$$\n\nBetty needs $20$ more to buy the wallet.\n\nThe answer is 20"
+  },
+  {
+   "idx": 8,
+   "ok": false,
+   "got": "6096.68",
+   "gold": "45",
+   "tokens": 512,
+   "out_tail": "tates John spends the first 2 hours in standstill traffic, which means he does not move during this time.\n    Distance = $2 \\text{ hours} \\times 0 \\text{ mph} ="
+  },
+  {
+   "idx": 9,
+   "ok": false,
+   "got": "624",
+   "gold": "460",
+   "tokens": 298,
+   "out_tail": "$\n3.  **Pages written in a year**: There are 52 weeks in a year. We multiply the weekly total by 52.\n    $$12 \\times 52 = 624 \\text{ pages}$$\n\nThe answer is 624"
+  },
+  {
+   "idx": 10,
+   "ok": true,
+   "got": "366",
+   "gold": "366",
+   "tokens": 140,
+   "out_tail": "th, there were 180 - (180 * 0.3) = <<180-180*0.3=126>>126 downloads.\nThe total number of downloads is 60 + 180 + 126 = <<60+180+126=366>>366.\nThe answer is 366\n"
+  },
+  {
+   "idx": 11,
+   "ok": false,
+   "got": "8328",
+   "gold": "694",
+   "tokens": 218,
+   "out_tail": "<6*12=72>>72 mini cheesecakes which cost 55 * 72 = $<<55*72=3960>>3960.\nThe total cost is 2448 + 1920 + 3960 = $<<2448+1920+3960=8328>>8328.\nThe answer is 8328\n"
+  },
+  {
+   "idx": 12,
+   "ok": false,
+   "got": "72",
+   "gold": "13",
+   "tokens": 196,
+   "out_tail": " half as many in May as in April (48), we calculate $48 \\div 2 = 24$ clips for May. Adding the clips from both months gives us $48 + 24 = 72$.\n\nThe answer is 72"
+  },
+  {
+   "idx": 13,
+   "ok": false,
+   "got": "72",
+   "gold": "18",
+   "tokens": 293,
+   "out_tail": " $48$ clips in April.\n\n2.  **Calculate the total for both months:**\n    Now we add the sales from April and May together:\n    $$48 + 24 = 72$$\n\nThe answer is 72"
+  },
+  {
+   "idx": 14,
+   "ok": false,
+   "got": "-2275",
+   "gold": "60",
+   "tokens": 212,
+   "out_tail": "s who enrolled in hip-hop dance is -9100 / 20 = $<-9100/20=-455>>-455.\nWhat percentage of the entire students enrolled in hip-hop dance?\nA: The answer is -2275\n"
+  },
+  {
+   "idx": 15,
+   "ok": false,
+   "got": "20",
+   "gold": "125",
+   "tokens": 337,
+   "out_tail": "*Calculate how much more she needs:** Subtract the total money she has ($\\$80$) from the cost of the wallet ($\\$100$).\n    $$100 - 80 = \\$20$$\n\nThe answer is 20"
+  },
+  {
+   "idx": 16,
+   "ok": true,
+   "got": "230",
+   "gold": "230",
+   "tokens": 512,
+   "out_tail": "much\". The example says: \"Betty has only half... Her parents decided to give her $15 for that purpose, and her grandparents twice as much as her parents.\"\n    *"
+  },
+  {
+   "idx": 17,
+   "ok": false,
+   "got": "624",
+   "gold": "57500",
+   "tokens": 333,
+   "out_tail": "2 weeks in a year. We multiply the weekly total by 52.\n    $12 \\text{ pages/week} \\times 52 \\text{ weeks/year} = 624 \\text{ pages per year}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 18,
+   "ok": false,
+   "got": "72",
+   "gold": "7",
+   "tokens": 168,
+   "out_tail": "n May as she did in April (48), we calculate $48 \\div 2 = 24$ clips for May. Next, we add the clips from both months together: $48 + 24 = 72$.\n\nThe answer is 72"
+  },
+  {
+   "idx": 19,
+   "ok": false,
+   "got": "12",
+   "gold": "6",
+   "tokens": 512,
+   "out_tail": " 6 miles.\n    *   Target average speed ($v_{avg}$) = 4 mph.\n    *   Total time required to cover the whole trail at target speed = Distance / Average Speed = 12"
+  },
+  {
+   "idx": 20,
+   "ok": false,
+   "got": "3",
+   "gold": "15",
+   "tokens": 512,
+   "out_tail": " initially.**\n- Total Water ($W_{total\\_initial}$) = $W_{orange\\_initial} + W_{pineapple\\_initial}$.\n- $W_{total\\_initial} = \\frac{20}{3} + 9 = \\frac{20}{3} + \\"
+  },
+  {
+   "idx": 21,
+   "ok": false,
+   "got": "72",
+   "gold": "14",
+   "tokens": 218,
+   "out_tail": "t{ clips} $$\n3.  **Calculate total sales:** Add the clips from both months together.\n    $$ \\text{Total Sales} = 48 + 24 = 72 \\text{ clips} $$\n\nThe answer is 72"
+  },
+  {
+   "idx": 22,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tokens": 63,
+   "out_tail": " Billy sold 1*3 + 2*2 = <<1*3+2*2=7>>7 DVDs to his first 5 customers.\nBilly has 8 - 5 = $<<8-5=3>>3 more customers left.\nThe answer is 7\n"
+  },
+  {
+   "idx": 23,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 38,
+   "out_tail": " The candle burns for 4 hours, so the candle will be 2*4=<<2*4=8>>8 cm shorter.\nThe answer is 8\n"
+  },
+  {
+   "idx": 24,
+   "ok": false,
+   "got": "72",
+   "gold": "26",
+   "tokens": 108,
+   "out_tail": "19.50/(1-0.25)=26>>26.\nThe answer is 26\n\nA: <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72\n"
+  },
+  {
+   "idx": 25,
+   "ok": false,
+   "got": "1",
+   "gold": "2",
+   "tokens": 512,
+   "out_tail": ". I need to generate a response for the last question \"Marie ordered one chicken meal...\" following that style.\n\nWait, looking at the very first block of text:\n"
+  },
+  {
+   "idx": 26,
+   "ok": true,
+   "got": "243",
+   "gold": "243",
+   "tokens": 434,
+   "out_tail": "6$$\n    \n    First, add the shorts and pants:\n    $49.50 + 67.50 = 117$ dollars.\n    \n    Then, add the shoes:\n    $117 + 126 = 243$ dollars.\n\nThe answer is 243"
+  },
+  {
+   "idx": 27,
+   "ok": false,
+   "got": "624",
+   "gold": "16",
+   "tokens": 282,
+   "out_tail": "re are 52 weeks in a year. We multiply the weekly total by 52.\n    $$12 \\text{ pages/week} \\times 52 \\text{ weeks/year} = 624 \\text{ pages}$$\n\nThe answer is 624"
+  },
+  {
+   "idx": 28,
+   "ok": false,
+   "got": "65",
+   "gold": "25",
+   "tokens": 512,
+   "out_tail": "ing distance after first stop (to reach end): $60 - 20 = 40$ miles.\n        *   Second stop is 15 miles before the end, meaning it is at position $(60-15) = 45$"
+  },
+  {
+   "idx": 29,
+   "ok": false,
+   "got": "624",
+   "gold": "104",
+   "tokens": 299,
+   "out_tail": "time:**\n    There are 52 weeks in a year. We multiply the weekly total by 52.\n    $12 \\text{ pages/week} \\times 52 = 624 \\text{ pages/year}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 30,
+   "ok": false,
+   "got": "72",
+   "gold": "109",
+   "tokens": 221,
+   "out_tail": "y in May as in April (48), we calculate that amount: $48 \\div 2 = 24$ clips. Next, we add the clips from both months together: $48 + 24 = 72$.\n\nThe answer is 72"
+  },
+  {
+   "idx": 31,
+   "ok": false,
+   "got": "72",
+   "gold": "80",
+   "tokens": 172,
+   "out_tail": " in May compared to April (48), we calculate $48 \\div 2 = 24$ clips for May. Next, we add the clips from both months together: $48 + 24 = 72$.\n\nThe answer is 72"
+  },
+  {
+   "idx": 32,
+   "ok": true,
+   "got": "35",
+   "gold": "35",
+   "tokens": 60,
+   "out_tail": " John spends 10 * .5 = <<10*.5=5>>5 hours a day on dogs.\nSo, he spends 5*7=<<5*7=35>>35 hours a week on dogs.\nThe answer is 35\n"
+  },
+  {
+   "idx": 33,
+   "ok": true,
+   "got": "70",
+   "gold": "70",
+   "tokens": 113,
+   "out_tail": "s x + (x - 30) = 110.\nSolving for x, we get 2x - 30 = 110, which means 2x = 140, so x = 70.\nSo Gretchen has 70 gold coins and 40 silver coins.\nThe answer is 70\n"
+  },
+  {
+   "idx": 34,
+   "ok": true,
+   "got": "23",
+   "gold": "23",
+   "tokens": 78,
+   "out_tail": " Half of Raymond's jewels = <<40/2=20>>20.\nAaron has 5 + 20 = $<<5+20=25>>25 jewels.\nSiobhan has 25 - 2 = $<<25-2=23>>23 jewels.\nThe answer is 23\n"
+  },
+  {
+   "idx": 35,
+   "ok": false,
+   "got": "4",
+   "gold": "9",
+   "tokens": 410,
+   "out_tail": "\n\nFinally, we calculate how long it takes to paint the whole house at this new rate:\nTime = Total Work / Rate = $1 \\div \\frac{1}{4} = 4$ hours.\n\nThe answer is 4"
+  },
+  {
+   "idx": 36,
+   "ok": false,
+   "got": "624",
+   "gold": "75",
+   "tokens": 280,
+   "out_tail": " There are 52 weeks in a year. Therefore, the total annual writing amount is $12 \\text{ (pages/week)} \\times 52 \\text{ (weeks)} = 624$ pages.\n\nThe answer is 624"
+  },
+  {
+   "idx": 37,
+   "ok": false,
+   "got": "72",
+   "gold": "2",
+   "tokens": 219,
+   "out_tail": "\\div 2 = 24$ clips.\n\n2.  **Calculate total clips sold:**\n    Add the number of clips sold in April and May together.\n    $48 + 24 = 72$ clips.\n\nThe answer is 72"
+  },
+  {
+   "idx": 38,
+   "ok": false,
+   "got": "72",
+   "gold": "10",
+   "tokens": 222,
+   "out_tail": "t{ clips} $$\n3.  **Calculate total sales:** Add the sales from both months together.\n    $$ \\text{Total Sales} = 48 + 24 = 72 \\text{ clips} $$\n\nThe answer is 72"
+  },
+  {
+   "idx": 39,
+   "ok": false,
+   "got": "624",
+   "gold": "18",
+   "tokens": 388,
+   "out_tail": "ber of weeks in a year**:\n    There are 52 weeks in a standard year.\n    $12 \\text{ pages/week} \\times 52 \\text{ weeks} = 624 \\text{ pages}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 40,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 52,
+   "out_tail": " Ben's iPhone is 1 * 2 = <<1*2=2>>2 years old.\nBrandon's iPhone is 2 * 4 = <<2*4=8>>8 years old.\nThe answer is 8\n"
+  },
+  {
+   "idx": 41,
+   "ok": false,
+   "got": "3",
+   "gold": "200",
+   "tokens": 512,
+   "out_tail": "ing: \"how far outside... could she stand and still hit\".\n    - If she stands *at* distance $X$ from the dragon, her javelin travels distance $3d$. For it to hit"
+  },
+  {
+   "idx": 42,
+   "ok": false,
+   "got": "8",
+   "gold": "26",
+   "tokens": 512,
+   "out_tail": ".. This means, Betty needs...\"\n\nSo I should write out the steps clearly.\n\n**Step-by-step:**\n1. Calculate total pieces of pie available: $5 \\text{ pies} \\times 8"
+  },
+  {
+   "idx": 43,
+   "ok": false,
+   "got": "1800",
+   "gold": "48",
+   "tokens": 512,
+   "out_tail": "available in the bag.\n        *   Let's calculate the total calories in the 300g bag: $250 \\times 5 = 1250$ calories.\n        *   Current intake: 1800 calories."
+  },
+  {
+   "idx": 44,
+   "ok": false,
+   "got": "624",
+   "gold": "20",
+   "tokens": 314,
+   "out_tail": "roduction:**\n    There are 52 weeks in a year. We multiply the weekly total by 52.\n    $12 \\text{ pages/week} \\times 52 = 624 \\text{ pages}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 45,
+   "ok": false,
+   "got": "624",
+   "gold": "104",
+   "tokens": 393,
+   "out_tail": "e annual writing time:**\n    There are 52 weeks in a year.\n    $12 \\text{ pages/week} \\times 52 \\text{ weeks/year} = 624 \\text{ pages/year}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 46,
+   "ok": false,
+   "got": "23",
+   "gold": "163",
+   "tokens": 512,
+   "out_tail": "of notes in the package. The scenario described contains an error in the numbers provided (likely the starting amount or the cup count). However, based strictly"
+  },
+  {
+   "idx": 47,
+   "ok": false,
+   "got": "624",
+   "gold": "800",
+   "tokens": 343,
+   "out_tail": "   There are 52 weeks in a year. We multiply the weekly total by 52.\n    $12 \\text{ pages/week} \\times 52 \\text{ weeks} = 624 \\text{ pages}$.\n\nThe answer is 624"
+  },
+  {
+   "idx": 48,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tokens": 60,
+   "out_tail": " There are 12 inches in 1 foot, so 4 feet = <<12*4=48>>48 inches.\nThere are 48/6 = <<48/6=8>>8 pieces of wire.\nThe answer is 8\n"
+  },
+  {
+   "idx": 49,
+   "ok": false,
+   "got": "3120",
+   "gold": "30",
+   "tokens": 365,
+   "out_tail": " hourly rate is $\\$0.20$. To find the number of hours, we divide the total earnings by the hourly rate:\n    $624 / 0.2 = 3120 \\text{ hours}$\n\nThe answer is 3120"
+  }
+ ]
+}

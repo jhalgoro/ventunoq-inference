@@ -1,0 +1,17 @@
+# vendored upstream binaries — fetch recipe in ROADMAP.md ("Reproducing…")
+llama.cpp/
+models/*.gguf
+
+# build/extract artifacts under npu/ — sources (*.c) and NOTES.md are what matter
+npu/*.so
+npu/*.onnx
+npu/*.dlc
+npu/*.raw
+npu/mmap_probe
+npu/mmap_probe2
+npu/soc_scan
+npu/compat/
+
+# python
+__pycache__/
+*.pyc

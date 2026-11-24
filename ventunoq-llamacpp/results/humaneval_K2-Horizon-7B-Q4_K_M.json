@@ -1,0 +1,60 @@
+{
+ "model": "K2-Horizon-7B-Q4_K_M",
+ "dataset": "HumanEval",
+ "n": 10,
+ "pass_at_1": 1.0,
+ "passed": 10,
+ "seconds": 672.4,
+ "details": [
+  {
+   "task": "HumanEval/0",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/1",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/2",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/3",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/4",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/5",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/6",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/7",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/8",
+   "ok": true,
+   "err": ""
+  },
+  {
+   "task": "HumanEval/9",
+   "ok": true,
+   "err": ""
+  }
+ ]
+}
