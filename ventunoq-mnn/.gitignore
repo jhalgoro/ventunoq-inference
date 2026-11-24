@@ -1,0 +1,23 @@
+# source clone + build — rebuild with scripts/build_mnn.sh (recipe also in parent alt-engines.md)
+MNN/
+
+# models are transient by policy (delete-after-suite, results/DISK_LOG.md)
+models/
+*.gguf
+*.mnn.weight
+
+# lfm3 (M7): export workspace on the UM890; exported dirs pushed to the board
+lfm3-work/
+lfm3-models/
+
+# minicpm5 (M10): exported dirs pushed to the board
+minicpm5-models/
+
+# harness scratch: run markers, console captures, local opencode config
+results/*_done
+results/*.out
+opencode.json
+
+# python
+__pycache__/
+*.pyc

@@ -1,0 +1,191 @@
+# Failures — MNN on QCS8300
+
+Numbering continues the parent survey: [`../ventunoq-llamacpp/FAILURES.md`](../ventunoq-llamacpp/FAILURES.md)
+owns **F1–F8**; this repo owns **F9–F19**. Legend (parent convention): 🔒 blocked outside our
+control · 🛠️ actionable by us · 📝 gotcha (solved, don't re-learn it the hard way).
+
+Inherited and still binding here:
+
+| Parent | One-liner | Effect on this repo |
+|---|---|---|
+| F1 | QNN/QAIRT needs the `smmu_proxy` kernel service; `6.8.0-1084-qcom` has none | MNN Hexagon backend unreachable (F13) |
+| F2 | Turnip Vulkan lacks `StorageBuffer8BitAccess`; quantized/tiled matmuls fault | MNN Vulkan backend = quick probe only (M4) |
+| F8 | QCS8300 lacks FMLAL/FMLSL **vector** despite HWCAP `asimdhp` → mistral.rs SIGILL | MNN is safe by construction — audit in [research/kernel-audit.md](research/kernel-audit.md) |
+
+---
+
+## F9 — taobao-mnn Qwen3.5 exports are multimodal: `llm_demo` init fails 📝
+
+`taobao-mnn/Qwen3.5-{0.8B,2B}-MNN` ship with `is_visual: true` (Qwen3-VL-style exports):
+
+1. `llm_demo <dir>/config.json` → `Can't open file: …/visual.mnn` → `LLM init error`.
+   (Downloading `visual.mnn` + `visual.mnn.weight` doesn't help either:)
+2. → `Unsupported vision processor family: qwen3_vl` → `LLM init error` — the current
+   engine build doesn't know that processor family.
+
+**Workaround (text-only, what all benchmarks here use):** copy the dir, delete the visual
+files, set `"is_visual": false` in `llm_config.json`, drop the `mllm` block from
+`config.json` — `scripts/text_only.py` does it. `llm_bench` never touches `visual.mnn`, so
+benchmarking works on the unpatched dir (it just prints the open-error per row).
+
+## F10 — `-c` precision flag is inverted from intuition: `-c 1` is fp32 📝
+
+`llm_bench -c <n>`: **1 = "High" = fp32, 2 = "Low" = fp16** — regardless of
+`"precision": "low"` in `config.json` (the flag overrides the file). fp32 silently costs
+**−65% decode** (25.1 vs 41.5 t/s at 0.8B) with *no warning*. Always pass `-c 2`
+explicitly; `scripts/bench_mnn.sh` does.
+
+## F11 — Hugging Face downloads stall mid-file 📝
+
+Same as parent F6: plain `curl -O` hangs at partial sizes. Working recipe (baked into
+`scripts/dl_model.sh`): `curl -L -C - --retry 3 --speed-limit 200000 --speed-time 30`,
+launched with `setsid nohup … &` for long pulls. Throughput when healthy: 25+ MB/s.
+
+## F12 — LFM2/LFM3 are not convertible: no model-mapper entry 🛠️
+
+- `transformers/llm/export/utils/model_mapper.py` has `qwen3_5`, `qwen3_5_moe`, … but **no
+  `lfm2`/`lfm3`** — only `lfm2_audio` in `utils/audio.py` (a different thing).
+- `gguf2mnn.py` maps only a llama/qwen-style op template (`model == 'llama'` branch); an
+  LFM GGUF has no path in.
+
+Consequence: **llama.cpp remains the only LFM3 engine on this board** (and the only NPU
+path). Upsert path: [ROADMAP M7](ROADMAP.md) — a `model_mapper` + `model.py` port of LFM's
+conv-gate/short-conv blocks; start with an upstream issue, not a PR.
+
+## F13 — MNN's Hexagon LLM backend is Android + QNN → unreachable here 🔒
+
+The backend (docs `transformers/llm.md`, "Android Hexagon 后端") requires `backend_type:
+hexagon`, a C4-fused export, and pushing `libMNN_htpops*.so` skel libs beside the model —
+i.e. the **QNN runtime stack**. Every QNN runtime path on this board dies at `HAP_mmap2`
+because the kernel lacks `smmu_proxy` (parent F1, ioctl-level evidence in parent
+`npu/NOTES.md`). Not engine-specific; nothing userspace can do. llama.cpp's Hexagon runner
+(bypasses QNN via FastRPC/FBCL) stays the only NPU path: 679 t/s prefill @LFM2.5-2.6B.
+
+## F14 — `llm_demo` has no HTTP API; serving needs a driver script 🛠️
+
+`llm_demo` is stdin/stdout interactive only — no OpenAI-compatible endpoint like
+`llama-server`. Worse, its own batch mode (`llm_demo config prompt.txt`) reads **one prompt
+per line** and streams every answer into a single stdout with no separator — unusable for
+multi-line benchmark prompts. Delivered workaround (M1 harness): `scripts/llm_eval.cpp`, a
+batch driver built into the clone by `scripts/build_mnn.sh` — one prompt file in, one answer
+file out, greedy sampler, fresh KV per item, resume-safe — driven by
+`scripts/quality_eval_mnn.py`. llama.cpp still owns any client/serving workload.
+
+## F15 — 9B-MNN export splits embeddings into `embeddings_bf16.bin`; the hardcoded download list misses it 🛠️ (rerun on hold)
+
+`taobao-mnn/Qwen3.5-9B-MNN` ships an extra **`embeddings_bf16.bin` (2.0 GB)** that the
+0.8B/2B/4B repos don't have. The old `dl_model.sh` `FILES` list was the hardcoded classic
+six → embeddings never downloaded → the model emits **`!!!!` repetition on every prompt**:
+QWEN35-9B-INT4 scored 0.000 on all 10 suites (gsm8k `tail` = all `!`) and ppl = **248,300**
+vs 16–48 on healthy rows.
+
+Not a corrupt download: `sha256 llm.mnn.weight = 896bf5a7…` matches the HF LFS oid exactly
+(DISK_LOG 2026-11-02 20:34) — it is a missing-file bug in our fetch list. **Fixed:**
+`dl_model.sh` now derives the file list from the HF tree API (keeps the text-only `visual.*`
+exclusion), so any per-model extra file is picked up automatically. 9B rerun parked by
+choice — at ~19 h for the R1 suite it is the slowest row either way.
+
+## F16 — `taobao-mnn/Qwen3.5-9B-…-Opus-Reasoning-Distilled-MNN` is an empty placeholder; HF serves 15-byte `Entry not found` bodies with HTTP 200 📝
+
+The repo appears in the org API but its tree contains **only `.gitattributes`**.
+`curl …/resolve/main/<file>` answers 200 with a 15-byte body `Entry not found` — the old
+`dl_model.sh` "succeeded" (28K total), and the ladder died 2 s into `q_dist9b` with a
+`JSONDecodeError` in `text_only.py`. Guard added: `dl_model.sh` aborts on any downloaded
+file < 100 B containing "not found". Nothing to run until upstream uploads — recheck the
+tree API before scheduling a 9B-DIST suite.
+
+## F17 — Opus-distilled models think aloud and re-solve the few-shot prefix: R1 distilled rows score 0.000 on MC+humaneval+niah 📝 fixed (R2 protocol)
+
+The Claude-Opus-Reasoning-Distilled exports reason aloud ("Let me analyze each option:
+A… B… C…"), which breaks three sibling-pinned harness assumptions:
+
+1. **MC (16-token budget)** runs out mid-analysis → all six MC suites 0.000 via `gen-miss`.
+   Lifting the budget alone doesn't help: **the 3-shot prefix backfires** — the models
+   continue the shot block and re-answer the example questions, so "last Answer: X" matches
+   a *shot's* answer (probe: pred=B on 6/8, the shots' letters).
+2. **humaneval (512 tok)** → prose reasoning ("Time complexity: O(n²)…") is executed as
+   Python (SyntaxError 0.000); additionally `cut()` at the first ``` erased fenced code
+   before extraction could see it.
+3. **niah (24 tok)** → preamble only → 0/5.
+   (gsm8k survived on its 700-token budget: 0.55/0.65.)
+
+**R2 protocol** (`-DIST2` tags, `q_dist2b2`/`q_dist4b2`; plain-model rows untouched):
+`--no-mc-shots` + `--mc-instruction` ("think briefly, end with a line 'Answer: X'") +
+budgets MC 512 / HE 1536 / GSM 1024 / NIAH 512 (niah prompt also gains a "do NOT
+enumerate the context" cue), via new `quality_eval_mnn.py` flags (`--mc-tokens
+`--mc-instruction --no-mc-shots --he-tokens --gsm-tokens --niah-tokens`). Parsing is
+reasoning-safe: explicit "answer is X" (last match) first; letter/choice-text heuristics
+only on the tail; code extracted from the LAST fenced block / last `def <entry_point>(`
+(reasoners sketch, then finalize); niah takes the last 5-digit number. Probe trail
+(2B-DIST): arc n=8 — R1 0.000 → 96 tok 0.000 (shot-replay caught) → 192 tok+instr 0.000
+(still shots) → zero-shot 256 tok 0.250 → +briefness instr 0.375 (chance 0.25) → budget
+512. gsm8k n=6 @1024: 6/6 (R1 was 0.55). humaneval n=4: first-def extraction @1024 still
+0/4 (truncated/mismatched code) → last-def + 1536 tok. niah n=2: enumeration @128 1/2 →
+no-enumerate + 512 → 2/2.
+
+## F18 — `cp -al` hardlink copies + `curl -C -` re-download: ladder poisoned its own distilled models before R2 🛠️ fixed
+
+The first `q_all2` launch (11-03 12:29) died in 90 s: every suite on both -DIST2 rows
+failed at engine init with `Can't open file:…/-text/embeddings_bf16.bin`, `Failed to open
+embedding file!`, `Reshape error: 18400 -> 18336`, `onForward returned no outputs` — yet
+the *same* `-text` dirs had run probes fine 4 h earlier. Chain: `text_only.py` rewrote
+`llm_config.json`/`config.json` with `open(path,"w")` — truncating the **shared cp -al
+inode**, so the source dir's copies shrank too (4901→4810, 652→452 B). The ladder stage
+then re-ran `dl_model.sh`, whose `curl -C -` saw shrunken files, resumed them against the
+upstream sizes and **appended upstream tail bytes after valid JSON**. MNN's config parse
+then fell back to defaults: `tie_embeddings` invalid → `DiskEmbedding` looks for
+`embeddings_bf16.bin` (llmconfig.hpp:129, only when offset==0/invalid) and default
+`hidden_size` → the rotary reshape error. DISK_LOG hid it: its DOWNLOAD entry hashes only
+`llm.mnn.weight` (never rewritten), and `disklog()` leaked the sha/du block to stdout
+instead of the log.
+
+Fixed on all three legs: `text_only.py` writes configs via tmp+`os.replace` (new inode,
+source hardlink never touched); `dl_model.sh` gets the file sizes from the tree API and
+**skips byte-complete files** (oversize = clobbered → full re-download; undersize =
+interrupted → resume); `disklog()` redirects to `$LOG`. Repro-verified: fresh download →
+text_only → re-download → both configs keep upstream size in the source, -text sizes
+parse OK, nlink=1 everywhere, engine probe initializes clean (arc n=3, 2/3).
+
+## F19 — R2 residuals on the 2B-DIST2 row: open fences, cap-truncated UTF-8, rambling MC 🛠️ fixed, rerun pending
+
+The R2 ladder row for 2B-DIST (2026-11-03 12:48→20:17 UTC) came back healthy on
+gsm8k 60.0 / arc 71.0 / winogrande 57.0 / obqa 68.0 / csqa 57.0 / niah 5/5 / ppl 33.71,
+but three cells were still harness-side, all with the same root: **reasoning outputs hit
+the token cap mid-stream**:
+1. **humaneval 10.0** — 31/50 IndentationError. When generation is cut inside a still-OPEN
+   fence (8/50 at exactly 1536 tok), the closed-fence regex matches nothing and the
+   `rfind("def <entry>(")` fallback lands on a *prose re-statement of the signature*
+   (docstring then looks over-indented). `extract_code` now builds candidates best-first
+   (last fence incl. unterminated ones via `split("```")`, then last def slice), tries each
+   raw + `textwrap.dedent`, and returns the first that `compile()`s. 7-case regression
+   (bare/closed/sketch+final/open/prose/indented/empty) passes.
+2. **mmlu FAILED** — `UnicodeDecodeError` at `open(o).read()`: the cap cut a multibyte
+   char at the tail of an output file. Reads now use `errors="replace"`. All 198 items had
+   generated; only scoring died.
+3. **hellaswag 36.0** — 57/100 cap-hits @512, 41 with no letter found (pred=None): the
+   brief-answer instruction is ignored on this suite and the model rambles past the
+   budget. Parsing is fine (arc: 63 cap-hits but only 5 None — those reach "Answer: X"
+   in time); the budget is the residual limit. Rerun needs a per-suite MC budget bump.
+
+The 4B-DIST2 stage (started 20:17 UTC) runs with fixes 1–2 live; after the ladder, rerun
+`{mmlu, humaneval}` (and hellaswag at a larger `--mc-tokens`) for 2B-DIST2 — delete those
+three JSONs first so the resume logic picks them up.
+
+### F19b — humaneval still 10.0 after the "fix": the prompt+completion gluing, not extraction
+
+`q_dist_fix` round 1 (11-04) re-scored hellaswag 36.0→52.0 (2B) / 57.0→68.0 (4B) at 1024
+tok and filled 2B mmlu 51.0 — but 2B humaneval stayed 10.0 with byte-identical per-item
+results (greedy ⇒ same outputs, and the extractor genuinely picked the same slice: the
+open-fence theory was wrong). n=5 probe with raw outputs kept: the extracted functions
+**compile standalone**; the failures came from `run_humaneval` gluing them onto
+`t["prompt"]` after stripping the restated `def` line — and HumanEval prompts contain the
+docstring, which the reasoners re-emit → the second docstring lands after the prompt's
+closed one → `IndentationError` on a `"""` line (31/50). Fix: if the extracted text
+restates the entry point and compiles standalone, run it as-is (the test only needs the
+entry defined); the old strip+glue path stays for bare completions (plain-model rows
+unchanged — parity). Verified on the saved probe outputs: bogus IndentationErrors gone,
+remaining failures are real `assert` failures in `check()`. Both DIST2 humaneval suites
+reran (`q_dist_fix` again, finished 11-05 03:30 UTC): 2B 10.0→**38.0** (22/45 residual
+failures are AssertionErrors — genuine logic), 4B 78.0→**74.0** (standalone execution
+exposes 3 NameErrors the gluing had papered over, so 4B's first pass was partly
+*over*counted).

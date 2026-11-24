@@ -1,0 +1,18 @@
+config=/home/arduino/Code/ventunoq-mnn/lfm3-models/LFM3-1.7B-MNN/config.json mode=chat nothink=False batch=/tmp/opencode/qbatch/LFM3-1.7B-INT4-SMOKE_chat
+[1/5] 00000.txt chars=55 gen=16 tok 3.0s
+[2/5] 00001.txt chars=79 gen=16 tok 3.0s
+[3/5] 00002.txt chars=57 gen=16 tok 6.0s
+[4/5] 00003.txt chars=79 gen=16 tok 5.0s
+[5/5] 00004.txt chars=78 gen=16 tok 7.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=5 generated=5 skipped=0
+[hellaswag 1] FAIL pred=0 gold=3 (gen-letter)
+[hellaswag 2] FAIL pred=None gold=2 (gen-miss)
+[hellaswag 3] FAIL pred=None gold=0 (gen-miss)
+[hellaswag 4] FAIL pred=None gold=3 (gen-miss)
+[hellaswag 5] FAIL pred=None gold=0 (gen-miss)
+
+hellaswag LFM3-1.7B-INT4-SMOKE/mnn: 0/5 = 0.0% -> results/quality_LFM3-1.7B-INT4-SMOKE_mnn_hellaswag.json

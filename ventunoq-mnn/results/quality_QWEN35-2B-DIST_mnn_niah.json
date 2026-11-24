@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-2B-DIST",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 936.4,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "1",
+   "ok": false,
+   "out": "Let me carefully read through the entire list of questions t"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": null,
+   "ok": false,
+   "out": "Let me work through this problem step by step"
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": null,
+   "ok": false,
+   "out": "Let me work through this problem step by step"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": "4",
+   "ok": false,
+   "out": "Let me carefully read through the entire text to find the se"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": null,
+   "ok": false,
+   "out": "Let me work through this problem step by step"
+  }
+ ]
+}

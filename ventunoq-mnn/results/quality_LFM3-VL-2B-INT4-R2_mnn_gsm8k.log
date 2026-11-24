@@ -1,0 +1,208 @@
+config=/home/arduino/Code/ventunoq-mnn/lfm3-models/LFM3-VL-2B-MNN/config.json mode=chat nothink=False batch=/tmp/opencode/qbatch/LFM3-VL-2B-INT4-R2_chat
+[1/100] 00000.txt chars=1284 gen=345 tok 25.0s
+[2/100] 00001.txt chars=3221 gen=1024 tok 59.0s
+[3/100] 00002.txt chars=911 gen=246 tok 19.0s
+[4/100] 00003.txt chars=16 gen=6 tok 7.0s
+[5/100] 00004.txt chars=696 gen=188 tok 17.0s
+[6/100] 00005.txt chars=585 gen=194 tok 16.0s
+[7/100] 00006.txt chars=703 gen=194 tok 16.0s
+[8/100] 00007.txt chars=972 gen=283 tok 21.0s
+[9/100] 00008.txt chars=1185 gen=366 tok 26.0s
+[10/100] 00009.txt chars=1702 gen=471 tok 30.0s
+[11/100] 00010.txt chars=660 gen=177 tok 16.0s
+[12/100] 00011.txt chars=696 gen=209 tok 17.0s
+[13/100] 00012.txt chars=391 gen=122 tok 13.0s
+[14/100] 00013.txt chars=392 gen=114 tok 13.0s
+[15/100] 00014.txt chars=3660 gen=1024 tok 60.0s
+[16/100] 00015.txt chars=466 gen=140 tok 13.0s
+[17/100] 00016.txt chars=763 gen=213 tok 17.0s
+[18/100] 00017.txt chars=758 gen=206 tok 17.0s
+[19/100] 00018.txt chars=1337 gen=408 tok 27.0s
+[20/100] 00019.txt chars=17 gen=6 tok 7.0s
+[21/100] 00020.txt chars=1018 gen=302 tok 23.0s
+[22/100] 00021.txt chars=976 gen=331 tok 23.0s
+[23/100] 00022.txt chars=935 gen=280 tok 21.0s
+[24/100] 00023.txt chars=461 gen=122 tok 13.0s
+[25/100] 00024.txt chars=325 gen=106 tok 12.0s
+[26/100] 00025.txt chars=676 gen=207 tok 18.0s
+[27/100] 00026.txt chars=1252 gen=339 tok 23.0s
+[28/100] 00027.txt chars=16 gen=6 tok 7.0s
+[29/100] 00028.txt chars=752 gen=214 tok 18.0s
+[30/100] 00029.txt chars=388 gen=117 tok 13.0s
+[31/100] 00030.txt chars=414 gen=136 tok 13.0s
+[32/100] 00031.txt chars=739 gen=210 tok 17.0s
+[33/100] 00032.txt chars=668 gen=215 tok 18.0s
+[34/100] 00033.txt chars=484 gen=125 tok 14.0s
+[35/100] 00034.txt chars=19 gen=7 tok 7.0s
+[36/100] 00035.txt chars=451 gen=154 tok 14.0s
+[37/100] 00036.txt chars=321 gen=104 tok 12.0s
+[38/100] 00037.txt chars=638 gen=211 tok 17.0s
+[39/100] 00038.txt chars=717 gen=213 tok 18.0s
+[40/100] 00039.txt chars=1397 gen=398 tok 26.0s
+[41/100] 00040.txt chars=701 gen=201 tok 16.0s
+[42/100] 00041.txt chars=737 gen=204 tok 17.0s
+[43/100] 00042.txt chars=984 gen=246 tok 19.0s
+[44/100] 00043.txt chars=986 gen=252 tok 19.0s
+[45/100] 00044.txt chars=403 gen=118 tok 13.0s
+[46/100] 00045.txt chars=269 gen=103 tok 11.0s
+[47/100] 00046.txt chars=798 gen=205 tok 18.0s
+[48/100] 00047.txt chars=699 gen=197 tok 16.0s
+[49/100] 00048.txt chars=244 gen=84 tok 11.0s
+[50/100] 00049.txt chars=285 gen=86 tok 11.0s
+[51/100] 00050.txt chars=854 gen=246 tok 19.0s
+[52/100] 00051.txt chars=1174 gen=343 tok 23.0s
+[53/100] 00052.txt chars=572 gen=185 tok 17.0s
+[54/100] 00053.txt chars=380 gen=111 tok 12.0s
+[55/100] 00054.txt chars=290 gen=89 tok 11.0s
+[56/100] 00055.txt chars=475 gen=158 tok 15.0s
+[57/100] 00056.txt chars=534 gen=173 tok 15.0s
+[58/100] 00057.txt chars=561 gen=153 tok 15.0s
+[59/100] 00058.txt chars=737 gen=198 tok 17.0s
+[60/100] 00059.txt chars=328 gen=107 tok 12.0s
+[61/100] 00060.txt chars=214 gen=81 tok 10.0s
+[62/100] 00061.txt chars=1574 gen=437 tok 30.0s
+[63/100] 00062.txt chars=1061 gen=373 tok 25.0s
+[64/100] 00063.txt chars=549 gen=141 tok 14.0s
+[65/100] 00064.txt chars=431 gen=144 tok 14.0s
+[66/100] 00065.txt chars=622 gen=194 tok 16.0s
+[67/100] 00066.txt chars=334 gen=113 tok 12.0s
+[68/100] 00067.txt chars=451 gen=134 tok 14.0s
+[69/100] 00068.txt chars=257 gen=87 tok 11.0s
+[70/100] 00069.txt chars=862 gen=275 tok 21.0s
+[71/100] 00070.txt chars=852 gen=246 tok 19.0s
+[72/100] 00071.txt chars=691 gen=217 tok 18.0s
+[73/100] 00072.txt chars=666 gen=189 tok 17.0s
+[74/100] 00073.txt chars=641 gen=183 tok 16.0s
+[75/100] 00074.txt chars=197 gen=73 tok 9.0s
+[76/100] 00075.txt chars=788 gen=209 tok 18.0s
+[77/100] 00076.txt chars=3212 gen=1024 tok 61.0s
+[78/100] 00077.txt chars=354 gen=94 tok 11.0s
+[79/100] 00078.txt chars=1581 gen=462 tok 30.0s
+[80/100] 00079.txt chars=709 gen=193 tok 17.0s
+[81/100] 00080.txt chars=449 gen=135 tok 13.0s
+[82/100] 00081.txt chars=2632 gen=729 tok 44.0s
+[83/100] 00082.txt chars=872 gen=289 tok 21.0s
+[84/100] 00083.txt chars=3568 gen=1024 tok 59.0s
+[85/100] 00084.txt chars=230 gen=71 tok 11.0s
+[86/100] 00085.txt chars=3862 gen=1024 tok 59.0s
+[87/100] 00086.txt chars=1211 gen=338 tok 24.0s
+[88/100] 00087.txt chars=1381 gen=352 tok 24.0s
+[89/100] 00088.txt chars=2689 gen=756 tok 45.0s
+[90/100] 00089.txt chars=807 gen=230 tok 19.0s
+[91/100] 00090.txt chars=1173 gen=319 tok 23.0s
+[92/100] 00091.txt chars=763 gen=193 tok 16.0s
+[93/100] 00092.txt chars=673 gen=221 tok 18.0s
+[94/100] 00093.txt chars=426 gen=138 tok 14.0s
+[95/100] 00094.txt chars=409 gen=134 tok 14.0s
+[96/100] 00095.txt chars=841 gen=227 tok 18.0s
+[97/100] 00096.txt chars=681 gen=189 tok 16.0s
+[98/100] 00097.txt chars=16 gen=6 tok 7.0s
+[99/100] 00098.txt chars=810 gen=202 tok 17.0s
+[100/100] 00099.txt chars=756 gen=208 tok 17.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=100 generated=100 skipped=0
+[gsm8k 1] OK  got=18 gold=18
+[gsm8k 2] FAIL got=5 gold=18
+[gsm8k 3] OK  got=16 gold=16
+[gsm8k 4] FAIL got=4 gold=8
+[gsm8k 5] OK  got=40 gold=40
+[gsm8k 6] OK  got=595 gold=595
+[gsm8k 7] OK  got=10 gold=10
+[gsm8k 8] FAIL got=34.5 gold=36
+[gsm8k 9] OK  got=3 gold=3
+[gsm8k 10] OK  got=240 gold=240
+[gsm8k 11] OK  got=13 gold=13
+[gsm8k 12] OK  got=2125 gold=2125
+[gsm8k 13] OK  got=16 gold=16
+[gsm8k 14] OK  got=18000 gold=18000
+[gsm8k 15] OK  got=5 gold=5
+[gsm8k 16] OK  got=55 gold=55
+[gsm8k 17] OK  got=250 gold=250
+[gsm8k 18] FAIL got=36 gold=33
+[gsm8k 19] OK  got=21 gold=21
+[gsm8k 20] FAIL got=22 gold=18
+[gsm8k 21] OK  got=118000 gold=118000
+[gsm8k 22] OK  got=7 gold=7
+[gsm8k 23] OK  got=83 gold=83
+[gsm8k 24] OK  got=10 gold=10
+[gsm8k 25] OK  got=8 gold=8
+[gsm8k 26] OK  got=100 gold=100
+[gsm8k 27] OK  got=9 gold=9
+[gsm8k 28] FAIL got=8 gold=4
+[gsm8k 29] OK  got=240000 gold=240000
+[gsm8k 30] OK  got=80 gold=80
+[gsm8k 31] OK  got=12 gold=12
+[gsm8k 32] FAIL got=2475 gold=25
+[gsm8k 33] OK  got=11 gold=11
+[gsm8k 34] FAIL got=5 gold=17
+[gsm8k 35] FAIL got=3200 gold=6400
+[gsm8k 36] OK  got=1 gold=1
+[gsm8k 37] FAIL got=10400 gold=15400
+[gsm8k 38] OK  got=25 gold=25
+[gsm8k 39] OK  got=144 gold=144
+[gsm8k 40] OK  got=280 gold=280
+[gsm8k 41] FAIL got=250 gold=300
+[gsm8k 42] OK  got=130 gold=130
+[gsm8k 43] OK  got=16 gold=16
+[gsm8k 44] OK  got=100 gold=100
+[gsm8k 45] FAIL got=6050 gold=800
+[gsm8k 46] OK  got=48 gold=48
+[gsm8k 47] OK  got=30 gold=30
+[gsm8k 48] OK  got=72 gold=72
+[gsm8k 49] FAIL got=3.6 gold=216
+[gsm8k 50] FAIL got=465 gold=75
+[gsm8k 51] OK  got=120 gold=120
+[gsm8k 52] OK  got=576 gold=576
+[gsm8k 53] OK  got=32 gold=32
+[gsm8k 54] FAIL got=2 gold=9
+[gsm8k 55] FAIL got=5 gold=175
+[gsm8k 56] OK  got=87 gold=87
+[gsm8k 57] OK  got=28 gold=28
+[gsm8k 58] OK  got=60000 gold=60000
+[gsm8k 59] OK  got=50 gold=50
+[gsm8k 60] OK  got=155 gold=155
+[gsm8k 61] OK  got=4 gold=4
+[gsm8k 62] OK  got=79 gold=79
+[gsm8k 63] FAIL got=160 gold=153
+[gsm8k 64] OK  got=2 gold=2
+[gsm8k 65] FAIL got=125 gold=123
+[gsm8k 66] OK  got=23 gold=23
+[gsm8k 67] OK  got=575 gold=575
+[gsm8k 68] FAIL got=2 gold=1
+[gsm8k 69] FAIL got=3 gold=5
+[gsm8k 70] OK  got=90 gold=90
+[gsm8k 71] OK  got=24 gold=24
+[gsm8k 72] OK  got=17 gold=17
+[gsm8k 73] OK  got=7 gold=7
+[gsm8k 74] FAIL got=80 gold=120
+[gsm8k 75] OK  got=63 gold=63
+[gsm8k 76] OK  got=50 gold=50
+[gsm8k 77] FAIL got=0.28 gold=94
+[gsm8k 78] OK  got=30 gold=30
+[gsm8k 79] OK  got=4 gold=4
+[gsm8k 80] OK  got=110 gold=110
+[gsm8k 81] OK  got=95 gold=95
+[gsm8k 82] OK  got=8 gold=8
+[gsm8k 83] OK  got=1080 gold=1080
+[gsm8k 84] FAIL got=20000 gold=40
+[gsm8k 85] OK  got=5 gold=5
+[gsm8k 86] OK  got=45000 gold=45000
+[gsm8k 87] OK  got=291 gold=291
+[gsm8k 88] FAIL got=0 gold=7300
+[gsm8k 89] OK  got=93 gold=93
+[gsm8k 90] FAIL got=13 gold=6
+[gsm8k 91] OK  got=140 gold=140
+[gsm8k 92] OK  got=448 gold=448
+[gsm8k 93] OK  got=3 gold=3
+[gsm8k 94] OK  got=520 gold=520
+[gsm8k 95] FAIL got=30.5 gold=30
+[gsm8k 96] FAIL got=30 gold=36
+[gsm8k 97] OK  got=665 gold=665
+[gsm8k 98] FAIL got=9 gold=27
+[gsm8k 99] OK  got=2325 gold=2325
+[gsm8k 100] OK  got=14 gold=14
+
+gsm8k LFM3-VL-2B-INT4-R2/mnn: 72/100 = 72.0% -> results/quality_LFM3-VL-2B-INT4-R2_mnn_gsm8k.json

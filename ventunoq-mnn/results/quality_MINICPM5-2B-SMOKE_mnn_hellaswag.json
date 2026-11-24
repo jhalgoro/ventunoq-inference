@@ -1,0 +1,60 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "hellaswag",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 33.8,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "pred": 0,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": 0,
+   "gold": 2,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  }
+ ]
+}

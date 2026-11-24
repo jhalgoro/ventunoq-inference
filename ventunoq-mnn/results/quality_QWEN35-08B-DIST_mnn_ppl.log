@@ -1,0 +1,4 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-Claude-4.6-Opus-Reasoning-Distilled-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-08B-DIST_chat
+[ppl] gatsby perplexity = 47.801662
+
+ppl QWEN35-08B-DIST/mnn: 1/1 = 100.0% -> results/quality_QWEN35-08B-DIST_mnn_ppl.json

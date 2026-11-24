@@ -1,0 +1,50 @@
+{
+ "tag": "LFM3-1.7B-INT4HQQ-R2",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 1.0,
+ "seconds": 1528.4,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "36132",
+   "ok": true,
+   "out": "ecret passcode for vault 1 is 36132.\"\n\nAnswer: 36132\n\n36132\n"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "98253",
+   "ok": true,
+   "out": "nly the 5-digit number.\"\n\nThus we just output \"98253\".98253\n"
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "48594",
+   "ok": true,
+   "out": "er is 48594.\n\nWe should output only the number: 48594.48594\n"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": "28611",
+   "ok": true,
+   "out": "nly the 5-digit number.\"\n\nThus we just output \"28611\".28611\n"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": "58512",
+   "ok": true,
+   "out": " \"The secret passcode for vault 5 is 58512.\"\n\nAnswer: 58512\n"
+  }
+ ]
+}

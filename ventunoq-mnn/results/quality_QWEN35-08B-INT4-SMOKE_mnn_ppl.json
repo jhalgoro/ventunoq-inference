@@ -1,0 +1,16 @@
+{
+ "tag": "QWEN35-08B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 17.4,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 36.395954,
+   "max_tokens": 1000
+  }
+ ]
+}

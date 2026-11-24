@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-4B-DIST2",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 1.0,
+ "seconds": 2428.7,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "36132",
+   "ok": true,
+   "out": "em text: \"The secret passcode for vault 1 is 36132.\"\n\n36132\n"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "98253",
+   "ok": true,
+   "out": "ault 2 is explicitly stated in the problem text:\n\n**98253**\n"
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "48594",
+   "ok": true,
+   "out": "licitly stated at the beginning of the document:\n\n**48594**\n"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": "28611",
+   "ok": true,
+   "out": "vault 4 is explicitly stated in the problem set:\n\n**28611**\n"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": "58512",
+   "ok": true,
+   "out": "derived from any of the other questions.\n\n**Answer: 58512**\n"
+  }
+ ]
+}

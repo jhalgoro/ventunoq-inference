@@ -1,0 +1,26 @@
+{
+ "tag": "LFM3-VL-2B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 2,
+ "score": 1.0,
+ "seconds": 502.9,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "36132",
+   "ok": true,
+   "out": "36132"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "98253",
+   "ok": true,
+   "out": "98253"
+  }
+ ]
+}

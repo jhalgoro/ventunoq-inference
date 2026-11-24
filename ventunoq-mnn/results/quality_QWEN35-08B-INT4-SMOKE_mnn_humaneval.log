@@ -1,0 +1,20 @@
+[1/3] 00000.txt chars=399 gen=142 tok 5.0s
+[2/3] 00001.txt chars=530 gen=139 tok 4.0s
+[3/3] 00002.txt chars=470 gen=170 tok 5.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=3 generated=3 skipped=0
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-08B-INT4-SMOKE_chat
+[humaneval 1] HumanEval/0 FAIL s)
+  File "/tmp/opencode/sandbox/he_0.py", line 32, in check
+    assert candidat
+[humaneval 2] HumanEval/82 FAIL .py", line 51, in <module>
+    check(prime_length)
+  File "/tmp/opencode/sandbox
+[humaneval 3] HumanEval/163 FAIL k(generate_integers)
+  File "/tmp/opencode/sandbox/he_2.py", line 33, in check
+ 
+
+humaneval QWEN35-08B-INT4-SMOKE/mnn: 0/3 = 0.0% -> results/quality_QWEN35-08B-INT4-SMOKE_mnn_humaneval.json

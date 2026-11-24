@@ -1,0 +1,310 @@
+{
+ "tag": "QWEN35-2B-INT4-BASE",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 50,
+ "score": 0.02,
+ "seconds": 1073.9,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_0.py\", line 55\n    \"\"\" Check if in given list of\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 74)\n",
+   "comp_tail": " \"\"\"\n    pass\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of"
+  },
+  {
+   "id": "HumanEval/3",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_1.py\", line 14\n    for operation in operations:\nIndentationError: unexpected indent\n",
+   "comp_tail": "l:\n    \"\"\" You're given a list of deposit and withdrawal operations on a bank account that starts with\n    zero balance."
+  },
+  {
+   "id": "HumanEval/7",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_2.py\", line 11\n    return [s for s in strings if substring in s]\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: 'return' outside function\n",
+   "comp_tail": "return [s for s in strings if substring in s]"
+  },
+  {
+   "id": "HumanEval/10",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_3.py\", line 84\n    \"\"\" Find the longest palindromic substring in given string.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 103)\n",
+   "comp_tail": "est palindromic substring in given string.\n    >>> longest_palindromic_substring('cat')\n    'cat'\n    >>> longest_palind"
+  },
+  {
+   "id": "HumanEval/13",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_4.py\", line 70\n    \"\"\" Return True if a is a subset of b, False otherwise.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 92)\n",
+   "comp_tail": "(set(), set())\n    True\n    >>> is_subset(set(), {1})\n    False\n    >>> is_subset({1, 2}, {1, 2, 3})\n    True\n    >>> is"
+  },
+  {
+   "id": "HumanEval/17",
+   "ok": false,
+   "err": "de/sandbox/he_5.py\", line 38, in <module>\n    check(parse_music)\n  File \"/tmp/opencode/sandbox/he_5.py\", line 32, in check\n    assert candidate('') == []\n           ^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "# Your code here\n    pass\n\ndef main():\n    # Your code here\n    pass"
+  },
+  {
+   "id": "HumanEval/20",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_6.py\", line 45\n    \"\"\" From\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 62)\n",
+   "comp_tail": "])\n    (2.0, 2.0)\n    \"\"\"\n    pass\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From"
+  },
+  {
+   "id": "HumanEval/23",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_7.py\", line 91\n    \"\"\" Test strlen function with string of length 1000000000\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 105)\n",
+   "comp_tail": "test_str_len_11()\n    \"\"\"\n    pass\n\ndef test_str_len_12():\n    \"\"\" Test strlen function with string of length 1000000000"
+  },
+  {
+   "id": "HumanEval/27",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_8.py\", line 81\n    \"\"\" For a given string, flip\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 95)\n",
+   "comp_tail": "> flip_case('Hello')\n    'hELLO'\n    \"\"\"\n    return\n\ndef flip_case(string: str) -> str:\n    \"\"\" For a given string, flip"
+  },
+  {
+   "id": "HumanEval/30",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_9.py\", line 49\n    \"\"\"Return only positive numbers in the list.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 63)\n",
+   "comp_tail": ", 2, 3, 9, 123, 1]\n    \"\"\"\n    pass\n\ndef get_positive(l: list):\n    \"\"\"Return only positive numbers in the list.\n    >>>"
+  },
+  {
+   "id": "HumanEval/33",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_10.py\", line 48\n    \"\"\"This function takes a list l and returns a list l' such that\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 65)\n",
+   "comp_tail": "eturns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at"
+  },
+  {
+   "id": "HumanEval/37",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_11.py\", line 48\n    \"\"\"This function takes a list l and returns a list l' such that\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 66)\n",
+   "comp_tail": "orted.\n    >>> sort_even_odd_sorted_even([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_even_odd_sorted_even([5, 6, 3, 4])\n    [5"
+  },
+  {
+   "id": "HumanEval/40",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_12.py\", line 20\n    return False\n    ^^^^^^^^^^^^\nSyntaxError: 'return' outside function\n",
+   "comp_tail": "return False\n\ndef main():\n    l = [1, 3, 5, 0]\n    result = triples_sum_to_zero(l)\n    print(result)"
+  },
+  {
+   "id": "HumanEval/43",
+   "ok": false,
+   "err": "<module>\n    check(pairs_sum_to_zero)\n  File \"/tmp/opencode/sandbox/he_13.py\", line 83, in check\n    assert candidate([1, 3, 5, 0]) == False\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "sum_to_zero([2, 4, -5, 3, 5, 7])\n    True\n    >>> pairs_sum_to_zero([1])\n    False\n    \"\"\"\n    # Your code here\n    pass"
+  },
+  {
+   "id": "HumanEval/47",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_14.py\", line 61\n    METADATA = {}\nIndentationError: expected an indented block after 'if' statement on line 58\n",
+   "comp_tail": "e list l.\n    >>> median([3, 1, 2, 4, 5])\n    3\n    >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n    \"\"\"\n    if not l:"
+  },
+  {
+   "id": "HumanEval/50",
+   "ok": false,
+   "err": " return \"\".join([chr(((ord(ch) - 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nSyntaxError: 'return' outside function\n",
+   "comp_tail": "ode_shift(\"hello\")\n    decoded = decode_shift(encoded)\n    print(f\"encoded: {encoded}\")\n    print(f\"decoded: {decoded}\")"
+  },
+  {
+   "id": "HumanEval/53",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_16.py\", line 103\n    def is_leap_leap_leap_le\n                            ^\nSyntaxError: expected '('\n",
+   "comp_tail": ">> is_leap_leap_leap(2020)\n    True\n    >>> is_leap_leap_leab(1900)\n    False\n    \"\"\"\n    pass\n\ndef is_leap_leap_leap_le"
+  },
+  {
+   "id": "HumanEval/57",
+   "ok": false,
+   "err": " 86, in <module>\n    check(monotonic)\n  File \"/tmp/opencode/sandbox/he_17.py\", line 76, in check\n    assert candidate([1, 2, 4, 10]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "   True\n    >>> is_subset([1, 2], [1, 2, 3, 4])\n    True\n    >>> is_subset([1, 2], [1, 2, 3])\n    False\n    \"\"\"\n    pass"
+  },
+  {
+   "id": "HumanEval/60",
+   "ok": true,
+   "err": "",
+   "comp_tail": "0)\n    55\n    >>> sum_to_n(1)\n    1\n    \"\"\"\n    if n == 1:\n        return 1\n    else:\n        return n + sum_to_n(n - 1)"
+  },
+  {
+   "id": "HumanEval/63",
+   "ok": false,
+   "err": "ine 62\n    \"\"\"The FibFib number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 82)\n",
+   "comp_tail": "follows:\n    fibfib(0) == 0\n    fibfib(1) == 0\n    fibfib(2) == 1\n    fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-"
+  },
+  {
+   "id": "HumanEval/67",
+   "ok": false,
+   "err": "t_distribution)\n  File \"/tmp/opencode/sandbox/he_20.py\", line 34, in check\n    assert candidate(\"5 apples and 6 oranges\",19) == 8\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "95\n    fruit_distribution(\"100 apples and 1 oranges\",120) -> 120 - 100 - 1 = 19\n    \"\"\"\n    return n - len(s.split(\" \"))"
+  },
+  {
+   "id": "HumanEval/70",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_21.py\", line 25\n    ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,\n     ^\nSyntaxError: '[' was never closed\n",
+   "comp_tail": " 14, 15, 16], [1, 16, 2, 15, 3, 14, 4, 13, 5, 12, 6, 11, 7, 10, 8, 9]),\n    ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,"
+  },
+  {
+   "id": "HumanEval/73",
+   "ok": false,
+   "err": "<module>\n    check(smallest_change)\n  File \"/tmp/opencode/sandbox/he_22.py\", line 19, in check\n    assert candidate([1,2,3,5,4,7,9,6]) == 4\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "pass\n\n# Test cases"
+  },
+  {
+   "id": "HumanEval/77",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_23.py\", line 18\n    '''\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 48)\n",
+   "comp_tail": "31,1331,1331,1331]) ==> [True,False,False,False,False,True,True,True,True,True,True,True,True,True]\n    main([1,2,3,4,5,"
+  },
+  {
+   "id": "HumanEval/80",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_24.py\", line 16\n    for i in range(len(s) - 2):\n                               ^\nIndentationError: unindent does not match any outer indentation level\n",
+   "comp_tail": "2] or s[i + 1] == s[i + 2]:\n            return False\n    return True\n\ndef main():\n    s = input()\n    print(is_happy(s))"
+  },
+  {
+   "id": "HumanEval/83",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_25.py\", line 9\n    if n == 2:\n              ^\nIndentationError: unindent does not match any outer indentation level\n",
+   "comp_tail": "urn 32\n    if n == 33:\n        return 33\n    if n == 34:\n        return 34\n    if n == 35:\n        return 35\n    if n =="
+  },
+  {
+   "id": "HumanEval/86",
+   "ok": false,
+   "err": "he_26.py\", line 32, in <module>\n    check(anti_shuffle)\n  File \"/tmp/opencode/sandbox/he_26.py\", line 21, in check\n    assert candidate('Hi') == 'Hi'\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "pass\n\n# Test cases"
+  },
+  {
+   "id": "HumanEval/90",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_27.py\", line 67\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 85)\n",
+   "comp_tail": "ou are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list."
+  },
+  {
+   "id": "HumanEval/93",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_28.py\", line 84\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 100)\n",
+   "comp_tail": "sage, and decodes in such a \n    way that it swaps case of all letters, replaces all vowels in \n    the message with the"
+  },
+  {
+   "id": "HumanEval/96",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_29.py\", line 67\n    def count\n             ^\nSyntaxError: expected '('\n",
+   "comp_tail": " primes = []\n    for i in range(2, n):\n        if is_prime(i):\n            primes.append(i)\n    return primes\n\ndef count"
+  },
+  {
+   "id": "HumanEval/100",
+   "ok": false,
+   "err": "n <module>\n    check(make_a_pile)\n  File \"/tmp/opencode/sandbox/he_30.py\", line 41, in check\n    assert candidate(3) == [3, 5, 7], \"Test 3\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 3\n",
+   "comp_tail": " if n == 1:\n        return [n]\n    elif n % 2 == 0:\n        return [n, n + 1]\n    else:\n        return [n, n + 1, n + 2]"
+  },
+  {
+   "id": "HumanEval/103",
+   "ok": false,
+   "err": "31.py\", line 39, in <module>\n    check(rounded_avg)\n  File \"/tmp/opencode/sandbox/he_31.py\", line 22, in check\n    assert candidate(1, 5) == \"0b11\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "pass\n\ndef main():\n    n = int(input())\n    m = int(input())\n    print(rounded_avg(n, m))"
+  },
+  {
+   "id": "HumanEval/106",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_32.py\", line 103\n    def test_test\n                 ^\nSyntaxError: expected '('\n",
+   "comp_tail": "n():\n    \"\"\" This function is called by the test suite.\n    It does not return anything.\n    \"\"\"\n    pass\n\ndef test_test"
+  },
+  {
+   "id": "HumanEval/110",
+   "ok": false,
+   "err": "exchange)\n  File \"/tmp/opencode/sandbox/he_33.py\", line 25, in check\n    assert candidate([1, 2, 3, 4], [1, 2, 3, 4]) == \"YES\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "change function and print the result.\"\"\"\n    lst1 = [1, 2, 3, 4]\n    lst2 = [1, 2, 3, 4]\n    print(exchange(lst1, lst2))"
+  },
+  {
+   "id": "HumanEval/113",
+   "ok": false,
+   "err": "7']) == [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "lements 8n the str8ng 8 of the 8nput.\"]\n    \"\"\"\n    return [len([i for i in lst if i.count(\"1\") % 2 == 1]) for i in lst]"
+  },
+  {
+   "id": "HumanEval/116",
+   "ok": false,
+   "err": "/sandbox/he_35.py\", line 40, in sort_array\n    return sorted(arr, key=compare)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: sort_array.<locals>.compare() missing 1 required positional argument: 'b'\n",
+   "comp_tail": "   if count_a != count_b:\n            return count_a - count_b\n        return a - b\n\n    return sorted(arr, key=compare)"
+  },
+  {
+   "id": "HumanEval/120",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_36.py\", line 84\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 105)\n",
+   "comp_tail": "array arr of integers and a positive integer k, return a sorted list \n    of length k with the maximum k numbers in arr."
+  },
+  {
+   "id": "HumanEval/123",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_37.py\", line 123\n    def\n       ^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "\"\"\n    pass\n\ndef test_get_odd_collatz_15():\n    \"\"\"\n    This function is called by the test suite.\n    \"\"\"\n    pass\n\ndef"
+  },
+  {
+   "id": "HumanEval/126",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_38.py\", line 18\n    return True\n    ^^^^^^^^^^^\nSyntaxError: 'return' outside function\n",
+   "comp_tail": "return True"
+  },
+  {
+   "id": "HumanEval/130",
+   "ok": false,
+   "err": " in <module>\n    check(tri)\n  File \"/tmp/opencode/sandbox/he_39.py\", line 59, in check\n    assert candidate(4) == [1, 3, 2.0, 8.0, 3.0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "+ i // 2)\n            else:\n                result.append(result[i-1] + result[i-2] + result[i+1])\n        return result"
+  },
+  {
+   "id": "HumanEval/133",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_40.py\", line 64\n    \"\"\"You are given a list of numbers.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 86)\n",
+   "comp_tail": " [-2.4,1,1] the output should be 6\n    \n\n    \"\"\"\n    pass\n\ndef sum_squares(lst):\n    \"\"\"You are given a list of numbers."
+  },
+  {
+   "id": "HumanEval/136",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_41.py\", line 15\n    b = None\nIndentationError: unexpected indent\n",
+   "comp_tail": "0:\n            if b is None:\n                b = i\n            else:\n                b = i\n    return a, b\n\n# Test cases"
+  },
+  {
+   "id": "HumanEval/140",
+   "ok": false,
+   "err": "xample\") == \"Example\", \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n",
+   "comp_tail": "pass\n\ndef main():\n    text = input()\n    result = fix_spaces(text)\n    print(result)"
+  },
+  {
+   "id": "HumanEval/143",
+   "ok": false,
+   "err": "e>\n    check(words_in_sentence)\n  File \"/tmp/opencode/sandbox/he_43.py\", line 31, in check\n    assert candidate(\"This is a test\") == \"is\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "pass\n\ndef main():\n    sentence = \"This is a test\"\n    result = words_in_sentence(sentence)\n    print(result)"
+  },
+  {
+   "id": "HumanEval/146",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_44.py\", line 11\n    for num in nums:\nIndentationError: unexpected indent\n",
+   "comp_tail": " 3 or num // 10 % 10 == 5 or num // 10 % 10 == 7 or num // 10 % 10 == 9:\n                    count += 1\n    return count"
+  },
+  {
+   "id": "HumanEval/150",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_45.py\", line 74\n    elif n % 103\n                ^\nSyntaxError: expected ':'\n",
+   "comp_tail": "9 == 0:\n        return y\n    elif n % 97 == 0:\n        return y\n    elif n % 101 == 0:\n        return y\n    elif n % 103"
+  },
+  {
+   "id": "HumanEval/153",
+   "ok": false,
+   "err": "pencode/sandbox/he_46.py\", line 41\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 69)\n",
+   "comp_tail": "    extensions: ['SErviNGSliCes', 'Cheese', 'StuFfed'] then you should\n    return 'Slices.SErviNGSliCes' since 'SErviNGS"
+  },
+  {
+   "id": "HumanEval/156",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_47.py\", line 124\n    \"\"\"\n    ^\nSyntaxError: unterminated triple-quoted string literal (detected at line 148)\n",
+   "comp_tail": "ction is a stub. It does nothing.\n    \"\"\"\n    pass\n\ndef test_16():\n    \"\"\"\n    This function is a stub. It does nothing."
+  },
+  {
+   "id": "HumanEval/160",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_48.py\", line 167\n    def check(candidate):\n    ^\nIndentationError: expected an indented block after function definition on line 166\n",
+   "comp_tail": "e here\n    pass\n\ndef test32():\n    # Your code here\n    pass\n\ndef test33():\n    # Your code here\n    pass\n\ndef test34():"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "(generate_integers)\n  File \"/tmp/opencode/sandbox/he_49.py\", line 22, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "rst integer: \"))\n    b = int(input(\"Enter the second integer: \"))\n    result = generate_integers(a, b)\n    print(result)"
+  }
+ ]
+}

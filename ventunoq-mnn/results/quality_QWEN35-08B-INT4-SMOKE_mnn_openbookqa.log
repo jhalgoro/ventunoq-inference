@@ -1,0 +1,18 @@
+[1/5] 00000.txt chars=25 gen=7 tok 2.0s
+[2/5] 00001.txt chars=44 gen=16 tok 1.0s
+[3/5] 00002.txt chars=8 gen=4 tok 2.0s
+[4/5] 00003.txt chars=3 gen=3 tok 1.0s
+[5/5] 00004.txt chars=9 gen=4 tok 1.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=5 generated=5 skipped=0
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-MNN-text/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/QWEN35-08B-INT4-SMOKE_chat
+[openbookqa 1] FAIL pred=0 gold=1 (gen-letter)
+[openbookqa 2] OK  pred=0 gold=0 (gen-letter)
+[openbookqa 3] OK  pred=0 gold=0 (gen-letter)
+[openbookqa 4] FAIL pred=0 gold=1 (gen-letter)
+[openbookqa 5] FAIL pred=0 gold=2 (gen-letter)
+
+openbookqa QWEN35-08B-INT4-SMOKE/mnn: 2/5 = 40.0% -> results/quality_QWEN35-08B-INT4-SMOKE_mnn_openbookqa.json

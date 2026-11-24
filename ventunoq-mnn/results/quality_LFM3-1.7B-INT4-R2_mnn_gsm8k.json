@@ -1,0 +1,710 @@
+{
+ "tag": "LFM3-1.7B-INT4-R2",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 100,
+ "score": 0.86,
+ "seconds": 3027.3,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "g.  \nDaily earnings = 9 eggs \u00d7 $2/egg = $18.\n\nThus, Janet makes $18 every day at the farmers' market.\n\nThe answer is 18\n"
+  },
+  {
+   "id": 1,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "aining: 10 - 5 = 5.\n- That matches the given 5 left.\n\nThus the initial number is 18.\n\n**Answer:** 18\n\nThe answer is 18.\n"
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": "times \\$4.00/\\text{carton} = \\$16.00 \\]\n\nThus, after 60 days, Cynthia will spend $16.00 on ice cream.\n\nThe answer is 16\n"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "ndon's iPhone age = 4 \u00d7 (Ben's iPhone age) = 4 \u00d7 2 = 8 years.\n\nThus, Brandon's iPhone is 8 years old.\n\nThe answer is 8.\n"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "got": "40",
+   "gold": "40",
+   "tail": "enue.\n\nDifference = $520 - $480 = $40\n\nThus, the mechanic earned $40 more on Thursday than on Friday.\n\nThe answer is 40\n"
+  },
+  {
+   "id": 5,
+   "ok": true,
+   "got": "595",
+   "gold": "595",
+   "tail": " 175 + 140 + 280.\n\nCalculate:\n175 + 140 = 315.\n315 + 280 = 595.\n\nThus, there are 595 gems in total.\n\nThe answer is 595.\n"
+  },
+  {
+   "id": 6,
+   "ok": true,
+   "got": "10",
+   "gold": "10",
+   "tail": "tract the boy's share: 16 - 6 = 10 liters.\n\nSo, after all distributions, 10 liters of water are left.\n\nThe answer is 10\n"
+  },
+  {
+   "id": 7,
+   "ok": true,
+   "got": "36",
+   "gold": "36",
+   "tail": "} = 38 + 2 = 40 \\text{ seconds}\n\\]\n\nGerald\u2019s new time after a 10% improvement is 10% less than his original time:\n\n\\[\n40"
+  },
+  {
+   "id": 8,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tail": "= \\frac{1.5}{0.5} \\]\n\\[ x = 3 \\]\n\nThus, Frankie watched 3 episodes of the 30-minute show on Wednesday.\n\nThe answer is 3\n"
+  },
+  {
+   "id": 9,
+   "ok": true,
+   "got": "240",
+   "gold": "240",
+   "tail": " and over 4 weeks, that's 60 \u00d7 4 = 240 sheets per month.\n\n**Answer:** 240 sheets of paper per month.\n\nThe answer is 240\n"
+  },
+  {
+   "id": 10,
+   "ok": true,
+   "got": "13",
+   "gold": "13",
+   "tail": "s miles = total - (Monday + Tuesday) = 41 - 28 = 13 miles.\n\nThus, Walt walked 13 miles on Wednesday.\n\nThe answer is 13.\n"
+  },
+  {
+   "id": 11,
+   "ok": true,
+   "got": "2125",
+   "gold": "2125",
+   "tail": " to 1/4 of 500 = 125. So total = 500 + (3*500) + (500/4) = 500 + 1500 + 125 = 2125.\n\nAnswer: 2125.\n\nThe answer is 2125.\n"
+  },
+  {
+   "id": 12,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": "y} = \\frac{2}{3} \\times 24 = 16 \\text{ feet}.\n\\]\n\nSo the tank\u2019s water depth on Wednesday is 16 feet.\n\nThe answer is 16.\n"
+  },
+  {
+   "id": 13,
+   "ok": true,
+   "got": "18000",
+   "gold": "18000",
+   "tail": "l payment.**\n- $1,500/month \u00d7 12 months = $18,000 per year.\n\nThus, Jessica pays $18,000 in a year.\n\nThe answer is 18000\n"
+  },
+  {
+   "id": 14,
+   "ok": true,
+   "got": "5",
+   "gold": "5",
+   "tail": "aw for rabbits: 20 pieces.  \n- Total: \\( 90 + 50 + 20 = 160 \\) pieces, which matches the given total.\n\nThe answer is 5.\n"
+  },
+  {
+   "id": 15,
+   "ok": true,
+   "got": "55",
+   "gold": "55",
+   "tail": "ils per day \u00d7 liters per pail = 11 \u00d7 5 = 55 liters.\n\nThus, Baldur gets 55 liters of water every day.\n\nThe answer is 55.\n"
+  },
+  {
+   "id": 16,
+   "ok": true,
+   "got": "250",
+   "gold": "250",
+   "tail": " = 500 - 250 = 250 \\]\n\nSo, on the third day, Sloane counted 250 customers.\n\nThus, the answer is 250.\n\nThe answer is 250\n"
+  },
+  {
+   "id": 17,
+   "ok": true,
+   "got": "33",
+   "gold": "33",
+   "tail": "rest integer is 33%.\n\nThus, the percentage chance that a randomly picked card is a water type is 33%.\n\nThe answer is 33\n"
+  },
+  {
+   "id": 18,
+   "ok": true,
+   "got": "21",
+   "gold": "21",
+   "tail": "s has 33 candies.\nDifference = John - James = 54 - 33 = 21\n\nSo, John has 21 more candies than James.\n\nThe answer is 21.\n"
+  },
+  {
+   "id": 19,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "**: The floor he rides to is 18. So Bill is now on the 18th floor.\n\nThus, Bill is on the 18th floor.\n\nThe answer is 18.\n"
+  },
+  {
+   "id": 20,
+   "ok": true,
+   "got": "118000",
+   "gold": "118000",
+   "tail": "0{,}000 = 118{,}000\n   \\]\n\nThus, Mr. Tan's net proceeds from selling the house are **$118,000**.\n\nThe answer is 118000.\n"
+  },
+  {
+   "id": 21,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tail": "e cream bars = 4 * 0.50 = $2.00.\n\nTotal cost = $5.00 + $2.00 = $7.00.\n\nThus, Peter paid a total of $7.\n\nThe answer is 7\n"
+  },
+  {
+   "id": 22,
+   "ok": true,
+   "got": "83",
+   "gold": "83",
+   "tail": "= 43\\)\n\n**Step 4: Total points**\n\\[\n22 \\text{ (Mike)} + 18 \\text{ (Jim)} + 43 \\text{ (Tony)} = 83\n\\]\n\nThe answer is 83.\n"
+  },
+  {
+   "id": 23,
+   "ok": false,
+   "got": "5",
+   "gold": "10",
+   "tail": "is left is sold equally in the afternoon and evening\" might mean that half of the leftovers is sold in the afternoon and"
+  },
+  {
+   "id": 24,
+   "ok": false,
+   "got": "3",
+   "gold": "8",
+   "tail": "en women left = 10 - 3 = 7, but that would mean 7 women left, not 8. Let's recalc:\n\nIf total left = 10, and men left = 3"
+  },
+  {
+   "id": 25,
+   "ok": true,
+   "got": "100",
+   "gold": "100",
+   "tail": "rence = $3,450 - $3,350 = $100\n\nSo, Furniture United's offer costs $100 more than Cozy Homes' offer.\n\nThe answer is 100\n"
+  },
+  {
+   "id": 26,
+   "ok": true,
+   "got": "9",
+   "gold": "9",
+   "tail": "rest after her son and husband: \\(36 - 27 = 9 \\text{ cookies/week}\\).\n\n**Answer:** 9 cookies per week.\n\nThe answer is 9\n"
+  },
+  {
+   "id": 27,
+   "ok": true,
+   "got": "4",
+   "gold": "4",
+   "tail": "ivide by -1.5:\n   \\[\n   x = \\frac{-6}{-1.5} = 4\n   \\]\n\n**Conclusion:** Billy bought 4 pounds of candy.\n\nThe answer is 4\n"
+  },
+  {
+   "id": 28,
+   "ok": true,
+   "got": "240000",
+   "gold": "240000",
+   "tail": " 160,000 = 240,000 \\]\n\nSo, the total amount spent on functioning pieces of equipment is $240,000.\n\nThe answer is 240000\n"
+  },
+  {
+   "id": 29,
+   "ok": true,
+   "got": "80",
+   "gold": "80",
+   "tail": "0. Since he needs 80 or higher to pass, his current grade is 80.\n\nThus, his current math grade is 80.\n\nThe answer is 80\n"
+  },
+  {
+   "id": 30,
+   "ok": true,
+   "got": "12",
+   "gold": "12",
+   "tail": "ference = Alice's age - Erica's age = 42 - 30 = 12 years.\n\nThus, Alice is 12 years older than Erica.\n\nThe answer is 12.\n"
+  },
+  {
+   "id": 31,
+   "ok": true,
+   "got": "25",
+   "gold": "25",
+   "tail": "Thus, 25 candles will both explode (since they are among the dangerous ones) and smell like wet dog.\n\nThe answer is 25.\n"
+  },
+  {
+   "id": 32,
+   "ok": true,
+   "got": "11",
+   "gold": "11",
+   "tail": "gel: $4\nSoup: $5\nCake: $2\nTotal = 4 + 5 + 2 = $11.\n\nThus, Aleksandra needs to pay $11 for the dinner.\n\nThe answer is 11\n"
+  },
+  {
+   "id": 33,
+   "ok": false,
+   "got": "7",
+   "gold": "17",
+   "tail": "e in drive times is 12 minutes. To be 5 minutes earlier, she needs to leave 12 - 5 = 7 minutes earlier than Wayne? Let's"
+  },
+  {
+   "id": 34,
+   "ok": false,
+   "got": "120",
+   "gold": "6400",
+   "tail": "apphires and gets 2 rubies, leaving 5 sapphires and 2 rubies. Total jewels: 5 sapphires + 2 rubies. Value: 5*800 + 2*120"
+  },
+  {
+   "id": 35,
+   "ok": true,
+   "got": "1",
+   "gold": "1",
+   "tail": "lly paid than Becky:\n\n- Difference: \\(9.00 - 8.00 = \\$1.00\\).\n\nThus, Kelly paid $1.00 more than Becky.\n\nThe answer is 1\n"
+  },
+  {
+   "id": 36,
+   "ok": true,
+   "got": "15400",
+   "gold": "15400",
+   "tail": " is:  \n\\( 1500 + 300 = 1800 \\) dollars per day.\n\n**Step 2: Find the hotel cost for 3 days**  \n\\( 1800 \\times 3 = 5400 \\)"
+  },
+  {
+   "id": 37,
+   "ok": false,
+   "got": "2",
+   "gold": "25",
+   "tail": "pack you buy, you get an extra one free. So for 2 packs, you pay for 2 packs (i.e., 2 * $4 = $8) and get 2 extra free (i"
+  },
+  {
+   "id": 38,
+   "ok": true,
+   "got": "144",
+   "gold": "144",
+   "tail": "ach pair costs $12.00.\n- Total cost = \\( 12 \\text{ pairs} \\times \\$12.00/\\text{pair} = \\$144.00 \\).\n\nThe answer is 144.\n"
+  },
+  {
+   "id": 39,
+   "ok": true,
+   "got": "280",
+   "gold": "280",
+   "tail": " Rob's time to get Royce's time.\nRoyce takes 240 + 40 = 280 minutes.\n\nThus, Royce takes 280 minutes.\n\nThe answer is 280\n"
+  },
+  {
+   "id": 40,
+   "ok": true,
+   "got": "300",
+   "gold": "300",
+   "tail": "nce there are 2 monitors, the cost of one monitor = $600 / 2 = $300.\n\nThus, one monitor costs $300.\n\nThe answer is 300.\n"
+  },
+  {
+   "id": 41,
+   "ok": true,
+   "got": "130",
+   "gold": "130",
+   "tail": "65 letters she just wrote again:  \n\\(65\\) more letters.\n\nTotal letters written = \\(65 + 65 = 130\\).\n\nThe answer is 130.\n"
+  },
+  {
+   "id": 42,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": "on required: \\( 20 - 4 = 16 \\) cups.\n\nTherefore, Juan must reduce his daily coffee intake by 16 cups.\n\nThe answer is 16\n"
+  },
+  {
+   "id": 43,
+   "ok": true,
+   "got": "100",
+   "gold": "100",
+   "tail": "0 roses/month**\n\nThus, Ford lacks 100 roses each month to meet the demand of all three flower shops.\n\nThe answer is 100\n"
+  },
+  {
+   "id": 44,
+   "ok": true,
+   "got": "800",
+   "gold": "800",
+   "tail": "0 ml of water for every 200 calories she burns. So:\n\\[\n8 \\times 100 \\text{ ml} = 800 \\text{ ml}.\n\\]\n\nThe answer is 800.\n"
+  },
+  {
+   "id": 45,
+   "ok": true,
+   "got": "48",
+   "gold": "48",
+   "tail": "gs = 20 (dogs) + 8 (cats) + 20 (birds) = 48 legs.\n\nSo, the total number of legs the pets have is 48.\n\nThe answer is 48.\n"
+  },
+  {
+   "id": 46,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": "\nTotal = 6 + 8 + 16 + 0 + 0 = 30 ounces.\n\nThus, the total ounces of meat consumed by the team is 30.\n\nThe answer is 30.\n"
+  },
+  {
+   "id": 47,
+   "ok": true,
+   "got": "72",
+   "gold": "72",
+   "tail": "r.\n\nCalculate:\n0.02 * 3600 = 72 Mb/hour.\n\nThus, Ashley's internet connection speed is 72 Mb per hour.\n\nThe answer is 72\n"
+  },
+  {
+   "id": 48,
+   "ok": true,
+   "got": "216",
+   "gold": "216",
+   "tail": "bic feet \u00d7 3 seconds per cubic foot = 216 seconds.\n\nSo it will take him 216 seconds to dig the hole.\n\nThe answer is 216\n"
+  },
+  {
+   "id": 49,
+   "ok": false,
+   "got": "1",
+   "gold": "75",
+   "tail": " free, that free hour might be before the first paid hour. So the first paid hour would be after the free hour. So if he"
+  },
+  {
+   "id": 50,
+   "ok": true,
+   "got": "120",
+   "gold": "120",
+   "tail": "{3} = 120.\n\\]\n\nSo each person would receive $120 if they pooled their money and divided it equally.\n\nThe answer is 120.\n"
+  },
+  {
+   "id": 51,
+   "ok": true,
+   "got": "576",
+   "gold": "576",
+   "tail": "16 groups \u00d7 36 hash browns per group = 576 hash browns.\n\nThus, 96 potatoes can make 576 hash browns.\n\nThe answer is 576\n"
+  },
+  {
+   "id": 52,
+   "ok": true,
+   "got": "32",
+   "gold": "32",
+   "tail": "f apples + cost of oranges\n= $5 + $6 + $21 = $32.\n\nThus, the price for such a crate of fruit is $32.\n\nThe answer is 32.\n"
+  },
+  {
+   "id": 53,
+   "ok": true,
+   "got": "9",
+   "gold": "9",
+   "tail": "00  \n- Next 6 hours: $700 \u00d7 6 = $4200  \n- Total raised: $2100 + $4200 = $6300, which matches the goal.\n\nThe answer is 9\n"
+  },
+  {
+   "id": 54,
+   "ok": true,
+   "got": "175",
+   "gold": "175",
+   "tail": "):  \n7 sacks \u00d7 25 kg/sack = 175 kg.\n\nSo, Goldy gave 175 kilograms of rice to her cousin and brother.\n\nThe answer is 175\n"
+  },
+  {
+   "id": 55,
+   "ok": true,
+   "got": "87",
+   "gold": "87",
+   "tail": "he total combined age.**\nTotal = Dora's age + Father's age + Mother's age = 15 + 38 + 34 = 87 years.\n\nThe answer is 87.\n"
+  },
+  {
+   "id": 56,
+   "ok": true,
+   "got": "28",
+   "gold": "28",
+   "tail": "= $76 - $48 = $28\n\nThus, if they choose the second amusement park over the first, they will save $28.\n\nThe answer is 28\n"
+  },
+  {
+   "id": 57,
+   "ok": true,
+   "got": "60000",
+   "gold": "60000",
+   "tail": "0 hours/song = 6000 * 10 = 60,000 hours\n\nThus, the 20 playlists will last a total of 60,000 hours.\n\nThe answer is 60000\n"
+  },
+  {
+   "id": 58,
+   "ok": true,
+   "got": "50",
+   "gold": "50",
+   "tail": "Now, we need to present step-by-step reasoning and end with \"The answer is 50\" or \"The answer is 50%\"? The problem asks:"
+  },
+  {
+   "id": 59,
+   "ok": true,
+   "got": "155",
+   "gold": "155",
+   "tail": "of quarters + 3/5 of twenties = $35 + $120 = $155.\n\nThus, Carrie paid a total of $155 for the lunch.\n\nThe answer is 155\n"
+  },
+  {
+   "id": 60,
+   "ok": true,
+   "got": "4",
+   "gold": "4",
+   "tail": "cost than 2 bagels:\n$6 (bread) - $2 (bagels) = $4.\n\nSo, 3 loaves of bread cost $4 more than 2 bagels.\n\nThe answer is 4.\n"
+  },
+  {
+   "id": 61,
+   "ok": true,
+   "got": "79",
+   "gold": "79",
+   "tail": "16 + 35 = 79 petals.\n\nSo the total petals on the flowers in the vase is 79.\n\nThus, the answer is 79.\n\nThe answer is 79.\n"
+  },
+  {
+   "id": 62,
+   "ok": true,
+   "got": "153",
+   "gold": "153",
+   "tail": "endrick} + \\text{Becca} = 47 + 141 + 153 = 341\n\\]\nThe total matches, so the calculation is correct.\n\nThe answer is 153.\n"
+  },
+  {
+   "id": 63,
+   "ok": true,
+   "got": "2",
+   "gold": "2",
+   "tail": "er day.  \nEach additional cow produces 5 liters per day.  \nExtra cows needed: \\(10 \\div 5 = 2\\) cows.\n\nThe answer is 2.\n"
+  },
+  {
+   "id": 64,
+   "ok": true,
+   "got": "123",
+   "gold": "123",
+   "tail": "ood baskets.  \n- Each green basket costs \\$25.  \n- You buy 3 green baskets: \\(3 \\times 25 = \\$75\\).\n\nNext, find the cost"
+  },
+  {
+   "id": 65,
+   "ok": true,
+   "got": "23",
+   "gold": "23",
+   "tail": "30 + Y = 52 + Y.\n\nSet equal to 75:\n52 + Y = 75\nY = 75 - 52 = 23.\n\nThus, the rink has 23 yellow cars.\n\nThe answer is 23.\n"
+  },
+  {
+   "id": 66,
+   "ok": true,
+   "got": "575",
+   "gold": "575",
+   "tail": "(\\text{manicure}) + 75 \\ (\\text{pedicure}) = 575\n\\]\n\nThus, the total money spent at the spa is $575.\n\nThe answer is 575\n"
+  },
+  {
+   "id": 67,
+   "ok": true,
+   "got": "1",
+   "gold": "1",
+   "tail": "rrot costs $1.\n\nThe question asks: How much does Ellen pay for one carrot every day?\n\nThe answer is 1.\n\nThe answer is 1\n"
+  },
+  {
+   "id": 68,
+   "ok": false,
+   "got": "15",
+   "gold": "5",
+   "tail": "ing hours)\n= 24 - (8 + 1)\n= 24 - 9\n= 15 hours.\n\nSo, Harold has 15 hours of free time left in his day.\n\nThe answer is 15\n"
+  },
+  {
+   "id": 69,
+   "ok": true,
+   "got": "90",
+   "gold": "90",
+   "tail": "e \u2212 Total cost = $240 \u2212 $150 = $90.\n\nThus, the class raised $90 from the profit of selling lollipops.\n\nThe answer is 90\n"
+  },
+  {
+   "id": 70,
+   "ok": true,
+   "got": "24",
+   "gold": "24",
+   "tail": "\n\n3. **Maria\u2019s own initial balloons:** She had 1 water balloon for herself.  \n   \\(1 \\text{ balloon}\\).\n\n4. **Total ball"
+  },
+  {
+   "id": 71,
+   "ok": true,
+   "got": "17",
+   "gold": "17",
+   "tail": "\\text{ hours (second part)} = 17 \\text{ hours}\n\\]\n\nThus, it took him 17 hours to get across the lake.\n\nThe answer is 17\n"
+  },
+  {
+   "id": 72,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tail": "ffrey}} = 4 + 2 + 1 = 7.\n\\]\n\nThus, the total number of basketballs the coach brought to practice is 7.\n\nThe answer is 7\n"
+  },
+  {
+   "id": 73,
+   "ok": false,
+   "got": "100",
+   "gold": "120",
+   "tail": "ges.\nRemaining = 240 - 140 = 100 oranges sold.\n\nThus, Mrs. Harrington sold 100 oranges.\n\nAnswer: 100\n\nThe answer is 100\n"
+  },
+  {
+   "id": 74,
+   "ok": true,
+   "got": "63",
+   "gold": "63",
+   "tail": "ats in a week:**  \n   \\[\n   9 \\text{ pretzels/day} \\times 7 \\text{ days} = 63 \\text{ pretzels}\n   \\]\n\nThe answer is 63.\n"
+  },
+  {
+   "id": 75,
+   "ok": true,
+   "got": "50",
+   "gold": "50",
+   "tail": " to church \u00f7 cookies per person = 750 \u00f7 15 = 50.\n\nThus, there were 50 people in the church next door.\n\nThe answer is 50\n"
+  },
+  {
+   "id": 76,
+   "ok": false,
+   "got": "0.91",
+   "gold": "94",
+   "tail": "hus:\n\\[\nC \\times 0.91^5 \\times 0.93^3 = 0.28 C\n\\]\nCancel C:\n\\[\n0.91^5 \\times 0.93^3 = 0.28\n\\]\n\nBut as computed, \\( 0.91^"
+  },
+  {
+   "id": 77,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": "o the number of eggs found by the friends is \\(40 - 10 = 30\\).\n\nThus, the friends found **30 eggs**.\n\nThe answer is 30.\n"
+  },
+  {
+   "id": 78,
+   "ok": false,
+   "got": "150",
+   "gold": "4",
+   "tail": "ges, assuming he can only earn $150k per year after college (tripled income). But we need to find the time it would take"
+  },
+  {
+   "id": 79,
+   "ok": true,
+   "got": "110",
+   "gold": "110",
+   "tail": "= 110 people.\n\nThus, the total number of people on the train at the final stop (third stop) is 110.\n\nThe answer is 110.\n"
+  },
+  {
+   "id": 80,
+   "ok": true,
+   "got": "95",
+   "gold": "95",
+   "tail": "ts = 4\n\nAverage score = Total score / Number of tests = 380 / 4 = 95\n\nSo, John's average score is 95.\n\nThe answer is 95\n"
+  },
+  {
+   "id": 81,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "ks per week, she will need 8 more weeks to collect the additional 80 toothpicks.\n\n**Answer:** 8 weeks.\n\nThe answer is 8\n"
+  },
+  {
+   "id": 82,
+   "ok": true,
+   "got": "1080",
+   "gold": "1080",
+   "tail": " 270 \\times 4 = 1080\n   \\]\n\nThus, the triceratops had 1080 kilograms of meat before the T-Rex ate.\n\nThe answer is 1080.\n"
+  },
+  {
+   "id": 83,
+   "ok": false,
+   "got": "40000",
+   "gold": "40",
+   "tail": "r current salary is $100,000?\"\n\n   - She needs to save enough to cover her living expenses (40% of salary = $40,000) and"
+  },
+  {
+   "id": 84,
+   "ok": true,
+   "got": "5",
+   "gold": "5",
+   "tail": "e fishes:\nFemale fish - Male fish = 16 - 11 = 5.\n\nSo, Tate has 5 more female fishes than male fishes.\n\nThe answer is 5.\n"
+  },
+  {
+   "id": 85,
+   "ok": true,
+   "got": "45000",
+   "gold": "45000",
+   "tail": " $45,000 per month.\n\nThus, the total amount of money they all have together each month is $45,000.\n\nThe answer is 45000\n"
+  },
+  {
+   "id": 86,
+   "ok": true,
+   "got": "291",
+   "gold": "291",
+   "tail": "flowers/day * 3 days = 291 sunflowers.\n\nThus, after 3 days, Faraday was able to sell 291 sunflowers.\n\nThe answer is 291\n"
+  },
+  {
+   "id": 87,
+   "ok": true,
+   "got": "7300",
+   "gold": "7300",
+   "tail": "eds to produce 7300 more bottles each day to satisfy 100% of the daily energy needs of 2300 people.\n\nThe answer is 7300\n"
+  },
+  {
+   "id": 88,
+   "ok": true,
+   "got": "93",
+   "gold": "93",
+   "tail": "21\n- 21 + 24 = 45\n- 45 + 48 = 93\n\nSo total puffs counted over the week = 93.\n\nThus, the answer is 93.\n\nThe answer is 93\n"
+  },
+  {
+   "id": 89,
+   "ok": false,
+   "got": "3",
+   "gold": "6",
+   "tail": "izzas exactly.\n- Pepperoni: 24 slices / 8 slices per pizza = 3 pizzas exactly.\n\nSo total pizzas = 3 (cheese) + 3 (pepper"
+  },
+  {
+   "id": 90,
+   "ok": true,
+   "got": "140",
+   "gold": "140",
+   "tail": "+ Second day = 60 + 80 = 140 trees.\n\nThus, Mr. Julius planted 140 trees in total over the two days.\n\nThe answer is 140.\n"
+  },
+  {
+   "id": 91,
+   "ok": true,
+   "got": "448",
+   "gold": "448",
+   "tail": "6 mL.\n\n**Step 3: Find the total for 8 doses.**  \nTotal for 8 doses = 56 mL/dose \u00d7 8 doses = 448 mL.\n\nThe answer is 448.\n"
+  },
+  {
+   "id": 92,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tail": "(3) - 2 = 9 - 2 = 7\\).  \n- Total treats = \\(3 + 7 = 10\\), which matches the 5 people \u00d7 2 treats each.\n\nThe answer is 3.\n"
+  },
+  {
+   "id": 93,
+   "ok": true,
+   "got": "520",
+   "gold": "520",
+   "tail": " 52 weeks \u00d7 $10.00/week = $520.00.\n\nThus, Bud spends $520.00 per year on making macaroni and cheese.\n\nThe answer is 520\n"
+  },
+  {
+   "id": 94,
+   "ok": false,
+   "got": "3",
+   "gold": "30",
+   "tail": "t sure. But the problem likely intends:\n\n- Side 1: 5 minutes.\n- Side 2: twice side 1 \u2192 10 minutes.\n- Side 3: twice side "
+  },
+  {
+   "id": 95,
+   "ok": false,
+   "got": "30",
+   "gold": "36",
+   "tail": "he needs 6 lemons.\n\nTotal lemons = (5 cups) \u00d7 (6 lemons per cup) = 30 lemons.\n\n**Answer:** 30 lemons.\n\nThe answer is 30\n"
+  },
+  {
+   "id": 96,
+   "ok": true,
+   "got": "665",
+   "gold": "665",
+   "tail": "ls - Cracked seashells = 732 - 67.\n\nCalculate:\n732 - 67 = 665\n\nThus, they found 665 good seashells.\n\nThe answer is 665.\n"
+  },
+  {
+   "id": 97,
+   "ok": true,
+   "got": "27",
+   "gold": "27",
+   "tail": "\n- Sarah has half as many pens as Timothy. So, Sarah's pens = 54 / 2 = 27.\n\nThus, Sarah has 27 pens.\n\nThe answer is 27.\n"
+  },
+  {
+   "id": 98,
+   "ok": true,
+   "got": "2325",
+   "gold": "2325",
+   "tail": "\\( C \\):\n\\[ C = 7995 - 5670 \\]\n\\[ C = 2325 \\]\n\nThus, the number of chocolate chip cookies is 2325.\n\nThe answer is 2325.\n"
+  },
+  {
+   "id": 99,
+   "ok": true,
+   "got": "14",
+   "gold": "14",
+   "tail": "s per person = total slices \u00f7 number of people = 56 \u00f7 4 = 14.\n\nThus, each person can have 14 slices.\n\nThe answer is 14.\n"
+  }
+ ]
+}

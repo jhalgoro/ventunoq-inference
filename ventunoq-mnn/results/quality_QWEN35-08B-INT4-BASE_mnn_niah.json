@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-08B-INT4-BASE",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 0.4,
+ "seconds": 500.5,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "36132",
+   "ok": true,
+   "out": " Answer: 36132"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": null,
+   "ok": false,
+   "out": ""
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "48594",
+   "ok": true,
+   "out": " Answer: 48594"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": null,
+   "ok": false,
+   "out": ""
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": null,
+   "ok": false,
+   "out": ""
+  }
+ ]
+}

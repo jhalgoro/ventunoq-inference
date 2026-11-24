@@ -1,0 +1,18 @@
+config=/home/arduino/Code/ventunoq-mnn/minicpm5-models/MiniCPM5-2B-MNN/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/MINICPM5-2B-INT4-R2_chat
+[1/5] 00000.txt chars=6 gen=3 tok 324.0s
+[2/5] 00001.txt chars=6 gen=3 tok 325.0s
+[3/5] 00002.txt chars=6 gen=3 tok 323.0s
+[4/5] 00003.txt chars=6 gen=3 tok 325.0s
+[5/5] 00004.txt chars=6 gen=3 tok 323.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=5 generated=5 skipped=0
+[niah 1] depth=0.1 OK got=36132 want=36132
+[niah 2] depth=0.3 OK got=98253 want=98253
+[niah 3] depth=0.5 OK got=48594 want=48594
+[niah 4] depth=0.7 OK got=28611 want=28611
+[niah 5] depth=0.9 OK got=58512 want=58512
+
+niah MINICPM5-2B-INT4-R2/mnn: 5/5 = 100.0% -> results/quality_MINICPM5-2B-INT4-R2_mnn_niah.json

@@ -1,0 +1,26 @@
+{
+ "tag": "LFM3-1.7B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 2,
+ "score": 0.0,
+ "seconds": 507.8,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "1",
+   "ok": false,
+   "out": "The secret passcode for vault 1 is 36132"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "2",
+   "ok": false,
+   "out": "The secret passcode for vault 2 is 98253"
+  }
+ ]
+}

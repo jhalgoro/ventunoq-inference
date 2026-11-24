@@ -1,0 +1,1990 @@
+{
+ "tag": "QWEN35-9B-INT4",
+ "engine": "mnn",
+ "task": "mmlu",
+ "n": 198,
+ "score": 0.0,
+ "seconds": 3351.7,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 5,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 6,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 7,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 8,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 9,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 10,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 11,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 12,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 13,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 14,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 15,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 16,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 17,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 18,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 19,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 20,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 21,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 22,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 23,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 24,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 25,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 26,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 27,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 28,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 29,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 30,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 31,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 32,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 33,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 34,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 35,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 36,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 37,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 38,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 39,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 40,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 41,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 42,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 43,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 44,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 45,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 46,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 47,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 48,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 49,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 50,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 51,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 52,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 53,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 54,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 55,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 56,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 57,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 58,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 59,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 60,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 61,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 62,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 63,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 64,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 65,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 66,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 67,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 68,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 69,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 70,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 71,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 72,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 73,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 74,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 75,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 76,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 77,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 78,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 79,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 80,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 81,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 82,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 83,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 84,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 85,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 86,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 87,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 88,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 89,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 90,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 91,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 92,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 93,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 94,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 95,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 96,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 97,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 98,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 99,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 100,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 101,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 102,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 103,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 104,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 105,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 106,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 107,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 108,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 109,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 110,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 111,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 112,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 113,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 114,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 115,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 116,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 117,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 118,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 119,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 120,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 121,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 122,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 123,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 124,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 125,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 126,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 127,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 128,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 129,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 130,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 131,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 132,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 133,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 134,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 135,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 136,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 137,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 138,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 139,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 140,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 141,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 142,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 143,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 144,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 145,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 146,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 147,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 148,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 149,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 150,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 151,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 152,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 153,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 154,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 155,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 156,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 157,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 158,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 159,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 160,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 161,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 162,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 163,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 164,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 165,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 166,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 167,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 168,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 169,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 170,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 171,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 172,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 173,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 174,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 175,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 176,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 177,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 178,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 179,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 180,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 181,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 182,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 183,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 184,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 185,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 186,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 187,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 188,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 189,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 190,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 191,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 192,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 193,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 194,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 195,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 196,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 197,
+   "ok": false,
+   "pred": null,
+   "gold": 3,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  }
+ ]
+}

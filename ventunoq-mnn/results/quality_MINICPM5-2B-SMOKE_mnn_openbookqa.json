@@ -1,0 +1,60 @@
+{
+ "tag": "MINICPM5-2B-SMOKE",
+ "engine": "mnn",
+ "task": "openbookqa",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 23.7,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "pred": null,
+   "gold": 0,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "pred": null,
+   "gold": 1,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "pred": null,
+   "gold": 2,
+   "scores": [
+    false
+   ],
+   "method": "gen-miss"
+  }
+ ]
+}

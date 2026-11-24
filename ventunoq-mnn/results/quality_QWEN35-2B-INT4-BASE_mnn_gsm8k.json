@@ -1,0 +1,710 @@
+{
+ "tag": "QWEN35-2B-INT4-BASE",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 100,
+ "score": 0.41,
+ "seconds": 4395.4,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "got": "8",
+   "gold": "18",
+   "tail": "4=<<3*4=12>>12 eggs for breakfast.\nShe sells 16-12=<<16-12=4>>4 eggs.\nShe sells 4*2=<<4*2=8>>8 dollars.\nThe answer is 8\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": "2",
+   "gold": "18",
+   "tail": " = 5\nN - 1/3*N - 2 - 1/2*(N - 1/3*N - 2) = 5\nN - 1/3*N - 2 - 1/2*(N - 1/3*N - 2) = 5\nN - 1/3*N - 2 - 1/2*(N - 1/3*N - 2)"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "got": "240",
+   "gold": "16",
+   "tail": "0/15 = <<900/15=60>>60 cartons.\nSince each carton costs $4.00, she will spend 60*4 = <<60*4=240>>240.\nThe answer is 240\n"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "1 year old.\nBen\u2019s iPhone is 2*1 = <<2*1=2>>2 years old.\nBrandon\u2019s iPhone is 4*2 = <<4*2=8>>8 years old.\nThe answer is 8\n"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "got": "640",
+   "gold": "40",
+   "tail": "*60 + 4*40 = $<<6*60+4*40=480+160=640>>640.\nOn Friday, the mechanic earned 12*40 = $<<12*40=480>>480.\nThe answer is 640\n"
+  },
+  {
+   "id": 5,
+   "ok": true,
+   "got": "595",
+   "gold": "595",
+   "tail": "2 = <<140*2=280>>280 emeralds.\nThere were 175 + 140 + 280 = <<175+140+280=595>>595 gems in the chest.\nThe answer is 595\n"
+  },
+  {
+   "id": 6,
+   "ok": false,
+   "got": "16",
+   "gold": "10",
+   "tail": "water.\nThe boy got 6 liters of water.\nSo there were 24 - 4 - 6 = <<24-4-6=16>>16 liters of water left.\nThe answer is 16\n"
+  },
+  {
+   "id": 7,
+   "ok": false,
+   "got": "11.57894736842105",
+   "gold": "36",
+   "tail": "578947368 * 1.1 = <<10.52631578947368*1.1=11.57894736842105>>11.57894736842105 seconds.\nThe answer is 11.57894736842105\n"
+  },
+  {
+   "id": 8,
+   "ok": false,
+   "got": "8",
+   "gold": "3",
+   "tail": "tes on Wednesday.\nSince 30 minutes = 1/2 hour, he watched 240/30 = <<240/30=8>>8 episodes on Wednesday.\nThe answer is 8\n"
+  },
+  {
+   "id": 9,
+   "ok": true,
+   "got": "240",
+   "gold": "240",
+   "tail": "0=60>>60 sheets of paper a week.\nThat means he uses 60*4=<<60*4=240>>240 sheets of paper every month.\nThe answer is 240\n"
+  },
+  {
+   "id": 10,
+   "ok": true,
+   "got": "13",
+   "gold": "13",
+   "tail": ", Walt walked 4*6=<<4*6=24>>24 miles.\nOn Wednesday, Walt walked 41 - 4 - 24 = $<<41-4-24=13>>13 miles.\nThe answer is 13\n"
+  },
+  {
+   "id": 11,
+   "ok": false,
+   "got": "2375",
+   "gold": "2125",
+   "tail": "/ 4 = <<1500/4=375>>375.\nThe total number of pieces is 500 + 1500 + 375 = <<500+1500+375=2375>>2375.\nThe answer is 2375\n"
+  },
+  {
+   "id": 12,
+   "ok": true,
+   "got": "16",
+   "gold": "16",
+   "tail": " 7 = <<17+7=24>>24 feet of water.\nOn Wednesday, the tank had 24 * 2/3 = <<24*2/3=16>>16 feet of water.\nThe answer is 16\n"
+  },
+  {
+   "id": 13,
+   "ok": false,
+   "got": "1500",
+   "gold": "18000",
+   "tail": "500 * 1.5 = $<<500*1.5=750>>750.\nJessica pays 450 + 300 + 750 = $<<450+300+750=1500>>1500 in a year.\nThe answer is 1500\n"
+  },
+  {
+   "id": 14,
+   "ok": false,
+   "got": "18",
+   "gold": "5",
+   "tail": "66666666666666 = <<160/26.666666666666666=6>>6 rats.\nThere are 6 * 3 = <<6*3=18>>18 rats in each cage.\nThe answer is 18\n"
+  },
+  {
+   "id": 15,
+   "ok": true,
+   "got": "55",
+   "gold": "55",
+   "tail": "0 liters of water in the afternoon.\nThat means he gets 25+30=<<25+30=55>>55 liters of water every day.\nThe answer is 55\n"
+  },
+  {
+   "id": 16,
+   "ok": false,
+   "got": "350",
+   "gold": "250",
+   "tail": "<<100+50=150>>150.\nThe total number of customers on the third day was 500 - 150 = <<500-150=350>>350.\nThe answer is 350\n"
+  },
+  {
+   "id": 17,
+   "ok": false,
+   "got": "85",
+   "gold": "33",
+   "tail": " picked card will be a water type is 82 / 96 * 100 = <<82/96*100=85.41666666666667>>85.41666666666667.\nThe answer is 85\n"
+  },
+  {
+   "id": 18,
+   "ok": true,
+   "got": "21",
+   "gold": "21",
+   "tail": "<<27+6=33>>33 candies.\nJohn has 54 candies.\nJohn has 54 - 33 = <<54-33=21>>21 more candies than James.\nThe answer is 21\n"
+  },
+  {
+   "id": 19,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "is 4*3=<<4*3=12>>12.\nHe rides the elevator up to the floor that's equal to 12 plus 6.\n12 plus 6 is 18.\nThe answer is 18\n"
+  },
+  {
+   "id": 20,
+   "ok": false,
+   "got": "328000",
+   "gold": "118000",
+   "tail": "lling the house are 400000 - 12000 - 20000 - 250000 = $<<400000-12000-20000-250000=328000>>328000.\nThe answer is 328000\n"
+  },
+  {
+   "id": 21,
+   "ok": true,
+   "got": "7",
+   "gold": "7",
+   "tail": " popsicles.\nHe purchased 4*0.50 = $<<4*0.50=2>>2 in ice cream bars.\nHe paid 5+2 = $<<5+2=7>>7 in total.\nThe answer is 7\n"
+  },
+  {
+   "id": 22,
+   "ok": false,
+   "got": "96",
+   "gold": "83",
+   "tail": " 39 + 18 = $<<39+18=57>>57 points.\nMike, Jim, and Tony have 39 + 57 = $<<39+57=96>>96 points in total.\nThe answer is 96\n"
+  },
+  {
+   "id": 23,
+   "ok": true,
+   "got": "10",
+   "gold": "10",
+   "tail": "which is 60 - 40 = <<60-40=20>>20 loaves.\nSo they sell 20 / 2 = <<20/2=10>>10 loaves in the afternoon.\nThe answer is 10\n"
+  },
+  {
+   "id": 24,
+   "ok": false,
+   "got": "-12",
+   "gold": "8",
+   "tail": "1/4=10>>10 people left.\nThere were 22 men left.\nSo there were 10 - 22 = <<10-22=-12>>-12 people left.\nThe answer is -12\n"
+  },
+  {
+   "id": 25,
+   "ok": false,
+   "got": "250",
+   "gold": "100",
+   "tail": "costs 1100 + 250*9 = $<<1100+250*9=2450>>2450.\nThe difference is 2700 - 2450 = $<<2700-2450=250>>250.\nThe answer is 250\n"
+  },
+  {
+   "id": 26,
+   "ok": false,
+   "got": "32",
+   "gold": "9",
+   "tail": "\nJenny eats the rest of the cookies.\nSolve step by step. End your reply with a line 'The answer is N'.\nThe answer is 32\n"
+  },
+  {
+   "id": 27,
+   "ok": false,
+   "got": "3.333333333333333",
+   "gold": "4",
+   "tail": "ndy.\nHe bought 5 / 1.5 = $<<5/1.5=3.333333333333333>>3.333333333333333 pounds of candy.\nThe answer is 3.333333333333333\n"
+  },
+  {
+   "id": 28,
+   "ok": true,
+   "got": "240000",
+   "gold": "240000",
+   "tail": "s they spent 400000 - 160000 = $<<400000-160000=240000>>240000 on functioning pieces of equipment.\nThe answer is 240000\n"
+  },
+  {
+   "id": 29,
+   "ok": true,
+   "got": "80",
+   "gold": "80",
+   "tail": " the test scores is 65+94+81+86+74 = <<65+94+81+86+74=400>>400.\nThe average is 400/5 = <<400/5=80>>80.\nThe answer is 80\n"
+  },
+  {
+   "id": 30,
+   "ok": true,
+   "got": "12",
+   "gold": "12",
+   "tail": "+12=42>>42 years old.\nThe difference between the ages of Alice and Erica is 42 - 30 = $<<42-30=12>>12.\nThe answer is 12\n"
+  },
+  {
+   "id": 31,
+   "ok": false,
+   "got": "2475",
+   "gold": "25",
+   "tail": "= 50000 * 5 / 100 = <<50000*5/100=2500>>2500\n2500 * 99% = 2500 * 99 / 100 = <<2500*99/100=2475>>2475\nThe answer is 2475\n"
+  },
+  {
+   "id": 32,
+   "ok": true,
+   "got": "11",
+   "gold": "11",
+   "tail": "25 = $<<4*1.25=5>>5.\nThe cake cost 4 / 2 = $<<4/2=2>>2.\nThe total cost is 5 + 2 + 4 = $<<5+2+4=11>>11.\nThe answer is 11\n"
+  },
+  {
+   "id": 33,
+   "ok": false,
+   "got": "21",
+   "gold": "17",
+   "tail": "rive 5 minutes before Wayne.\nSo Bernadette should leave 16+5=<<16+5=21>>21 minutes earlier than Wayne.\nThe answer is 21\n"
+  },
+  {
+   "id": 34,
+   "ok": false,
+   "got": "3",
+   "gold": "6400",
+   "tail": "he has -37 - 3 = <<-37-3=-40>>-40 sapphires left.\nShe trades 3 sapphires for two rubies.\nThis means she has -40 - 3 = <<"
+  },
+  {
+   "id": 35,
+   "ok": true,
+   "got": "1",
+   "gold": "1",
+   "tail": "0 - 1000*10/100 = $<<1000-1000*10/100=900>>900.\nKelly paid 900 - 899 = $<<900-899=1>>1 more than Becky.\nThe answer is 1\n"
+  },
+  {
+   "id": 36,
+   "ok": true,
+   "got": "15400",
+   "gold": "15400",
+   "tail": "l is 1800*3=<<1800*3=5400>>5400 for 3 days.\nThe total cost is 10000+5400=<<10000+5400=15400>>15400.\nThe answer is 15400\n"
+  },
+  {
+   "id": 37,
+   "ok": true,
+   "got": "25",
+   "gold": "25",
+   "tail": "pays 4 * 100 = $<<4*100=400>>400 cents.\nThis means each razor costs 400 / 16 = $<<400/16=25>>25 cents.\nThe answer is 25\n"
+  },
+  {
+   "id": 38,
+   "ok": true,
+   "got": "144",
+   "gold": "144",
+   "tail": "o, 24 legs need 24/2=<<24/2=12>>12 pairs of snowshoes.\nSo, it will cost Mario 12*12=<<12*12=144>>144.\nThe answer is 144\n"
+  },
+  {
+   "id": 39,
+   "ok": false,
+   "got": "160",
+   "gold": "280",
+   "tail": "\nA: Rob takes 2*60=<<2*60=120>>120 minutes.\nRoyce takes 120+40=<<120+40=160>>160 minutes.\nThe answer is 160\n"
+  },
+  {
+   "id": 40,
+   "ok": false,
+   "got": "350",
+   "gold": "300",
+   "tail": "as $3,100 - $2,400 = $<<3100-2400=700>>700.\nThe cost of one monitor was $700 / 2 = $<<700/2=350>>350.\nThe answer is 350\n"
+  },
+  {
+   "id": 41,
+   "ok": false,
+   "got": "78",
+   "gold": "130",
+   "tail": "\nShe re-writes everything she has already written.\nThat means she writes 52+26=<<52+26=78>>78 letters.\nThe answer is 78\n"
+  },
+  {
+   "id": 42,
+   "ok": false,
+   "got": "1",
+   "gold": "16",
+   "tail": "reduce his coffee intake to 4 cups.\nSo he needs to reduce his coffee intake by 5 - 4 = $<<5-4=1>>1 cup.\nThe answer is 1\n"
+  },
+  {
+   "id": 43,
+   "ok": false,
+   "got": "17039360",
+   "gold": "100",
+   "tail": "=17039360>>17039360 roses a month.\nHe supplies 17039360+17039360+17039360+17039360=<<17039360+17039360+17039360+17039360"
+  },
+  {
+   "id": 44,
+   "ok": true,
+   "got": "800",
+   "gold": "800",
+   "tail": "1600>>1600 calories in total.\nHannah needs to drink 100*1600/200=<<100*1600/200=800>>800 ml of water.\nThe answer is 800\n"
+  },
+  {
+   "id": 45,
+   "ok": true,
+   "got": "48",
+   "gold": "48",
+   "tail": "re are 10 birds * 2 legs = <<10*2=20>>20 legs.\nThere are 20 + 8 + 20 = <<20+8+20=48>>48 legs in total.\nThe answer is 48\n"
+  },
+  {
+   "id": 46,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": "ourth and fifth players ate 0 ounces of meat.\nSo the team ate 6+8+16 = <<6+8+16=30>>30 ounces of meat.\nThe answer is 30\n"
+  },
+  {
+   "id": 47,
+   "ok": true,
+   "got": "72",
+   "gold": "72",
+   "tail": "00>>1200kb/min\n1200kb/min * 60 = <<1200*60=72000>>72000kb/h\n72000kb/h / 1000 = <<72000/1000=72>>72Mb/h\nThe answer is 72\n"
+  },
+  {
+   "id": 48,
+   "ok": true,
+   "got": "216",
+   "gold": "216",
+   "tail": "nds to shovel a cubic foot of earth, it will take him 72*3 = <<72*3=216>>216 seconds to dig the hole.\nThe answer is 216\n"
+  },
+  {
+   "id": 49,
+   "ok": false,
+   "got": "240",
+   "gold": "75",
+   "tail": "30*2=60>>60.\nThe fourth hour is 60*2 = $<<60*2=120>>120.\nThe fifth hour is 120*2 = $<<120*2=240>>240.\nThe answer is 240\n"
+  },
+  {
+   "id": 50,
+   "ok": true,
+   "got": "120",
+   "gold": "120",
+   "tail": "90 + 150 = $<<120+90+150=360>>360.\nIf they share equally, they will have 360 / 3 = $<<360/3=120>>120.\nThe answer is 120\n"
+  },
+  {
+   "id": 51,
+   "ok": true,
+   "got": "576",
+   "gold": "576",
+   "tail": "tato makes 36/6 = $<<36/6=6>>6 hash browns.\nSo, 96 potatoes make 96*6 = $<<96*6=576>>576 hash browns.\nThe answer is 576\n"
+  },
+  {
+   "id": 52,
+   "ok": false,
+   "got": "12.5",
+   "gold": "32",
+   "tail": "=1.5>>1.5.\nSo, one crate of fruit costs 5 * 0.5 + 12 * 1 + 7 * 1.5 = $<<5*0.5+12*1+7*1.5=12.5>>12.5.\nThe answer is 12.5\n"
+  },
+  {
+   "id": 53,
+   "ok": false,
+   "got": "5603",
+   "gold": "9",
+   "tail": "600 / 1 = $<<5600/1=5600>>5600 more.\nSo they have to fundraise 3 + 5600 = $<<3+5600=5603>>5603 more.\nThe answer is 5603\n"
+  },
+  {
+   "id": 54,
+   "ok": true,
+   "got": "175",
+   "gold": "175",
+   "tail": " 3+4 = <<3+4=7>>7 sacks to her cousin and brother.\nShe gave 7*25 = <<7*25=175>>175 kilograms of rice.\nThe answer is 175\n"
+  },
+  {
+   "id": 55,
+   "ok": true,
+   "got": "87",
+   "gold": "87",
+   "tail": "ars old.\nDora's father's age plus Dora's age plus Dora's mother's age is 38+15+34 = <<38+15+34=87>>87.\nThe answer is 87\n"
+  },
+  {
+   "id": 56,
+   "ok": false,
+   "got": "36",
+   "gold": "28",
+   "tail": "d amusement park costs 14*2 + 10*2 = $<<14*2+10*2=44>>44.\nThe difference is 80 - 44 = $<<80-44=36>>36.\nThe answer is 36\n"
+  },
+  {
+   "id": 57,
+   "ok": true,
+   "got": "60000",
+   "gold": "60000",
+   "tail": "gs.\nEach song is 10 hours long, so the total number of hours is 6000 * 10 = <<6000*10=60000>>60000.\nThe answer is 60000\n"
+  },
+  {
+   "id": 58,
+   "ok": false,
+   "got": "41.66666666666667",
+   "gold": "50",
+   "tail": ".4166666666666667 * 100 = <<0.4166666666666667*100=41.66666666666667>>41.66666666666667\nThe answer is 41.66666666666667\n"
+  },
+  {
+   "id": 59,
+   "ok": false,
+   "got": "41",
+   "gold": "155",
+   "tail": "<140*0.25=35>>35.\n3/5 of 10 twenties = 10 * 0.6 = $<<10*0.6=6>>6.\nSo she paid 35 + 6 = $<<35+6=41>>41.\nThe answer is 41\n"
+  },
+  {
+   "id": 60,
+   "ok": true,
+   "got": "4",
+   "gold": "4",
+   "tail": "<<3*2=6>>6.\n2 bagels cost 2*1=<<2*1=2>>2.\nSo, 3 loaves of bread cost 6-2=<<6-2=4>>4 more than 2 bagels.\nThe answer is 4\n"
+  },
+  {
+   "id": 61,
+   "ok": false,
+   "got": "97",
+   "gold": "79",
+   "tail": "01>>101 petals.\nShe dropped 1*4=<<1*4=4>>4 petals.\nSo she put 101-4=<<101-4=97>>97 petals in the vase.\nThe answer is 97\n"
+  },
+  {
+   "id": 62,
+   "ok": false,
+   "got": "12",
+   "gold": "153",
+   "tail": "k has 57x + 12 + 3x cards.\nSmendrick has 60x + 12 cards.\nSmendrick has 60x + 12 + 3x cards.\nSmendrick has 63x + 12 cards"
+  },
+  {
+   "id": 63,
+   "ok": true,
+   "got": "2",
+   "gold": "2",
+   "tail": "to produce 25 liters of milk a day.\nSince he already has 3 cows, he needs 5 - 3 = <<5-3=2>>2 more cows.\nThe answer is 2\n"
+  },
+  {
+   "id": 64,
+   "ok": false,
+   "got": "75",
+   "gold": "123",
+   "tail": ".\nBut you get $2 off for each basket of red food, so you pay 54 - 2 * 3 = $<<54-2*3=48>>48.\nThe answer is 75 + 48 = 123\n"
+  },
+  {
+   "id": 65,
+   "ok": false,
+   "got": "33",
+   "gold": "23",
+   "tail": " <<12-2=10>>10\nBlue cars: 10 * 3 = <<10*3=30>>30\nYellow cars: 75 - 12 - 10 - 30 = <<75-12-10-30=33>>33\nThe answer is 33\n"
+  },
+  {
+   "id": 66,
+   "ok": false,
+   "got": "275",
+   "gold": "575",
+   "tail": "d a pedicure.\nShe spent 100+75+100 = $<<100+75+100=275>>275 to do a hair, a manicure, and a pedicure.\nThe answer is 275\n"
+  },
+  {
+   "id": 67,
+   "ok": false,
+   "got": "3",
+   "gold": "1",
+   "tail": "alad costs her $6, while the yogurt is half the price.\nSo, the yogurt costs $6 / 2 = $<<6/2=3>>3.\nEllen eats two carrots"
+  },
+  {
+   "id": 68,
+   "ok": false,
+   "got": "7",
+   "gold": "5",
+   "tail": "walks his dog for an hour each day.\nThat means he has 8 - 1 = <<8-1=7>>7 hours of free time in his day.\nThe answer is 7\n"
+  },
+  {
+   "id": 69,
+   "ok": true,
+   "got": "90",
+   "gold": "90",
+   "tail": "eans, they spent 0.5 * 10 * 30 = $<<0.5*10*30=150>>150.\nSo, they raised 240 - 150 = $<<240-150=90>>90.\nThe answer is 90\n"
+  },
+  {
+   "id": 70,
+   "ok": false,
+   "got": "21",
+   "gold": "24",
+   "tail": "20>>20 water balloons.\nMaria also had 1 water balloon.\nSo she had 20+1 = <<20+1=21>>21 water balloons.\nThe answer is 21\n"
+  },
+  {
+   "id": 71,
+   "ok": false,
+   "got": "19",
+   "gold": "17",
+   "tail": " at a pace of 1 mile per hour.\nHe swims 8/1 = <<8/1=8>>8 hours.\nHe swims 8+3+8 = <<8+3+8=19>>19 hours.\nThe answer is 19\n"
+  },
+  {
+   "id": 72,
+   "ok": false,
+   "got": "14",
+   "gold": "7",
+   "tail": ">4 balls.\nJordan carried 4 * 2 = <<4*2=8>>8 balls.\nThe coach brought 2 + 4 + 8 = <<2+4+8=14>>14 balls.\nThe answer is 14\n"
+  },
+  {
+   "id": 73,
+   "ok": false,
+   "got": "59",
+   "gold": "120",
+   "tail": "nges.\nThis means she kept 240 - 4 = <<240-4=236>>236 oranges.\nShe sold 236/4 = <<236/4=59>>59 oranges.\nThe answer is 59\n"
+  },
+  {
+   "id": 74,
+   "ok": true,
+   "got": "63",
+   "gold": "63",
+   "tail": "dgar eats 18*7=<<18*7=126>>126 pretzels a week.\nHis brother eats 126/2=<<126/2=63>>63 pretzels a week.\nThe answer is 63\n"
+  },
+  {
+   "id": 75,
+   "ok": true,
+   "got": "50",
+   "gold": "50",
+   "tail": "r.\nSince each person got 15 cookies, there were 750/15=<<750/15=50>>50 people in the church next door.\nThe answer is 50\n"
+  },
+  {
+   "id": 76,
+   "ok": false,
+   "got": "62",
+   "gold": "94",
+   "tail": "5% - (7% x 3) = 55% - 21% = <<55%-21%=34>>34%.\nThe charge remaining was 34% + 28% = <<34%+28%=62>>62%.\nThe answer is 62\n"
+  },
+  {
+   "id": 77,
+   "ok": true,
+   "got": "30",
+   "gold": "30",
+   "tail": "th twins found 30*2=<<30*2=60>>60 eggs.\nSo the friends found 100 - 60 - 10 = $<<100-60-10=30>>30 eggs.\nThe answer is 30\n"
+  },
+  {
+   "id": 78,
+   "ok": false,
+   "got": "50",
+   "gold": "4",
+   "tail": "ns 50k * 3 = $<<50k*3=150k>>150k in college.\nHe earns 50k * 3 = $<<50k*3=150k>>150k in college.\nHe earns 50k * 3 = $<<50"
+  },
+  {
+   "id": 79,
+   "ok": false,
+   "got": "270",
+   "gold": "110",
+   "tail": "0 people on the train.\nAt the third stop, there are 190 + 80 = <<190+80=270>>270 people on the train.\nThe answer is 270\n"
+  },
+  {
+   "id": 80,
+   "ok": true,
+   "got": "95",
+   "gold": "95",
+   "tail": "00 + 80 = <<100+100+100+80=380>>380 across the 4 tests.\nHis average score is 380 / 4 = <<380/4=95>>95.\nThe answer is 95\n"
+  },
+  {
+   "id": 81,
+   "ok": true,
+   "got": "8",
+   "gold": "8",
+   "tail": "re toothpicks.\nSince she saves 10 toothpicks each week, it will take her 80/10=<<80/10=8>>8 weeks more.\nThe answer is 8\n"
+  },
+  {
+   "id": 82,
+   "ok": false,
+   "got": "1105920",
+   "gold": "1080",
+   "tail": "f of what was left, so there were 552960 * 2 = <<552960*2=1105920>>1105920 kilograms of meat left.\nThe T-Rex ate half of"
+  },
+  {
+   "id": 83,
+   "ok": false,
+   "got": "80",
+   "gold": "40",
+   "tail": "0.2=20>>20 times her current salary.\nShe needs 20 years * 4 = $<<20*4=80>>80 times her current salary.\nThe answer is 80\n"
+  },
+  {
+   "id": 84,
+   "ok": false,
+   "got": "1",
+   "gold": "5",
+   "tail": "es.\nHe has 4+8=<<4+8=12>>12 male fishes.\nHe has 12-11=<<12-11=1>>1 more female fishes than male fishes.\nThe answer is 1\n"
+  },
+  {
+   "id": 85,
+   "ok": false,
+   "got": "22500",
+   "gold": "45000",
+   "tail": "500)=15000>>15000.\nSo they all have together 5000 + 2500 + 15000 = $<<5000+2500+15000=22500>>22500.\nThe answer is 22500\n"
+  },
+  {
+   "id": 86,
+   "ok": false,
+   "got": "23",
+   "gold": "291",
+   "tail": "*12=474.4285714285714>>474.4285714285714 per sunflower.\nFaraday earned 474.4285714285714 / 2 = $<<474.4285714285714/2=23"
+  },
+  {
+   "id": 87,
+   "ok": false,
+   "got": "1",
+   "gold": "7300",
+   "tail": "son's daily energy demand = 0.2 * 1 person's daily energy demand = 0.2 * 1 person's daily energy demand = 0.2 * 1 person"
+  },
+  {
+   "id": 88,
+   "ok": true,
+   "got": "93",
+   "gold": "93",
+   "tail": "*2=<<24*2=48>>48 puffs of clouds.\nSo Alice counted 3+6+12+24+48=<<3+6+12+24+48=93>>93 puffs of clouds.\nThe answer is 93\n"
+  },
+  {
+   "id": 89,
+   "ok": false,
+   "got": "20",
+   "gold": "6",
+   "tail": " 18.5+1=<<18.5+1=19.5>>19.5 pizza slices.\nSince she needs to buy whole pizzas, she needs to buy 19.5+1=<<19.5+1=20.5>>20"
+  },
+  {
+   "id": 90,
+   "ok": false,
+   "got": "60",
+   "gold": "140",
+   "tail": "40 = <<10+10=20>>20 more trees.\nSo, Mr. Julius planted 40 + 20 = <<40+20=60>>60 trees in the two days.\nThe answer is 60\n"
+  },
+  {
+   "id": 91,
+   "ok": true,
+   "got": "448",
+   "gold": "448",
+   "tail": "edicine in one dose.\nThat means, she had to combine 56*8 = <<56*8=448>>448 mL of medicine in 8 doses.\nThe answer is 448\n"
+  },
+  {
+   "id": 92,
+   "ok": false,
+   "got": "4",
+   "gold": "3",
+   "tail": "e makes 2 less than three times as many brownies as cupcakes, then she makes 12/3=<<12/3=4>>4 cupcakes.\nThe answer is 4\n"
+  },
+  {
+   "id": 93,
+   "ok": false,
+   "got": "29744.00",
+   "gold": "520",
+   "tail": "y week.\nThat means he spends 572.00 * 52 = $<<572.00*52=29744.00>>29744.00 on cheese every year.\nThe answer is 29744.00\n"
+  },
+  {
+   "id": 94,
+   "ok": false,
+   "got": "32.5",
+   "gold": "30",
+   "tail": "/2=2.5>>2.5 minutes.\nThe total time is 5+10+10+2.5+2.5+2.5=<<5+10+10+2.5+2.5+2.5=32.5>>32.5 minutes.\nThe answer is 32.5\n"
+  },
+  {
+   "id": 95,
+   "ok": false,
+   "got": "72",
+   "gold": "36",
+   "tail": "gallon of lemonade will need 24*2=<<24*2=48>>48 lemons.\nSo, Tim will need 24+48=<<24+48=72>>72 lemons.\nThe answer is 72\n"
+  },
+  {
+   "id": 96,
+   "ok": false,
+   "got": "384",
+   "gold": "665",
+   "tail": "67=19>>19 good seashells.\nNancy and Benny found 365 + 19 = <<365+19=384>>384 good seashells together.\nThe answer is 384\n"
+  },
+  {
+   "id": 97,
+   "ok": true,
+   "got": "27",
+   "gold": "27",
+   "tail": "\nA: George has 18 pens.\nTimothy has 18*3=<<18*3=54>>54 pens.\nSarah has 54/2=<<54/2=27>>27 pens.\nThe answer is 27\n"
+  },
+  {
+   "id": 98,
+   "ok": true,
+   "got": "2325",
+   "gold": "2325",
+   "tail": "e number of chocolate chip cookies they've made is 7995 - 2595 - 3075 = <<7995-2595-3075=2325>>2325.\nThe answer is 2325\n"
+  },
+  {
+   "id": 99,
+   "ok": true,
+   "got": "14",
+   "gold": "14",
+   "tail": "lices.\nHenry and his friends share the pizzas equally, so each of them gets 56/4=<<56/4=14>>14 slices.\nThe answer is 14\n"
+  }
+ ]
+}

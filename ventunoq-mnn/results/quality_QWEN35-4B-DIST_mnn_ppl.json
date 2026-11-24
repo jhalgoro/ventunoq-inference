@@ -1,0 +1,16 @@
+{
+ "tag": "QWEN35-4B-DIST",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 4029.9,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 24.102592,
+   "max_tokens": "full"
+  }
+ ]
+}

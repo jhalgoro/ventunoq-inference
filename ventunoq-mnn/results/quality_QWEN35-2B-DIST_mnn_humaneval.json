@@ -1,0 +1,310 @@
+{
+ "tag": "QWEN35-2B-DIST",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 50,
+ "score": 0.0,
+ "seconds": 1196.7,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "is > 0.5. Returns False. \u2713\n                                                                                                                               ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "t be slow for large lists\n   - However, for typical benchmark questions, O(n\u00b2) is acceptable\n\nLet me write the solution:"
+  },
+  {
+   "id": "HumanEval/3",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "1, 2, 3]): 0\u21921\u21923\u21924 (never below zero) \u2192 False \u2713\n- below_zero([1, 2, -4, 5]): 0\u21921\u21923\u2192-1 (below zero!) \u2192 True \u2713\n</analysis>"
+  },
+  {
+   "id": "HumanEval/7",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_2.py\", line 11\n    Let me analyze this problem:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ngs that contain the substring\n   - Returns empty list if substring is empty string\n\nLet me write the complete function:"
+  },
+  {
+   "id": "HumanEval/10",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": " the complete function including its signature, no explanations, no markdown fences.\n\nLet me analyze the given function:"
+  },
+  {
+   "id": "HumanEval/13",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "follows:\n- GCD(a, b) = GCD(b, a mod b)\n- We continue until b = 0, at which point the answer is a\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/17",
+   "ok": false,
+   "err": "File \"/tmp/opencode/sandbox/he_5.py\", line 64\n    Wait, that doesn't match the expected output. Let me reconsider.\n                    ^\nSyntaxError: unterminated string literal (detected at line 64)\n",
+   "comp_tail": "hat doesn't match the expected output. Let me reconsider.\n\nLooking at the expected output again: [4, 2, 1, 2, 2, 1, 1, 1"
+  },
+  {
+   "id": "HumanEval/20",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "d the minimum difference\n3. Return the two closest elements in ascending order\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/23",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_7.py\", line 10\n    Let me think about how to approach this coding problem.\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ink about how to approach this coding problem.\n\nLet me consider different approaches:\n\n1. Using built-in string methods:"
+  },
+  {
+   "id": "HumanEval/27",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_8.py\", line 8\n    Let me think about how to approach this coding problem.\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "tters should become lowercase\n- The function should return the modified string\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/30",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_9.py\", line 15\n    - `get_positive([-1, 2, -4, 5, 6])` \u2192 `[2, 5, 6]`\n                                        ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": ", 6` \u2713\n   - `[5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10]` \u2192 `5, 3, 2, 3, 9, 123, 1` \u2713\n\nThe solution is a list comprehension:"
+  },
+  {
+   "id": "HumanEval/33",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_10.py\", line 21\n    - Index 0: not divisible by 3 \u2192 keep as 1\n                                  ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "e expected output. The indices divisible by 3 are being sorted, but the values at these indices don't match the expected"
+  },
+  {
+   "id": "HumanEval/37",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_11.py\", line 15\n    - sort_even([1, 2, 3]) \u2192 [1, 2, 3] (unchanged)\n                           ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "ments at odd indices\n2. Sort them\n3. Put them back at odd indices\n4. Keep even indices unchanged\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/40",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/43",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_13.py\", line 28\n    - `[1, 3, 5, 0]` \u2192 False (no two elements sum to 0)\n                     ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "elements are distinct since x \u2260 -x)\n4. If loop completes without finding such pair, return False\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/47",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "  >>> median([3, 1, 2, 4, 5])\n    3\n     >>> median([-10, 4, 6, 1000, 10, 20])\n    15.0\n     \"\"\"\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/50",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_15.py\", line 14\n    Let me analyze this problem:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": ":\n     \"\"\"\n     takes as input string encoded with encode_shift function. Returns decoded string.\n     \"\"\"\n     return s"
+  },
+  {
+   "id": "HumanEval/53",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_16.py\", line 19\n    - add(2, 3) = 2 + 3 = 5 \u2713\n                            ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": " + 3 = 5 \u2713\n- add(5, 7) = 5 + 7 = 12 \u2713\n\nThe function signature is already provided, so I just need to implement the body."
+  },
+  {
+   "id": "HumanEval/57",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "plete function including its signature, no explanations, no markdown fences.\n\n\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/60",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "- sum_to_n(1) = 1 * 2 / 2 = 2 / 2 = 1 \u2713\n\nSo the formula n(n+1)/2 is correct.\n\nNow I'll implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/63",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_19.py\", line 28\n    - fibfib(0) = 0 \u2713\n                    ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "the recurrence is: fibfib(n) = fibfib(n-1) + fibfib(n-2) + fibfib(n-3)\n\nLet me verify fibfib(2) = 1:\nfibfib(2) = fibfib("
+  },
+  {
+   "id": "HumanEval/67",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_20.py\", line 18\n    - \"5 apples and 6 oranges\", 19 \u2192 19 - 5 - 6 = 8\n                                   ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "e string to extract the number of apples and oranges\n2. Subtract those from n to get mangoes\n\nLet me write the function:"
+  },
+  {
+   "id": "HumanEval/70",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/73",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/77",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/80",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/83",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/86",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_26.py\", line 23\n    - 'Hi' \u2192 'Hi' (already sorted)\n           ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "inal word order and spacing.\n\nThe key challenge is handling spaces and special characters correctly during sorting. I'll"
+  },
+  {
+   "id": "HumanEval/90",
+   "ok": false,
+   "err": " to write a function `next_smallest(lst)` that returns the 2nd smallest element of a list\n                                                                       ^\nSyntaxError: invalid decimal literal\n",
+   "comp_tail": " complexity: O(n)\n   - Space complexity: O(n)\n\nLet me implement each approach:\n\nApproach 1: Sort and take second element"
+  },
+  {
+   "id": "HumanEval/93",
+   "ok": false,
+   "err": "code/sandbox/he_28.py\", line 20\n    2. Swap case of all letters (uppercase \u2192 lowercase, lowercase \u2192 uppercase)\n                                           ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "put shows 'tHKS KS C MGSSCGG' - I notice the vowels are being replaced with letters that appear 2 positions ahead in the"
+  },
+  {
+   "id": "HumanEval/96",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/100",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_30.py\", line 16\n    Let me analyze this problem carefully:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "If n is even: levels are n, n+2, n+4, ... (all even numbers)\n\nThe number of levels = n + (n % 2)\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/103",
+   "ok": false,
+   "err": ". Average = 3.0. Rounded = 3. Binary = \"11\" \u2713\n                                                                                                            ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "= (n + m) * count / count = (n + m) * count / count\n\nActually, the count is (m - n + 1). So average = (n + m) * (m - n +"
+  },
+  {
+   "id": "HumanEval/106",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/110",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/113",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_34.py\", line 14\n    Let me analyze this problem carefully.\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "is:\n`\"the number of odd elements {count}n the str{count}ng {count} of the {count}nput.\"`\n\nNow let me write the function:"
+  },
+  {
+   "id": "HumanEval/116",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "tion to convert integers to binary strings, then count the number of '1's. I'll use a lambda function to count the ones."
+  },
+  {
+   "id": "HumanEval/120",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/123",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/126",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_38.py\", line 21\n    - is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n                                    ^\nSyntaxError: invalid character '\u279e' (U+279E)\n",
+   "comp_tail": "t is sorted in ascending order\n2. If there are duplicates, return False\n3. Otherwise return True\n\nLet me write the code:"
+  },
+  {
+   "id": "HumanEval/130",
+   "ok": false,
+   "err": "e_39.py\", line 26\n    Wait, there's something odd here. For tri(3), it uses tri(4), not tri(3+1)=tri(4). Let me verify:\n               ^\nSyntaxError: unterminated string literal (detected at line 26)\n",
+   "comp_tail": "(3) = [1, 3, 2, 8] which is only 4 numbers. So it's returning n+1 numbers starting from index 0.\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/133",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_40.py\", line 19\n    - [1,2,3] \u2192 14\n              ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "1. Square each number\n2. Round up to ceiling (ceil)\n\nLet me verify with [-2.4,1,1]:\n- ceil((-2.4)\u00b2) + ceil(1\u00b2) + ceil(1\u00b2"
+  },
+  {
+   "id": "HumanEval/136",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/140",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_42.py\", line 19\n    - \"Example\" \u2192 \"Example\" (no spaces)\n                ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "e are more than 2 consecutive spaces, replace them with \"-\"\n- Otherwise, replace spaces with \"_\"\n\nLet me implement this:"
+  },
+  {
+   "id": "HumanEval/143",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/146",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/150",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/153",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_46.py\", line 25\n    4. If there's a tie, return the first one in the list\n               ^\nSyntaxError: unterminated string literal (detected at line 25)\n",
+   "comp_tail": "R,V,I,N,G,S,L,C,E,S = 13\n  - Lowercase: i = 1\n  - Strength = 13 - 1 = 12 \u2713\n\n- 'Cheese': C,h,e,e,s,e\n  - Uppercase: C = 1"
+  },
+  {
+   "id": "HumanEval/156",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "omplete function including its signature, no explanations, no markdown fences.\n\nLet me implement this solution.\n</think>"
+  },
+  {
+   "id": "HumanEval/160",
+   "ok": false,
+   "err": "en 5 * 4 = 20, then 20 - 5 = 15. That's not right.\n                                                                                    ^\nSyntaxError: unterminated string literal (detected at line 51)\n",
+   "comp_tail": "operator precedence properly.\n\nFor: 2 + 3 * 4 - 5\n\nWith standard precedence:\n- 3 * 4 = 12\n- 2 + 12 = 14\n- 14 - 5 = 9\n\nSo"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "complete function including its signature, no explanations, no markdown fences.\n                                                                          ^\nSyntaxError: invalid character '\u2014' (U+2014)\n",
+   "comp_tail": "eck if it's even\n3. If even, add to result list\n4. Return the result as a list\n\nLet me implement this solution.\n</think>"
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "tag": "QWEN35-08B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "hellaswag",
+ "n": 5,
+ "score": 0.4,
+ "seconds": 12.5,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "pred": 0,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "pred": 0,
+   "gold": 2,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "pred": 0,
+   "gold": 0,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "pred": 0,
+   "gold": 3,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "pred": 0,
+   "gold": 0,
+   "scores": [
+    true
+   ],
+   "method": "gen-letter"
+  }
+ ]
+}

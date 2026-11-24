@@ -1,0 +1,18 @@
+config=/home/arduino/Code/ventunoq-mnn/lfm3-models/LFM3-VL-2B-MNN/config.json mode=chat nothink=False batch=/tmp/opencode/qbatch/LFM3-VL-2B-INT4-SMOKE_chat
+[1/5] 00000.txt chars=10 gen=4 tok 3.0s
+[2/5] 00001.txt chars=10 gen=4 tok 2.0s
+[3/5] 00002.txt chars=10 gen=4 tok 3.0s
+[4/5] 00003.txt chars=10 gen=4 tok 3.0s
+[5/5] 00004.txt chars=2 gen=2 tok 2.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=5 generated=5 skipped=0
+[openbookqa 1] OK  pred=1 gold=1 (gen-letter)
+[openbookqa 2] OK  pred=0 gold=0 (gen-letter)
+[openbookqa 3] FAIL pred=3 gold=0 (gen-letter)
+[openbookqa 4] OK  pred=1 gold=1 (gen-letter)
+[openbookqa 5] FAIL pred=3 gold=2 (gen-letter)
+
+openbookqa LFM3-VL-2B-INT4-SMOKE/mnn: 3/5 = 60.0% -> results/quality_LFM3-VL-2B-INT4-SMOKE_mnn_openbookqa.json

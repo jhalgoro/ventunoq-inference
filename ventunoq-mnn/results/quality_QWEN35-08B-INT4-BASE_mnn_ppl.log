@@ -1,0 +1,4 @@
+config=/home/arduino/Code/ventunoq-mnn/models/Qwen3.5-0.8B-Base-MNN-text/config.json mode=base nothink=False batch=/tmp/opencode/qbatch/QWEN35-08B-INT4-BASE_base
+[ppl] gatsby perplexity = 25.875963
+
+ppl QWEN35-08B-INT4-BASE/mnn: 1/1 = 100.0% -> results/quality_QWEN35-08B-INT4-BASE_mnn_ppl.json

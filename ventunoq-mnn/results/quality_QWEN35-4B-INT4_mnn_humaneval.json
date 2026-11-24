@@ -1,0 +1,310 @@
+{
+ "tag": "QWEN35-4B-INT4",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 50,
+ "score": 0.58,
+ "seconds": 955.1,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_0.py\", line 12\n    for j in range(i + 1, len(numbers)):\nIndentationError: unexpected indent\n",
+   "comp_tail": " 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False"
+  },
+  {
+   "id": "HumanEval/3",
+   "ok": true,
+   "err": "",
+   "comp_tail": "r operation in operations:\n        balance += operation\n        if balance < 0:\n            return True\n    return False"
+  },
+  {
+   "id": "HumanEval/7",
+   "ok": true,
+   "err": "",
+   "comp_tail": " filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    return [s for s in strings if substring in s]"
+  },
+  {
+   "id": "HumanEval/10",
+   "ok": false,
+   "err": "ox/he_3.py\", line 61, in <module>\n    check(make_palindrome)\n  File \"/tmp/opencode/sandbox/he_3.py\", line 56, in check\n    assert candidate('x') == 'x'\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "         break\n        i += 1\n    \n    prefix = string[:i]\n    suffix = string[i:]\n    \n    return string + suffix[::-1]"
+  },
+  {
+   "id": "HumanEval/13",
+   "ok": true,
+   "err": "",
+   "comp_tail": "isor(3, 5)\n    1\n    >>> greatest_common_divisor(25, 15)\n    5\n    \"\"\"\n    while b:\n        a, b = b, a % b\n    return a"
+  },
+  {
+   "id": "HumanEval/17",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_5.py\", line 17\n    result.append(beats[note])\nIndentationError: unexpected indent\n",
+   "comp_tail": "        result.append(beats[note])\n    return result"
+  },
+  {
+   "id": "HumanEval/20",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_6.py\", line 12\n    for j in range(i + 1, len(numbers)):\nIndentationError: unexpected indent\n",
+   "comp_tail": "= diff\n                closest_pair = (min(numbers[i], numbers[j]), max(numbers[i], numbers[j]))\n    return closest_pair"
+  },
+  {
+   "id": "HumanEval/23",
+   "ok": true,
+   "err": "",
+   "comp_tail": "def strlen(string: str) -> int:\n    return len(string)"
+  },
+  {
+   "id": "HumanEval/27",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_8.py\", line 8\n    result.append(char.upper())\nIndentationError: unexpected indent\n",
+   "comp_tail": "pper():\n            result.append(char.lower())\n        else:\n            result.append(char)\n    return ''.join(result)"
+  },
+  {
+   "id": "HumanEval/30",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    return [x for x in l if x > 0]"
+  },
+  {
+   "id": "HumanEval/33",
+   "ok": true,
+   "err": "",
+   "comp_tail": " i in indices]\n    values.sort()\n    for i, idx in enumerate(indices):\n        result[idx] = values[i]\n    return result"
+  },
+  {
+   "id": "HumanEval/37",
+   "ok": false,
+   "err": " 123, 1, -10])) == tuple([-10, 3, -5, 2, -3, 3, 5, 0, 9, 1, 123])\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "sort()\n    result = list(l)\n    for i in range(1, len(l), 2):\n        result[i] = even_indices[i // 2]\n    return result"
+  },
+  {
+   "id": "HumanEval/40",
+   "ok": true,
+   "err": "",
+   "comp_tail": "  for k in range(j + 1, n):\n                if l[i] + l[j] + l[k] == 0:\n                    return True\n    return False"
+  },
+  {
+   "id": "HumanEval/43",
+   "ok": true,
+   "err": "",
+   "comp_tail": "  seen = set()\n    for num in l:\n        if -num in seen:\n            return True\n        seen.add(num)\n    return False"
+  },
+  {
+   "id": "HumanEval/47",
+   "ok": true,
+   "err": "",
+   "comp_tail": "   if n % 2 == 1:\n        return sorted_l[n // 2]\n    else:\n        return (sorted_l[n // 2 - 1] + sorted_l[n // 2]) / 2"
+  },
+  {
+   "id": "HumanEval/50",
+   "ok": true,
+   "err": "",
+   "comp_tail": "ction. Returns decoded string.\n    \"\"\"\n    return \"\".join([chr(((ord(ch) - 5 - ord(\"a\")) % 26) + ord(\"a\")) for ch in s])"
+  },
+  {
+   "id": "HumanEval/53",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n    return x + y"
+  },
+  {
+   "id": "HumanEval/57",
+   "ok": false,
+   "err": " 36, in <module>\n    check(monotonic)\n  File \"/tmp/opencode/sandbox/he_17.py\", line 26, in check\n    assert candidate([1, 2, 4, 10]) == True\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "f (l[i] > l[i + 1] and not increasing) or (l[i] < l[i + 1] and not decreasing):\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/60",
+   "ok": true,
+   "err": "",
+   "comp_tail": "050\n    >>> sum_to_n(5)\n    15\n    >>> sum_to_n(10)\n    55\n    >>> sum_to_n(1)\n    1\n    \"\"\"\n    return n * (n + 1) // 2"
+  },
+  {
+   "id": "HumanEval/63",
+   "ok": true,
+   "err": "",
+   "comp_tail": "bs[2] = 1\n    \n    for i in range(3, n + 1):\n        fibs[i] = fibs[i-1] + fibs[i-2] + fibs[i-3]\n    \n    return fibs[n]"
+  },
+  {
+   "id": "HumanEval/67",
+   "ok": false,
+   "err": "^^^^\n  File \"/tmp/opencode/sandbox/he_20.py\", line 15, in fruit_distribution\n    apples = int(s.split()[1])\n             ^^^^^^^^^^^^^^^^^\nValueError: invalid literal for int() with base 10: 'apples'\n",
+   "comp_tail": "    apples = int(s.split()[1])\n    oranges = int(s.split()[4])\n    return n - apples - oranges"
+  },
+  {
+   "id": "HumanEval/70",
+   "ok": true,
+   "err": "",
+   "comp_tail": "append(sorted_lst[left])\n        left += 1\n        result.append(sorted_lst[right])\n        right -= 1\n    return result"
+  },
+  {
+   "id": "HumanEval/73",
+   "ok": true,
+   "err": "",
+   "comp_tail": " right:\n        if arr[left] != arr[right]:\n            count += 1\n        left += 1\n        right -= 1\n    return count"
+  },
+  {
+   "id": "HumanEval/77",
+   "ok": false,
+   "err": "/tmp/opencode/sandbox/he_23.py\", line 26, in check\n    assert candidate(-1) == True, \"Third test error: \" + str(candidate(-1))\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Third test error: False\n",
+   "comp_tail": "return True\n    root = round(abs(a) ** (1/3))\n    if root ** 3 == abs(a):\n        return root ** 3 == a\n    return False"
+  },
+  {
+   "id": "HumanEval/80",
+   "ok": true,
+   "err": "",
+   "comp_tail": "e(len(s) - 2):\n        if s[i] == s[i+1] or s[i] == s[i+2] or s[i+1] == s[i+2]:\n            return False\n    return True"
+  },
+  {
+   "id": "HumanEval/83",
+   "ok": false,
+   "err": "/sandbox/he_25.py\", line 28, in <module>\n    check(starts_one_ends)\n  File \"/tmp/opencode/sandbox/he_25.py\", line 18, in check\n    assert candidate(1) == 1\n           ^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "  starts = 9 * 10**(n-2)\n    ends = 9 * 10**(n-2)\n    overlap = 1 * 10**(n-2)\n    return total + starts + ends - overlap"
+  },
+  {
+   "id": "HumanEval/86",
+   "ok": true,
+   "err": "",
+   "comp_tail": "ord in words:\n        sorted_word = ''.join(sorted(word))\n        result.append(sorted_word)\n    return ' '.join(result)"
+  },
+  {
+   "id": "HumanEval/90",
+   "ok": true,
+   "err": "",
+   "comp_tail": "rn None\n    sorted_lst = sorted(lst)\n    if sorted_lst[0] == sorted_lst[1]:\n        return None\n    return sorted_lst[1]"
+  },
+  {
+   "id": "HumanEval/93",
+   "ok": false,
+   "err": "candidate('TEST') == 'tgst', \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n",
+   "comp_tail": "                    result.append(char.lower())\n        else:\n            result.append(char)\n    return ''.join(result)"
+  },
+  {
+   "id": "HumanEval/96",
+   "ok": false,
+   "err": "sert candidate(1) == []\n           ^^^^^^^^^^^^\n  File \"/tmp/opencode/sandbox/he_29.py\", line 29, in count_up_to\n    is_prime[1] = False\n    ~~~~~~~~^^^\nIndexError: list assignment index out of range\n",
+   "comp_tail": "] = False\n    \n    for i in range(2, n):\n        if is_prime[i]:\n            primes.append(i)\n    \n    return primes[:n]"
+  },
+  {
+   "id": "HumanEval/100",
+   "ok": true,
+   "err": "",
+   "comp_tail": "2 == 0:\n            current += 2\n        else:\n            current += 2\n        result.append(current)\n    return result"
+  },
+  {
+   "id": "HumanEval/103",
+   "ok": false,
+   "err": "31.py\", line 38, in <module>\n    check(rounded_avg)\n  File \"/tmp/opencode/sandbox/he_31.py\", line 21, in check\n    assert candidate(1, 5) == \"0b11\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "f n > m:\n        return -1\n    total = (n + m) * (m - n + 1) // 2\n    avg = total // (m - n + 1)\n    return bin(avg)[2:]"
+  },
+  {
+   "id": "HumanEval/106",
+   "ok": true,
+   "err": "",
+   "comp_tail": "\n            for j in range(1, i + 1):\n                sum_val += j\n            result.append(sum_val)\n    return result"
+  },
+  {
+   "id": "HumanEval/110",
+   "ok": true,
+   "err": "",
+   "comp_tail": " 2 != 0)\n    even_in_lst2 = sum(1 for x in lst2 if x % 2 == 0)\n    return \"YES\" if even_in_lst2 >= odd_in_lst1 else \"NO\""
+  },
+  {
+   "id": "HumanEval/113",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_34.py\", line 56\n    s =\n       ^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ce('e', 'e')\n        s = s.replace('o', 'o')\n        s = s.replace('n', '4')\n        s = s.replace('t', 't')\n        s ="
+  },
+  {
+   "id": "HumanEval/116",
+   "ok": true,
+   "err": "",
+   "comp_tail": "    return sorted(arr, key=lambda x: (bin(x).count('1'), x))"
+  },
+  {
+   "id": "HumanEval/120",
+   "ok": false,
+   "err": "e>\n    check(maximum)\n  File \"/tmp/opencode/sandbox/he_36.py\", line 31, in check\n    assert candidate([-3, -4, 5], 3) == [-4, -3, 5]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": "    return sorted(arr, reverse=True)[:k]"
+  },
+  {
+   "id": "HumanEval/123",
+   "ok": true,
+   "err": "",
+   "comp_tail": "sequence.append(current)\n    \n    odd_numbers = [num for num in sequence if num % 2 != 0]\n    return sorted(odd_numbers)"
+  },
+  {
+   "id": "HumanEval/126",
+   "ok": true,
+   "err": "",
+   "comp_tail": "i] == lst[i + 1]:\n            if i + 2 < len(lst) and lst[i + 2] == lst[i]:\n                return False\n    return True"
+  },
+  {
+   "id": "HumanEval/130",
+   "ok": false,
+   "err": ", line 55, in <module>\n    check(tri)\n  File \"/tmp/opencode/sandbox/he_39.py\", line 42, in check\n    assert candidate(3) == [1, 3, 2.0, 8.0]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": " - 2]\n            next_val = prev + prev_prev + result[i - 1]\n            result.append(next_val)\n    \n    return result"
+  },
+  {
+   "id": "HumanEval/133",
+   "ok": false,
+   "err": "ssert candidate([-2.4,1,1])==6, \"This prints if this assert fails 1 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 1 (good for debugging!)\n",
+   "comp_tail": "    return sum(int(x + 0.9999999) ** 2 for x in lst)"
+  },
+  {
+   "id": "HumanEval/136",
+   "ok": true,
+   "err": "",
+   "comp_tail": "se:\n        a = None\n    \n    if positives:\n        b = min(positives)\n    else:\n        b = None\n    \n    return (a, b)"
+  },
+  {
+   "id": "HumanEval/140",
+   "ok": false,
+   "err": "e\") == \"Exa-mple\", \"This prints if this assert fails 4 (good for debugging!)\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: This prints if this assert fails 4 (good for debugging!)\n",
+   "comp_tail": "    import re\n    result = text.replace(\" \", \"_\")\n    result = re.sub(r\" {2,}\", \"-\", result)\n    return result"
+  },
+  {
+   "id": "HumanEval/143",
+   "ok": true,
+   "err": "",
+   "comp_tail": "urn False\n    i = 3\n    while i * i <= n:\n        if n % i == 0:\n            return False\n        i += 2\n    return True"
+  },
+  {
+   "id": "HumanEval/146",
+   "ok": true,
+   "err": "",
+   "comp_tail": "          last = int(s[-1])\n            if first % 2 != 0 and last % 2 != 0:\n                count += 1\n    return count"
+  },
+  {
+   "id": "HumanEval/150",
+   "ok": true,
+   "err": "",
+   "comp_tail": "n < 2:\n        return y\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return y\n    return x"
+  },
+  {
+   "id": "HumanEval/153",
+   "ok": true,
+   "err": "",
+   "comp_tail": "ax_strength = strength\n            strongest_extension = extension\n    \n    return f\"{class_name}.{strongest_extension}\""
+  },
+  {
+   "id": "HumanEval/156",
+   "ok": false,
+   "err": "47.py\", line 92, in <module>\n    check(int_to_mini_roman)\n  File \"/tmp/opencode/sandbox/he_47.py\", line 73, in check\n    assert candidate(19) == 'xix'\n           ^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": " 9:\n        result.append('ix')\n        number -= 9\n    elif number >= 5:\n        result.append('v')\n        number -= 5"
+  },
+  {
+   "id": "HumanEval/160",
+   "ok": false,
+   "err": "do_algebra)\n  File \"/tmp/opencode/sandbox/he_48.py\", line 45, in check\n    assert candidate(['+', '*', '-'], [2, 3, 4, 5]) == 9\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+   "comp_tail": ":\n            result //= operand[i + 1]\n        elif op == '**':\n            result **= operand[i + 1]\n    return result"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "(generate_integers)\n  File \"/tmp/opencode/sandbox/he_49.py\", line 22, in check\n    assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Test 1\n",
+   "comp_tail": "   result = []\n    for i in range(start, end + 1):\n        if i % 2 == 0:\n            result.append(i)\n    return result"
+  }
+ ]
+}

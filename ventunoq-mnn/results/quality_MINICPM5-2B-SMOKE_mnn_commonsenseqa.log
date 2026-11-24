@@ -1,0 +1,18 @@
+config=/home/arduino/Code/ventunoq-mnn/minicpm5-models/MiniCPM5-2B-MNN/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/MINICPM5-2B-SMOKE_chat
+[1/5] 00000.txt chars=94 gen=16 tok 5.0s
+[2/5] 00001.txt chars=91 gen=16 tok 4.0s
+[3/5] 00002.txt chars=75 gen=16 tok 3.0s
+[4/5] 00003.txt chars=83 gen=16 tok 4.0s
+[5/5] 00004.txt chars=71 gen=16 tok 4.0s
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+DONE items=5 generated=5 skipped=0
+[commonsenseqa 1] FAIL pred=None gold=0 (gen-miss)
+[commonsenseqa 2] FAIL pred=None gold=2 (gen-miss)
+[commonsenseqa 3] FAIL pred=None gold=1 (gen-miss)
+[commonsenseqa 4] FAIL pred=None gold=1 (gen-miss)
+[commonsenseqa 5] FAIL pred=None gold=4 (gen-miss)
+
+commonsenseqa MINICPM5-2B-SMOKE/mnn: 0/5 = 0.0% -> results/quality_MINICPM5-2B-SMOKE_mnn_commonsenseqa.json

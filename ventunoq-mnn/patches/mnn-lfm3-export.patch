@@ -1,0 +1,451 @@
+diff --git a/transformers/llm/export/llmexport.py b/transformers/llm/export/llmexport.py
+index caf915a..1fce645 100644
+--- a/transformers/llm/export/llmexport.py
++++ b/transformers/llm/export/llmexport.py
+@@ -145,6 +145,19 @@ class LlmExporter(torch.nn.Module):
+                 'bos': '<bos>',
+                 'eos': '<turn|>'
+             }
++        # lfm3/lfm3_vl keep their chat template in chat_template.jinja (macros, namespaces,
++        # generation tags): tokenizer_config.json has no chat_template key and the
++        # minja parser cannot take the real one, so the engine fell back to raw
++        # concatenation (untemplated, out-of-distribution prompts). Simplified
++        # ChatML below; turns use the pipe special tokens, the think block uses the
++        # pipe-free text tags. Renders the non-thinking form (empty think block)
++        # like the HF template with enable_thinking=false.
++        if self.model_type in ('lfm3', 'lfm3_vl'):
++            self.llm_config['jinja'] = {
++                'chat_template': '{{ bos_token }}{% for message in messages %}<|im_start|>{{ message.role }}\n{% if message.role == "assistant" %}<think></think>{% endif %}{{ message.content }}<|im_end|>\n{% endfor %}{% if add_generation_prompt %}<|im_start|>assistant\n<think></think>{% endif %}',
++                'bos': '<|startoftext|>',
++                'eos': '<|im_end|>'
++            }
+         # glm_ocr's HF template is too complex for minja parser, use simplified version
+         if self.model_type == 'glm_ocr':
+             self.llm_config['jinja'] = {
+diff --git a/transformers/llm/export/utils/model.py b/transformers/llm/export/utils/model.py
+index bcd4706..848f6ac 100644
+--- a/transformers/llm/export/utils/model.py
++++ b/transformers/llm/export/utils/model.py
+@@ -159,6 +159,7 @@ class LlmModel(PreTrainedModel):
+             'funaudiochat': 'AutoModelForSeq2SeqLM',
+             'glm_ocr': 'GlmOcrForConditionalGeneration',
+             'lfm2_vl': 'Lfm2VlForConditionalGeneration',
++            'lfm3_vl': 'AutoModelForImageTextToText',
+             'gemma4': 'Gemma4ForConditionalGeneration',
+             'hunyuan_vl': 'HunYuanVLForConditionalGeneration',
+             'minicpmv4_7': 'MiniCPMV4_7ForConditionalGeneration',
+@@ -285,10 +286,10 @@ class LlmModel(PreTrainedModel):
+ 
+         model.embed = Embedding(model.embed, config)
+ 
+-        # gemma3/gemma3_text/gemma4: dual rotary for sliding vs full attention layers
++        # gemma3/gemma3_text/gemma4/lfm3: dual rotary for sliding vs full attention layers
+         # rope_parameters has form {'sliding_attention': {'rope_theta': ...}, 'full_attention': {'rope_theta': ...}}
+         _rp = getattr(config, 'rope_parameters', None)
+-        _is_dual_rope = (model_type in ('gemma3', 'gemma3_text', 'gemma4')
++        _is_dual_rope = (model_type in ('gemma3', 'gemma3_text', 'gemma4', 'lfm3', 'lfm3_vl')
+                          and _rp is not None
+                          and isinstance(_rp, dict)
+                          and any(isinstance(v, dict) for v in _rp.values()))
+@@ -323,7 +324,20 @@ class LlmModel(PreTrainedModel):
+             })()
+             model.rotary_full = Rotary(full_config)
+             # Adjust rotary_dim for partial rotary factor
+-            if partial_factor < 1.0:
++            if partial_factor < 1.0 and model_type in ('lfm3', 'lfm3_vl'):
++                # LFM3 HF pads inv_freq with zeros and applies rotate_half across the
++                # full head_dim, so pairs (i, i + head_dim/2) rotate while the trailing
++                # dims keep cos=1 / sin=0. Keep the table at head_dim width and zero
++                # the unused frequencies: the standard llama_rotary_pos / FusedRoPE
++                # path then matches HF bit-for-bit.
++                rope_angles = int(partial_factor * global_head_dim) // 2
++                theta_full = full_rp.get('rope_theta', 1000000.0)
++                freqs = 1.0 / (theta_full ** (torch.arange(0, 2 * rope_angles, 2, dtype=torch.float32) / global_head_dim))
++                model.rotary_full.rotary_dim = global_head_dim
++                model.rotary_full.theta = torch.cat(
++                    (freqs, torch.zeros(global_head_dim // 2 - rope_angles, dtype=torch.float32)))
++                model.rotary_full.build_rope_tables()
++            elif partial_factor < 1.0:
+                 rotary_dim = int(global_head_dim * partial_factor)
+                 model.rotary_full.rotary_dim = rotary_dim
+                 model.rotary_full.theta = 1.0 / (full_rp.get('rope_theta', 1000000.0) ** (torch.arange(0, rotary_dim, 2, dtype=torch.float32) / global_head_dim))
+diff --git a/transformers/llm/export/utils/model_mapper.py b/transformers/llm/export/utils/model_mapper.py
+index 4b31c7e..baaea1c 100644
+--- a/transformers/llm/export/utils/model_mapper.py
++++ b/transformers/llm/export/utils/model_mapper.py
+@@ -1011,6 +1011,75 @@ class ModelMapper:
+         }
+         self.regist('lfm2', lfm2_map)
+ 
++    def regist_lfm3(self):
++        # LFM3 = LFM2 conv layers + Llama attention with QK RMSNorm, a per-head
++        # sigmoid output gate (gate_proj: hidden -> num_heads), sandwich norms on
++        # both branch outputs, and per-layer-type rope (full: theta 1e6 partial
++        # 0.5; sliding: theta 1e4) with a third `sliding_attention` layer type.
++        lfm3_config = {
++            'hidden_size': 'hidden_size',
++            'num_attention_heads': 'num_attention_heads',
++            'num_hidden_layers': 'num_hidden_layers',
++            'num_key_value_heads': 'num_key_value_heads',
++            'rope_theta': 'rope_theta',
++            'rope_parameters': 'rope_parameters',
++            'max_position_embeddings': 'max_position_embeddings',
++            'layer_types': 'layer_types',
++            'conv_L_cache': 'conv_L_cache',
++            'sliding_window': 'sliding_window',
++        }
++        lfm3_model = {
++            'lm': 'lm_head',
++            'embed': 'model.embed_tokens',
++            'blocks': 'model.layers',
++            'final_layernorm': 'model.embedding_norm',
++        }
++        lfm3_decoder = {
++            'self_attn': 'self_attn',
++            'linear_attn': 'conv',
++            'mlp': 'feed_forward',
++            'input_layernorm': 'operator_norm',
++            'post_attention_layernorm': 'ffn_norm',
++            'post_operator_norm': 'post_operator_norm',
++            'post_ffn_norm': 'post_ffn_norm',
++        }
++        lfm3_attention = {
++            'q_proj': 'q_proj',
++            'k_proj': 'k_proj',
++            'v_proj': 'v_proj',
++            'o_proj': 'o_proj',
++            'q_norm': 'q_norm',
++            'k_norm': 'k_norm',
++            'gate_proj': 'gate_proj',
++        }
++        lfm3_linear_attention = {
++            'in_proj': 'in_proj',
++            'conv': 'conv',
++            'out_proj': 'out_proj',
++        }
++        lfm3_map = {
++            'config': lfm3_config,
++            'model': lfm3_model,
++            'decoder': lfm3_decoder,
++            'attention': lfm3_attention,
++            'linear_attention': lfm3_linear_attention,
++        }
++        self.regist('lfm3', lfm3_map)
++
++    def regist_lfm3_vl(self):
++        # LFM3-VL keeps the LFM3 text backbone under `model.language_model`, with the
++        # vision tower and projector handled by Lfm3VlVision (mapped as visual).
++        lfm3_vl_map = copy.deepcopy(self.mapper['lfm3'])
++        lfm3_vl_map['config'] = {k: f'text_config.{v}' for k, v in lfm3_vl_map['config'].items()}
++        lfm3_vl_map['model'].update({
++            'embed': 'model.language_model.embed_tokens',
++            'blocks': 'model.language_model.layers',
++            'final_layernorm': 'model.language_model.embedding_norm',
++            'visual': 'model.vision_tower',
++            'multi_modal_projector': 'model.multi_modal_projector',
++        })
++        self.regist('lfm3_vl', lfm3_vl_map)
++
+     def regist_lfm2_moe(self):
+         lfm2_moe_config = {
+             'hidden_size': 'hidden_size',
+diff --git a/transformers/llm/export/utils/transformers.py b/transformers/llm/export/utils/transformers.py
+index 46799a1..8720450 100644
+--- a/transformers/llm/export/utils/transformers.py
++++ b/transformers/llm/export/utils/transformers.py
+@@ -138,6 +138,27 @@ class Attention(torch.nn.Module):
+             # norm.weight as gamma, so canonicalize the offset semantics first.
+             self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None), 1.0)
+             self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None), 1.0)
++        if config.model_type in ('lfm3', 'lfm3_vl'):
++            # LFM3 q/k norms are plain-gamma RMSNorm over head_dim (eps=norm_eps);
++            # canonicalize so FusedRoPE can store norm.weight as gamma.
++            self.q_norm = canonical_rms_norm(getattr(self, 'q_norm', None))
++            self.k_norm = canonical_rms_norm(getattr(self, 'k_norm', None))
++            gate_proj = getattr(self, 'gate_proj', None)
++            if gate_proj is not None and gate_proj.out_features == self.num_heads:
++                # Expand the per-head scalar gate to a per-channel gate (rows
++                # repeated head_dim times, numerically identical) so the gate
++                # projection has num_heads*head_dim channels: a broadcast/Tile in
++                # the gate chain breaks the converter's gated-attention C4 fusion
++                # (FuseTransformerC4), leaving o_proj with a layout mismatch.
++                head_index = torch.arange(self.num_heads).repeat_interleave(self.head_dim)
++                expanded = torch.nn.Linear(
++                    gate_proj.in_features, self.num_heads * self.head_dim,
++                    bias=gate_proj.bias is not None,
++                    dtype=gate_proj.weight.dtype, device=gate_proj.weight.device)
++                expanded.weight.data = gate_proj.weight.data[head_index].clone()
++                if gate_proj.bias is not None:
++                    expanded.bias.data = gate_proj.bias.data[head_index].clone()
++                self.gate_proj = expanded
+         self.q_gate_proj = None
+         self.qk_norm_after_rope = getattr(config, 'qk_norm_after_rope', False)
+         if not self.qk_norm_after_rope:
+@@ -298,6 +319,10 @@ class Attention(torch.nn.Module):
+         value_states = None
+         if self.q_gate_proj is not None:
+             gate = self.q_gate_proj(hidden_states)
++        elif getattr(self, 'gate_proj', None) is not None:
++            # LFM3 output gate, expanded to per-channel in __init__; sigmoid is
++            # applied at the shared site below.
++            gate = self.gate_proj(hidden_states)
+         elif self.q_proj.out_features == 2 * self.num_heads * self.head_dim:
+             reshaped = query_states.view(bsz, q_len, self.num_heads, self.head_dim * 2)
+             query_states, gate = torch.split(reshaped, self.head_dim, dim=-1)
+@@ -1715,6 +1740,12 @@ class Decoder(torch.nn.Module):
+                 attention_mask=attention_mask,
+             )
+ 
++        # LFM3 sandwich norm: RMSNorm on the attention/conv branch output before
++        # the residual add (post_operator_norm); the FFN twin is below.
++        post_operator_norm = getattr(self, 'post_operator_norm', None)
++        if post_operator_norm is not None:
++            hidden_states = post_operator_norm(hidden_states)
++
+         # Fully Connected
+         if not hasattr(self, 'post_attention_layernorm'):
+             # phi
+@@ -1784,6 +1815,9 @@ class Decoder(torch.nn.Module):
+             residual = hidden_states
+             hidden_states = self.post_attention_layernorm(hidden_states)
+             hidden_states = self.mlp(hidden_states)
++            post_ffn_norm = getattr(self, 'post_ffn_norm', None)
++            if post_ffn_norm is not None:  # LFM3 sandwich norm on the FFN output
++                hidden_states = post_ffn_norm(hidden_states)
+             hidden_states = residual + hidden_states
+ 
+         # gemma4 PLE (Per-Layer Embeddings)
+diff --git a/transformers/llm/export/utils/vision.py b/transformers/llm/export/utils/vision.py
+index 8005ed1..3a607b4 100644
+--- a/transformers/llm/export/utils/vision.py
++++ b/transformers/llm/export/utils/vision.py
+@@ -7,7 +7,9 @@ import numpy as np
+ from torch import nn
+ from typing import Tuple, Optional, Dict, Any
+ 
+-from .transformers import VisionRotary, Decoder
++from types import SimpleNamespace
++
++from .transformers import Attention, VisionRotary, Decoder
+ from .spinner import spinner_run
+ from .torch_utils import onnx_export, EncoderExport, embedding_scale
+ from .qat import copy_qat_source
+@@ -129,6 +131,7 @@ class Vision(torch.nn.Module):
+             'minicpmv4_7': MiniCPMV4_7Vision,
+             'glm_ocr': GlmOcrVision,
+             'lfm2_vl': Lfm2VlVision,
++            'lfm3_vl': Lfm3VlVision,
+             'hunyuan_vl': HunyuanVLVision,
+         }
+         if model_type in visual_models:
+@@ -2822,3 +2825,210 @@ class Lfm2VlVision(Vision):
+                         "pixel_values": { 0: "size" },
+                     })
+         return onnx_model
++
++
++class Lfm3VlVisionConv(torch.nn.Module):
++    # Gated depthwise 3x3 conv over the patch grid. HF reshapes the merge-block-ordered
++    # sequence into raster grids; here the same op is nine shifted gathers derived from
++    # position_ids, keeping the graph free of grid-dependent reshapes.
++    def __init__(self, conv, merge_size):
++        super().__init__()
++        self.merge_size = merge_size
++        self.in_proj = conv.in_proj
++        self.out_proj = conv.out_proj
++        self.weight = conv.spatial_conv.weight  # (C, 1, k, k)
++
++    def forward(self, hidden_states, position_ids):
++        # hidden_states: (N, C); position_ids: (2, N) raster (h, w) of each merge-ordered patch
++        value, scale, key = torch.chunk(self.in_proj(hidden_states), 3, dim=-1)
++        gated = value * key
++        m = self.merge_size
++        h = position_ids[0].float()
++        w = position_ids[1].float()
++        grid_h = h.max() + 1
++        grid_w = w.max() + 1
++        blocks_w = torch.floor(grid_w / m)
++        # frames are contiguous blocks of grid_h*grid_w tokens; taps never cross frames
++        frame_step = grid_h * grid_w
++        frame_base = torch.floor(torch.arange(h.shape[0], device=h.device).float() / frame_step) * frame_step
++        kernel = self.weight.shape[-1]
++        pad = kernel // 2
++        convolved = 0
++        for ky in range(kernel):
++            hp = h + (ky - pad)
++            bh = torch.floor(hp / m)
++            valid_h = (hp >= 0).float() * (hp <= grid_h - 1).float()
++            for kx in range(kernel):
++                wp = w + (kx - pad)
++                bw = torch.floor(wp / m)
++                valid = valid_h * (wp >= 0).float() * (wp <= grid_w - 1).float()
++                # merge-block index of the source cell; invalid taps fall to row 0, masked below
++                src = frame_base + (bh * blocks_w + bw) * (m * m) + (hp - m * bh) * m + (wp - m * bw)
++                tap = torch.index_select(gated, 0, (src * valid).long())
++                convolved = convolved + tap * valid.unsqueeze(-1) * self.weight[:, 0, ky, kx]
++        return self.out_proj(scale * convolved)
++
++
++class Lfm3VlVisionLayer(torch.nn.Module):
++    def __init__(self, layer, self_attn, conv):
++        super().__init__()
++        self.self_attn = self_attn
++        self.conv = conv
++        self.mlp = layer.feed_forward
++        self.operator_norm = layer.operator_norm
++        self.ffn_norm = layer.ffn_norm
++
++    def forward(self, hidden_states, rotary_pos_emb, attention_mask, position_ids):
++        if self.self_attn is not None:
++            # MNN Attention works in (batch, seq, channel) layout
++            attn_out = self.self_attn(self.operator_norm(hidden_states).unsqueeze(0),
++                                      attention_mask, rotary_pos_emb)
++            operator_output = attn_out.squeeze(0)
++        else:
++            operator_output = self.conv(self.operator_norm(hidden_states), position_ids)
++        hidden_states = hidden_states + operator_output
++        return hidden_states + self.mlp(self.ffn_norm(hidden_states))
++
++
++class Lfm3VlVision(Vision):
++    # LFM3-VL vision tower: linear patchifier + conv/attn mixed encoder (axial 2D rope,
++    # full attention per frame) + LayerNorm/MLP projector. Patch flattening, grid
++    # positions and per-frame masks follow the Qwen2VL contract, so the C++ qwen2_vl
++    # patch processor and the Qwen2Vision helpers below are reused as-is.
++    processor_family = "qwen2_vl"
++    patch_layout = "merged"
++    refresh_image_resize_config = Qwen2Vision.refresh_image_resize_config
++    reset_multimodal_state = Qwen2Vision.reset_multimodal_state
++    str_to_ids = Qwen2Vision.str_to_ids
++    vision_reshape = Qwen2Vision.vision_reshape
++    vision_position_ids = Qwen2Vision.vision_position_ids
++    vision_attention_mask = Qwen2Vision.vision_attention_mask
++    images_forward = Qwen2Vision.images_forward
++    embed = Qwen2Vision.embed
++
++    def __init__(self, visual, base):
++        vision_config = base.config.origin_config.vision_config
++        self.vision_config = vision_config
++        self.patch_size = vision_config.patch_size
++        self.merge_size = vision_config.spatial_merge_size
++        self.temporal_patch_size = vision_config.temporal_patch_size
++        # image processor size bounds (processor_config.json shortest/longest edge)
++        self.min_pixels = 65536
++        self.max_pixels = 16777216
++        self.image_embeds = []
++        self.video_embeds = []
++        self.image_grid_thw = []
++        super().__init__(visual, base)
++        self.multi_modal_projector = base.multi_modal_projector.float()
++        self.quant_bit = 8
++
++    def init_config(self):
++        self.norm_mean = self.norm_std = [0.5, 0.5, 0.5]
++        image_mean = np.array(self.norm_mean) * 255.0
++        image_norm = 1 / (np.array(self.norm_std) * 255.0)
++        self.llm_config['image_mean'] = image_mean.tolist()
++        self.llm_config['image_norm'] = image_norm.tolist()
++        self.llm_config['is_visual'] = True
++
++    def load(self):
++        self.vision_start_id = self.config.vision_start_token_id
++        self.vision_end_id = self.config.vision_end_token_id
++        self.image_pad_id = self.config.image_token_id
++        self.video_pad_id = self.config.video_token_id
++        self.llm_config['vision_start'] = self.vision_start_id
++        self.llm_config['vision_end'] = self.vision_end_id
++        self.llm_config['image_pad'] = self.image_pad_id
++        # Placeholder strings come from the tokenizer's added-token table: LFM3-VL uses
++        # <|image|>/<|video|> (ids 125030/125029), NOT the qwen-style *_pad tokens.
++        hf_tok = getattr(self.tokenizer, 'tokenizer', self.tokenizer)
++        added = getattr(hf_tok, 'added_tokens_decoder', {})
++        def token_str(token_id, fallback):
++            entry = added.get(int(token_id))
++            return getattr(entry, 'content', fallback)
++        self.vision_start_token = token_str(self.vision_start_id, '<|vision_start|>')
++        self.vision_end_token = token_str(self.vision_end_id, '<|vision_end|>')
++        self.image_pad_token = token_str(self.image_pad_id, '<|image|>')
++        self.video_pad_token = token_str(self.video_pad_id, '<|video|>')
++        self.refresh_image_resize_config()
++        config = self.vision_config
++        head_dim = config.hidden_size // config.num_attention_heads
++        # VisionRotary emits cos/sin of cat([h_freqs, w_freqs]) repeated over the full
++        # head_dim, matching HF's axial rope recomposition; rotary_dim is per-axis half.
++        self.rotary = VisionRotary(SimpleNamespace(
++            head_dim=head_dim, rotary_dim=head_dim // 2, model_type=config.model_type,
++            rope_theta=config.rope_parameters['rope_theta'], rope_ratio=None,
++            rope_parameters=None, rope_scaling=None))
++        attn_config = SimpleNamespace(
++            hidden_size=config.hidden_size, head_dim=head_dim, model_type=config.model_type,
++            num_attention_heads=config.num_attention_heads,
++            num_key_value_heads=config.num_key_value_heads)
++        attn_mapper = {'attention': {'q_proj': 'q_proj', 'k_proj': 'k_proj', 'v_proj': 'v_proj',
++                                     'o_proj': 'out_proj', 'q_norm': 'q_layernorm',
++                                     'k_norm': 'k_layernorm'}}
++        self.blocks = torch.nn.ModuleList()
++        for i, layer in enumerate(self.visual.layers):
++            is_attn = config.layer_types[i] == 'full_attention'
++            self_attn = Attention(layer.self_attn, i, attn_config, self.rotary,
++                                  attn_mapper) if is_attn else None
++            conv = None if is_attn else Lfm3VlVisionConv(layer.conv, self.merge_size)
++            self.blocks.append(Lfm3VlVisionLayer(layer, self_attn, conv))
++        self.patchifier = self.visual.patchifier
++        self.embedding_norm = self.visual.embedding_norm
++
++    smart_resize = Qwen2Vision.smart_resize
++
++    def image_to_tensor(self, image):
++        from transformers.image_transforms import convert_to_rgb, resize, rescale, normalize
++        from transformers.image_utils import (
++            PILImageResampling, infer_channel_dimension_format, to_numpy_array
++        )
++        image = convert_to_rgb(image)
++        image = to_numpy_array(image)
++        format = infer_channel_dimension_format(image)
++        height, width = image.shape[:2]
++        resized_height, resized_width = self.smart_resize(
++            height, width, self.patch_size * self.merge_size, self.min_pixels, self.max_pixels)
++        image = resize(image, size=(resized_height, resized_width),
++                       resample=PILImageResampling.BICUBIC, input_data_format=format)
++        image = rescale(image, scale=1 / 255.0, input_data_format=format)
++        image = normalize(image=image, mean=self.norm_mean, std=self.norm_std,
++                          input_data_format=format)
++        image = np.expand_dims(image, [0])
++        image = image.transpose(0, 3, 1, 2)
++        return torch.from_numpy(image)
++
++    def img_process(self, image):
++        image = self.image_to_tensor(image)
++        image_embed = self.images_forward(image)
++        self.image_embeds.append(image_embed)
++        return image_embed.shape[0]
++
++    def forward(self, flatten_patches, position_ids, attention_mask):
++        hidden_states = self.embedding_norm(self.patchifier(flatten_patches))
++        rotary_pos_emb = self.rotary(position_ids)
++        for blk in self.blocks:
++            hidden_states = blk(hidden_states, rotary_pos_emb, attention_mask, position_ids)
++        projector = self.multi_modal_projector
++        hidden_states = projector.layer_norm(hidden_states)
++        hidden_states = hidden_states.reshape(-1, projector.linear_1.in_features)
++        hidden_states = projector.linear_1(hidden_states)
++        hidden_states = projector.act(hidden_states)
++        image_embeds = projector.linear_2(hidden_states)
++        return image_embeds.unsqueeze(1)
++
++    @spinner_run(f'export visual to ')
++    def export(self, onnx_path):
++        patch_dim = 3 * self.temporal_patch_size * self.patch_size ** 2
++        patches = torch.randn([900, patch_dim])
++        position_ids = torch.zeros([2, 900], dtype=torch.int32)
++        attention_mask = torch.zeros([1, 900, 900], dtype=torch.float)
++        onnx_model = f'{onnx_path}/visual.onnx'
++        self.export_onnx(self, (patches, position_ids, attention_mask), onnx_model,
++                         input_names=['patches', 'position_ids', 'attention_mask'],
++                         output_names=['image_embeds'],
++                         dynamic_axes={
++                             'patches': { 0: 'size' },
++                             'position_ids': { 1: 'size' },
++                             'attention_mask': { 1: 'size', 2: 'size' },
++                         })
++        return onnx_model

@@ -1,0 +1,16 @@
+{
+ "tag": "QWEN35-2B-INT4-BASE",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 1974.8,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 19.188656,
+   "max_tokens": "full"
+  }
+ ]
+}

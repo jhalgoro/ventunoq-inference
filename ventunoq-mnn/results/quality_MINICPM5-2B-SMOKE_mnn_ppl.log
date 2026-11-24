@@ -1,0 +1,4 @@
+config=/home/arduino/Code/ventunoq-mnn/minicpm5-models/MiniCPM5-2B-MNN/config.json mode=chat nothink=True batch=/tmp/opencode/qbatch/MINICPM5-2B-SMOKE_chat
+[ppl] gatsby perplexity = 33.242836
+
+ppl MINICPM5-2B-SMOKE/mnn: 1/1 = 100.0% -> results/quality_MINICPM5-2B-SMOKE_mnn_ppl.json

@@ -1,0 +1,45 @@
+{
+ "tag": "QWEN35-08B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 59.6,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "got": "26",
+   "gold": "18",
+   "tail": "l earnings per day:**\n    She sells 13 eggs at $2 per fresh duck egg.\n    $13 \\times 2 = 26$ dollars.\n\nThe answer is 26\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": "2",
+   "gold": "31",
+   "tail": "ff the price\".\n    If the coupon takes twice the amount of rewards off the price, it means the price is reduced by 2 * $"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "got": "0",
+   "gold": "3",
+   "tail": "cond mixture.\nDifference = Cost of first mixture - Cost of second mixture\nDifference = $25 - $25 = $0.\n\nThe answer is N\n"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "got": "24",
+   "gold": "6",
+   "tail": "the cost per pair.\n    $$24,000.00 \\div 1,000.00 = 24$$\n\nJessica can buy 24 pairs of shoes in a year.\n\nThe answer is 24\n"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "got": "8",
+   "gold": "14",
+   "tail": "ually.\n5.  **Slices per person**: $56 \\text{ slices} \\div 7 \\text{ people} = 8 \\text{ slices/person}$.\n\nThe answer is 8\n"
+  }
+ ]
+}

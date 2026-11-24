@@ -1,0 +1,310 @@
+{
+ "tag": "QWEN35-08B-DIST",
+ "engine": "mnn",
+ "task": "humaneval",
+ "n": 50,
+ "score": 0.0,
+ "seconds": 636.7,
+ "details": [
+  {
+   "id": "HumanEval/0",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_0.py\", line 12\n    Let me analyze the problem step by step:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ith proper signature\n   - Implement the comparison logic\n   - Return the boolean result\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/3",
+   "ok": false,
+   "err": "non-negative, returns `False` \u2713\n                                                                                                                          ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "d\n- Return `True` if any balance is less than the minimum\n- Return `False` if all balances are >= 0\n\n**Code Structure:**"
+  },
+  {
+   "id": "HumanEval/7",
+   "ok": false,
+   "err": "sandbox/he_2.py\", line 23\n    - Note: `'bacd'` doesn't contain `'a'`, so it should be excluded\n                                        ^\nSyntaxError: unterminated string literal (detected at line 23)\n",
+   "comp_tail": "r is case-sensitive)\n   - Substring not found in any string\n   - Empty strings in the input list\n\nLet me write the code:"
+  },
+  {
+   "id": "HumanEval/10",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_3.py\", line 43\n    - `make_palindrome('')`: Returns `''` \u2713\n                                          ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "s `''`\n- String with repeated characters: works correctly\n- Non-palindromic strings: returns `False`\n\n### Code Structure"
+  },
+  {
+   "id": "HumanEval/13",
+   "ok": false,
+   "err": "code/sandbox/he_4.py\", line 14\n    2. **Constraints:** 0 \u2264 a, b \u2264 1000000 (implied by typical competitive programming problems)\n                          ^\nSyntaxError: invalid character '\u2264' (U+2264)\n",
+   "comp_tail": "n a = 0, b = 0: GCD(0, 0) = 0\n- When a = 0, b \u2260 0: GCD(0, b) = b\n- When a \u2260 0, b = 0: GCD(a, 0) = a\n\n**Code Structure:**"
+  },
+  {
+   "id": "HumanEval/17",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_5.py\", line 17\n    Let me analyze the problem step by step:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "hole note = 4 beats\n   - `'o'|` = half note = 2 beats\n   - `'.'|` = quarter note = 1 beat\n\n3. **Analyzing the example**:"
+  },
+  {
+   "id": "HumanEval/20",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_6.py\", line 12\n    Let me analyze the problem step by step:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": " - Already sorted: Should work as expected\n   - Reverse sorted: Should work as expected\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/23",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_7.py\", line 10\n    Let me analyze the requirements:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "   \"\"\" Return length of given string\n    >>> strlen('')\n    0\n    >>> strlen('abc')\n    3\n    \"\"\"\n    return len(string)"
+  },
+  {
+   "id": "HumanEval/27",
+   "ok": false,
+   "err": " line 38\n    - This is the most Pythonic way but might not be what's expected\n                                                         ^\nSyntaxError: unterminated string literal (detected at line 38)\n",
+   "comp_tail": "is`\n- `if is('hello'): ...` or `if is('HELLO'): ...`\n- Very explicit about the condition\n\nApproach 11: Using `if` with `"
+  },
+  {
+   "id": "HumanEval/30",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_9.py\", line 10\n    Let me analyze the requirements:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "umber is positive\n- Filter using `filter()` or a list comprehension\n- Return the result\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/33",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_10.py\", line 14\n    2. Return a new list `l'` where:\n                           ^\nSyntaxError: unterminated string literal (detected at line 14)\n",
+   "comp_tail": " 4, 8, 9, 2]` - wait, this is the original list, not sorted. Let me re-read...\n\nActually, looking at the example output:"
+  },
+  {
+   "id": "HumanEval/37",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_11.py\", line 15\n    2. **Output**: A new list `l'` where:\n                                ^\nSyntaxError: unterminated string literal (detected at line 15)\n",
+   "comp_tail": "ments from original list at odd indices to `l'`\n3. Sort the elements at even indices\n4. Return `l'`\n\n**Code structure:**"
+  },
+  {
+   "id": "HumanEval/40",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_12.py\", line 25\n    - `[1, 3, 5, 0]` \u2192 sum = 1+3+5 = 9 \u2260 0, so False \u2713\n                     ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11 \u2260 0, 1+3+7 = 11"
+  },
+  {
+   "id": "HumanEval/43",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_13.py\", line 19\n    Let me analyze the problem step by step:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "exists before updating\n   - Return False if key not found after processing all elements\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/47",
+   "ok": false,
+   "err": "indexed), which is `3`. \u2713\n                                                                                                                                ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "t the list and return the middle element.\n\n9. **Implementation details**:\n   - Sort the list using `sorted()`\n   - Use `"
+  },
+  {
+   "id": "HumanEval/50",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_15.py\", line 14\n    Let me analyze the encoding and decoding functions step by step.\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "y within the alphabet\n- The offset is the same in both directions (adding 5 to encode, subtracting 5 to decode)\n</think>"
+  },
+  {
+   "id": "HumanEval/53",
+   "ok": false,
+   "err": "andbox/he_16.py\", line 13\n    3. The docstring should document the function's purpose\n                                                 ^\nSyntaxError: unterminated string literal (detected at line 13)\n",
+   "comp_tail": ": int, y: int):\n    \"\"\"Add two numbers x and y\n    >>> add(2, 3)\n    5\n    >>> add(5, 7)\n    12\n    \"\"\"\n    return x + y"
+  },
+  {
+   "id": "HumanEval/57",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_17.py\", line 17\n    - `[1, 2, 4, 20]` \u2192 True (increasing)\n                      ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "acuously true)\n- Single element: Should be monotonic\n- Mixed elements: Should return `False`\n\n**Python Implementation:**"
+  },
+  {
+   "id": "HumanEval/60",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_18.py\", line 22\n    - sum_to_n(30) = 465 (30 \u00d7 31 / 2 = 465) \u2713\n                             ^\nSyntaxError: invalid character '\u00d7' (U+00D7)\n",
+   "comp_tail": "use Python's built-in sum() function to accomplish this.\n</think>\n\ndef sum_to_n(n: int):\n    return sum(range(1, n + 1))"
+  },
+  {
+   "id": "HumanEval/63",
+   "ok": false,
+   "err": "19.py\", line 31\n    - fibfib(5) = fibfib(4) + fibfib(3) + fibfib(2) = 2 + 1 + 1 = 4 \u2713\n                                                                    ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "is related to Fibonacci numbers\n   - Fibonacci numbers: F(0) = 0, F(1) = 0, F(2) = 1, F(3) = 1, F(4) = 2, F(5) = 3, F(6)"
+  },
+  {
+   "id": "HumanEval/67",
+   "ok": false,
+   "err": "y\", line 20\n    - `fruit_distribution(\"5 apples and 6 oranges\", 19)` \u2192 5 + 6 = 11, 19 - 11 = 8 \u2713\n                                                         ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "e `split()` to split the string\n   - Use `len()` to count the words\n   - Subtract from n\n   - Return the result\n</think>"
+  },
+  {
+   "id": "HumanEval/70",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_21.py\", line 26\n    - Result: `[1, 4, 2, 3]` \u2713\n                             ^\nSyntaxError: invalid character '\u2713' (U+2713)\n",
+   "comp_tail": "for efficient operations\n   - Implement the sorting process\n   - Return the sorted list\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/73",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_22.py\", line 29\n    2. If first \u2260 last, we need to change (last - first) elements\n                ^\nSyntaxError: invalid character '\u2260' (U+2260)\n",
+   "comp_tail": "elements\n- Use `arr[0]` and `arr[-1]` to get the first and last elements\n- Return `len(arr) - arr[0] - arr[-1]`\n</think>"
+  },
+  {
+   "id": "HumanEval/77",
+   "ok": false,
+   "err": " of some integer if it can be written as `n\u00b3` where `n` is an integer\n                                                                                    ^\nSyntaxError: invalid character '\u00b3' (U+00B3)\n",
+   "comp_tail": " 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7,"
+  },
+  {
+   "id": "HumanEval/80",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_24.py\", line 19\n    - `is_happy(a)` \u2192 length=1, fails length condition \u2192 False \u2713\n                    ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "positions\n- Use `zip` to extract consecutive groups\n- Use `set()` to check for duplicates in consecutive groups\n</think>"
+  },
+  {
+   "id": "HumanEval/83",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_25.py\", line 18\n    - Number of ways = 1 \u00d7 10^(n-1) = 10^(n-1)\n                         ^\nSyntaxError: invalid character '\u00d7' (U+00D7)\n",
+   "comp_tail": "d as an integer\n\n**Step 6: Edge case handling**\n- n=1: 10^(1-1) = 10^0 = 1 \u2713\n- n=0: Not specified as positive, but let's"
+  },
+  {
+   "id": "HumanEval/86",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_26.py\", line 26\n    - 'Hi' \u2192 'Hi' (no spaces, ASCII order is same)\n           ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "with `+` to maintain word separation\n   - Handle potential empty strings from `split()`\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/90",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_27.py\", line 14\n    1. The function needs to find the 2nd smallest element from a list\n                                      ^\nSyntaxError: invalid decimal literal\n",
+   "comp_tail": "he position of the smallest element\n- Return `lst[index]` or `None` based on the result\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/93",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_28.py\", line 20\n    - A (1st) \u2192 C (2nd)\n         ^\nSyntaxError: invalid decimal literal\n",
+   "comp_tail": "(3rd)\n   - I (3rd) \u2192 H (4th)\n   - E (2nd) \u2192 G (3rd)\n   - A (1st) \u2192 C (2nd)\n   - E (2nd) \u2192 G (3rd)\n   - I (3rd) \u2192 H (4th)"
+  },
+  {
+   "id": "HumanEval/96",
+   "ok": false,
+   "err": ".py\", line 35\n    3. For each number, check if it's prime using a deterministic Miller-Prasieg test\n                                   ^\nSyntaxError: unterminated string literal (detected at line 35)\n",
+   "comp_tail": " `n < 2`\n- Use a simple Miller-Prasieg test for primality\n- Return the appropriate list\n\nLet me write the code:\n</think>"
+  },
+  {
+   "id": "HumanEval/100",
+   "ok": false,
+   "err": "e_30.py\", line 28\n    - The k-th level (where k starts at 1) has stones = n + (k-1) \u00d7 2\n                                                                  ^\nSyntaxError: invalid character '\u00d7' (U+00D7)\n",
+   "comp_tail": " - Initialize list with n\n     - Loop while i < n\n     - Add i to list\n     - Return list\n\n7. **Edge cases**:\n   - n = 1"
+  },
+  {
+   "id": "HumanEval/103",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_31.py\", line 21\n    - rounded_avg(1, 5) = (1+5)/2 = 3.0 \u2192 \"0b11\" \u2713\n                                        ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": " n + 1))` for rounding\n- Use `bin()` to convert to binary string\n- Handle edge case where n > m by returning -1\n</think>"
+  },
+  {
+   "id": "HumanEval/106",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_32.py\", line 19\n    - Let's check:\n         ^\nSyntaxError: unterminated string literal (detected at line 19)\n",
+   "comp_tail": "ial calculation\n- Use `sum()` for the sum calculation\n- Handle edge case where `n = 0` (empty list)\n\n**Code structure**:"
+  },
+  {
+   "id": "HumanEval/110",
+   "ok": false,
+   "err": "he_33.py\", line 21\n    4. The condition for \"YES\" is: it's possible to make lst1 all even numbers\n                                     ^\nSyntaxError: unterminated string literal (detected at line 21)\n",
+   "comp_tail": " If `len(lst1) > 0` and `lst1.count(x) % 2 != 0` for any `x`, return \"NO\"\n- Otherwise, return \"YES\"\n\n**Code Structure:**"
+  },
+  {
+   "id": "HumanEval/113",
+   "ok": false,
+   "err": "/tmp/opencode/sandbox/he_34.py\", line 25\n    - `['1234567']`: Count odd digits \u2192 1, 2, 3, 4, 5, 6, 7 = 7 odd digits\n                                      ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "it in string if digit % 2 != 0)`\n   - The string replacement needs to be carefully constructed\n\n6. **Writing the code**:"
+  },
+  {
+   "id": "HumanEval/116",
+   "ok": false,
+   "err": "`[1, 5, 2, 3, 4]` \u2192 `[1, 2, 3, 4, 5]` (binary: `1`, `101`, `100`, `011`, `010` \u2192 counts: `1`, `2`, `2`, `2`, `1` \u2192 decimal order)\n                        ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "omplement)\n\n5. **Implementation details**:\n   - Use `bin(n).count('1')` for counting ones\n   - Sort using `key=lambda x:"
+  },
+  {
+   "id": "HumanEval/120",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_36.py\", line 27\n    Let me analyze this problem step by step.\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "e `arr[:k]` to get the first k elements\n- Sort them with `sort()` or `sorted()`\n- Return the result\n\n**Code Structure:**"
+  },
+  {
+   "id": "HumanEval/123",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_37.py\", line 19\n    Let me analyze the requirements:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "`: odd, so next is 10, returns `[1, 10]`\n- `n = 4`: even, so next is 2, next is 1, returns `[1, 2]`\n\n**Code structure**:"
+  },
+  {
+   "id": "HumanEval/126",
+   "ok": false,
+   "err": "encode/sandbox/he_38.py\", line 30\n    4. If any element doesn't match the expected next value, return False\n                           ^\nSyntaxError: unterminated string literal (detected at line 30)\n",
+   "comp_tail": "nd to detect duplicates\n- Return `False` if any element doesn't match the expected next value\n\n**Final code structure:**"
+  },
+  {
+   "id": "HumanEval/130",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_39.py\", line 19\n    Let me analyze the problem step by step:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ction signature: def tri(n):\n   - Initialize result list with tri(1)\n   - Loop from 2 to n\n   - Compute and append tri(i"
+  },
+  {
+   "id": "HumanEval/133",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_40.py\", line 25\n    - [1, 2, 3] \u2192 [1, 2, 3] (already integers, ceiling = 3) \u2192 sum = 6 \u2713\n                ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": ", 9] \u2192 [1, 4, 9] \u2192 sum = 14\n   - [1, 3, 5, 7] \u2192 [1, 3, 5, 7] \u2192 sum = 16\n   \n   The examples in the docstring are clearly"
+  },
+  {
+   "id": "HumanEval/136",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_41.py\", line 14\n    Let me analyze the requirements:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "ist for `min()` and `max()`\n- Use `None` as the default return value\n- Return the result as a tuple\n\n**Code structure**:"
+  },
+  {
+   "id": "HumanEval/140",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_42.py\", line 22\n    - \"Example\" \u2192 \"Example\" (no consecutive spaces, no hyphens needed)\n                ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "iling spaces\n   - Use `str.lstrip()` to remove leading spaces\n   - Use `str.rstrip()` to remove trailing spaces\n   - Use"
+  },
+  {
+   "id": "HumanEval/143",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_43.py\", line 26\n    3. **Constraints**: Length \u2264 100, only letters in the input\n                               ^\nSyntaxError: invalid character '\u2264' (U+2264)\n",
+   "comp_tail": " 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467,"
+  },
+  {
+   "id": "HumanEval/146",
+   "ok": false,
+   "err": "tmp/opencode/sandbox/he_44.py\", line 18\n    - [15, -73, 14, -15] \u2192 1 element (15 has first digit 1 (odd) and last digit 5 (odd))\n                         ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": ", 5, 7, 9 are odd \u2713\n- Numbers with leading zeros: 007 has first digit 0 (not odd), so doesn't count\n\n**Code structure:**"
+  },
+  {
+   "id": "HumanEval/150",
+   "ok": false,
+   "err": "File \"/tmp/opencode/sandbox/he_45.py\", line 21\n    - `x_or_y(7, 34, 12)` returns `34` \u2192 `n = 7` is prime, `y = 34`\n                                       ^\nSyntaxError: invalid character '\u2192' (U+2192)\n",
+   "comp_tail": "        if n > 2 and n % 2 != 0:\n             return x\n         else:\n             return y\n     else:\n         return y"
+  },
+  {
+   "id": "HumanEval/153",
+   "ok": false,
+   "err": "6.py\", line 24\n    - CAP = number of uppercase letters in the extension's name\n                                                        ^\nSyntaxError: unterminated string literal (detected at line 24)\n",
+   "comp_tail": "ension\n   - Sort and select the strongest\n   - Format the output as requested\n\nLet me write the implementation:\n</think>"
+  },
+  {
+   "id": "HumanEval/156",
+   "ok": false,
+   "err": "D': 400, 'C\": 100, 'L\": 50, \"X\": 10, \"V\": 5}\n                                                                                          ^\nSyntaxError: unterminated string literal (detected at line 29)\n",
+   "comp_tail": ": 10, \"V\": 5}\n- String conversion: \"1\" -> \"I\", \"19\" -> \"IX\", etc.\n- Lowercase: Use f-string or .lower()\n\nCode structure:"
+  },
+  {
+   "id": "HumanEval/160",
+   "ok": false,
+   "err": "e 45\n    - Use `operator` from `operator` module for Python's built-in operators\n                                                      ^\nSyntaxError: unterminated string literal (detected at line 45)\n",
+   "comp_tail": "Use `operator` from `operator` module\n   - Implement the evaluation logic\n   - Return the result\n\nLet me write the code:"
+  },
+  {
+   "id": "HumanEval/163",
+   "ok": false,
+   "err": "  File \"/tmp/opencode/sandbox/he_49.py\", line 12\n    Let me analyze the requirements:\n        ^^\nSyntaxError: invalid syntax\n",
+   "comp_tail": "] is the same as [b, a]\n- The range [a, b] is the same as [b, a]\n- The range [a, b] is the same as [b, a]\n- The range [a"
+  }
+ ]
+}

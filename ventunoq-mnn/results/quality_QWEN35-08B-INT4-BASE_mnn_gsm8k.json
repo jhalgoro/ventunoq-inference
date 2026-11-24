@@ -1,0 +1,710 @@
+{
+ "tag": "QWEN35-08B-INT4-BASE",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 100,
+ "score": 0.01,
+ "seconds": 1861.3,
+ "details": [
+  {
+   "id": 0,
+   "ok": false,
+   "got": null,
+   "gold": "18",
+   "tail": "\nN:\n\nThe answer is N\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": null,
+   "gold": "18",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 2,
+   "ok": false,
+   "got": "0.25",
+   "gold": "16",
+   "tail": "\nN: 15/60 = $<<15/60=0.25>>0.25 per day.\nThe answer is N\n"
+  },
+  {
+   "id": 3,
+   "ok": false,
+   "got": null,
+   "gold": "8",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 4,
+   "ok": false,
+   "got": null,
+   "gold": "40",
+   "tail": "\nThe answer is N.\n"
+  },
+  {
+   "id": 5,
+   "ok": false,
+   "got": "175",
+   "gold": "595",
+   "tail": "\nN: 175\n"
+  },
+  {
+   "id": 6,
+   "ok": false,
+   "got": null,
+   "gold": "10",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 7,
+   "ok": false,
+   "got": null,
+   "gold": "36",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 8,
+   "ok": false,
+   "got": null,
+   "gold": "3",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 9,
+   "ok": false,
+   "got": null,
+   "gold": "240",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 10,
+   "ok": false,
+   "got": null,
+   "gold": "13",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 11,
+   "ok": false,
+   "got": null,
+   "gold": "2125",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 12,
+   "ok": false,
+   "got": null,
+   "gold": "16",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 13,
+   "ok": false,
+   "got": null,
+   "gold": "18000",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 14,
+   "ok": false,
+   "got": "10",
+   "gold": "5",
+   "tail": "\nThe answer is 10\n"
+  },
+  {
+   "id": 15,
+   "ok": false,
+   "got": "35",
+   "gold": "55",
+   "tail": "\nThe answer is 35\n"
+  },
+  {
+   "id": 16,
+   "ok": false,
+   "got": null,
+   "gold": "250",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 17,
+   "ok": false,
+   "got": null,
+   "gold": "33",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 18,
+   "ok": false,
+   "got": "18",
+   "gold": "21",
+   "tail": "\nThe answer is 18\n"
+  },
+  {
+   "id": 19,
+   "ok": false,
+   "got": null,
+   "gold": "18",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 20,
+   "ok": false,
+   "got": null,
+   "gold": "118000",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 21,
+   "ok": false,
+   "got": null,
+   "gold": "7",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 22,
+   "ok": false,
+   "got": "63",
+   "gold": "83",
+   "tail": "\nThe answer is 63\n"
+  },
+  {
+   "id": 23,
+   "ok": true,
+   "got": "10",
+   "gold": "10",
+   "tail": "ually in the afternoon and evening.\nSo, the bakery sells 20/2 = <<20/2=10>>10 loaves in the afternoon.\nThe answer is 10\n"
+  },
+  {
+   "id": 24,
+   "ok": false,
+   "got": "12",
+   "gold": "8",
+   "tail": "\nThe answer is 12\n"
+  },
+  {
+   "id": 25,
+   "ok": false,
+   "got": null,
+   "gold": "100",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 26,
+   "ok": false,
+   "got": "19",
+   "gold": "9",
+   "tail": "\nThe answer is 19\n"
+  },
+  {
+   "id": 27,
+   "ok": false,
+   "got": "6.5",
+   "gold": "4",
+   "tail": "\nThe answer is 6.5\n"
+  },
+  {
+   "id": 28,
+   "ok": false,
+   "got": null,
+   "gold": "240000",
+   "tail": "\nN:\n\nThe answer is N\n"
+  },
+  {
+   "id": 29,
+   "ok": false,
+   "got": null,
+   "gold": "80",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 30,
+   "ok": false,
+   "got": "3",
+   "gold": "12",
+   "tail": "\nThe answer is 3\n"
+  },
+  {
+   "id": 31,
+   "ok": false,
+   "got": "250",
+   "gold": "25",
+   "tail": "\nThe answer is 250\n"
+  },
+  {
+   "id": 32,
+   "ok": false,
+   "got": null,
+   "gold": "11",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 33,
+   "ok": false,
+   "got": null,
+   "gold": "17",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 34,
+   "ok": false,
+   "got": "3199.999999999999",
+   "gold": "6400",
+   "tail": "66666666666 sapphires * $1200 = $<<2.6666666666666666*1200=3199.999999999999>>3199.999999999999 rubies.\nThe answer is N\n"
+  },
+  {
+   "id": 35,
+   "ok": false,
+   "got": null,
+   "gold": "1",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 36,
+   "ok": false,
+   "got": null,
+   "gold": "15400",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 37,
+   "ok": false,
+   "got": null,
+   "gold": "25",
+   "tail": "\nN:\n\nThe answer is N\n"
+  },
+  {
+   "id": 38,
+   "ok": false,
+   "got": null,
+   "gold": "144",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 39,
+   "ok": false,
+   "got": "100",
+   "gold": "280",
+   "tail": "\nThe answer is 100\n"
+  },
+  {
+   "id": 40,
+   "ok": false,
+   "got": null,
+   "gold": "300",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 41,
+   "ok": false,
+   "got": null,
+   "gold": "130",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 42,
+   "ok": false,
+   "got": "10",
+   "gold": "16",
+   "tail": "\nThe answer is 10\n"
+  },
+  {
+   "id": 43,
+   "ok": false,
+   "got": null,
+   "gold": "100",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 44,
+   "ok": false,
+   "got": null,
+   "gold": "800",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 45,
+   "ok": false,
+   "got": "1",
+   "gold": "48",
+   "tail": "\nN: 1\n"
+  },
+  {
+   "id": 46,
+   "ok": false,
+   "got": null,
+   "gold": "30",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 47,
+   "ok": false,
+   "got": null,
+   "gold": "72",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 48,
+   "ok": false,
+   "got": "18",
+   "gold": "216",
+   "tail": "\n\nThe answer is 18\n"
+  },
+  {
+   "id": 49,
+   "ok": false,
+   "got": null,
+   "gold": "75",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 50,
+   "ok": false,
+   "got": null,
+   "gold": "120",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 51,
+   "ok": false,
+   "got": "6",
+   "gold": "576",
+   "tail": "13: Find the ratio of potatoes to hash browns.\n6 potatoes make 36 hash browns.\nSo, 6 potatoes make 36 hash browns.\nSo, 6"
+  },
+  {
+   "id": 52,
+   "ok": false,
+   "got": null,
+   "gold": "32",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 53,
+   "ok": false,
+   "got": "3",
+   "gold": "9",
+   "tail": "\nN: 3\n"
+  },
+  {
+   "id": 54,
+   "ok": false,
+   "got": null,
+   "gold": "175",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 55,
+   "ok": false,
+   "got": null,
+   "gold": "87",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 56,
+   "ok": false,
+   "got": null,
+   "gold": "28",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 57,
+   "ok": false,
+   "got": "1800",
+   "gold": "60000",
+   "tail": "\nN:  The answer is 1800\n"
+  },
+  {
+   "id": 58,
+   "ok": false,
+   "got": null,
+   "gold": "50",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 59,
+   "ok": false,
+   "got": "170",
+   "gold": "155",
+   "tail": "\nThe answer is 170\n"
+  },
+  {
+   "id": 60,
+   "ok": false,
+   "got": null,
+   "gold": "4",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 61,
+   "ok": false,
+   "got": null,
+   "gold": "79",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 62,
+   "ok": false,
+   "got": null,
+   "gold": "153",
+   "tail": "\nN: The answer is N\n"
+  },
+  {
+   "id": 63,
+   "ok": false,
+   "got": "1",
+   "gold": "2",
+   "tail": "\n\nThe answer is 1\n"
+  },
+  {
+   "id": 64,
+   "ok": false,
+   "got": null,
+   "gold": "123",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 65,
+   "ok": false,
+   "got": null,
+   "gold": "23",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 66,
+   "ok": false,
+   "got": null,
+   "gold": "575",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 67,
+   "ok": false,
+   "got": null,
+   "gold": "1",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 68,
+   "ok": false,
+   "got": "1",
+   "gold": "5",
+   "tail": "\nThe answer is 1\n"
+  },
+  {
+   "id": 69,
+   "ok": false,
+   "got": null,
+   "gold": "90",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 70,
+   "ok": false,
+   "got": null,
+   "gold": "24",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 71,
+   "ok": false,
+   "got": "10",
+   "gold": "17",
+   "tail": "\nThe answer is 10\n"
+  },
+  {
+   "id": 72,
+   "ok": false,
+   "got": null,
+   "gold": "7",
+   "tail": "\nN:\n\nThe answer is N\n"
+  },
+  {
+   "id": 73,
+   "ok": false,
+   "got": null,
+   "gold": "120",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 74,
+   "ok": false,
+   "got": "9",
+   "gold": "63",
+   "tail": "\nThe answer is 9\n"
+  },
+  {
+   "id": 75,
+   "ok": false,
+   "got": "33",
+   "gold": "50",
+   "tail": "\nThe answer is 33\n"
+  },
+  {
+   "id": 76,
+   "ok": false,
+   "got": null,
+   "gold": "94",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 77,
+   "ok": false,
+   "got": "90",
+   "gold": "30",
+   "tail": "\nN: The answer is 90\n"
+  },
+  {
+   "id": 78,
+   "ok": false,
+   "got": null,
+   "gold": "4",
+   "tail": "\nN:\n\nThe answer is N\n\nThe answer is N\n"
+  },
+  {
+   "id": 79,
+   "ok": false,
+   "got": null,
+   "gold": "110",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 80,
+   "ok": false,
+   "got": null,
+   "gold": "95",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 81,
+   "ok": false,
+   "got": "0.8333333333333333",
+   "gold": "8",
+   "tail": "\nN: 10/12=<<10/12=0.8333333333333333>>0.8333333333333333\n"
+  },
+  {
+   "id": 82,
+   "ok": false,
+   "got": null,
+   "gold": "1080",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 83,
+   "ok": false,
+   "got": null,
+   "gold": "40",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 84,
+   "ok": false,
+   "got": "1",
+   "gold": "5",
+   "tail": "\nThe answer is 1\n"
+  },
+  {
+   "id": 85,
+   "ok": false,
+   "got": null,
+   "gold": "45000",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 86,
+   "ok": false,
+   "got": null,
+   "gold": "291",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 87,
+   "ok": false,
+   "got": "100",
+   "gold": "7300",
+   "tail": "\nN: 100\n"
+  },
+  {
+   "id": 88,
+   "ok": false,
+   "got": null,
+   "gold": "93",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 89,
+   "ok": false,
+   "got": null,
+   "gold": "6",
+   "tail": "\nN:\n\nThe answer is N\n"
+  },
+  {
+   "id": 90,
+   "ok": false,
+   "got": "100",
+   "gold": "140",
+   "tail": "\nN:\n\nThe answer is 100\n"
+  },
+  {
+   "id": 91,
+   "ok": false,
+   "got": null,
+   "gold": "448",
+   "tail": "\n\nThe answer is N\n"
+  },
+  {
+   "id": 92,
+   "ok": false,
+   "got": null,
+   "gold": "3",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 93,
+   "ok": false,
+   "got": null,
+   "gold": "520",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 94,
+   "ok": false,
+   "got": "12",
+   "gold": "30",
+   "tail": "\nN: 12\n"
+  },
+  {
+   "id": 95,
+   "ok": false,
+   "got": "12",
+   "gold": "36",
+   "tail": "\nThe answer is 12\n"
+  },
+  {
+   "id": 96,
+   "ok": false,
+   "got": null,
+   "gold": "665",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 97,
+   "ok": false,
+   "got": null,
+   "gold": "27",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 98,
+   "ok": false,
+   "got": null,
+   "gold": "2325",
+   "tail": "\nThe answer is N\n"
+  },
+  {
+   "id": 99,
+   "ok": false,
+   "got": "8",
+   "gold": "14",
+   "tail": "\nN:\n\nThe answer is 8\n"
+  }
+ ]
+}

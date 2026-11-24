@@ -1,0 +1,11 @@
+CPU Group: [ 4  5  6  7 ], 844800 - 1958400
+CPU Group: [ 0  1 ], 902400 - 2112000
+CPU Group: [ 2  3 ], 940800 - 2361600
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0, perfCores: 0
+| model                          |  modelSize | backend    | threads | precision  | test          | speed(tok/s) |
+| ------------------------------ | ---------: | ---------- | ----: | ---------- | ------------- | ------------ |
+| MiniCPM5-2B-MNN                |   1.18 GiB | CPU        |     4 | Low        | pp512         | 57.26 ± 0.29 |
+| MiniCPM5-2B-MNN                |   1.18 GiB | CPU        |     4 | Low        | tg128         | 18.38 ± 0.05 |
+| MiniCPM5-2B-MNN                |   1.18 GiB | CPU        |     4 | Low        | pp512+tg128   | 57.41 ± 0.11<br>17.55 ± 0.00 |
+decode wall speed (incl. sampling): 17.54 ± 0.00 tok/s
+

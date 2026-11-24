@@ -1,0 +1,50 @@
+{
+ "tag": "QWEN35-08B-DIST",
+ "engine": "mnn",
+ "task": "niah",
+ "n": 5,
+ "score": 0.0,
+ "seconds": 497.0,
+ "details": [
+  {
+   "id": 0,
+   "depth": 0.1,
+   "code": "36132",
+   "got": "1",
+   "ok": false,
+   "out": "Let me analyze the given information to find the secret pass"
+  },
+  {
+   "id": 1,
+   "depth": 0.3,
+   "code": "98253",
+   "got": "2",
+   "ok": false,
+   "out": "Let me carefully read through the provided text to find the "
+  },
+  {
+   "id": 2,
+   "depth": 0.5,
+   "code": "48594",
+   "got": "3",
+   "ok": false,
+   "out": "Let me analyze the given information to find the secret pass"
+  },
+  {
+   "id": 3,
+   "depth": 0.7,
+   "code": "28611",
+   "got": "4",
+   "ok": false,
+   "out": "Let me analyze the given information to find the secret pass"
+  },
+  {
+   "id": 4,
+   "depth": 0.9,
+   "code": "58512",
+   "got": "5",
+   "ok": false,
+   "out": "Let me analyze the given information to find the secret pass"
+  }
+ ]
+}

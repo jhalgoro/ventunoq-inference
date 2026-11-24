@@ -1,0 +1,16 @@
+{
+ "tag": "MINICPM5-2B-INT4-R2",
+ "engine": "mnn",
+ "task": "ppl",
+ "n": 1,
+ "score": 1.0,
+ "seconds": 2022.8,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "ppl": 31.929985,
+   "max_tokens": "full"
+  }
+ ]
+}

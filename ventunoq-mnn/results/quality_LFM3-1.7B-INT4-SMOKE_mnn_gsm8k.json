@@ -1,0 +1,45 @@
+{
+ "tag": "LFM3-1.7B-INT4-SMOKE",
+ "engine": "mnn",
+ "task": "gsm8k",
+ "n": 5,
+ "score": 0.8,
+ "seconds": 150.2,
+ "details": [
+  {
+   "id": 0,
+   "ok": true,
+   "got": "18",
+   "gold": "18",
+   "tail": "g.  \nDaily earnings = 9 eggs \u00d7 $2/egg = $18.\n\nThus, Janet makes $18 every day at the farmers' market.\n\nThe answer is 18\n"
+  },
+  {
+   "id": 1,
+   "ok": false,
+   "got": "68",
+   "gold": "31",
+   "tail": "ce or the reduced price? Usually, coupons are applied after rewards. So, $80 - $4 = $76, then $8 off = $68.\n\n   However,"
+  },
+  {
+   "id": 2,
+   "ok": true,
+   "got": "3",
+   "gold": "3",
+   "tail": "1/2 lb almonds and 1/3 lb walnuts costs $3 more than the mixture of 1/5 lb almonds and 1/3 lb walnuts.\n\nThe answer is 3\n"
+  },
+  {
+   "id": 3,
+   "ok": true,
+   "got": "6",
+   "gold": "6",
+   "tail": "So 6 pairs \u00d7 2 shoes per pair = 12 shoes.\n\nBut earlier I thought 6 pairs, but that's pairs, not shoes. The question asks"
+  },
+  {
+   "id": 4,
+   "ok": true,
+   "got": "14",
+   "gold": "14",
+   "tail": "s per person = total slices \u00f7 number of people = 56 \u00f7 4 = 14.\n\nThus, each person can have 14 slices.\n\nThe answer is 14.\n"
+  }
+ ]
+}
